@@ -1,2 +1,2 @@
-LastmanstandIn.ApplicationView = Ember.View.extend({
+LastManStanding.ApplicationView = Ember.View.extend({
 });

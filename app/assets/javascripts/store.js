@@ -1,3 +1,3 @@
-LastmanstandIn.Store = DS.Store.extend({
+LastManStanding.Store = DS.Store.extend({
   revision: 11
 });

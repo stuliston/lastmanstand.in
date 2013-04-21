@@ -1,3 +1,3 @@
-LastmanstandIn.ApplicationRoute = Ember.Route.extend({
+LastManStanding.ApplicationRoute = Ember.Route.extend({
 
 });

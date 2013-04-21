@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-LastmanstandIn::Application.load_tasks
+LastManStanding::Application.load_tasks

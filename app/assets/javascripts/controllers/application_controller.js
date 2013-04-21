@@ -1,3 +1,3 @@
-LastmanstandIn.ApplicationController = Ember.Controller.extend({
+LastManStanding.ApplicationController = Ember.Controller.extend({
 
 });

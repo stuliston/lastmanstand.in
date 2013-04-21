@@ -18,5 +18,5 @@
 //= require ember-data
 //= require_self
 //= require lastmanstand_in
-LastmanstandIn = Ember.Application.create();
+LastManStanding = Ember.Application.create();
 //= require_tree .

@@ -1,3 +1,3 @@
-LastmanstandIn.Router.map(function() {
+LastManStanding.Router.map(function() {
 
 });
