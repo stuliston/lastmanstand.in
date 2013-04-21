@@ -1,3 +1,0 @@
-LastManStanding.Router.map(function() {
-
-});
