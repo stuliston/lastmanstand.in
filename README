@@ -1,0 +1,39 @@
+
+GOALS
+-----
+
+- Slick, minimal UI
+- Ease of use
+- Visualisation of data (your position)
+
+IDEAS
+-----
+
+- Use odds system to show who is playing it safe and who is gambling?
+- You could use the above info to indicate a 'favourite' early-on
+
+MVP
+---
+
+- One sport to begin with. EPL starts again in a few months
+- Simplest login technique possible (one that provides an avatar)
+- No schedule / results API. Manual entry by me to start with
+
+USER STORIES
+------------
+
+As a potential PLAYER, I want to log-in so that I can start playing the game.
+  - email, avatar, password, display name
+
+As a PLAYER, I want to be taken straight to my list of COMPETITIONS
+  - See mock
+
+As a PLAYER, I want to create a new 'competition' so that I can play against my friends.
+  - simple form taking: comp name
+
+As a user, I want to invite my friends
+
+------
+
+As the site maintainer, I want to create multiple rounds of fixtures, so that players
+
