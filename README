@@ -6,11 +6,24 @@ GOALS
 - Ease of use
 - Visualisation of data (your position)
 
-IDEAS
------
 
+GLOSSARY
+--------
+
+USER        - A person who has registered their email, password and name so they can start to play the game
+GAME(?)     - A group of USERS who play against each other (possibly with a name like "The Hooroo Invitational"). A user can be involved in many GAMES
+TEAM        - An EPL football team e.g. Man Utd, Chelsea
+MATCH       - A fixture comprising of a home TEAM, and AWAY team and a RESULT
+RESULT      - Win/lose/draw
+PREDICTION  - A USER select a TEAM that will *win* a given MATCH
+
+
+IDEAS (AKA Scope creep)
+-----------------------
 - Use odds system to show who is playing it safe and who is gambling?
 - You could use the above info to indicate a 'favourite' early-on
+- 'Casualties timeline' - round-by-round graph of who dropped out (or lost a life) in each round
+
 
 MVP
 ---
@@ -18,6 +31,7 @@ MVP
 - One sport to begin with. EPL starts again in a few months
 - Simplest login technique possible (one that provides an avatar)
 - No schedule / results API. Manual entry by me to start with
+
 
 USER STORIES
 ------------
