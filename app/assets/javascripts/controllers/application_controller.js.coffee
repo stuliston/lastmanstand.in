@@ -1,1 +1,1 @@
-LastManStanding.ApplicationController = Ember.Controller.extend()
+LMS.ApplicationController = Ember.Controller.extend()

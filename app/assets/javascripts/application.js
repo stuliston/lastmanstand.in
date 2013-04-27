@@ -6,6 +6,6 @@
 //= require_self
 //= require lastmanstanding
 
-window.LastManStanding = Ember.Application.create();
+window.LMS = Ember.Application.create();
 
 //= require_tree .

@@ -1,1 +1,1 @@
-LastManStanding.ApplicationRoute = Ember.Route.extend()
+LMS.ApplicationRoute = Ember.Route.extend()

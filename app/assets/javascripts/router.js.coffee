@@ -1,1 +1,2 @@
-LastManStanding.Router.map ->
+LMS.Router.map ->
+  @resource('games')

@@ -1,1 +1,1 @@
-LastManStanding.ApplicationView = Ember.View.extend()
+LMS.ApplicationView = Ember.View.extend()
