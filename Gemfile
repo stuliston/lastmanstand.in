@@ -9,6 +9,8 @@ gem 'pg'
 gem 'cancan'
 gem 'jquery-rails'
 gem 'ember-rails'
+gem 'ember-source', '1.0.0.rc3'
+gem 'handlebars-source', '1.0.0.rc3'
 gem 'active_model_serializers'
 
 # Gems used only for assets and not required
