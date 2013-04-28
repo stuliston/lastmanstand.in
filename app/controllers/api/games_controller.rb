@@ -1,15 +1,15 @@
 module Api
 
-  class ProfilesController < ApplicationController
+  class GamesController < ApplicationController
     respond_to :json
     load_and_authorize_resource
 
     def index
-      respond_with @profiles
+      respond_with @games
     end
 
     def show
-      respond_with @profile
+      respond_with @game
     end
 
   end
