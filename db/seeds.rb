@@ -6,3 +6,8 @@ users = [
   User.create!(email: 'robmonie@gmail.com', password: 'password', profile: Profile.create!(name: 'Rob'))
 ]
 
+games = [
+  Game.create!(name: 'Rob v Stu', profiles: users.collect(&:profile)),
+  Game.create!(name: 'Stu Solo Style', profiles: [ users.first.profile ]),
+  Game.create!(name: 'Hooroo Invitational', profiles: users.collect(&:profile))
+]
