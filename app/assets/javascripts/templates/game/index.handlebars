@@ -2,11 +2,11 @@
   <h1>{{controller.name}}</h1>
 
   <ul class="participants unstyled">
-  {{#each participant in controller.participants}}
+  {{#each gameParticipant in controller.gameParticipants}}
     <li>
-      <img {{bindAttr src="participant.gravatarImageUrl"}} class="avatar" />
+      <img {{bindAttr src="gameParticipant.participant.gravatarImageUrl"}} class="avatar" />
       <div class="details">
-        {{participant.name}}
+        {{gameParticipant.participant.name}}
       </div>
     </li>
   {{/each}}
