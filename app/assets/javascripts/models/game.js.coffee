@@ -1,22 +1,22 @@
 LMS.Game = DS.Model.extend
   name: DS.attr 'string'
-  gameParticipants: DS.hasMany('LMS.GameMembership')
+  gameMemberships: DS.hasMany('LMS.GameMembership')
 
   # participants: (->
-  #   @get('gameParticipants').getEach('participant')
-  # ).property('@each.gameParticipants').cacheable()
+  #   @get('gameMemberships').getEach('participant')
+  # ).property('@each.gameMemberships').cacheable()
 
 LMS.Game.FIXTURES = [
 
   {
     id: 1
     name: "Hooroo"
-    gameParticipants: [1, 2]
+    gameMemberships: [1, 2]
   },
   {
     id: 2
     name: "Last Man Standing"
-    gameParticipants: [3, 4]
+    gameMemberships: [3, 4]
   }
 
 ]
