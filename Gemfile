@@ -12,6 +12,7 @@ gem 'ember-rails'
 gem 'ember-source', '1.0.0.rc3'
 gem 'handlebars-source', '1.0.0.rc3'
 gem 'active_model_serializers'
+gem 'bcrypt-ruby' # required for has_secure_password
 
 # Gems used only for assets and not required
 # in production environments by default.
