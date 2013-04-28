@@ -1,0 +1,78 @@
+$header-height: 50px
+$header-height-phone: 40px
+$nav-width-phone: 200px
+$nav-height: 40px
+
+.fill-layout
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+
+#header
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  height: $header-height - 1px //account for border
+  line-height: $header-height
+
+#navigation
+  position: absolute
+  top: $header-height - 1px
+  left: 0
+  right: 0
+  height: $nav-height
+
+#main
+  position: absolute
+  top: $header-height + $nav-height
+  left: 0
+  right: 0
+  bottom: 0
+  padding: 1em
+
+  h1
+    margin-top: 0
+
+ul.unstyled
+  list-style: none
+  margin: 0
+  padding: 0
+
+ul.horizontal
+  list-style: none
+  margin: 0
+  padding: 0
+  li
+    display: inline-block
+
+
+@include phone
+
+  #main-wrapper
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    width: 100% //set as fixed on mobiles on load
+    @include transition(all, 0.2s)
+    &.navigation-visible
+      left: 80%
+
+  #header
+    height: $header-height-phone
+
+  #navigation
+    width: $nav-width-phone
+    top: 0
+    left: 0
+    right: 0
+    width: auto
+    overflow: hidden
+    bottom: auto
+
+  #main
+    left: 0
+    top: $header-height-phone

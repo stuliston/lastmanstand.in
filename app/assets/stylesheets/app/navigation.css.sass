@@ -1,0 +1,57 @@
+#navigation
+
+  background: #eee
+
+  li
+    display: inline-block
+
+  h2, a
+    display: inline-block
+    padding: 15px 10px 15px 10px
+  h2
+    margin: 0
+    color: #666
+    @include type-setter(1, 1, bold)
+
+  a, a:visited, a:active
+    color: #888
+    text-decoration: none
+
+
+  a:hover
+    color: darken(#888, 10)
+
+  a.active
+    // @include box-shadow(inset 0 0 10px rgba(0, 0, 0, 0.5))
+    color: darken(#888, 30)
+
+@include phone
+
+  #navigation
+    z-index: 0
+    height: $header-height-phone
+    display: block
+    height: auto
+    bottom: 0
+    background-image: url(asset-path("nav_bg.jpg", image))
+    background-position: 0px $header-height-phone
+    background-repeat: repeat
+
+    ul
+      padding-top: 10px
+
+    li
+      display: block
+
+    a, h2
+      padding: 20px
+
+    a, a:visited, a:active
+    color: #bbb
+    text-decoration: none
+
+    a:hover
+      color: lighten(#bbb, 10)
+
+    a.active
+      color: lighten(#bbb, 30)

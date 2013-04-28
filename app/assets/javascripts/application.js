@@ -1,8 +1,8 @@
 //= require jquery
-//= require jquery_ujs
 //= require handlebars
 //= require ember
 //= require ember-data
+//= require viewporter
 //= require_self
 //= require lastmanstanding
 

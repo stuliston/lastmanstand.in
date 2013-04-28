@@ -1,7 +1,16 @@
-<div id="page-header">
-  Last Man Standing
+
+{{view LMS.AppNavigation id="navigation"}}
+
+<div id="main-wrapper" {{bindAttr class="navigationVisible isPhone"}}>
+  <div id="header">
+    <button class="nav-toggle" {{action "toggleNavigation"}}>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <div class="logo">Last Man Standing</div>
+  </div>
+  <div id="main">
+      {{outlet}}
+  </div>
 </div>
-
-{{view LMS.AppNavigation}}
-
-{{outlet}}

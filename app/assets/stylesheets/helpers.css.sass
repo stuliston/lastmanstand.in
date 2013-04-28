@@ -1,0 +1,15 @@
+@mixin type-setter($size:1.4, $line: $size * 1.1, $weight: normal)
+  font-size:   ($size * 10) + px
+  line-height: ($line * 10) + px
+  font-size:   $size + rem
+  line-height: $line + rem
+  font-weight: $weight
+
+
+@mixin phone
+  @media only screen and (min-width: 320px) and (max-width: 480px)
+    @content
+
+@mixin tablet
+  @media only screen and (min-width: 768px) and (max-width: 1024)
+    @content
