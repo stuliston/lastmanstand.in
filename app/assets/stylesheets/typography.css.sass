@@ -1,9 +1,17 @@
 body
-  color: #333
+  color: #444
 
 h1, h2, h3
-  color: #333
+  color: #444
+
+h1
+  @include type-setter(1.6, 1.6, bold)
 
 a, a:visited, a:active
   text-decoration: none
   color: #444
+
+@include phone
+
+  h1
+    text-align: center
