@@ -1,4 +1,4 @@
-LMS.GamesRoute = Ember.Route.extend
+LMS.GamesIndexRoute = Ember.Route.extend
 
   model: ->
     LMS.Game.find()

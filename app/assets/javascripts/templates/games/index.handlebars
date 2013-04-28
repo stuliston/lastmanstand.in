@@ -1,0 +1,11 @@
+<h1>Games</h1>
+{{#linkTo games.new}}New Game{{/linkTo}}
+<ul class="games-list unstyled">
+  {{#each game in controller}}
+    <li>
+      {{#linkTo 'game' game}}
+        <div class="name">{{game.name}}</div>
+      {{/linkTo}}
+    </li>
+  {{/each}}
+</ul>
