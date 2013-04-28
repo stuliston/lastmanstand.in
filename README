@@ -21,9 +21,9 @@ PREDICTION  - A USER select a TEAM that will *win* a given MATCH
 MVP
 ---
 
-- One sport to begin with. EPL starts again in a few months
+- One sport to begin with. EPL starts again in a few months (problem: how do we attract early-adopters and test the app ourselves?)
 - Simplest login technique possible (one that provides an avatar)
-- No schedule / results API. Manual entry by me to start with
+- No schedule / results API. Manual entry to start with
 
 
 USER STORIES
@@ -32,13 +32,13 @@ USER STORIES
 As a potential PLAYER, I want to log-in so that I can start playing the game.
   - email, avatar, password, display name
 
-As a PLAYER, I want to be taken straight to my list of COMPETITIONS
-  - See mock
+As a PLAYER, I want to create a new GAME so that I can begin to guess scores
+  - name
 
-As a PLAYER, I want to create a new 'competition' so that I can play against my friends.
-  - simple form taking: comp name
+As a user, I want to invite my friends to play my GAME
 
-As a user, I want to invite my friends
+As Rob and Stu, I want to integrate Braintree (or similar) to charge users a fee
+  - Need to hypothesise and measure what will be the most successful model for this
 
 STRETCH
 -------
