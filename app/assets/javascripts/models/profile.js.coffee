@@ -2,7 +2,7 @@ LMS.Profile = DS.Model.extend
   name: DS.attr 'string'
   gravatarImageUrl: DS.attr 'string'
 
-  gameParticipants: DS.hasMany('LMS.GameParticipant')
+  gameParticipants: DS.hasMany('LMS.GameMembership')
 
   # games: (->
   #   @get('gameParticipants').getEach('game')
@@ -26,4 +26,3 @@ LMS.Profile.FIXTURES = [
   }
 
 ]
-

@@ -1,10 +1,10 @@
-LMS.GameParticipant = DS.Model.extend
+LMS.GameMembership = DS.Model.extend
 
   game: DS.belongsTo 'LMS.Game'
   participant: DS.belongsTo 'LMS.Profile'
 
 #These will go very soon
-LMS.GameParticipant.FIXTURES = [
+LMS.GameMembership.FIXTURES = [
 
   {
     id: 1
@@ -28,4 +28,3 @@ LMS.GameParticipant.FIXTURES = [
   }
 
 ]
-

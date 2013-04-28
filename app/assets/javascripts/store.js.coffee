@@ -11,8 +11,8 @@ LMS.Adapter.configure('LMS.Game', {
   sideloadAs: 'games'
 })
 
-LMS.Adapter.configure('LMS.GameParticipant', {
-  sideloadAs: 'game_participants'
+LMS.Adapter.configure('LMS.GameMembership', {
+  sideloadAs: 'game_memberships'
 })
 
 LMS.Store = DS.Store.extend

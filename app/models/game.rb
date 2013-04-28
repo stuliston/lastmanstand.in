@@ -1,5 +1,4 @@
 class Game < ActiveRecord::Base
-
-  has_and_belongs_to_many :profiles
-
+  has_many :game_memberships, dependent: :destroy
+  has_many :profiles, through: :game_memberships
 end

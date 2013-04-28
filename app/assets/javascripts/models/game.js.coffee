@@ -1,6 +1,6 @@
 LMS.Game = DS.Model.extend
   name: DS.attr 'string'
-  gameParticipants: DS.hasMany('LMS.GameParticipant')
+  gameParticipants: DS.hasMany('LMS.GameMembership')
 
   # participants: (->
   #   @get('gameParticipants').getEach('participant')
@@ -20,8 +20,3 @@ LMS.Game.FIXTURES = [
   }
 
 ]
-
-
-
-
-

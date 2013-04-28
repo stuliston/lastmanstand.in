@@ -1,7 +1,7 @@
 <div class="game-index">
   <h1>{{controller.name}}</h1>
 
-  <ul class="participants unstyled">
+  <ul class="members unstyled">
   {{#each gameParticipant in controller.gameParticipants}}
     <li>
       <img {{bindAttr src="gameParticipant.participant.gravatarImageUrl"}} class="avatar" />
