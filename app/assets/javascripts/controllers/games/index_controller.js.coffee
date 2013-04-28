@@ -1,3 +1,3 @@
-LMS.GamesIndexController = Ember.ArrayController.extend
+LMS.GamesIndexController = Ember.ArrayController.extend()
 
-  itemController: 'game'
+  # itemController: 'game'

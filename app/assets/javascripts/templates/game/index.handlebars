@@ -1,1 +1,14 @@
-Show Game
+<div class="game-index">
+  <h1>{{controller.name}}</h1>
+
+  <ul class="participants unstyled">
+  {{#each participant in controller.participants}}
+    <li>
+      <img {{bindAttr src="participant.gravatarImageUrl"}} class="avatar" />
+      <div class="details">
+        {{participant.name}}
+      </div>
+    </li>
+  {{/each}}
+  </ul>
+</div>
