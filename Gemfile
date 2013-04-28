@@ -24,11 +24,8 @@ group :assets do
   gem 'neat'
 end
 
-group :test do
-  gem 'rspec-rails'
-end
-
 group :development, :test do
+  gem 'rspec-rails'
   gem 'awesome_print'
   gem 'pry'
   gem 'better_errors'
