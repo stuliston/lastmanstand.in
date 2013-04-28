@@ -11,7 +11,7 @@ LMS.Adapter.configure('LMS.Game', {
   sideloadAs: 'games'
 })
 
-LMS.Adapter.configure('LMS.GameParticipants', {
+LMS.Adapter.configure('LMS.GameParticipant', {
   sideloadAs: 'game_participants'
 })
 
