@@ -2,11 +2,11 @@
   <h1>{{controller.name}}</h1>
 
   <ul class="members unstyled">
-  {{#each gameMembership in controller.gameMemberships}}
+  {{#each profile in controller.members}}
     <li>
-      <img {{bindAttr src="gameMembership.profile.avatarImageUrl"}} class="avatar" />
+      <img {{bindAttr src="profile.avatarImageUrl"}} class="avatar" />
       <div class="details">
-        {{gameMembership.profile.name}}
+        {{profile.name}}
       </div>
     </li>
   {{/each}}
