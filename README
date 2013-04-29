@@ -9,13 +9,14 @@ GOALS
 GLOSSARY
 --------
 
-USER        - A person who has registered their email, password and name so they can start to play the game
-PROFILE     - A public profile of a user. (Keeps the user for authentication type stuff)
-GAME(?)     - A group of PROFILE's who play against each other (possibly with a name like "The Hooroo Invitational"). A user can be involved in many GAMES
-TEAM        - An EPL football team e.g. Man Utd, Chelsea
-MATCH       - A fixture comprising of a home TEAM, and AWAY team and a RESULT
-RESULT      - Win/lose/draw
-PREDICTION  - A USER select a TEAM that will *win* a given MATCH
+USER            - A person who has registered their email, password and name so they can start to play the game
+PROFILE         - A public profile of a user. (Keeps the user for authentication type stuff)
+GAME            - A group of PROFILE's who play against each other (possibly with a name like "The Hooroo Invitational"). A user can be involved in many GAMES
+GAME MEMBERSHIP - A PROFILE's association to a GAME they have joined
+TEAM            - An EPL football team e.g. Man Utd, Chelsea
+MATCH           - A fixture comprising of a home TEAM, and AWAY team and a RESULT
+RESULT          - Win/lose/draw
+PREDICTION      - A USER select a TEAM that will *win* a given MATCH
 
 
 MVP
