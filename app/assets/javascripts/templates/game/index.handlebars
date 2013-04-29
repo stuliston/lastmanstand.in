@@ -4,7 +4,7 @@
   <ul class="members unstyled">
   {{#each gameMembership in controller.gameMemberships}}
     <li>
-      <img {{bindAttr src="gameMembership.profile.gravatarImageUrl"}} class="avatar" />
+      <img {{bindAttr src="gameMembership.profile.avatarImageUrl"}} class="avatar" />
       <div class="details">
         {{gameMembership.profile.name}}
       </div>
