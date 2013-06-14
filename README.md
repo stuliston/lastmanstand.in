@@ -26,16 +26,29 @@
 
 ## USER STORIES
 
-As a potential PLAYER, I want to log-in so that I can start playing the game.
-* email, avatar, password, display name
+* User can create and account with username and password
+* User can sign in with google
+* User can sign in with facebook
+* User can sign in with twitter
+* User can view homepage with info about app and pricing
+* User can create a new game
+* User can invite 2 friends to join game by email for free
+* User can accept an invitation
+* User can ignore an invitation
+* User can change the invitation message sent to friends
+* User can view all their games on dashboard
+* User can view all pending invitations on a dashboard
+* User only sees games that are current on the dashboard (low priority)
+* User can view past games (low priority)
+* User can view the current fixture
+* User can pick winners from the current fixture
+* User is limited to pick teams that they have not picked before
+* User is prevented from picking teams after the round closes
+* User can view all players in a game
+* User can add players to a game
+* User can upgrade a game that has run out of allowed number of players
+* System takes payment for game upgrade associates credit(?) with game
 
-As a PLAYER, I want to create a new GAME so that I can begin to guess scores
-* name
-
-As a user, I want to invite my friends to play my GAME
-
-As Rob and Stu, I want to integrate Braintree (or similar) to charge users a fee
-* Need to hypothesise and measure what will be the most successful model for this
 
 ## STRETCH
 
