@@ -1,0 +1,1 @@
+LMS.CurrentProfileController = Ember.ObjectController.extend()

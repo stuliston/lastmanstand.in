@@ -4,11 +4,11 @@ LMS.Profile = DS.Model.extend
   gameMemberships: DS.hasMany('LMS.GameMembership')
   gameInvitations: DS.hasMany('LMS.GameInvitation')
 
-  games: (->
-    @get('gameMemberships').getEach('game')
-  ).property('@each.gameMemberships').cacheable()
+  # currentGames: (->
+  #   @get('gameMemberships').getEach('game')
+  # ).property('@each.gameMemberships')#.cacheable()
 
 
-  invitations: (->
-    @get('gameInvitations').getEach('game')
-  ).property('@each.gameInvitations').cacheable()
+  # invitedGames: (->
+  #   @get('gameInvitations').getEach('game')
+  # ).property('@each.gameInvitations')#.cacheable()

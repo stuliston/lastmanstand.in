@@ -5,6 +5,11 @@
     <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0" />
 
     <%= stylesheet_link_tag    "application", media: "all" %>
+
+    <script>
+      var currentProfileId = <%= Profile.first.id %>;
+    </script> <!--do this properly once we do logins-->
+
     <%= javascript_include_tag "vendor" %>
     <%= javascript_include_tag "lastmanstanding" %>
     <%= csrf_meta_tags %>

@@ -3,4 +3,5 @@ class GameSerializer < ActiveModel::Serializer
   attributes :id, :name
 
   has_many :game_memberships
+  has_many :game_invitations
 end

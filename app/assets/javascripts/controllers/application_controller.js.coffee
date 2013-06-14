@@ -5,6 +5,7 @@ LMS.ApplicationController = Ember.Controller.extend
   windowWidth: 0
 
   init: ->
+    @_super()
 
     calculateWindowWidth = =>
       width = $(window).width()

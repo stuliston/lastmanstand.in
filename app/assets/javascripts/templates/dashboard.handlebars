@@ -1,9 +1,9 @@
 <h2>Current Games</h2>
 <ul class="games-list unstyled">
-  {{#each game in games}}
+  {{#each gameMembership in currentProfile.gameMemberships}}
     <li>
-      {{#linkTo 'game' game}}
-        <div class="name">{{game.name}}</div>
+      {{#linkTo 'game' gameMembership.game}}
+        <div class="name">{{gameMembership.game.name}}</div>
       {{/linkTo}}
     </li>
   {{/each}}
@@ -12,11 +12,9 @@
 
 <h2>Invitations</h2>
 <ul class="invitations-list unstyled">
-  {{#each invitation in invitations}}
+  {{#each gameInvitation in currentProfile.gameInvitations}}
     <li>
-      {{#linkTo 'invitation' invitation}}
-        <div class="name">{{invitation.game.name}}</div>
-      {{/linkTo}}
+      <div class="name">{{gameInvitation.game.name}}</div>
     </li>
   {{/each}}
 </ul>

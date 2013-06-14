@@ -1,1 +1,18 @@
 New Game
+
+<div class="row">
+  <label>League</label> {{view Ember.Select
+   viewName="select"
+   contentBinding="leagues"
+   optionLabelPath="content.name"
+   optionValuePath="content.id"
+   prompt="Select a League"
+   selectionBinding="league"}}
+
+</div>
+<div class="row">
+  <label>Name</label>
+  {{input value=name}}
+</div>
+
+<button {{action saveGame}}>Create Game</button>
