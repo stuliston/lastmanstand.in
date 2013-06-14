@@ -1,0 +1,22 @@
+<h2>Current Games</h2>
+<ul class="games-list unstyled">
+  {{#each game in games}}
+    <li>
+      {{#linkTo 'game' game}}
+        <div class="name">{{game.name}}</div>
+      {{/linkTo}}
+    </li>
+  {{/each}}
+</ul>
+
+
+<h2>Invitations</h2>
+<ul class="invitations-list unstyled">
+  {{#each invitation in invitations}}
+    <li>
+      {{#linkTo 'invitation' invitation}}
+        <div class="name">{{invitation.game.name}}</div>
+      {{/linkTo}}
+    </li>
+  {{/each}}
+</ul>

@@ -1,5 +1,7 @@
 LMS.Router.map ->
 
+  @resource('dashboard')
+
   @resource('games', {path: '/games'}, ->
     @route('new')
   )
