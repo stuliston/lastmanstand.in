@@ -1,0 +1,14 @@
+<ul>
+  {{#each gameInvitation in gameInvitations}}
+    <li>{{gameInvitation.email}}</li>
+  {{/each}}
+</ul>
+<div class="player-count" {{bindAttr class="morePlayersAllowed::full"}}>
+  {{gameInvitations.length}} of {{maxAllowedPlayers}} available players
+</div>
+{{#if morePlayersAllowed}}
+  {{input value=view.newEmail placeholder="Enter email"}}
+  <button {{action addEmail target="view"}} {{bindAttr disabled="view.isEmailInvalid"}}>Add</button>
+{{else}}
+  <button>Upgrade account to add more players</button>
+{{/if}}

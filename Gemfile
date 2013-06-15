@@ -10,7 +10,7 @@ gem 'cancan'
 gem 'jquery-rails'
 gem 'ember-rails'
 gem 'ember-source', '1.0.0.rc5'
-gem 'ember-data-source', '0.13'
+# gem 'ember-data-source', '0.13' ---USING DEV BUILD IN VENDOR FOLDER
 gem 'handlebars-source', '1.0.0.rc4'
 gem 'active_model_serializers'
 gem 'bcrypt-ruby' # required for has_secure_password
