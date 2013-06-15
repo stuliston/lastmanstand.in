@@ -4,7 +4,7 @@ LastManStanding::Application.routes.draw do
 
   namespace :api do
     resources :profiles
-    resources :leagues, only: [:index]
+    resources :leagues
     resources :games
     resources :game_memberships, only: [ :create ]
   end

@@ -1,12 +1,16 @@
+<p>
+  Your game currently allows for {{maxAllowedPlayers}} players including you.
+</p>
 <ul>
   {{#each gameInvitation in gameInvitations}}
     <li>{{gameInvitation.email}}</li>
   {{/each}}
 </ul>
-<div class="player-count" {{bindAttr class="morePlayersAllowed::full"}}>
-  {{gameInvitations.length}} of {{maxAllowedPlayers}} available players
-</div>
+
 {{#if morePlayersAllowed}}
+  <div class="player-count" {{bindAttr class="morePlayersAllowed::full"}}>
+    {{totalPlayersRemaining}} players remaining.
+  </div>
   {{input value=view.newEmail placeholder="Enter email"}}
   <button {{action addEmail target="view"}} {{bindAttr disabled="view.isEmailInvalid"}}>Add</button>
 {{else}}

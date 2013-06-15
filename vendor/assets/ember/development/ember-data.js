@@ -1,5 +1,4 @@
 // Last commit: 91b7adb (2013-05-29 12:02:58 -0700)
-console.log('loadingemnberdata');
 
 (function() {
 var define, requireModule;
