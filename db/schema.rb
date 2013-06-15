@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20130615041720) do
   create_table "game_invitations", force: true do |t|
     t.integer  "profile_id"
     t.integer  "game_id"
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

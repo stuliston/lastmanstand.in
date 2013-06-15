@@ -7,6 +7,7 @@ LastManStanding::Application.routes.draw do
     resources :leagues
     resources :games
     resources :game_memberships, only: [ :create ]
+    resources :game_invitations, only: [ :create ]
   end
 
 end

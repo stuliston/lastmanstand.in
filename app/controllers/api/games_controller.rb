@@ -15,7 +15,7 @@ module Api
 
     def create
       if @game.save!
-        render json: @game #respond_with doesn't work for some reason
+        render json: @game, serializer: ShallowGameSerializer, root: 'game'
       end
     end
 

@@ -1,4 +1,5 @@
-// Last commit: 91b7adb (2013-05-29 12:02:58 -0700)
+// Last commit: a369cea (2013-06-14 07:46:14 -0700)
+
 
 (function() {
 var define, requireModule;
@@ -14,11 +15,18 @@ var define, requireModule;
     if (seen[name]) { return seen[name]; }
     seen[name] = {};
 
-    var mod = registry[name],
-        deps = mod.deps,
-        callback = mod.callback,
-        reified = [],
-        exports;
+    var mod, deps, callback, reified , exports;
+
+    mod = registry[name];
+
+    if (!mod) {
+      throw new Error("Module '" + name + "' not found.");
+    }
+
+    deps = mod.deps;
+    callback = mod.callback;
+    reified = [];
+    exports;
 
     for (var i=0, l=deps.length; i<l; i++) {
       if (deps[i] === 'exports') {
@@ -39,7 +47,7 @@ var define, requireModule;
 */
 
 /**
-  All Ember Data methods and functions are defined inside of this namespace.
+  All Ember Data methods and functions are defined inside of this namespace. 
 
   @class DS
   @static
@@ -800,8 +808,6 @@ DS.Transaction = Ember.Object.extend({
     current transaction should not be used again.
   */
   rollback: function() {
-    var store = get(this, 'store');
-
     // Destroy all relationship changes and compute
     // all references affected
     var references = Ember.OrderedSet.create();
@@ -862,7 +868,7 @@ DS.Transaction = Ember.Object.extend({
       if(!record.get('isDirty')) {
         this.remove(record);
       }
-    }, this);
+    }, this); 
   },
 
   /**
@@ -1769,8 +1775,7 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
 
     var unloadedReferences = this.unloadedReferences(references),
         manyArray = this.recordArrayManager.createManyArray(type, Ember.A(references)),
-        loadingRecordArrays = this.loadingRecordArrays,
-        reference, clientId, i, l;
+        reference, i, l;
 
     // Start the decrementing counter on the ManyArray at the number of
     // records we need to load from the adapter
@@ -4242,8 +4247,8 @@ DS.RelationshipChange.determineRelationshipType = function(recordType, knownSide
     else{
       return knownKind === "belongsTo" ? "oneToMany" : "manyToMany";
     }
-  }
-
+  } 
+ 
 };
 
 DS.RelationshipChange.createChange = function(firstRecordReference, secondRecordReference, store, options){
@@ -4486,8 +4491,6 @@ DS.RelationshipChange.prototype = {
 
   /** @private */
   getByReference: function(reference) {
-    var store = this.store;
-
     // return null or undefined if the original reference was null or undefined
     if (!reference) { return reference; }
 
@@ -4795,8 +4798,7 @@ DS.hasMany = function(type, options) {
 };
 
 function clearUnmaterializedHasMany(record, relationship) {
-  var store = get(record, 'store'),
-      data = get(record, 'data').hasMany;
+  var data = get(record, 'data').hasMany;
 
   var references = data[relationship.key];
 
@@ -5864,7 +5866,8 @@ DS.Serializer = Ember.Object.extend({
     @returns {any} the serialized representation of the id
   */
   serializeId: function(id) {
-    if (isNaN(id)) { return id; }
+    if(id === undefined || id === null) { return null; }
+    if(isNaN(id)) { return id; }
     return +id;
   },
 
@@ -6209,7 +6212,7 @@ DS.Serializer = Ember.Object.extend({
   deserializeValue: function(value, attributeType) {
     var transform = this.transforms ? this.transforms[attributeType] : null;
 
-    Ember.assert("You tried to use a attribute type (" + attributeType + ") that has not been registered", transform);
+    Ember.assert("You tried to use an attribute type (" + attributeType + ") that has not been registered", transform);
     return transform.deserialize(value);
   },
 
@@ -7017,7 +7020,7 @@ DS.JSONSerializer = DS.Serializer.extend({
       if (relationship.options && relationship.options.polymorphic && !Ember.isNone(id)) {
         this.addBelongsToPolymorphic(hash, key, id, child.constructor);
       } else {
-        hash[key] = id === undefined ? null : this.serializeId(id);
+        hash[key] = this.serializeId(id);
       }
     }
   },
@@ -7085,6 +7088,8 @@ DS.JSONSerializer = DS.Serializer.extend({
     if (json[root]) {
       if (record) { loader.updateId(record, json[root]); }
       this.extractRecordRepresentation(loader, type, json[root]);
+    } else {
+      Ember.Logger.warn("Extract requested, but no data given for " + type + ". This may cause weird problems.");
     }
   },
 
@@ -7368,7 +7373,7 @@ DS.loaderFor = loaderFor;
 
   For an example implementation, see {{#crossLink "DS.RestAdapter"}} the
   included REST adapter.{{/crossLink}}.
-
+  
   @class Adapter
   @namespace DS
   @extends Ember.Object
@@ -8448,8 +8453,6 @@ DS.RESTSerializer = DS.JSONSerializer.extend({
 
 
 (function() {
-/*global jQuery*/
-
 /**
   @module data
   @submodule data-adapters
@@ -8457,10 +8460,11 @@ DS.RESTSerializer = DS.JSONSerializer.extend({
 
 var get = Ember.get, set = Ember.set;
 
-function rejectionHandler(reason) {
-  Ember.Logger.error(reason, reason.message);
+DS.rejectionHandler = function(reason) {
+  Ember.Logger.assert([reason, reason.message, reason.stack]);
+
   throw reason;
-}
+};
 
 /**
   The REST adapter allows your store to communicate with an HTTP server by
@@ -8584,7 +8588,7 @@ DS.RESTAdapter = DS.Adapter.extend({
     }, function(xhr) {
       adapter.didError(store, type, record, xhr);
       throw xhr;
-    }).then(null, rejectionHandler);
+    }).then(null, DS.rejectionHandler);
   },
 
   createRecords: function(store, type, records) {
@@ -8607,7 +8611,7 @@ DS.RESTAdapter = DS.Adapter.extend({
       data: data
     }).then(function(json) {
       adapter.didCreateRecords(store, type, records, json);
-    }).then(null, rejectionHandler);
+    }).then(null, DS.rejectionHandler);
   },
 
   updateRecord: function(store, type, record) {
@@ -8627,7 +8631,7 @@ DS.RESTAdapter = DS.Adapter.extend({
     }, function(xhr) {
       adapter.didError(store, type, record, xhr);
       throw xhr;
-    }).then(null, rejectionHandler);
+    }).then(null, DS.rejectionHandler);
   },
 
   updateRecords: function(store, type, records) {
@@ -8653,7 +8657,7 @@ DS.RESTAdapter = DS.Adapter.extend({
       data: data
     }).then(function(json) {
       adapter.didUpdateRecords(store, type, records, json);
-    }).then(null, rejectionHandler);
+    }).then(null, DS.rejectionHandler);
   },
 
   deleteRecord: function(store, type, record) {
@@ -8668,7 +8672,7 @@ DS.RESTAdapter = DS.Adapter.extend({
     }, function(xhr){
       adapter.didError(store, type, record, xhr);
       throw xhr;
-    }).then(null, rejectionHandler);
+    }).then(null, DS.rejectionHandler);
   },
 
   deleteRecords: function(store, type, records) {
@@ -8694,7 +8698,7 @@ DS.RESTAdapter = DS.Adapter.extend({
       data: data
     }).then(function(json){
       adapter.didDeleteRecords(store, type, records, json);
-    }).then(null, rejectionHandler);
+    }).then(null, DS.rejectionHandler);
   },
 
   find: function(store, type, id) {
@@ -8703,7 +8707,7 @@ DS.RESTAdapter = DS.Adapter.extend({
     return this.ajax(this.buildURL(root, id), "GET").
       then(function(json){
         adapter.didFindRecord(store, type, json, id);
-    }).then(null, rejectionHandler);
+    }).then(null, DS.rejectionHandler);
   },
 
   findAll: function(store, type, since) {
@@ -8716,7 +8720,7 @@ DS.RESTAdapter = DS.Adapter.extend({
       data: this.sinceQuery(since)
     }).then(function(json) {
       adapter.didFindAll(store, type, json);
-    }).then(null, rejectionHandler);
+    }).then(null, DS.rejectionHandler);
   },
 
   findQuery: function(store, type, query, recordArray) {
@@ -8727,7 +8731,7 @@ DS.RESTAdapter = DS.Adapter.extend({
       data: query
     }).then(function(json){
       adapter.didFindQuery(store, type, json, recordArray);
-    }).then(null, rejectionHandler);
+    }).then(null, DS.rejectionHandler);
   },
 
   findMany: function(store, type, ids, owner) {
@@ -8740,7 +8744,7 @@ DS.RESTAdapter = DS.Adapter.extend({
       data: {ids: ids}
     }).then(function(json) {
       adapter.didFindMany(store, type, json);
-    }).then(null, rejectionHandler);
+    }).then(null, DS.rejectionHandler);
   },
 
   /**
