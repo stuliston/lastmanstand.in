@@ -5,6 +5,7 @@ class Profile < ActiveRecord::Base
   has_many :games, through: :game_memberships
 
   has_many :game_invitations, dependent: :destroy
+  has_many :predictions
 
   delegate :email, to: :user
 
