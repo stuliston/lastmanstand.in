@@ -86,3 +86,15 @@ As the site maintainer, I want to create multiple rounds of fixtures, so that pl
 * Setup Konacha and get a few basic js specs in place
 
 
+## CHANGE LOG
+
+### RM (19/06)
+I've created a reasonably deep heirarchy for league, season, round, fixture. It felt like maybe one or two of these was optional but added them anyway as it makes some things simpler. Lets chat if it doesn't make sense.
+
+The seed data should populate a rough semi-random afl premiership season. It's messy and could do with enhancements like not putting all games for a round on a single date/time but makes it possible to build some ui with some data for now.
+
+### RM (16/06)
+Started on a user creating a game and inviting other participants. Lots of loose ends in here. A missing feature in Ember data has made me move on from that for now but a pull request exists with some discussion around it so it might be available pretty soon. Plenty of other things to do in the mean time.
+
+The invitations stuff is very basic at the moment, no tokens or anything like that. This needs a short discussion.
+
