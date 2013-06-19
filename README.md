@@ -82,8 +82,9 @@ As the site maintainer, I want to create multiple rounds of fixtures, so that pl
 * User should see all dates in their time zone.
 
 
-## TECH - TODO
-* Setup Konacha and get a few basic js specs in place
+## TECH STUFF
+* Thinking of bringing in http://foundation.zurb.com/docs/ for it's apparently excellent mobile first css goodness. Just the basics, not the kitchen sink
+* JS Testing. Konacha looks good for it's integration testing capabilities and rails integration. There is some very nice ember testing stuff that's come out recently that makes testing much easier - it's unfortunately based on qunit. Not so bad but the dsl isn't as nice.
 
 
 ## CHANGE LOG
