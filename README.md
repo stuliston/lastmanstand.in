@@ -24,6 +24,11 @@
 * No schedule / results API. Manual entry to start with
 
 
+## GENERAL PRODUCT THOUGHTS
+This app will naturally be quite seasonal and will if have short spurts of signups near the start of a season and slow drop offs until the end. This will make learning behaviours trickier than an app with constant use throughout a year. Longer term:
+* What could be done to keep people's attention?
+* What could be done to allow games to start part-way through the season?
+
 ## USER STORIES
 
 * User can create and account with username and password
