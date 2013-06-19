@@ -14,7 +14,15 @@ module Api
     end
 
     def create
-      if @game.save!
+      if @game.save
+        render json: @game, serializer: ShallowGameSerializer, root: 'game'
+      end
+    end
+
+    def update
+      puts "AAA"
+      puts @game.id
+      if @game.update_attributes!(params[:game])
         render json: @game, serializer: ShallowGameSerializer, root: 'game'
       end
     end

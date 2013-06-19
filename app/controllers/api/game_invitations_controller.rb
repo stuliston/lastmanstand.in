@@ -21,7 +21,7 @@ module Api
     private
 
      def game_invitation_params
-      params.require(:game_invitation).permit(:game_id, :email)
+      params.require(:game_invitation).permit([:game_id, :email])
     end
 
   end

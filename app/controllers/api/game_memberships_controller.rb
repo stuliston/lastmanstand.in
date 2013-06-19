@@ -15,7 +15,7 @@ module Api
     private
 
      def game_membership_params
-      params.require(:game_membership).permit(:game_id, :profile_id)
+      params.require(:game_membership).permit([:game_id, :profile_id])
     end
 
   end
