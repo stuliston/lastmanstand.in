@@ -34,3 +34,48 @@ st_kilda          = Team.create!(name: 'St Kilda', league: afl)
 sydney_swans      = Team.create!(name: 'Sydney Swans', league: afl)
 west_coast_eagles = Team.create!(name: 'West Coast Eagles', league: afl)
 western_bulldogs  = Team.create!(name: 'Western Bulldogs', league: afl)
+
+#Create a fixture for a single afl season
+Season.destroy_all
+Round.destroy_all
+Fixture.destroy_all
+afl_season_2013 = Season.create!(name: "2013 AFL Premiership Season", start_date: Date.new(2013, 3, 22), end_date: Date.new(2013, 8, 30), league: afl)
+
+round_date = afl_season_2013.start_date
+paired_teams = []
+round_number = 1
+all_afl_teams = Team.where(league: afl)
+
+
+#This is pretty messy but it kinda works (I think)
+while round_date <= afl_season_2013.end_date
+
+  round = afl_season_2013.rounds.create(number: round_number)
+  played_this_round = []
+  # puts paired_teams
+
+  all_afl_teams.each do |team_a|
+    next if played_this_round.include?(team_a)
+
+    all_afl_teams.each do |team_b|
+
+      pair = {a: team_a, b: team_b}
+
+      if played_this_round.include?(team_a)
+        break
+      elsif played_this_round.include?(team_b) || team_a == team_b || paired_teams.include?(pair)
+        next
+      else
+        round.fixtures.create!(home_team: team_a, away_team: team_b, start_time: round_date)
+        paired_teams << pair
+        played_this_round << team_a
+        played_this_round << team_b
+      end
+
+    end
+  end
+
+  round_date = round_date + 1.week
+  round_number += 1
+end
+
