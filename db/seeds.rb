@@ -6,11 +6,6 @@ rob = User.create!(email: 'robmonie@gmail.com', password: 'password', profile: P
 
 users = [ stu, rob ]
 
-Game.destroy_all
-Game.create!(name: 'Rob v Stu', profiles: users.collect(&:profile))
-Game.create!(name: 'Stu Solo Style', profiles: [ stu.profile ] )
-Game.create!(name: 'Hooroo Invitational', profiles: users.collect(&:profile))
-
 League.destroy_all
 afl = League.create!(name: 'Australian Football League')
 epl = League.create!(name: 'English Premier League')
@@ -37,9 +32,16 @@ western_bulldogs  = Team.create!(name: 'Western Bulldogs', league: afl)
 
 #Create a fixture for a single afl season
 Season.destroy_all
+
+afl_season_2013 = Season.create!(name: "2013 AFL Premiership Season", start_date: Date.new(2013, 3, 22), end_date: Date.new(2013, 8, 30), league: afl)
+
+Game.destroy_all
+Game.create!(name: 'Rob v Stu', profiles: users.collect(&:profile), season: afl_season_2013)
+Game.create!(name: 'Stu Solo Style', profiles: [ stu.profile ], season: afl_season_2013)
+Game.create!(name: 'Hooroo Invitational', profiles: users.collect(&:profile), season: afl_season_2013)
+
 Round.destroy_all
 Fixture.destroy_all
-afl_season_2013 = Season.create!(name: "2013 AFL Premiership Season", start_date: Date.new(2013, 3, 22), end_date: Date.new(2013, 8, 30), league: afl)
 
 round_date = afl_season_2013.start_date
 paired_teams = []

@@ -28,10 +28,11 @@
 This app will naturally be quite seasonal and will if have short spurts of signups near the start of a season and slow drop offs until the end. This will make learning behaviours trickier than an app with constant use throughout a year. Longer term:
 * What could be done to keep people's attention?
 * What could be done to allow games to start part-way through the season?
+* How could we let users try the game at any time to get the feel for it?  Trial season?
 
 ## USER STORIES
 
-* User can create and account with username and password
+* User can create an account with username and password
 * User can sign in with google
 * User can sign in with facebook
 * User can sign in with twitter
@@ -87,7 +88,10 @@ As the site maintainer, I want to create multiple rounds of fixtures, so that pl
 * User should see all dates in their time zone.
 
 
-## TECH STUFF
+## TECH STUFF / DESIGN DISCUSSION
+* Once you're in a game, how much do urls matter? Ember is awesome for this but what should they look like? Are ids ok or should we slug stuff. If we slug, should it be globally unique or unique to it's parent. For example:
+** /games/hooroo-invitational - a dashboard for the game. The hooroo-invitational would need to be unique to the world or include the id somehow. This is good for SEO but lame for humans. SEO isn't a factor here as we're in the logged in state.
+** /games/27-hooroo-invitational/rounds/3 - displays the third round with it's fixtures in whatever form they should be at that point in time.
 * Thinking of bringing in http://foundation.zurb.com/docs/ for it's apparently excellent mobile first css goodness. Just the basics, not the kitchen sink
 * JS Testing. Konacha looks good for it's integration testing capabilities and rails integration. There is some very nice ember testing stuff that's come out recently that makes testing much easier - it's unfortunately based on qunit. Not so bad but the dsl isn't as nice.
 

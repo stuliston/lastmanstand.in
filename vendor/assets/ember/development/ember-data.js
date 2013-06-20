@@ -7691,7 +7691,7 @@ DS.Adapter = Ember.Object.extend(DS._Mappable, {
         serializer = get(this, 'serializer');
 
     store.didUpdateAll(type);
-
+    debugger;
     serializer.extractMany(loader, payload, type);
   },
 
