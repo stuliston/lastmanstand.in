@@ -93,7 +93,7 @@ As the site maintainer, I want to create multiple rounds of fixtures, so that pl
 ** /games/hooroo-invitational - a dashboard for the game. The hooroo-invitational would need to be unique to the world or include the id somehow. This is good for SEO but lame for humans. SEO isn't a factor here as we're in the logged in state.
 ** /games/27-hooroo-invitational/rounds/3 - displays the third round with it's fixtures in whatever form they should be at that point in time.
 * Thinking of bringing in http://foundation.zurb.com/docs/ for it's apparently excellent mobile first css goodness. Just the basics, not the kitchen sink
-* JS Testing. Konacha looks good for it's integration testing capabilities and rails integration. There is some very nice ember testing stuff that's come out recently that makes testing much easier - it's unfortunately based on qunit. Not so bad but the dsl isn't as nice.
+* JS Testing. Konacha looks good for it's integration testing capabilities and rails integration. There is some very nice ember testing stuff that's come out recently that makes testing much easier - it's unfortunately based on qunit. Not so bad but the dsl isn't as nice. Teaspoon appears to be similar to konacha in regards to rails integration and has qunit integration. It also seems to mount on the running rails app rather than have a separate runner which would mean it could be used to execute full end to end specs using the ember testing goodness - https://github.com/modeset/teaspoon
 
 
 ## CHANGE LOG
