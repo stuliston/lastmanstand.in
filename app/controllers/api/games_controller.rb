@@ -20,8 +20,6 @@ module Api
     end
 
     def update
-      puts "AAA"
-      puts @game.id
       if @game.update_attributes!(params[:game])
         render json: @game, serializer: ShallowGameSerializer, root: 'game'
       end
@@ -30,7 +28,7 @@ module Api
     private
 
     def game_params
-      params.require(:game).permit(:name, :league_id)
+      params.require(:game).permit(:name, :season_id)
     end
 
   end

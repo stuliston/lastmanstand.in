@@ -24,6 +24,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'bourbon'
   gem 'neat'
+  gem "teaspoon"
 end
 
 group :development, :test do

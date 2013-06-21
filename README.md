@@ -25,7 +25,7 @@
 
 
 ## GENERAL PRODUCT THOUGHTS
-This app will naturally be quite seasonal and will if have short spurts of signups near the start of a season and slow drop offs until the end. This will make learning behaviours trickier than an app with constant use throughout a year. Longer term:
+This app will naturally be quite seasonal and will if have short spurts of signups near the start of a season and slow usage drop offs until the end. This will make learning behaviours trickier than an app with constant use throughout a year. Longer term:
 * What could be done to keep people's attention?
 * What could be done to allow games to start part-way through the season?
 * How could we let users try the game at any time to get the feel for it?  Trial season?
@@ -53,7 +53,8 @@ This app will naturally be quite seasonal and will if have short spurts of signu
 * User can view all players in a game
 * User can add players to a game
 * User can upgrade a game that has run out of allowed number of players
-* System takes payment for game upgrade associates credit(?) with game
+* User is knocked out once they have used up to the number of lives defined by the game
+* System takes payment for game upgrade and associates credit(?) with game
 
 
 ## STRETCH

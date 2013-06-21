@@ -1,8 +1,8 @@
 class LeagueSerializer < ActiveModel::Serializer
 
-  embed :ids, include: true
   attributes :id, :name
 
-  has_many :seasons
+  has_many :seasons, embed: :ids, include: true
+  has_one :current_season
 
 end

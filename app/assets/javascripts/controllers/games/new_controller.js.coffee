@@ -12,6 +12,11 @@ LMS.GamesNewController = Ember.ObjectController.extend
     @get('totalPlayersRemaining') > 0
   ).property('totalPlayersRemaining')
 
+
+  leagueDidChange: (->
+    @set('season', @get('league.currentSeason'))
+  ).observes('league')
+
   saveGame: ->
     @get('store').commit()
     # @transitionToRoute(@get('indexRoute'))
