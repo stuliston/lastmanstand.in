@@ -94,13 +94,18 @@ As the site maintainer, I want to create multiple rounds of fixtures, so that pl
 ** /games/hooroo-invitational - a dashboard for the game. The hooroo-invitational would need to be unique to the world or include the id somehow. This is good for SEO but lame for humans. SEO isn't a factor here as we're in the logged in state.
 ** /games/27-hooroo-invitational/rounds/3 - displays the third round with it's fixtures in whatever form they should be at that point in time.
 * Thinking of bringing in http://foundation.zurb.com/docs/ for it's apparently excellent mobile first css goodness. Just the basics, not the kitchen sink
-* JS Testing. Konacha looks good for it's integration testing capabilities and rails integration. There is some very nice ember testing stuff that's come out recently that makes testing much easier - it's unfortunately based on qunit. Not so bad but the dsl isn't as nice. Teaspoon appears to be similar to konacha in regards to rails integration and has qunit integration. It also seems to mount on the running rails app rather than have a separate runner which would mean it could be used to execute full end to end specs using the ember testing goodness - https://github.com/modeset/teaspoon
 
 
 ## CHANGE LOG
 
+
+
 ### RM (22/06)
 Added teabag for ui testing with an example unit test and integration test. The integration testing problem isn't solved from the perepective of how to supply data. The example in there uses local data fixtures but this doesn't feel like enough to me. To be true integration tests they kinda need to use the db. This is poossible but it opens the question of how to populate data for tests.  It's worth pursuing this over capybara however because capybara has a bunch of other problems that make it flakey for testing this kind of app. Ember is explictly solving the problem that it has and will result in a dramatically faster end-to-end test suite.
+
+Got some basic navigation within a game going so a player can open the current round (just opens the first round at the moment), show all rounds and then navigate to fixtures. Show all players within a game.  Everything is still really spikey at the moment. Several moments of getting stuck for ages on something and wondering if pursuing ember is a good idea then finding and answer and being glad I did :/
+
+At the moment it's loading heaps of data when the page loads which is slow because there's no query join optimisation being done on the server... N+1 up the wazoo!
 
 ### RM (19/06)
 I've created a reasonably deep heirarchy for league, season, round, fixture. It felt like maybe one or two of these was optional but added them anyway as it makes some things simpler. Lets chat if it doesn't make sense.
