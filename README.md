@@ -99,6 +99,9 @@ As the site maintainer, I want to create multiple rounds of fixtures, so that pl
 
 ## CHANGE LOG
 
+### RM (22/06)
+Added teabag for ui testing with an example unit test and integration test. The integration testing problem isn't solved from the perepective of how to supply data. The example in there uses local data fixtures but this doesn't feel like enough to me. To be true integration tests they kinda need to use the db. This is poossible but it opens the question of how to populate data for tests.  It's worth pursuing this over capybara however because capybara has a bunch of other problems that make it flakey for testing this kind of app. Ember is explictly solving the problem that it has and will result in a dramatically faster end-to-end test suite.
+
 ### RM (19/06)
 I've created a reasonably deep heirarchy for league, season, round, fixture. It felt like maybe one or two of these was optional but added them anyway as it makes some things simpler. Lets chat if it doesn't make sense.
 
