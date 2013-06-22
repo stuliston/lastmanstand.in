@@ -4,3 +4,4 @@
 #= require ember-data
 #= require viewporter
 #= require fastclick
+#= require xdate

@@ -5,10 +5,16 @@ LMS.Router.map ->
   @resource('games', {path: '/games'}, ->
     @route('new')
     @resource('game', {path: ':game_id'}, ->
-      # @route('edit')
       @route('current_round')
-      @route('rounds')
       @route('members')
+      @route('rounds')
+      @route('round', {path: '/rounds/:round_number'}) #weird !
+
+      # @resource('rounds', ->
+      #   @route('index')
+      #   @resource('round', {path: ":round_id"})
+      # )
+
     )
   )
 

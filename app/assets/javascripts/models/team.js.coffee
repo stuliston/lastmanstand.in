@@ -1,3 +1,3 @@
 LMS.Team = DS.Model.extend
-  name: DS.attr('name')
+  name: DS.attr('string')
   league: DS.belongsTo('LMS.League')
