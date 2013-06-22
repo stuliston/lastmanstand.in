@@ -1,0 +1,10 @@
+<ul class="members unstyled">
+{{#each gameMembership in controller}}
+  <li>
+    <img {{bindAttr src="gameMembership.profile.avatarImageUrl"}} class="avatar" />
+    <div class="details">
+      {{gameMembership.profile.name}}
+    </div>
+  </li>
+{{/each}}
+</ul>

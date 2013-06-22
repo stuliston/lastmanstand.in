@@ -4,5 +4,6 @@ class SeasonSerializer < ActiveModel::Serializer
   attributes :id, :name
 
   has_one :league
+  has_many :rounds
 
 end

@@ -1,1 +1,11 @@
-{{outlet}}
+<div class="game-container">
+
+  <h1>{{name}}</h1>
+
+  {{#linkTo game.current_round controller}}Current Round{{/linkTo}} |
+  {{#linkTo game.rounds controller}}All Rounds{{/linkTo}} |
+  {{#linkTo game.members controller}}Members{{/linkTo}}
+
+  {{outlet}}
+
+</div>

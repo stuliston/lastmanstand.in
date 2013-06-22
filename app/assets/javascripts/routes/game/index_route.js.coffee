@@ -1,7 +1,7 @@
-LMS.GameIndexRoute = Ember.Route.extend
+LMS.GameIndexRoute = Ember.Route.extend()
 
-  model: (params)->
-    @modelFor('game')
+  # model: (params)->
+  #   @modelFor('game')
 
-  setupController: (controller, game) ->
-    controller.set('model', game)
+  # setupController: (controller, game) ->
+  #   controller.set('model', game)
