@@ -33,6 +33,4 @@ module Api
 
   end
 
-
-
 end

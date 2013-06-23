@@ -98,6 +98,8 @@ As the site maintainer, I want to create multiple rounds of fixtures, so that pl
 
 ## CHANGE LOG
 
+###RM (23/06)
+Added ability for current user to pick teams for a round. No smarts to prevent changing predictions after round starts etc. Also i've had to jump through a few hoops on the UI because I made the decision not to return the relationship between a fixture and it's predictions for the current user. This is because there are more predictions against a fixture than one user. In hindsight, I think we can do this via a readonly 'current_user_predictions' collection. This would make things much simpler in the client.  Currently the selected predictions don't show as such on first load of a round, you have to select something to make it give the right classes. Not sure what's up with that. I might move to the model shown above anyway.
 
 
 ### RM (22/06)

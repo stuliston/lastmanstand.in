@@ -8,6 +8,7 @@
 
     <script>
       var currentProfileId = <%= Profile.first.id %>;
+      window.ENV = { EXPERIMENTAL_CONTROL_HELPER: true};
     </script> <!--do this properly once we do logins-->
 
     <%= javascript_include_tag "vendor" %>

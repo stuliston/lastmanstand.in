@@ -2,7 +2,7 @@
 <ul class="games-list unstyled">
   {{#each gameMembership in currentProfile.gameMemberships}}
     <li>
-      {{#linkTo 'game' gameMembership.game}}
+      {{#linkTo 'game.current_round' gameMembership.game}}
         <div class="name">{{gameMembership.game.name}}</div>
       {{/linkTo}}
     </li>

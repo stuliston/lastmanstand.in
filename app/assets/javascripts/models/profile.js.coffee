@@ -3,6 +3,7 @@ LMS.Profile = DS.Model.extend
   avatarImageUrl: DS.attr('string')
   gameMemberships: DS.hasMany('LMS.GameMembership')
   gameInvitations: DS.hasMany('LMS.GameInvitation')
+  predictions: DS.hasMany('LMS.Prediction')
 
   # currentGames: (->
   #   @get('gameMemberships').getEach('game')
