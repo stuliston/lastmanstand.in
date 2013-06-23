@@ -1,20 +1,18 @@
-LMS.FixtureItemView = Ember.View.extend
+LMS.RoundFixtureController = Ember.ObjectController.extend
 
-  fixture: null
+  needs: ['predictions']
   predictions: null
-  classNameBindings: ['homeOrAway']
-  tagName: 'li'
 
   selectedTeam: (->
-    @get('fixture.currentUserPredictions').get('firstObject.team')
-  ).property('fixture.currentUserPredictions.@each.team')
+    @get('currentUserPredictions').get('firstObject.team')
+  ).property('currentUserPredictions.@each.team')
 
   isHomeTeamSelected: (->
-    @get('selectedTeam') == @get('fixture.homeTeam')
+    @get('selectedTeam') == @get('homeTeam')
   ).property('selectedTeam')
 
   isAwayTeamSelected: (->
-    @get('selectedTeam') == @get('fixture.awayTeam')
+    @get('selectedTeam') == @get('awayTeam')
   ).property('selectedTeam')
 
   homeOrAway: (->
