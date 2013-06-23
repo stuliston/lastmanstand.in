@@ -2,15 +2,13 @@
 <ul class="fixtures unstyled">
 {{#each fixture in fixtures}}
   {{#view LMS.FixtureItemView fixtureBinding="fixture" predictionsBinding="controller.predictions"}}
-  <li>
-    <div class="home" {{bindAttr class="view.isHomeTeamSelected:selected:not"}} {{action selectWinner fixture fixture.homeTeam}}>
+    <div class="home" {{action selectWinner fixture fixture.homeTeam}}>
       {{fixture.homeTeam.name}}
     </div>
     <div>vs</div>
-    <div class="away" {{bindAttr class="view.isAwayTeamSelected:selected"}} {{action selectWinner fixture fixture.awayTeam}}>
+    <div class="away" {{action selectWinner fixture fixture.awayTeam}}>
       {{fixture.awayTeam.name}}
     </div>
-  </li>
   {{/view}}
 {{/each}}
 </ul>

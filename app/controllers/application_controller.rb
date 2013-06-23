@@ -13,7 +13,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if signed_in?
+    User.first #TODO: swap out once we get proper auth
+    #@current_user ||= User.find(session[:user_id]) if signed_in?
   end
 
   def signed_in?
