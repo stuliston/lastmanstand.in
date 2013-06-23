@@ -99,8 +99,7 @@ As the site maintainer, I want to create multiple rounds of fixtures, so that pl
 ## CHANGE LOG
 
 ###RM (23/06)
-Added ability for current user to pick teams for a round. No smarts to prevent changing predictions after round starts etc. Also i've had to jump through a few hoops on the UI because I made the decision not to return the relationship between a fixture and it's predictions for the current user. This is because there are more predictions against a fixture than one user. In hindsight, I think we can do this via a readonly 'current_user_predictions' collection. This would make things much simpler in the client.  Currently the selected predictions don't show as such on first load of a round, you have to select something to make it give the right classes. Not sure what's up with that. I might move to the model shown above anyway.
-
+Added ability for current user to pick teams for a round. No smarts to prevent changing predictions after round starts etc.
 
 ### RM (22/06)
 Added teabag for ui testing with an example unit test and integration test. The integration testing problem isn't solved from the perepective of how to supply data. The example in there uses local data fixtures but this doesn't feel like enough to me. To be true integration tests they kinda need to use the db. This is poossible but it opens the question of how to populate data for tests.  It's worth pursuing this over capybara however because capybara has a bunch of other problems that make it flakey for testing this kind of app. Ember is explictly solving the problem that it has and will result in a dramatically faster end-to-end test suite.
