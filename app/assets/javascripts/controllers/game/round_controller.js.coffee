@@ -1,6 +1,8 @@
 LMS.GameRoundController = Ember.ObjectController.extend
 
   needs: ['game', 'predictions', 'currentProfile']
+  predictions: null
+  currentProfile: null
 
   predictionsBinding: 'controllers.predictions'
   currentProfileBinding: 'controllers.currentProfile.model'
