@@ -1,6 +1,8 @@
 
 # Teaspoon includes some support files, but you can use anything from your own support path too.
-# require support/sinon
+# = require support/pavlov
+# = require support/sinon
+# = require support/view_helpers
 #
 # Deferring execution
 # If you're using CommonJS, RequireJS or some other asynchronous library you can defer execution. Call Teaspoon.execute()
@@ -23,7 +25,6 @@
 # You can require javascript files here. A good place to start is by requiring your application.js.
 # = require vendor
 # = require lastmanstanding
-# = require support/jasmine_test_adapter
 
 document.write('<div id="ember-testing-container"><div id="ember-testing"></div></div>');
 document.write('<style>#ember-testing-container { position: absolute; background: white; bottom: 0; right: 0; width: 640px; height: 384px; overflow: auto; z-index: 9999; border: 1px solid #ccc; } #ember-testing { zoom: 50%; }</style>');
@@ -31,12 +32,10 @@ document.write('<style>#ember-testing-container { position: absolute; background
 LMS.rootElement = '#ember-testing'
 LMS.setupForTesting()
 
-Ember.Test.adapter = LMS.JasmineTestAdapter.create()
-
-
 LMS.injectTestHelpers()
 
 window.currentProfileId = 1
 LMS.Store = DS.Store.extend
   revision: 12
-  adapter: DS.FixtureAdapter.create()
+  adapter: DS.FixtureAdapter.create
+    simulateRemoteResponse: true

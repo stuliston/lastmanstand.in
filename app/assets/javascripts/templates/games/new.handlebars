@@ -1,20 +1,23 @@
-New Game
+<div class="game-new">
+  <h1>New Game</h1>
 
-<div class="row">
-  <label>League</label> {{view Ember.Select
-   viewName="select"
-   contentBinding="leagues"
-   optionLabelPath="content.name"
-   optionValuePath="content.id"
-   prompt="Select a League"
-   selectionBinding="league"}}
+  <div class="row">
+    <label for='league'>League</label> {{view Ember.Select
+        name="league"
+        viewName="select"
+        contentBinding="leagues"
+        optionLabelPath="content.name"
+        optionValuePath="content.id"
+        prompt="Select a League"
+        selectionBinding="league"}}
 
+  </div>
+  <div class="row">
+    <label>Name</label>
+    {{input value=name name="name"}}
+  </div>
+
+  {{view LMS.GameInvitationsView}}
+
+  <button {{action saveGame}} class="submit">Create Game</button>
 </div>
-<div class="row">
-  <label>Name</label>
-  {{input value=name}}
-</div>
-
-{{view LMS.GameInvitationsView}}
-
-<button {{action saveGame}}>Create Game</button>
