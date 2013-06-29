@@ -104,6 +104,8 @@ Only a single team can be picked per round. Kept the model the same to make it e
 
 Added some testing stuff that's not properly working. I'll look at this again soon.
 
+*** NOTE: Reseed your database for this one. Any rounds with multiple tips will not work as expected.
+
 ###RM (23/06)
 Added ability for current user to pick teams for a round. No smarts to prevent changing predictions after round starts etc.
 
