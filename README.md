@@ -102,7 +102,13 @@ As the site maintainer, I want to create multiple rounds of fixtures, so that pl
 ###RM (29/06)
 Only a single team can be picked per round. Kept the model the same to make it easy to support an afl style footy tipping comp later. Opening a round shows whether the round is closed or how long until the round closes. This autoupdates and shows days or hours or mins depending on how far away the game is.
 
+Current round link now opens to the current round. Logic needs tweaking for what this actually means. Currently tuesday - monday will show the weekend of that week.
+
+Can't select teams for a closed round
+
 Added some testing stuff that's not properly working. I'll look at this again soon.
+
+
 
 *** NOTE: Reseed your database for this one. Any rounds with multiple tips will not work as expected.
 
