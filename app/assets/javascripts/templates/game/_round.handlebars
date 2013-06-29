@@ -1,0 +1,11 @@
+{{#view class="round-container" classNameBindings="isRoundClosed"}}
+  <h3>Round {{number}}: {{date startTime format="ddd dd MMM, yyyy"}}</h3>
+  <div class="round-close-message">
+    {{#if isRoundClosed}}
+      Round is closed to tipping
+    {{else}}
+      Round closes in {{timeToNow startTime currentTime}}
+    {{/if}}
+  </div>
+  {{render "round/fixtures" fixtures}}
+{{/view}}

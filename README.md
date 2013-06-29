@@ -94,9 +94,15 @@ As the site maintainer, I want to create multiple rounds of fixtures, so that pl
 ** /games/hooroo-invitational - a dashboard for the game. The hooroo-invitational would need to be unique to the world or include the id somehow. This is good for SEO but lame for humans. SEO isn't a factor here as we're in the logged in state.
 ** /games/27-hooroo-invitational/rounds/3 - displays the third round with it's fixtures in whatever form they should be at that point in time.
 * Thinking of bringing in http://foundation.zurb.com/docs/ for it's apparently excellent mobile first css goodness. Just the basics, not the kitchen sink
+* Validation: It'd be worth looking at https://github.com/dockyard/ember-validations and https://github.com/dockyard/client_side_validations-ember as they promise to provide ember validation based on active model validations.
 
 
 ## CHANGE LOG
+
+###RM (29/06)
+Only a single team can be picked per round. Kept the model the same to make it easy to support an afl style footy tipping comp later. Opening a round shows whether the round is closed or how long until the round closes. This autoupdates and shows days or hours or mins depending on how far away the game is.
+
+Added some testing stuff that's not properly working. I'll look at this again soon.
 
 ###RM (23/06)
 Added ability for current user to pick teams for a round. No smarts to prevent changing predictions after round starts etc.

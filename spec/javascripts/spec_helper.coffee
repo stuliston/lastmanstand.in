@@ -25,6 +25,7 @@
 # You can require javascript files here. A good place to start is by requiring your application.js.
 # = require vendor
 # = require lastmanstanding
+# = require spec_lifecycle
 
 document.write('<div id="ember-testing-container"><div id="ember-testing"></div></div>');
 document.write('<style>#ember-testing-container { position: absolute; background: white; bottom: 0; right: 0; width: 640px; height: 384px; overflow: auto; z-index: 9999; border: 1px solid #ccc; } #ember-testing { zoom: 50%; }</style>');
@@ -39,3 +40,4 @@ LMS.Store = DS.Store.extend
   revision: 12
   adapter: DS.FixtureAdapter.create
     simulateRemoteResponse: true
+

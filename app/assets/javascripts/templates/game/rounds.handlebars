@@ -2,7 +2,7 @@
 {{#each round in controller}}
   <li>
     {{#linkTo game.round round}}
-      Round {{round.number}}: Starts {{date round.startDate format="ddd dd/MM/yyyy"}}
+      Round {{round.number}}: Starts {{date round.startTime format="ddd dd/MM/yyyy"}}
     {{/linkTo}}
   </li>
 {{/each}}

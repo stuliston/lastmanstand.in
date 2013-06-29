@@ -11,8 +11,8 @@
   <div class="player-count" {{bindAttr class="morePlayersAllowed::full"}}>
     {{totalPlayersRemaining}} players remaining.
   </div>
-  {{input value=view.newEmail placeholder="Enter email"}}
-  <button {{action addEmail target="view"}} {{bindAttr disabled="view.isEmailInvalid"}}>Add</button>
+  {{input value=view.newEmail name="email" placeholder="Enter email"}}
+  <button class="add-email" {{action addEmail target="view"}} {{bindAttr disabled="view.isEmailInvalid"}}>Add</button>
 {{else}}
   <button>Upgrade account to add more players</button>
 {{/if}}

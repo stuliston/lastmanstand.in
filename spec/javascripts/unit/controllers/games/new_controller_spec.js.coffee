@@ -3,7 +3,7 @@
 pavlov.specify "games/new_controller", ->
   describe "player invitations and membership", ->
 
-    game = controller = profileC = null
+    store = game = controller = profileC = null
 
     before ->
       game = LMS.Game.createRecord(maxAllowedPlayers: 3)
@@ -14,7 +14,6 @@ pavlov.specify "games/new_controller", ->
       game.get('gameInvitations').createRecord(game: game, profile: profileB)
 
       controller = LMS.GamesNewController.create(model: game)
-
 
     it "calculates total players", ->
       assert(controller.get('totalPlayers')).equals(2)

@@ -3,10 +3,28 @@ LMS.ApplicationController = Ember.Controller.extend
   navigationVisible: false
   isPhone: false
   windowWidth: 0
+  currentTime: new Date()
 
   init: ->
     @_super()
+    @_manageWindowWidth()
+    @_trackCurrentTimeToSecond()
 
+
+  toggleNavigation: ->
+    @set('navigationVisible', !@get('navigationVisible'))
+
+  currentPathDidChange: (->
+    @set('navigationVisible', false)
+  ).observes('currentPath')
+
+  #Not sure how often we want to trigger this? Maybe too often
+  _trackCurrentTimeToSecond: ->
+    setInterval(=>
+      Ember.run => @set('currentTime', new Date())
+    , 1000)
+
+  _manageWindowWidth: ->
     calculateWindowWidth = =>
       width = $(window).width()
       @set('windowWidth', width)
@@ -16,11 +34,3 @@ LMS.ApplicationController = Ember.Controller.extend
 
     $(window).on 'resize', =>
       calculateWindowWidth()
-
-
-  toggleNavigation: ->
-    @set('navigationVisible', !@get('navigationVisible'))
-
-  currentPathDidChange: (->
-    @set('navigationVisible', false)
-  ).observes('currentPath')
