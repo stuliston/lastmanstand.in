@@ -99,6 +99,9 @@ As the site maintainer, I want to create multiple rounds of fixtures, so that pl
 
 ## CHANGE LOG
 
+###RM (30/06)
+Prevent picking teams that have been picked in previous rounds. Navigate next/previous from within a round.
+
 ###RM (29/06)
 Only a single team can be picked per round. Kept the model the same to make it easy to support an afl style footy tipping comp later. Opening a round shows whether the round is closed or how long until the round closes. This autoupdates and shows days or hours or mins depending on how far away the game is.
 
