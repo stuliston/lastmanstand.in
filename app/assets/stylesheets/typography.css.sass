@@ -1,15 +1,28 @@
-body
-  color: #444
+$base-text-color: #333
+$primary-color: #379aff
+$secondary-color: #b6b6b6
+$success-color: #13c276
+$alert-color: #ff4627
 
-h1, h2, h3
-  color: #444
+
+
+body
+  color: $base-text-color
+
+a, a:visited
+  text-decoration: none
+  color: $primary-color
 
 h1
-  @include type-setter(1.6, 1.6, bold)
-
-a, a:visited, a:active
-  text-decoration: none
-  color: #444
+  font-size: 1.6em
+h2
+  font-size: 1.4em
+h3
+  font-size: 1.3em
+h4
+  font-size: 1.2em
+h5
+  font-size: 1.1em
 
 @include phone
 

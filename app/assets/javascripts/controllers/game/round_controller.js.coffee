@@ -23,7 +23,7 @@ LMS.GameRoundController = Ember.ObjectController.extend
   nextRound: (->
     rounds = @get('season.rounds')
     currentRoundIndex = rounds.indexOf(@get('model'))
-    rounds.objectAt(currentRoundIndex + 1) if currentRoundIndex
+    rounds.objectAt(currentRoundIndex + 1) if currentRoundIndex >= 0
   ).property('model')
 
   selectWinner: (fixture, team) ->

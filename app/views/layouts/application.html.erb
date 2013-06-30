@@ -4,7 +4,7 @@
     <title>LastManStanding</title>
     <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0" />
 
-    <%= stylesheet_link_tag    "application", media: "all" %>
+    <%= stylesheet_link_tag "application", media: "all" %>
 
     <script>
       var currentProfileId = <%= Profile.first.id %>;
@@ -18,7 +18,8 @@
 
   <body>
     <div id="viewporter">
-      <%= yield %>
+
     </div>
+    <noscript><%= yield %></noscript>
   </body>
 </html>

@@ -1,18 +1,25 @@
 .fixtures
   li
     div
-      display: inline-block
       padding: 10px
       margin-bottom: 10px
+      display: inline-block
     .home, .away
-      width: 140px
       cursor: pointer
+      width: 42%
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
     .home
       text-align: right
+    .vs
+      text-align: center
+      width: 10%
 
   .disable-home-team .home, .disable-away-team .away
     background: #eee
     color: #aaa
+    cursor: default
 
   .home .home, .away .away
     background: #ccc

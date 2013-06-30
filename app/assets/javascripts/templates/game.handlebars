@@ -1,9 +1,8 @@
 <div class="game-container">
 
   <h1>{{name}}</h1>
-
   <ul class="nav unstyled">
-    <li>{{#linkTo game.current_round controller.model}}Current Round{{/linkTo}}</li>
+    <li>{{#linkTo game.current_round controller.model}}This Round{{/linkTo}}</li>
     <li>{{#linkTo game.rounds controller.model}}All Rounds{{/linkTo}}</li>
     <li>{{#linkTo game.members controller.model}}Members{{/linkTo}}</li>
   </ul>
