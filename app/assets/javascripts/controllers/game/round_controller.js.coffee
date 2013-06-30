@@ -5,6 +5,7 @@ LMS.GameRoundController = Ember.ObjectController.extend
   currentProfile: null
   predictionsBinding: 'controllers.predictions'
   currentProfileBinding: 'controllers.currentProfile.model'
+
   currentTime: (->
     @get('controllers.application.currentTime')
   ).property 'controllers.application.currentTime'
@@ -13,8 +14,20 @@ LMS.GameRoundController = Ember.ObjectController.extend
     @get('controllers.application.currentTime') > @get('startTime')
   ).property('startTime', 'currentTime')
 
+  previousRound: (->
+    rounds = @get('season.rounds')
+    currentRoundIndex = rounds.indexOf(@get('model'))
+    rounds.objectAt(currentRoundIndex - 1) if currentRoundIndex
+  ).property('model')
+
+  nextRound: (->
+    rounds = @get('season.rounds')
+    currentRoundIndex = rounds.indexOf(@get('model'))
+    rounds.objectAt(currentRoundIndex + 1) if currentRoundIndex
+  ).property('model')
+
   selectWinner: (fixture, team) ->
-    return if @get('isRoundClosed')
+    return if @get('isRoundClosed') || @get('predictions').someProperty('team', team)
 
     if prediction = @_predictionForRound()
       prediction.setProperties(fixture: fixture, team: team)

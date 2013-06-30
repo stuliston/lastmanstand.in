@@ -10,8 +10,14 @@
     .home
       text-align: right
 
-  .away .away, .home .home
+  .disable-home-team .home, .disable-away-team .away
+    background: #eee
+    color: #aaa
+
+  .home .home, .away .away
     background: #ccc
+    color: #333
+    cursor: default
 
 .is-round-closed
   .fixtures

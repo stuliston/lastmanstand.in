@@ -1,5 +1,13 @@
 {{#view class="round-container" classNameBindings="isRoundClosed"}}
   <h3>Round {{number}}: {{date startTime format="ddd dd MMM, yyyy"}}</h3>
+  <ul class="nav unstyled horizontal">
+  {{#if previousRound}}
+    <li>{{#linkTo game.round previousRound}}Previous{{/linkTo}}</li>
+  {{/if}}
+  {{#if nextRound}}
+    <li>{{#linkTo game.round nextRound}}Next{{/linkTo}}</li>
+  {{/if}}
+  </ul>
   <div class="round-close-message">
     {{#if isRoundClosed}}
       Round is closed to tipping
