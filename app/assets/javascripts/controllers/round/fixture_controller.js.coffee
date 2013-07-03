@@ -1,10 +1,11 @@
 LMS.RoundFixtureController = Ember.ObjectController.extend
 
-  needs: ['predictions']
-  predictions: null
+  needs: ['predictions', 'game']
 
   selectedTeam: (->
-    @get('currentUserPredictions').get('firstObject.team')
+    @get('currentUserPredictions').find((prediction) =>
+      prediction.get('game') == @get('controllers.game.model')
+    )?.get('team')
   ).property('currentUserPredictions.@each.team')
 
   isHomeTeamSelected: (->
@@ -16,13 +17,15 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
   ).property('selectedTeam')
 
   disableHomeTeam: (->
-    homeTeam = @get('homeTeam')
-    @get('controllers.predictions').someProperty('team', homeTeam)
+    @get('controllers.predictions').some((prediction) =>
+      prediction.get('team') == @get('homeTeam') && prediction.get('game') == @get('controllers.game.model')
+    )
   ).property('controllers.predictions.@each.team')
 
   disableAwayTeam: (->
-    awayTeam = @get('awayTeam')
-    @get('controllers.predictions').someProperty('team', awayTeam)
+    @get('controllers.predictions').some((prediction) =>
+      prediction.get('team') == @get('awayTeam') && prediction.get('game') == @get('controllers.game.model')
+    )
   ).property('controllers.predictions.@each.team')
 
 

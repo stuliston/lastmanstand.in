@@ -27,13 +27,16 @@ LMS.GameRoundController = Ember.ObjectController.extend
   ).property('model')
 
   selectWinner: (fixture, team) ->
-    return if @get('isRoundClosed') || @get('predictions').someProperty('team', team)
+    profile = @get('currentProfile')
+    game = @get('controllers.game.model')
+    currentPrediction = @_predictionForGameAndRound()
+    return if @get('isRoundClosed') || currentPrediction?.get('team') == team
 
-    if prediction = @_predictionForRound()
-      prediction.setProperties(fixture: fixture, team: team)
-      fixture.get('currentUserPredictions').pushObject(prediction)
+    if currentPrediction
+      currentPrediction.setProperties(fixture: fixture, team: team)
+      fixture.get('currentUserPredictions').pushObject(currentPrediction)
     else
-      prediction = LMS.Prediction.createRecord(fixture: fixture, team: team, profile: @get('currentProfile'))
+      prediction = LMS.Prediction.createRecord(fixture: fixture, team: team, profile: profile, game: game)
 
     @get('store').commit()
 
@@ -41,7 +44,8 @@ LMS.GameRoundController = Ember.ObjectController.extend
   #and will clean up if anything goes wrong. Currently not tying the prediction to
   #the round in order to make supporting a standard 'footy tipping' game style possible
   #at a later date.
-  _predictionForRound: ->
+  _predictionForGameAndRound: ->
     round = @get('model')
-    @get('predictions').find((prediction) -> prediction.get('fixture.round') == round )
+    game = @get('controllers.game.model')
+    @get('predictions').find((prediction) -> prediction.get('fixture.round') == round && prediction.get('game') == game)
 

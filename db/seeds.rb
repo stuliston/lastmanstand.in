@@ -42,6 +42,7 @@ Game.create!(name: 'Hooroo Invitational', profiles: users.collect(&:profile), se
 
 Round.destroy_all
 Fixture.destroy_all
+Prediction.destroy_all
 
 round_date = afl_season_2013.start_date
 paired_teams = []
