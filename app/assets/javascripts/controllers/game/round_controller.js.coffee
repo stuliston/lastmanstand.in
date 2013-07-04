@@ -30,7 +30,10 @@ LMS.GameRoundController = Ember.ObjectController.extend
     profile = @get('currentProfile')
     game = @get('controllers.game.model')
     currentPrediction = @_predictionForGameAndRound()
-    return if @get('isRoundClosed') || currentPrediction?.get('team') == team
+
+    return if @get('isRoundClosed') || @get('predictions').some((prediction) ->
+      prediction.get('team') == team && prediction.get('game') == game
+    )
 
     if currentPrediction
       currentPrediction.setProperties(fixture: fixture, team: team)
