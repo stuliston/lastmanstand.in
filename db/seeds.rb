@@ -3,8 +3,11 @@ User.destroy_all
 Profile.destroy_all
 stu = User.create!(email: 'stuart.liston@gmail.com', password: 'password', profile: Profile.create!(name: 'Stu'))
 rob = User.create!(email: 'robmonie@gmail.com', password: 'password', profile: Profile.create!(name: 'Rob'))
+phil = User.create!(email: 'metcalfe.phil@gmail.com', password: 'password', profile: Profile.create!(name: 'Rob'))
+ash = User.create!(email: 'ash@ashmckenzie.org', password: 'password', profile: Profile.create!(name: 'Ash'))
+dan = User.create!(email: 'locusdelicti@gmail.com', password: 'password', profile: Profile.create!(name: 'Dan'))
 
-users = [ stu, rob ]
+users = [ stu, rob, ash, phil, dan ]
 
 League.destroy_all
 afl = League.create!(name: 'Australian Football League')
