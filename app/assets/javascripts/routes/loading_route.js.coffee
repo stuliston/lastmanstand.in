@@ -1,0 +1,1 @@
+LMS.LoadingRoute = Ember.Route.extend()

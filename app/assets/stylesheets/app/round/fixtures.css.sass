@@ -1,17 +1,21 @@
 .fixtures
   li
+    clear: both
     div
       padding: 10px
       margin-bottom: 10px
-      display: inline-block
+      float: left
     .home, .away
       cursor: pointer
-      width: 42%
+      width: 45%
       overflow: hidden
       text-overflow: ellipsis
       white-space: nowrap
     .home
       text-align: right
+      @include border-radius(0px 3px 3px 0px)
+    .away
+      @include border-radius(3px 0px 0px 3px)
     .vs
       text-align: center
       width: 10%
@@ -22,8 +26,8 @@
     cursor: default
 
   .home .home, .away .away
-    background: #ccc
-    color: #333
+    background: #666
+    color: #fff
     cursor: default
 
 .is-round-closed

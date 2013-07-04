@@ -1,25 +1,32 @@
 .round-container
-
   .header
     +horizontal-list
+    margin: 0
+    padding: 0.5em 1em
 
   .previous, .next
     padding-top: 10px
-    width: 10%
+    width: 14%
+    a
+      color: #666
+
+  .next
+    text-align: right
 
   .title
     width: 70%
     text-align: center
     h2
       margin: 0.2em 0
+      color: #555
 
   .round-close-message
-    margin: 1em 0
+    margin: 0 0 1em 0
     padding: 5px
-    background: #eee
-    color: $success-color
+    background: $success-color
+    color: #fff
     text-align: center
 
   &.is-round-closed
     .round-close-message
-      color: $alert-color
+      background: $alert-color
