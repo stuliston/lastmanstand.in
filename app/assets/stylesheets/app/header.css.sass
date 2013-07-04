@@ -9,9 +9,12 @@
 @include phone
   #header
     .logo
-      // @include type-setter(1.2, 1.2, normal)
       line-height: $header-height-phone
       text-align: center
+      margin-left: 1em
+      text-transform: uppercase
+      font-weight: bold
+      color: rgba(255, 255, 255, 0.5)
 
     .nav-toggle
       display: block
@@ -22,11 +25,7 @@
       padding: 0
       width: 25px
       border: none
-      // border: 1px solid #cfcfcf
       background: transparent
-      // @include background-image(linear-gradient(top, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1)))
-      // @include box-shadow(inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.075))
-      // @include border-radius(3px)
       .bar
         display: block
         background: #ddd
