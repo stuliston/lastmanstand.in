@@ -57,8 +57,12 @@ Teaspoon.setup do |config|
 
   # Example suite. Since we're just filtering to files already within the root test/javascripts, these files will also
   # be run in the default suite -- but can be focused into a more specific suite.
-  #config.suite :targeted do |suite|
-  #  suite.matcher = "test/javascripts/targeted/*_test.{js,js.coffee,coffee}"
-  #end
+  config.suite :unit do |suite|
+   suite.matcher = "spec/javascripts/unit/**/*_spec.{js,js.coffee,coffee}"
+  end
+
+  config.suite :integration do |suite|
+   suite.matcher = "spec/javascripts/integration/**/*_spec.{js,js.coffee,coffee}"
+  end
 
 end if defined?(Teaspoon) && Teaspoon.respond_to?(:setup) # let Teaspoon be undefined outside of development/test/asset groups

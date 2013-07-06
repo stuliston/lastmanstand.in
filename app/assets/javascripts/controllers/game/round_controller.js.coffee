@@ -1,6 +1,6 @@
 LMS.GameRoundController = Ember.ObjectController.extend
 
-  needs: ['application', 'game', 'predictions', 'currentProfile']
+  needs: ['application', 'game', 'gameRounds', 'predictions', 'currentProfile']
   predictions: null
   currentProfile: null
   predictionsBinding: 'controllers.predictions'
@@ -15,33 +15,35 @@ LMS.GameRoundController = Ember.ObjectController.extend
   ).property('startTime', 'currentTime')
 
   previousRound: (->
-    rounds = @get('season.rounds')
-    currentRoundIndex = rounds.indexOf(@get('model'))
-    rounds.objectAt(currentRoundIndex - 1) if currentRoundIndex
-  ).property('model')
+    previousRoundNumber = @get('number') - 1
+    @get('controllers.gameRounds').findProperty('number', previousRoundNumber)
+  ).property('controllers.gameRounds', 'model')
 
   nextRound: (->
-    rounds = @get('season.rounds')
-    currentRoundIndex = rounds.indexOf(@get('model'))
-    rounds.objectAt(currentRoundIndex + 1) if currentRoundIndex >= 0
-  ).property('model')
+    nextRoundNumber = @get('number') + 1
+    @get('controllers.gameRounds').findProperty('number', nextRoundNumber)
+  ).property('controllers.gameRounds', 'model')
 
   selectWinner: (fixture, team) ->
-    profile = @get('currentProfile')
     game = @get('controllers.game.model')
-    currentPrediction = @_predictionForGameAndRound()
+    return unless @_isTeamSelectableForGame(team, game)
 
-    return if @get('isRoundClosed') || @get('predictions').some((prediction) ->
-      prediction.get('team') == team && prediction.get('game') == game
-    )
-
-    if currentPrediction
+    if currentPrediction = @_predictionForGameAndRound()
       currentPrediction.setProperties(fixture: fixture, team: team)
       fixture.get('currentUserPredictions').pushObject(currentPrediction)
     else
-      prediction = LMS.Prediction.createRecord(fixture: fixture, team: team, profile: profile, game: game)
+      LMS.Prediction.createRecord
+        fixture: fixture,
+        team: team,
+        profile: @get('currentProfile'),
+        game: game
 
-    @get('store').commit()
+    @get('store').commitDefaultTransaction()
+
+  _isTeamSelectableForGame: (team, game) ->
+    !(@get('isRoundClosed') || @get('predictions').some((prediction) ->
+      prediction.get('team') == team && prediction.get('game') == game
+    ))
 
   #Assumes that server prevents a round from having more than a single prediction
   #and will clean up if anything goes wrong. Currently not tying the prediction to

@@ -3,6 +3,7 @@
 # = require support/pavlov
 # = require support/sinon
 # = require support/view_helpers
+# = require support/ember_helpers
 #
 # Deferring execution
 # If you're using CommonJS, RequireJS or some other asynchronous library you can defer execution. Call Teaspoon.execute()

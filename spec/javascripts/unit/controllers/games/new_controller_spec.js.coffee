@@ -1,5 +1,3 @@
-#=require spec_helper
-
 pavlov.specify "games/new_controller", ->
   describe "player invitations and membership", ->
 
@@ -13,7 +11,8 @@ pavlov.specify "games/new_controller", ->
       game.get('gameMemberships').createRecord(game: game, profile: profileA)
       game.get('gameInvitations').createRecord(game: game, profile: profileB)
 
-      controller = LMS.GamesNewController.create(model: game)
+      controller = controllerFor('games.new', game)
+
 
     it "calculates total players", ->
       assert(controller.get('totalPlayers')).equals(2)

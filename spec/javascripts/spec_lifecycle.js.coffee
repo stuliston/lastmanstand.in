@@ -1,12 +1,14 @@
 QUnit.testStart ->
   Ember.run ->
-    console.log 'advance'
+    # console.log 'advance'
     LMS.advanceReadiness()
 
 QUnit.testDone ->
   Ember.run ->
-    console.log 'before reset'
-    store = LMS.__container__.lookup('store:main')
+    # console.log 'before reset'
+    store = lookupStore()
+    # store.defaultTransaction.rollback()
+
     for key of store.clientIdToType
       type = App.store.clientIdToType[key]
       clearCache(store, type)
@@ -27,7 +29,7 @@ QUnit.testDone ->
       inflight: Ember.OrderedSet.create()
 
     LMS.reset()
-    console.log 'after reset'
+    # console.log 'after reset'
 
 clearCache = (store, type) ->
     map = store.typeMapFor(type)

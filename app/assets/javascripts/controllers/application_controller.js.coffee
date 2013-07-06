@@ -20,9 +20,12 @@ LMS.ApplicationController = Ember.Controller.extend
 
   #Not sure how often we want to trigger this? Maybe too often
   _trackCurrentTimeToSecond: ->
-    setInterval(=>
+    @_timerId = setInterval(=>
       Ember.run => @set('currentTime', new Date())
     , 1000)
+
+  destroy: ->
+    clearInterval(@_timerId)
 
   _manageWindowWidth: ->
     calculateWindowWidth = =>
