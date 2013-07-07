@@ -2,14 +2,13 @@ LMS.RoundListItemController = Ember.ObjectController.extend
 
   needs: ['predictions', 'game']
 
-
   prediction: (->
     round = @get('model')
     game = @get('controllers.game.model')
     @get('controllers.predictions').find((prediction) =>
       prediction.get('fixture.round') == round && prediction.get('game') == game
     )
-  ).property('predictions.@each.fixture', 'predictions.@each.team')
+  ).property('predictions.@each.team')
 
   selectedTeam: (->
     @get('prediction.team')
