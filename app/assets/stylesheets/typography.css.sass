@@ -1,8 +1,8 @@
 $base-text-color: #333
-$primary-color: #379aff
+$primary-color: #097BAC
 $secondary-color: #b6b6b6
-$success-color: #13c276
-$alert-color: #ff4627
+$success-color: #73C27D
+$alert-color: #FA6254
 
 
 
@@ -11,7 +11,7 @@ body
 
 a, a:visited
   text-decoration: none
-  color: $primary-color
+  color: lighten($base-text-color, 10)
 
 h1
   font-size: 1.4em
@@ -28,7 +28,11 @@ h5
 
   h1
     text-align: center
-    background: #3B97D0
-    color: #eee
+    background: $primary-color
+    color: #eee//#6597BB
     margin: 0
-    padding: 0.5em
+    margin-top: -40px
+    line-height: 40px
+    font-size: 1em
+    // margin: 0 40px
+    // padding: 0.5em

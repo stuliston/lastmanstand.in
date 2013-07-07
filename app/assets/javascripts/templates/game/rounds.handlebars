@@ -1,9 +1,20 @@
 <ul class="rounds unstyled">
 {{#each round in controller}}
-  <li>
+  {{#view tagName="li" classNameBindings="selectionClass"}}
     {{#linkTo game.round round}}
-      Round {{round.number}}: Starts {{date round.startTime format="ddd dd/MM/yyyy"}}
+      <div>Round {{round.number}}: {{date round.startTime format="ddd dd/MM/yyyy"}}</div>
+      {{round.a}}
+      {{#if round.selectedTeam}}
+        <div class="selection">
+        {{#if round.isSelectionCorrect}}
+          <i class="icon-ok-sign"></i>
+        {{else}}
+          <i class="icon-remove-sign"></i>
+        {{/if}}
+        <span>{{round.selectedTeam.name}} to defeat {{round.nonSelectedTeam.name}}</span>
+        </div>
+      {{/if}}
     {{/linkTo}}
-  </li>
+  {{/view}}
 {{/each}}
 </ul>

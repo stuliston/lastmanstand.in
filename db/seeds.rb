@@ -45,7 +45,6 @@ Game.create!(name: 'Hooroo Invitational', profiles: users.collect(&:profile), se
 
 Round.destroy_all
 Fixture.destroy_all
-Prediction.destroy_all
 
 round_date = afl_season_2013.start_date
 paired_teams = []
@@ -72,7 +71,10 @@ while round_date <= afl_season_2013.end_date
       elsif played_this_round.include?(team_b) || team_a == team_b || paired_teams.include?(pair)
         next
       else
-        round.fixtures.create!(home_team: team_a, away_team: team_b, start_time: round_date)
+        if round_date < Time.now
+          winning_team = [team_a, team_b][rand(0..1)]
+        end
+        round.fixtures.create!(home_team: team_a, away_team: team_b, start_time: round_date, winning_team: winning_team)
         paired_teams << pair
         played_this_round << team_a
         played_this_round << team_b
@@ -83,5 +85,18 @@ while round_date <= afl_season_2013.end_date
 
   round_date = round_date + 1.week
   round_number += 1
+end
+
+Prediction.destroy_all
+
+profile = Profile.first
+Game.all.each do |game|
+  game.season.rounds.each do |round|
+    fixture_index = rand(0..round.fixtures.size - 1)
+    fixture = round.fixtures[fixture_index]
+    if fixture.start_time < Time.now
+      Prediction.create!(profile: profile, team: fixture.home_team, game: game, fixture: fixture)
+    end
+  end
 end
 

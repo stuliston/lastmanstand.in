@@ -2,7 +2,16 @@
 
   .rounds
     li
-      padding: 15px
-      border-bottom: 1px solid #ccc
+      background: #eee
+      border-bottom: 1px solid #ddd
+      &.correct .selection
+        color: $success-color
+      &.incorrect .selection
+        color: $alert-color
       a
-        color: #666
+        padding: 15px
+        display: block
+        line-height: 1.2em
+
+      .selection
+        font-size: 0.8em
