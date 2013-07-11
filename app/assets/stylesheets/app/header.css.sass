@@ -1,28 +1,30 @@
 #header
-  background: #1B67a0
+  background: $primary-color
   .logo
     margin-left: 1em
-    color: #eee
+    color: $light-grey
   .nav-toggle
     display: none
 
 @include phone
   #header
-    .logo
-      line-height: $header-height-phone
-      text-align: center
-      margin-left: 1em
-      text-transform: uppercase
-      font-weight: bold
-      color: rgba(255, 255, 255, 0.5)
+    // .logo
+    //   line-height: $header-height-phone
+    //   text-align: center
+    //   margin-left: 1em
+    //   text-transform: uppercase
+    //   font-weight: bold
+    //   color: rgba(255, 255, 255, 0.5)
 
     .nav-toggle
+      $nav-toggle-height: $header-height-phone - 12px
       z-index: 100
       display: block
       position: absolute
       left: 8px
-      top: 6px
-      height: $header-height-phone - 12px
+      top: 50%
+      margin-top: -($nav-toggle-height / 2)
+      height: $nav-toggle-height
       padding: 0
       width: 25px
       border: none

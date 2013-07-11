@@ -1,5 +1,5 @@
 {{#view tagName="li" classNameBindings="selectionClass"}}
-  {{#linkTo game.round this}}
+  {{#linkTo 'game.round' this}}
     <div>Round {{number}}: {{date startTime format="ddd dd/MM/yyyy"}}</div>
 
     {{#if selectedTeam}}
