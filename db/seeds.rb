@@ -1,11 +1,11 @@
 
 User.destroy_all
 Profile.destroy_all
-stu = User.create!(email: 'stuart.liston@gmail.com', password: 'password', profile: Profile.create!(name: 'Stu'))
-rob = User.create!(email: 'robmonie@gmail.com', password: 'password', profile: Profile.create!(name: 'Rob'))
-phil = User.create!(email: 'metcalfe.phil@gmail.com', password: 'password', profile: Profile.create!(name: 'Rob'))
-ash = User.create!(email: 'ash@ashmckenzie.org', password: 'password', profile: Profile.create!(name: 'Ash'))
-dan = User.create!(email: 'locusdelicti@gmail.com', password: 'password', profile: Profile.create!(name: 'Dan'))
+stu = User.create!(email: 'stuart.liston@gmail.com', password: 'password', password_confirmation: 'password', profile: Profile.create!(name: 'Stu'))
+rob = User.create!(email: 'robmonie@gmail.com', password: 'password', password_confirmation: 'password', profile: Profile.create!(name: 'Rob'))
+phil = User.create!(email: 'metcalfe.phil@gmail.com', password: 'password', password_confirmation: 'password', profile: Profile.create!(name: 'Phil'))
+ash = User.create!(email: 'ash@ashmckenzie.org', password: 'password', password_confirmation: 'password', profile: Profile.create!(name: 'Ash'))
+dan = User.create!(email: 'locusdelicti@gmail.com', password: 'password', password_confirmation: 'password', profile: Profile.create!(name: 'Dan'))
 
 users = [ stu, rob, ash, phil, dan ]
 
@@ -94,8 +94,9 @@ Game.all.each do |game|
   game.season.rounds.each do |round|
     fixture_index = rand(0..round.fixtures.size - 1)
     fixture = round.fixtures[fixture_index]
+    selected_team = [fixture.home_team, fixture.away_team][rand(0..1)]
     if fixture.start_time < Time.now
-      Prediction.create!(profile: profile, team: fixture.home_team, game: game, fixture: fixture)
+      Prediction.create!(profile: profile, team: selected_team, game: game, fixture: fixture)
     end
   end
 end

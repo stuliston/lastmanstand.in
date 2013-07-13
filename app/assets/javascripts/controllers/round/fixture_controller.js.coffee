@@ -18,16 +18,27 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
 
   disableHomeTeam: (->
     @get('controllers.predictions').some((prediction) =>
-      prediction.get('team') == @get('homeTeam') && prediction.get('game') == @get('controllers.game.model')
+      prediction.get('fixture.round.startTime') < new Date() &&
+      prediction.get('team') == @get('homeTeam') && 
+      prediction.get('game') == @get('controllers.game.model')
     )
   ).property('controllers.predictions.@each.team')
 
   disableAwayTeam: (->
     @get('controllers.predictions').some((prediction) =>
-      prediction.get('team') == @get('awayTeam') && prediction.get('game') == @get('controllers.game.model')
+      prediction.get('fixture.round.startTime') < new Date() &&
+      prediction.get('team') == @get('awayTeam') && 
+      prediction.get('game') == @get('controllers.game.model')
     )
   ).property('controllers.predictions.@each.team')
 
+  selectionClass: (->
+    return unless @get('winningTeam')
+    if @get('selectedTeam') == @get('winningTeam')
+      "correct"
+    else  
+      "incorrect"
+  ).property('selectedTeam', 'winningTeam')
 
   homeOrAway: (->
     if @get('isHomeTeamSelected')

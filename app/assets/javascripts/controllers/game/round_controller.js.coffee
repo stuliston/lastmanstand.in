@@ -37,11 +37,15 @@ LMS.GameRoundController = Ember.ObjectController.extend
         profile: @get('currentProfile'),
         game: game
 
+    @_deleteFuturePredictionsForTeam(team)    
+
     @get('store').commitDefaultTransaction()
 
   _isTeamSelectableForGame: (team, game) ->
     !(@get('isRoundClosed') || @get('predictions').some((prediction) ->
-      prediction.get('team') == team && prediction.get('game') == game
+      prediction.get('fixture.round.startTime') < new Date() &&
+      prediction.get('team') == team && 
+      prediction.get('game') == game
     ))
 
   #Assumes that server prevents a round from having more than a single prediction
@@ -52,4 +56,13 @@ LMS.GameRoundController = Ember.ObjectController.extend
     round = @get('model')
     game = @get('controllers.game.model')
     @get('predictions').find((prediction) -> prediction.get('fixture.round') == round && prediction.get('game') == game)
+
+  _deleteFuturePredictionsForTeam: (team) ->
+    currentRound = @get('model')
+    prediction = @get('predictions').find((prediction) => 
+      prediction.get('fixture.round.startTime') > new Date() && 
+      prediction.get('fixture.round') != currentRound && 
+      prediction.get('team') == team
+    )  
+    @get('store').deleteRecord(prediction) if prediction
 
