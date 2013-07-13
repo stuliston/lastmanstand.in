@@ -4,7 +4,7 @@ class ShallowGameMembershipSerializer < ActiveModel::Serializer
 
   attributes :id
 
-  has_one :game, serializer: ShallowGameSerializer
+  has_one :game#, serializer: ShallowGameSerializer
   has_one :profile, serializer: ShallowProfileSerializer
 
 end
