@@ -1,5 +1,4 @@
 pavlov.specify "game/round_controller", ->
-
   describe "computed properties", ->
 
     gameRoundController = gameController = round = previousRound = nextRound = season = null
@@ -68,13 +67,13 @@ pavlov.specify "game/round_controller", ->
 
     describe "selecting winner", ->
 
-      expectation = null
+      transactionCommitExpectation = null
 
       before ->
-        expectation = sinon.mock(store).expects('commitDefaultTransaction')
+        transactionCommitExpectation = sinon.mock(store).expects('commitDefaultTransaction')
 
       after ->
-        expectation.verify()
+        transactionCommitExpectation.verify()
         assert(true).isTrue()
 
       it "can select if not previously selected within game", ->
@@ -83,30 +82,30 @@ pavlov.specify "game/round_controller", ->
 
     describe "selecting winner", ->
 
-      expectation = null
+      transactionCommitExpectation = null
 
       before ->
-        expectation = sinon.mock(store).expects('commitDefaultTransaction')
+        transactionCommitExpectation = sinon.mock(store).expects('commitDefaultTransaction')
 
       after ->
-        expectation.verify()
+        transactionCommitExpectation.verify()
         assert(true).isTrue()
 
       it "can select if not previously selected within game", ->
-        expectation.once()
+        transactionCommitExpectation.once()
         gameRoundController.selectWinner(fixture2, team2)
 
       it "can select if the round is not closed", ->
-        expectation.once()
+        transactionCommitExpectation.once()
         gameRoundController.selectWinner(fixture2, team2)
 
       it "cannot select if the round is closed", ->
-        expectation.never()
+        transactionCommitExpectation.never()
         Ember.run ->
           controllerFor('application').set('currentTime', new Date(new Date().getTime() + 1000))
         gameRoundController.selectWinner(fixture2, team2)
 
       it "cannot select if the team has been selected in a previous round", ->
-        expectation.never()
+        transactionCommitExpectation.never()
         gameRoundController.selectWinner(fixture2, team1)
 

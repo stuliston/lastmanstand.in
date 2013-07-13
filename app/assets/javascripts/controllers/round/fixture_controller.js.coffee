@@ -3,10 +3,10 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
   needs: ['predictions', 'game']
 
   selectedTeam: (->
-    @get('currentUserPredictions').find((prediction) =>
-      prediction.get('game') == @get('controllers.game.model')
+    @get('controllers.predictions').find((prediction) =>
+      prediction.get('game') == @get('controllers.game.model') && prediction.get('fixture') == @get('model')
     )?.get('team')
-  ).property('currentUserPredictions.@each.team')
+  ).property('controllers.predictions.@each.team')
 
   isHomeTeamSelected: (->
     @get('selectedTeam') == @get('homeTeam')

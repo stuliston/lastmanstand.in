@@ -30,7 +30,6 @@ LMS.GameRoundController = Ember.ObjectController.extend
 
     if currentPrediction = @_predictionForGameAndRound()
       currentPrediction.setProperties(fixture: fixture, team: team)
-      fixture.get('currentUserPredictions').pushObject(currentPrediction)
     else
       LMS.Prediction.createRecord
         fixture: fixture,

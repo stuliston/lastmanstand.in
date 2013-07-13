@@ -5,6 +5,6 @@ class GameMembershipSerializer < ActiveModel::Serializer
   attributes :id
 
   has_one :game
-  has_one :profile
+  has_one :profile, serializer: ShallowProfileSerializer
 
 end

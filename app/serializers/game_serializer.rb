@@ -6,5 +6,4 @@ class GameSerializer < ActiveModel::Serializer
   has_many :game_memberships
   has_many :game_invitations
 
-
 end
