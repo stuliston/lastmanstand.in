@@ -6,11 +6,14 @@
     background: $light-grey
 
   .previous, .next
-    padding-top: 10px
     width: 14%
     a
+      display: block
       color: #666
-
+      text-align: center
+      line-height: 38px
+      i
+        line-height: 50px
   .next
     text-align: right
 
@@ -29,5 +32,6 @@
     text-align: center
 
   &.is-round-closed
+    color: $secondary-color
     .round-close-message
       background: $alert-color

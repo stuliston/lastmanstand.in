@@ -3,6 +3,8 @@
     <li class="previous">
       {{#if previousRound}}
         {{#linkTo 'game.round' previousRound}}<i class="icon-chevron-sign-left icon-2x"></i>{{/linkTo}}
+      {{else}}  
+        &nbsp;
       {{/if}}
     </li>
     <li class="title">
@@ -12,6 +14,8 @@
     <li class="next">
       {{#if nextRound}}
         {{#linkTo 'game.round' nextRound}}<i class="icon-chevron-sign-right icon-2x"></i>{{/linkTo}}
+      {{else}}  
+        &nbsp;
       {{/if}}
     </li>
   </ul>
