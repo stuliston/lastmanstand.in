@@ -1,15 +1,15 @@
 <ul class="fixtures unstyled">
 {{#each fixture in controller}}
   {{#view tagName="li" classNameBindings="fixture.homeOrAway disableHomeTeam disableAwayTeam selectionClass"}}
-    <div class="home" {{action selectWinner fixture fixture.homeTeam}}>
+    <a class="home" {{action selectWinner fixture fixture.homeTeam}}>
       {{fixture.homeTeam.name}}
-    </div>
+    </a>
     <div class="vs">
       vs
     </div>
-    <div class="away" {{action selectWinner fixture fixture.awayTeam}}>
+    <a class="away" {{action selectWinner fixture fixture.awayTeam}}>
       {{fixture.awayTeam.name}}
-    </div>
+    </a>
   {{/view}}
 {{/each}}
 </ul>

@@ -33,7 +33,7 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
   ).property('controllers.predictions.@each.team')
 
   selectionClass: (->
-    return unless @get('winningTeam')
+    return unless @get('selectedTeam') && @get('winningTeam')
     if @get('selectedTeam') == @get('winningTeam')
       "correct"
     else  

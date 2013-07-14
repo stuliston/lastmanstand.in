@@ -28,7 +28,7 @@ LMS.GameRoundController = Ember.ObjectController.extend
   selectWinner: (fixture, team) ->
     game = @get('controllers.game.model')
     store = @get('store')
-
+    
     if @_isTeamSelectableForGame(team, game)
       if prediction = @_predictionForTeamInCurrentRound(team)
         store.deleteRecord(prediction) 

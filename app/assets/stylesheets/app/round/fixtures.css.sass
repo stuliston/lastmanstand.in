@@ -1,16 +1,21 @@
 .fixtures
   li
     clear: both
-    div
+    a, div
+      display: block
       padding: 10px
       margin-bottom: 10px
       float: left
+    a:active
+      background: #888
+      color: #fff  
     .home, .away
       cursor: pointer
       width: 45%
       overflow: hidden
       text-overflow: ellipsis
       white-space: nowrap
+
     .home
       text-align: right
       @include border-radius(0px 3px 3px 0px)
@@ -20,21 +25,30 @@
       text-align: center
       width: 10%
 
+
   .disable-home-team .home, .disable-away-team .away
     background: $light-grey
     color: #aaa
     cursor: default
 
-  .home .home, .away .away
+  .home .home, .away .away, .home.selecting, .away.selecting
     background: #666
     color: #fff
     cursor: default
-  .correct.home .home, .correct.away .away
-    background: $success-color
-  .incorrect.home .home, .incorrect.away .away
-    background: $alert-color
 
 .is-round-closed
   .fixtures
-    div
+    .disable-home-team .home, .disable-away-team .away
+      background: $light-grey
+      color: #aaa
+    a, a:active  
+      color: #888
+      background: #fff  
       cursor: default
+    .correct.home .home, .correct.away .away
+      background: $success-color
+      color: #fff
+    .incorrect.home .home, .incorrect.away .away
+      background: $alert-color  
+      color: #fff
+
