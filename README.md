@@ -90,48 +90,4 @@ As the site maintainer, I want to create multiple rounds of fixtures, so that pl
 
 
 ## TECH STUFF / DESIGN DISCUSSION
-* Once you're in a game, how much do urls matter? Ember is awesome for this but what should they look like? Are ids ok or should we slug stuff. If we slug, should it be globally unique or unique to it's parent. For example:
-** /games/hooroo-invitational - a dashboard for the game. The hooroo-invitational would need to be unique to the world or include the id somehow. This is good for SEO but lame for humans. SEO isn't a factor here as we're in the logged in state.
-** /games/27-hooroo-invitational/rounds/3 - displays the third round with it's fixtures in whatever form they should be at that point in time.
-* Thinking of bringing in http://foundation.zurb.com/docs/ for it's apparently excellent mobile first css goodness. Just the basics, not the kitchen sink
-* Validation: It'd be worth looking at https://github.com/dockyard/ember-validations and https://github.com/dockyard/client_side_validations-ember as they promise to provide ember validation based on active model validations.
-
-
-## CHANGE LOG
-
-###RM (30/06)
-Prevent picking teams that have been picked in previous rounds. Navigate next/previous from within a round.
-
-###RM (29/06)
-Only a single team can be picked per round. Kept the model the same to make it easy to support an afl style footy tipping comp later. Opening a round shows whether the round is closed or how long until the round closes. This autoupdates and shows days or hours or mins depending on how far away the game is.
-
-Current round link now opens to the current round. Logic needs tweaking for what this actually means. Currently tuesday - monday will show the weekend of that week.
-
-Can't select teams for a closed round
-
-Added some testing stuff that's not properly working. I'll look at this again soon.
-
-
-
-*** NOTE: Reseed your database for this one. Any rounds with multiple tips will not work as expected.
-
-###RM (23/06)
-Added ability for current user to pick teams for a round. No smarts to prevent changing predictions after round starts etc.
-
-### RM (22/06)
-Added teabag for ui testing with an example unit test and integration test. The integration testing problem isn't solved from the perepective of how to supply data. The example in there uses local data fixtures but this doesn't feel like enough to me. To be true integration tests they kinda need to use the db. This is poossible but it opens the question of how to populate data for tests.  It's worth pursuing this over capybara however because capybara has a bunch of other problems that make it flakey for testing this kind of app. Ember is explictly solving the problem that it has and will result in a dramatically faster end-to-end test suite.
-
-Got some basic navigation within a game going so a player can open the current round (just opens the first round at the moment), show all rounds and then navigate to fixtures. Show all players within a game.  Everything is still really spikey at the moment. Several moments of getting stuck for ages on something and wondering if pursuing ember is a good idea then finding and answer and being glad I did :/
-
-At the moment it's loading heaps of data when the page loads which is slow because there's no query join optimisation being done on the server... N+1 up the wazoo!
-
-### RM (19/06)
-I've created a reasonably deep heirarchy for league, season, round, fixture. It felt like maybe one or two of these was optional but added them anyway as it makes some things simpler. Lets chat if it doesn't make sense.
-
-The seed data should populate a rough semi-random afl premiership season. It's messy and could do with enhancements like not putting all games for a round on a single date/time but makes it possible to build some ui with some data for now.
-
-### RM (16/06)
-Started on a user creating a game and inviting other participants. Lots of loose ends in here. A missing feature in Ember data has made me move on from that for now but a pull request exists with some discussion around it so it might be available pretty soon. Plenty of other things to do in the mean time.
-
-The invitations stuff is very basic at the moment, no tokens or anything like that. This needs a short discussion.
-
+??
