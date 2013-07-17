@@ -1,11 +1,11 @@
 class ShallowProfileSerializer < ActiveModel::Serializer
 
-  embed :ids, include: true
+  embed :ids#, include: true
 
   attributes :id, :avatar_image_url, :name
 
-  has_many :game_memberships, serializer: ShallowGameMembershipSerializer
-  has_many :game_invitations, serializer: ShallowGameInvitationSerializer
+  has_many :game_memberships
+  has_many :game_invitations
   has_many :predictions
 
   def avatar_image_url

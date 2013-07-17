@@ -7,7 +7,7 @@ phil = User.create!(email: 'metcalfe.phil@gmail.com', password: 'password', pass
 ash = User.create!(email: 'ash@ashmckenzie.org', password: 'password', password_confirmation: 'password', profile: Profile.create!(name: 'Ash'))
 dan = User.create!(email: 'locusdelicti@gmail.com', password: 'password', password_confirmation: 'password', profile: Profile.create!(name: 'Dan'))
 
-users = [ stu, rob, ash, phil, dan ]
+all_users = [ stu, rob, ash, phil, dan ]
 
 League.destroy_all
 afl = League.create!(name: 'Australian Football League')
@@ -39,9 +39,15 @@ Season.destroy_all
 afl_season_2013 = Season.create!(name: "2013 AFL Premiership Season", start_date: Date.new(2013, 3, 22), end_date: Date.new(2013, 8, 30), league: afl)
 
 Game.destroy_all
-Game.create!(name: 'Rob v Stu', profiles: users.collect(&:profile), season: afl_season_2013)
+Game.create!(name: 'Rob v Stu', profiles: [rob, stu].collect(&:profile), season: afl_season_2013)
+Game.create!(name: 'Rob v Phil', profiles: [rob, phil].collect(&:profile), season: afl_season_2013)
+Game.create!(name: 'Stu v Phil', profiles: [stu, phil].collect(&:profile), season: afl_season_2013)
+Game.create!(name: 'Phil v Ash', profiles: [phil, ash].collect(&:profile), season: afl_season_2013)
+Game.create!(name: 'Ash v Dan', profiles: [ash, dan].collect(&:profile), season: afl_season_2013)
 Game.create!(name: 'Stu Solo Style', profiles: [ stu.profile ], season: afl_season_2013)
-Game.create!(name: 'Hooroo Invitational', profiles: users.collect(&:profile), season: afl_season_2013)
+Game.create!(name: 'Hooroo Invitational', profiles: all_users.collect(&:profile), season: afl_season_2013)
+
+
 
 Round.destroy_all
 Fixture.destroy_all
@@ -89,15 +95,17 @@ end
 
 Prediction.destroy_all
 
-profile = Profile.first
-Game.all.each do |game|
-  game.season.rounds.each do |round|
-    fixture_index = rand(0..round.fixtures.size - 1)
-    fixture = round.fixtures[fixture_index]
-    selected_team = [fixture.home_team, fixture.away_team][rand(0..1)]
-    if fixture.start_time < Time.now
-      Prediction.create!(profile: profile, team: selected_team, game: game, fixture: fixture)
+Profile.all.each do |profile|
+  Game.all.each do |game|
+    if game.profiles.include? profile
+      game.season.rounds.each do |round|
+        fixture_index = rand(0..round.fixtures.size - 1)
+        fixture = round.fixtures[fixture_index]
+        selected_team = [fixture.home_team, fixture.away_team][rand(0..1)]
+        if fixture.start_time < Time.now
+          Prediction.create!(profile: profile, team: selected_team, game: game, fixture: fixture)
+        end
+      end
     end
   end
 end
-
