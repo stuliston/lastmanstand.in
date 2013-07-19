@@ -5,6 +5,9 @@
   li
     display: inline-block
 
+  li ul
+    display: none  
+
   h2, a
     display: inline-block
     padding: 15px 10px 15px 10px
@@ -34,18 +37,25 @@
     height: auto
     bottom: 0
     background: #222
-    // background-image: url(asset-path("nav_bg.jpg", image))
-    // background-position: 0px $header-height-phone
-    // background-repeat: repeat
 
     ul
-      padding-top: 10px
+      padding: 15px
 
     li
       display: block
+      border-bottom: 1px solid #333
+      ul
+        display: block
+        padding: 0 15px
+      li
+        border: none  
 
+    h2
+      color: #fff
+      font-size: 1.1em    
     a, h2
       padding: 10px 20px
+
 
     a, a:visited, a:active
     color: #bbb

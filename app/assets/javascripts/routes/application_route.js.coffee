@@ -7,7 +7,9 @@ LMS.ApplicationRoute = Ember.Route.extend
     store.adapterForType(LMS.Profile).didFindRecord(store, LMS.Profile, profileData)
 
   model: ->
-    {currentProfile: LMS.Profile.find(currentProfileId)}
+    Ember.Object.create(currentProfile: LMS.Profile.find(currentProfileId))
 
   setupController: (controller, model) ->
-    @controllerFor('currentProfile').set('model', model.currentProfile) #profile id hacked into bootstrap html. fix later
+    controller.set('model', model)  
+    @controllerFor('currentProfile').set('model', model.get('currentProfile')) #profile id hacked into bootstrap html. fix later
+

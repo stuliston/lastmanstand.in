@@ -1,0 +1,15 @@
+<ul class="unstyled" id="navigation">
+  <li class="games"><i></i>
+    <h2>Games</h2>
+    <ul class="unstyled">
+    {{#each gameMembership in controller.model.currentProfile.gameMemberships}}
+      <li>
+        {{#linkTo 'game.current_round' gameMembership.game}}
+          <div class="name">{{gameMembership.game.name}}</div>
+        {{/linkTo}}
+      </li>
+    {{/each}}
+</ul> 
+  </li>
+  <li class="games">{{#linkTo "games.new"}}<i></i>Start New Game{{/linkTo}}</li>
+</ul>

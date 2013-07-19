@@ -10,13 +10,15 @@ LMS.ApplicationController = Ember.Controller.extend
     @_manageWindowWidth()
     @_trackCurrentTimeToSecond()
 
-
   toggleNavigation: ->
     @set('navigationVisible', !@get('navigationVisible'))
 
   currentPathDidChange: (->
     @set('navigationVisible', false)
   ).observes('currentPath')
+
+  hideNavigation: ->
+    @set('navigationVisible', false)
 
   #Not sure how often we want to trigger this? Maybe too often
   _trackCurrentTimeToSecond: ->
