@@ -2,6 +2,7 @@
 button
   border: 1px solid transparent
   padding: 8px 10px
+  @include border-radius($border-radius)
 
 button.primary
   color: #fff
@@ -20,10 +21,10 @@ button[disabled]
   color: $secondary-color
 
 input, select
+  @include border-radius($border-radius)
   padding: 8px 10px
   border: 1px solid $secondary-color
   color: $base-text-color
- 
 
 .form
   .row

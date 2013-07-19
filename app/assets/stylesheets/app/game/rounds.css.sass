@@ -2,12 +2,12 @@
 
   .rounds
     li
-      background: $light-grey
+      background: $secondary-bg-color
       border-bottom: 1px solid #ddd
       &.correct .selection
-        color: $success-color
+        color: lighten($success-color, 10)
       &.incorrect .selection
-        color: $alert-color
+        color: lighten($alert-color, 10)
       a
         padding: 15px
         display: block
