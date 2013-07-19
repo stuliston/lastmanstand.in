@@ -23,7 +23,7 @@
     {{#if isRoundClosed}}
       Round is closed
     {{else}}
-      Round closes in {{timeToNow startTime currentTime}}
+      Round closes in <strong>{{timeToNow startTime currentTime}}</strong>
     {{/if}}
   </div>
   {{render "round/fixtures" fixtures}}
