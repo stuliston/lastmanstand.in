@@ -1,7 +1,5 @@
 LMS.ApplicationRoute = Ember.Route.extend
 
-  # redirect: -> this.transitionTo('dashboard')
-
   beforeModel: ->
     store = @get('store')
     store.adapterForType(LMS.Profile).didFindRecord(store, LMS.Profile, profileData)
