@@ -1,6 +1,7 @@
 LMS.GameInvitationsView = Ember.View.extend
   templateName: 'game_invitations'
   newEmail: null
+  classNames: ['game-invitations']
 
   isEmailInvalid: ( ->
     email = @get('newEmail')

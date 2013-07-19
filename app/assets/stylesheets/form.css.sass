@@ -1,0 +1,35 @@
+
+button
+  border: 1px solid transparent
+  padding: 8px 10px
+
+button.primary
+  color: #fff
+  background: lighten($primary-color, 10)
+
+button.secondary
+  color: #fff
+  background: darken($secondary-color, 20)
+
+button.alert
+  color: #fff
+  background: lighten($alert-color, 10)
+
+button[disabled]
+  background: lighten($secondary-color, 10)  
+  color: $secondary-color
+
+input, select
+  padding: 8px 10px
+  border: 1px solid $secondary-color
+  color: $base-text-color
+ 
+
+.form
+  .row
+    padding: 10px 0
+
+@include phone
+  input, select
+    width: 100%
+ 

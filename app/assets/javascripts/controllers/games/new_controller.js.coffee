@@ -20,3 +20,6 @@ LMS.GamesNewController = Ember.ObjectController.extend
   saveGame: ->
     @get('store').commit()
     # @transitionToRoute(@get('indexRoute'))
+
+  cancel: ->
+    @transitionToRoute(@get('indexRoute'))  

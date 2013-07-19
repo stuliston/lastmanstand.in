@@ -8,11 +8,14 @@
 </ul>
 
 {{#if morePlayersAllowed}}
-  <div class="player-count" {{bindAttr class="morePlayersAllowed::full"}}>
-    {{totalPlayersRemaining}} players remaining.
-  </div>
-  {{input value=view.newEmail name="email" placeholder="Enter email"}}
-  <button class="add-email" {{action addEmail target="view"}} {{bindAttr disabled="view.isEmailInvalid"}}>Add</button>
+  <p class="player-count" {{bindAttr class="morePlayersAllowed::full"}}>
+    You have {{totalPlayersRemaining}} players remaining.
+  </p>
+  <div class="add-email-container">
+    {{input value=view.newEmail name="email" type="email" placeholder="Enter email"}}
+    <button class="add-email primary" {{action addEmail target="view"}} {{bindAttr disabled="view.isEmailInvalid"}}>Add</button>
+  </div>  
 {{else}}
-  <button>Upgrade account to add more players</button>
+  <button class="upgrade-account alert">Upgrade account to add more players</button>
+  <p class="or">- OR -</p>
 {{/if}}

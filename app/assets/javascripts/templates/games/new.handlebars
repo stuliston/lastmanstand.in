@@ -1,8 +1,8 @@
-<div class="game-new">
-  <h1>New Game</h1>
+<h1>Start a New Game</h1>
 
+<div class="game-new form">
   <div class="row">
-    <label for='league'>League</label> {{view Ember.Select
+    {{view Ember.Select
         name="league"
         viewName="select"
         contentBinding="leagues"
@@ -13,11 +13,14 @@
 
   </div>
   <div class="row">
-    <label>Name</label>
-    {{input value=name name="name"}}
+    {{input value=name name="name" placeholder="Name your Game"}}
   </div>
 
   {{view LMS.GameInvitationsView}}
 
-  <button {{action saveGame}} class="submit">Create Game</button>
+  <div class="row">
+    <button {{action cancel}} class="cancel secondary">Cancel</button>
+    <button {{action saveGame}} class="submit primary">Create</button>
+  </div>
+    
 </div>
