@@ -13,25 +13,20 @@
       position: relative
       cursor: pointer
       width: 45%
-      overflow: hidden
-      text-overflow: ellipsis
-      white-space: nowrap
-
     .home
       text-align: right
-      padding-right: 18px
       @include border-radius(0px 3px 3px 0px)
     .away
       @include border-radius(3px 0px 0px 3px)
-      padding-left: 18px
     .vs
       text-align: center
       width: 10%
-    .score
-      font-size: 0.8em
-      margin-top: 5px
-      font-weight: normal  
-
+    .name
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap    
+    .score, .predictions
+      display: none  
 
   .disable-home-team .home, .disable-away-team .away
     background: $secondary-bg-color
@@ -45,12 +40,12 @@
 
 .is-round-closed
   .fixtures
-    .disable-home-team .home, .disable-away-team .away
-      background: $secondary-bg-color
-      color: #aaa
+    // .disable-home-team .home, .disable-away-team .away
+    //   background: $secondary-bg-color
+    //   color: #aaa
     a, a:active  
       color: #888
-      background: #fff  
+      background: #eee  
       cursor: default
     .correct.home-selected .home, .correct.away-selected .away
       background: $success-color
@@ -58,8 +53,22 @@
     .incorrect.home-selected .home, .incorrect.away-selected .away
       background: $alert-color  
       color: #fff
-
     .home-win .home, .away-win .away
       font-weight: bold
       color: $base-text-color
+    .name
+      margin-bottom: 30px  
+    .score, .predictions
+      display: block
+      font-size: 0.9em
+      margin-top: 5px
+      font-weight: normal 
+      height: 20px 
+      position: absolute
+      bottom: 10px 
+      
+    .home .predictions, .away .score
+      left: 10px
+    .away .predictions, .home .score  
+      right: 10px       
 

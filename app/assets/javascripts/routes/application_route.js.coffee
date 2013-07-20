@@ -10,4 +10,5 @@ LMS.ApplicationRoute = Ember.Route.extend
   setupController: (controller, model) ->
     controller.set('model', model)  
     @controllerFor('currentProfile').set('model', model.get('currentProfile')) #profile id hacked into bootstrap html. fix later
+    @controllerFor('allPredictions').set('model', LMS.Prediction.all()) 
 

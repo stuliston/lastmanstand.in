@@ -5,6 +5,10 @@ LMS.Profile = DS.Model.extend
   gameInvitations: DS.hasMany('LMS.GameInvitation')
   predictions: DS.hasMany('LMS.Prediction')
 
+  smallThumbAvatarImageUrl: (->
+    @get('avatarImageUrl') + "?s=20"
+  ).property('avatarImageUrl') 
+
   # currentGames: (->
   #   @get('gameMemberships').getEach('game')
   # ).property('@each.gameMemberships')#.cacheable()

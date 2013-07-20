@@ -1,6 +1,6 @@
 LMS.RoundFixtureController = Ember.ObjectController.extend
 
-  needs: ['predictions', 'game']
+  needs: ['predictions', 'gamePredictions', 'game']
 
   #This method has had some performance tuning done on it as it's called A LOT. 
   #Be sure to profile any changes before and after.
@@ -50,6 +50,16 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
       "incorrect"
   ).property('selectedTeam', 'winningTeam')
 
+  homeTeamPredictions: (->
+    return [] if @get('round.startTime') > new Date()
+    @get('controllers.gamePredictions.byFixture')[@get('model')]?.filterProperty('team', @get('homeTeam')) || []
+  ).property('controllers.allPredictions.@each.team')
+
+  awayTeamPredictions: (->
+    return [] if @get('round.startTime') > new Date()
+    @get('controllers.gamePredictions.byFixture')[@get('model')]?.filterProperty('team', @get('awayTeam')) || []
+  ).property('controllers.allPredictions.@each.team')
+
   resultClass: (->
     return unless @get('winningTeam')
     if @get('winningTeam') == @get('homeTeam')
@@ -58,4 +68,8 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
       "home-lose away-win"
   ).property('selectedTeam', 'winningTeam')
 
+
+  _gameFixtureKey: ->
+    game = @get('controllers.game.model')
+    "#{game.get('id')}-#{@get('id')}"
   

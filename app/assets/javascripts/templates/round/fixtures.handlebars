@@ -2,19 +2,29 @@
 {{#each fixture in controller}}
   {{#view tagName="li" classNameBindings="fixture.selectedTeamClass fixture.disableHomeTeam fixture.disableAwayTeam fixture.selectionClass fixture.resultClass"}}
     <a class="home" {{action selectWinner fixture fixture.homeTeam}}>
-      {{fixture.homeTeam.name}}
+      <div class="name">{{fixture.homeTeam.name}}</div>
       {{#if fixture.homeScore}}
-        <div class="score">Score: {{fixture.homeScore}}</div>
+        <div class="score">({{fixture.homeScore}})</div>
       {{/if}}
+      <ul class="predictions unstyled horizontal">
+      {{#each prediction in fixture.homeTeamPredictions}}
+        <li><img {{bindAttr src="prediction.profile.smallThumbAvatarImageUrl"}} {{bindAttr alt="prediction.profile.name"}}/></li>
+      {{/each}}
+      </ul>
     </a>
     <div class="vs">
       vs
     </div>
     <a class="away" {{action selectWinner fixture fixture.awayTeam}}>
-      {{fixture.awayTeam.name}}
+      <div class="name">{{fixture.awayTeam.name}}</div>
       {{#if fixture.homeScore}}
-        <div class="score">Score: {{fixture.awayScore}}</div>
+        <div class="score">({{fixture.awayScore}})</div>
       {{/if}}
+      <ul class="predictions unstyled horizontal">
+      {{#each prediction in fixture.awayTeamPredictions}}
+        <li><img {{bindAttr src="prediction.profile.smallThumbAvatarImageUrl"}} {{bindAttr alt="prediction.profile.name"}}/></li>
+      {{/each}}
+      </ul>
     </a>
   {{/view}}
 {{/each}}
