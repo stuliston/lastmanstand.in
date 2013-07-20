@@ -13,15 +13,17 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
     prediction?.get('team')
   ).property('controllers.predictions.@each.team')
 
-  isHomeTeamSelected: (->
-    @get('selectedTeam') == @get('homeTeam')
-  ).property('selectedTeam')
-
-  isAwayTeamSelected: (->
-    @get('selectedTeam') == @get('awayTeam')
+  selectedTeamClass: (->
+    if @get('selectedTeam') == @get('homeTeam')
+      'home-selected'
+    else if @get('selectedTeam') == @get('awayTeam')
+      'away-selected'
+    else
+      null
   ).property('selectedTeam')
 
   disableHomeTeam: (->
+    return if @get('round.startTime') < new Date()
     game = @get('controllers.game.model')
     homeTeam = @get('homeTeam')
     @get('controllers.predictions.byGame')[game]?.some((prediction) =>
@@ -31,6 +33,7 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
   ).property('controllers.predictions.@each.team')
 
   disableAwayTeam: (->
+    return if @get('round.startTime') < new Date()
     game = @get('controllers.game.model')
     awayTeam = @get('awayTeam')
     @get('controllers.predictions.byGame')[game]?.some((prediction) =>
@@ -47,11 +50,12 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
       "incorrect"
   ).property('selectedTeam', 'winningTeam')
 
-  homeOrAway: (->
-    if @get('isHomeTeamSelected')
-      'home'
-    else if @get('isAwayTeamSelected')
-      'away'
-    else
-      null
-  ).property('isHomeTeamSelected', 'isAwayTeamSelected')
+  resultClass: (->
+    return unless @get('winningTeam')
+    if @get('winningTeam') == @get('homeTeam')
+      "home-win away-lose"
+    else  
+      "home-lose away-win"
+  ).property('selectedTeam', 'winningTeam')
+
+  

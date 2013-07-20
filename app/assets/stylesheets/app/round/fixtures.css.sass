@@ -10,6 +10,7 @@
       background: #888
       color: #fff  
     .home, .away
+      position: relative
       cursor: pointer
       width: 45%
       overflow: hidden
@@ -18,9 +19,11 @@
 
     .home
       text-align: right
+      padding-right: 18px
       @include border-radius(0px 3px 3px 0px)
     .away
       @include border-radius(3px 0px 0px 3px)
+      padding-left: 18px
     .vs
       text-align: center
       width: 10%
@@ -31,10 +34,35 @@
     color: #aaa
     cursor: default
 
-  .home .home, .away .away, .home.selecting, .away.selecting
+  .home-selected .home, .away-selected .away, .home-selected.selecting, .away-selected.selecting
     background: #666
     color: #fff
     cursor: default
+
+  .win, .lose
+    display: none
+  //   position: absolute
+  //   top: 50%
+  //   margin-top: -4px
+  //   width: 8px
+  //   height: 8px
+  //   padding: 0
+  //   @include border-radius(8px)
+
+  // .win
+  //   background: lighten($success-color, 10)
+
+  // .lose
+  //   background: lighten($alert-color, 10)    
+
+  // .home .win, .home .lose
+  //   left: 5px
+
+  // .away .win, .away .lose
+  //   right: 5px
+
+  // .home-win .home .win, .away-win .away .win, .home-lose .home .lose, .away-lose .away .lose
+  //   display: block  
 
 .is-round-closed
   .fixtures
@@ -45,10 +73,16 @@
       color: #888
       background: #fff  
       cursor: default
-    .correct.home .home, .correct.away .away
+    .correct.home-selected .home, .correct.away-selected .away
       background: $success-color
       color: #fff
-    .incorrect.home .home, .incorrect.away .away
+    .incorrect.home-selected .home, .incorrect.away-selected .away
       background: $alert-color  
       color: #fff
+
+    .home-win .home, .away-win .away
+      background: lighten($success-color, 30)   
+
+    .home-lose .home, .away-lose .away
+      background: lighten($alert-color, 30)     
 
