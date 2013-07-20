@@ -1,7 +1,7 @@
 .fixtures
   li
     clear: both
-    a, div
+    >a, >div
       display: block
       padding: 10px
       margin-bottom: 10px
@@ -27,6 +27,10 @@
     .vs
       text-align: center
       width: 10%
+    .score
+      font-size: 0.8em
+      margin-top: 5px
+      font-weight: normal  
 
 
   .disable-home-team .home, .disable-away-team .away
@@ -38,31 +42,6 @@
     background: #666
     color: #fff
     cursor: default
-
-  .win, .lose
-    display: none
-  //   position: absolute
-  //   top: 50%
-  //   margin-top: -4px
-  //   width: 8px
-  //   height: 8px
-  //   padding: 0
-  //   @include border-radius(8px)
-
-  // .win
-  //   background: lighten($success-color, 10)
-
-  // .lose
-  //   background: lighten($alert-color, 10)    
-
-  // .home .win, .home .lose
-  //   left: 5px
-
-  // .away .win, .away .lose
-  //   right: 5px
-
-  // .home-win .home .win, .away-win .away .win, .home-lose .home .lose, .away-lose .away .lose
-  //   display: block  
 
 .is-round-closed
   .fixtures
@@ -81,8 +60,6 @@
       color: #fff
 
     .home-win .home, .away-win .away
-      background: lighten($success-color, 30)   
-
-    .home-lose .home, .away-lose .away
-      background: lighten($alert-color, 30)     
+      font-weight: bold
+      color: $base-text-color
 

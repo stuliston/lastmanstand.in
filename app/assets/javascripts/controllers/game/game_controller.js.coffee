@@ -7,7 +7,8 @@ LMS.GameController = Ember.ObjectController.extend
   ).observes('model')  
 
   lastGame: ->
-    if id = localStorage.getItem 'lastGameId'    
-      LMS.Game.find(id)
+    if id = localStorage.getItem 'lastGameId' 
+      #don't us a find by id. Only look for previously loaded games in case the game no longer exists   
+      LMS.Game.all().findProperty(id) 
       
 

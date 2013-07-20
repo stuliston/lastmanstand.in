@@ -78,9 +78,17 @@ while round_date <= afl_season_2013.end_date
         next
       else
         if round_date < Time.now
-          winning_team = [team_a, team_b][rand(0..1)]
+          team_a_score = rand(30..150)
+          team_b_score = rand(30..150)
+          winning_team = team_a_score < team_b_score ? team_b : team_a
         end
-        round.fixtures.create!(home_team: team_a, away_team: team_b, start_time: round_date, winning_team: winning_team)
+        round.fixtures.create!(
+          home_team: team_a, 
+          home_score: team_a_score,
+          away_team: team_b, 
+          away_score: team_b_score, 
+          start_time: round_date, 
+          winning_team: winning_team)
         paired_teams << pair
         played_this_round << team_a
         played_this_round << team_b
