@@ -13,8 +13,7 @@ gem 'ember-source', '1.0.0.rc6.2'
 # gem 'ember-data-source', '0.13' ---USING DEV BUILD IN VENDOR FOLDER
 # gem 'handlebars-source', '1.0.0.rc4'
 gem 'active_model_serializers'
-# gem 'bcrypt-ruby', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'bcrypt' #Fix an issue that arose when upgrading to rails 4
-gem 'bcrypt-ruby', '3.0.0' # required for has_secure_password
+gem 'devise', '3.0.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
