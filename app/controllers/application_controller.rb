@@ -1,26 +1,31 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
+  # For APIs, you may want to use :null_session instead
   protect_from_forgery with: :exception
 
-  #Work around problem witb RAILS 4 and CANCAN resource loading
+  respond_to :html, :json
+
+  # Work around problem witb RAILS 4 and CANCAN resource loading
   before_filter do
     resource = controller_name.singularize.to_sym
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
   end
 
-  protected
+  rescue_from CanCan::AccessDenied do |exception|
+    obvious_message = <<-ASCII
+       $$$$$$\  $$\   $$\        $$$$$$\  $$\   $$\  $$$$$$\  $$$$$$$\  $$\
+      $$  __$$\ $$ |  $$ |      $$  __$$\ $$$\  $$ |$$  __$$\ $$  __$$\ $$ |
+      $$ /  $$ |$$ |  $$ |      $$ /  \__|$$$$\ $$ |$$ /  $$ |$$ |  $$ |$$ |
+      $$ |  $$ |$$$$$$$$ |      \$$$$$$\  $$ $$\$$ |$$$$$$$$ |$$$$$$$  |$$ |
+      $$ |  $$ |$$  __$$ |       \____$$\ $$ \$$$$ |$$  __$$ |$$  ____/ \__|
+      $$ |  $$ |$$ |  $$ |      $$\   $$ |$$ |\$$$ |$$ |  $$ |$$ |
+       $$$$$$  |$$ |  $$ |      \$$$$$$  |$$ | \$$ |$$ |  $$ |$$ |      $$\
+       \______/ \__|  \__|       \______/ \__|  \__|\__|  \__|\__|      \__|
+    ASCII
+    Rails.logger.warn obvious_message
 
-  def current_user
-    User.first #TODO: swap out once we get proper auth
-    #@current_user ||= User.find(session[:user_id]) if signed_in?
+    redirect_to root_path, alert: exception.message
   end
-
-  def signed_in?
-    session[:user_id].present?
-  end
-
-
 
 end

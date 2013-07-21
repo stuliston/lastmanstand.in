@@ -5,21 +5,11 @@
     <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0" />
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <%= stylesheet_link_tag "application", media: "all" %>
-
-    <script>
-      var currentProfileId = <%= Profile.first.id %>;
-      window.ENV = { EXPERIMENTAL_CONTROL_HELPER: true};
-      var profileData = <%= ProfileSerializer.new(Profile.first).to_json.html_safe %>;
-    </script> <!--do this properly once we do logins-->
-
-    <%= javascript_include_tag "vendor" %>
-    <%= javascript_include_tag "lastmanstanding" %>
+    <%= yield :head %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <div id="viewporter">
-    </div>
-    <noscript><%= yield %></noscript>
+    <%= yield %>
   </body>
 </html>

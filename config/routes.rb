@@ -1,6 +1,9 @@
 LastManStanding::Application.routes.draw do
 
-  root to: 'application#index'
+  devise_for :users
+
+  get '/welcome', to: 'home#welcome', as: :welcome
+  root to: 'home#show'
 
   namespace :api do
     resources :profiles
