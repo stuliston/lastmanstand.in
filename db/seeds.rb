@@ -36,7 +36,7 @@ western_bulldogs  = Team.create!(name: 'Western Bulldogs', league: afl)
 #Create a fixture for a single afl season
 Season.destroy_all
 
-afl_season_2013 = Season.create!(name: "2013 AFL Premiership Season", start_date: Date.new(2013, 3, 22), end_date: Date.new(2013, 8, 30), league: afl)
+afl_season_2013 = Season.create!(name: "2013 AFL Premiership Season", start_date: Date.new(2013, 6, 22), end_date: Date.new(2013, 11, 30), league: afl)
 
 Game.destroy_all
 Game.create!(name: 'Rob v Stu', profiles: [rob, stu].collect(&:profile), season: afl_season_2013)
@@ -83,11 +83,11 @@ while round_date <= afl_season_2013.end_date
           winning_team = team_a_score < team_b_score ? team_b : team_a
         end
         round.fixtures.create!(
-          home_team: team_a, 
+          home_team: team_a,
           home_score: team_a_score,
-          away_team: team_b, 
-          away_score: team_b_score, 
-          start_time: round_date, 
+          away_team: team_b,
+          away_score: team_b_score,
+          start_time: round_date,
           winning_team: winning_team)
         paired_teams << pair
         played_this_round << team_a

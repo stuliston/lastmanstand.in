@@ -1,0 +1,12 @@
+<li>
+  <img {{bindAttr src="profile.avatarImageUrl"}} class="avatar" />
+  <div class="details">
+    <strong>{{profile.name}}</strong>
+    {{#if isOutOfLives}}
+      <div class="knockout-message">Knocked out in round {{knockoutFixture.round.number}}</div>
+      <div class="knockout-result"><strong>{{knockoutFixture.winningTeam.name}}</strong> def {{knockoutFixture.losingTeam.name}}</div>
+    {{else}}
+      <div class="lives">{{remainingLives}}/{{game.numberOfLives}} Lives Remaining</div>
+    {{/if}}
+  </div>
+</li>

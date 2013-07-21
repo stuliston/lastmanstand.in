@@ -3,3 +3,7 @@ LMS.Prediction = DS.Model.extend
   profile: DS.belongsTo('LMS.Profile')
   team: DS.belongsTo('LMS.Team')
   game: DS.belongsTo('LMS.Game')
+
+  isCorrect: (->
+    @get('team') == @get('fixture.winningTeam')
+  ).property('team', 'fixture.winningTeam')
