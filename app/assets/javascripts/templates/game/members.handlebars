@@ -1,5 +1,15 @@
 <ul class="members unstyled">
-{{#each gameMembership in controller}}
-  {{render 'game/membership_item' gameMembership}}
+{{#each controller}}
+  <li>
+    <img {{bindAttr src="profile.avatarImageUrl"}} class="avatar" />
+    <div class="details">
+      <strong>{{profile.name}}</strong>
+      {{playerLives remainingLives lostLives}}
+      {{#if isOutOfLives}}
+        <div class="knockout-message">Knocked out in round {{knockoutFixture.round.number}}</div>
+        <div class="knockout-result"><strong>{{knockoutFixture.winningTeam.name}}</strong> def {{knockoutFixture.losingTeam.name}}</div>
+      {{/if}}
+    </div>
+  </li>
 {{/each}}
 </ul>
