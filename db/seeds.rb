@@ -104,9 +104,9 @@ end
 Prediction.destroy_all
 
 Profile.all.each do |profile|
-  lost_games = 0
   Game.all.each do |game|
     if game.profiles.include? profile
+      lost_games = 0
       game.season.rounds.each do |round|
         fixture_index = rand(0..round.fixtures.size - 1)
         fixture = round.fixtures[fixture_index]
@@ -114,7 +114,7 @@ Profile.all.each do |profile|
         if selected_team != fixture.winning_team
           lost_games = lost_games + 1
         end
-        if fixture.start_time < Time.now && lost_games < game.number_of_lives
+        if fixture.start_time < Time.now && lost_games <= game.number_of_lives
           Prediction.create!(profile: profile, team: selected_team, game: game, fixture: fixture)
         end
       end
