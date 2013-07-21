@@ -1,19 +1,29 @@
 <section class="welcome">
-  <h1>Last</h1>
-  <h1>Man</h1>
-  <h1>Standing</h1>
+  <h1>LAST</h1>
+  <h1>MAN <i class="icon-male"></i></h1>
+  <h1>STANDING</h1>
 </section>
 
-<hr/>
+<section class='register-options form'>
+  <p>Create your free account:</p>
 
-<section class='login-options form'>
-  <%= form_for(:user, url: user_session_path) do |f| %>
-    <div class="row">
+  <% # TODO: Custom controller for registration. We need to create a profile too %>
+
+  <%= form_for(:user, url: user_registration_path) do |f| %>
+
+    <div class="input-prepend row">
+      <span class="add-on"><i class="icon-envelope"></i></span>
       <%= f.email_field :email, autofocus: true, placeholder: "Login Email" %>
     </div>
 
-    <div class="row">
+    <div class="input-prepend row">
+      <span class="add-on"><i class="icon-key"></i></span>
       <%= f.password_field :password, placeholder: "Password" %>
+    </div>
+
+    <div class="input-prepend row">
+      <span class="add-on"><i class="icon-key"></i></span>
+      <%= f.password_field :password_confirmation, placeholder: "Confirm Password" %>
     </div>
 
     <div class="row">
@@ -21,7 +31,14 @@
       <%= f.label :remember_me %>
     </div>
 
-    <div><%= f.submit "Sign in", class: "submit primary" %></div>
+    <div class="row">
+      <%= f.submit "Create my account", class: "submit primary" %>
+    </div>
   <% end %>
+
+  <p>
+    Already have an account?
+    <%= link_to "Log in", new_user_session_path %>
+  </p>
 
 </section>
