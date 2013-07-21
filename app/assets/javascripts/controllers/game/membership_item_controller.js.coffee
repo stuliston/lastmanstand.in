@@ -7,13 +7,13 @@ LMS.GameMembershipItemController = Ember.ObjectController.extend
     )
   ).property('profile.predictions.@each.team')
 
-  remainingLives: (->
-    @get('game.numberOfLives') - @get('incorrectPredictions').get('length')
-  ).property('incorrectPredictions')
-
   lostLives: (->
     @get('incorrectPredictions').get('length')
   ).property('incorrectPredictions')
+
+  remainingLives: (->
+    @get('game.numberOfLives') - @get('lostLives')
+  ).property('lostLives')
 
   isOutOfLives: (->
     @get('remainingLives') <= 0
