@@ -10,5 +10,5 @@ LMS.GameCurrentRoundRoute = Ember.Route.extend
       diffDays > -3 && diffDays <= 4
     )
 
-  setupController: (controller, round) ->
-    controller.set('model', round)
+  # setupController: (controller, round) ->
+  #   controller.set('model', round)

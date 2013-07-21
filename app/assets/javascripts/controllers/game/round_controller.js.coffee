@@ -28,14 +28,14 @@ LMS.GameRoundController = Ember.ObjectController.extend
   selectWinner: (fixture, team) ->
     game = @get('controllers.game.model')
     store = @get('store')
-    
+
     if @_isTeamSelectableForGame(team, game)
       if prediction = @_predictionForTeamInCurrentRound(team)
-        store.deleteRecord(prediction) 
+        store.deleteRecord(prediction)
         store.commitDefaultTransaction()
         return
-      else if prediction = @_predictionForTeamInFutureRound(team)  
-        store.deleteRecord(prediction) 
+      else if prediction = @_predictionForTeamInFutureRound(team)
+        store.deleteRecord(prediction)
 
       if currentPrediction = @_predictionForGameAndRound()
         currentPrediction.setProperties(fixture: fixture, team: team)
@@ -51,7 +51,7 @@ LMS.GameRoundController = Ember.ObjectController.extend
   _isTeamSelectableForGame: (team, game) ->
     !(@get('isRoundClosed') || @get('predictions').some((prediction) ->
       prediction.get('fixture.round.startTime') < new Date() &&
-      prediction.get('team') == team && 
+      prediction.get('team') == team &&
       prediction.get('game') == game
     ))
 
@@ -64,18 +64,17 @@ LMS.GameRoundController = Ember.ObjectController.extend
     game = @get('controllers.game.model')
     @get('predictions').find((prediction) -> prediction.get('fixture.round') == round && prediction.get('game') == game)
 
-    
+
   _predictionForTeamInCurrentRound: (team) ->
     currentRound = @get('model')
-    prediction = @get('predictions').find((prediction) => 
-      (prediction.get('fixture.round') == currentRound) && 
+    prediction = @get('predictions').find((prediction) =>
+      (prediction.get('fixture.round') == currentRound) &&
       prediction.get('team') == team
-    )  
+    )
 
   _predictionForTeamInFutureRound: (team) ->
     currentRound = @get('model')
-    prediction = @get('predictions').find((prediction) => 
-      (prediction.get('fixture.round') != currentRound || prediction.get('fixture.round.startTime') > new Date()) && 
+    prediction = @get('predictions').find((prediction) =>
+      (prediction.get('fixture.round') != currentRound || prediction.get('fixture.round.startTime') > new Date()) &&
       prediction.get('team') == team
-    )  
-    
+    )

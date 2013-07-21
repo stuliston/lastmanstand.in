@@ -2,7 +2,7 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
 
   needs: ['predictions', 'gamePredictions', 'game']
 
-  #This method has had some performance tuning done on it as it's called A LOT. 
+  #This method has had some performance tuning done on it as it's called A LOT.
   #Be sure to profile any changes before and after.
   selectedTeam: (->
     game = @get('controllers.game.model')
@@ -11,7 +11,7 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
       prediction.get('fixture') == fixture
     )
     prediction?.get('team')
-  ).property('controllers.predictions.@each.team')
+  ).property('controllers.predictions.@each.team', 'controllers.game.model')
 
   selectedTeamClass: (->
     if @get('selectedTeam') == @get('homeTeam')
@@ -30,7 +30,7 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
       prediction.get('fixture.round.startTime') < new Date() &&
       prediction.get('team') == homeTeam
     )
-  ).property('controllers.predictions.@each.team')
+  ).property('controllers.predictions.@each.team', 'controllers.game.model')
 
   disableAwayTeam: (->
     return if @get('round.startTime') < new Date()
@@ -40,36 +40,32 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
       prediction.get('fixture.round.startTime') < new Date() &&
       prediction.get('team') == awayTeam
     )
-  ).property('controllers.predictions.@each.team')
+  ).property('controllers.predictions.@each.team', 'controllers.game.model')
 
   selectionClass: (->
     return unless @get('selectedTeam') && @get('winningTeam')
     if @get('selectedTeam') == @get('winningTeam')
       "correct"
-    else  
+    else
       "incorrect"
   ).property('selectedTeam', 'winningTeam')
 
   homeTeamPredictions: (->
     return [] if @get('round.startTime') > new Date()
     @get('controllers.gamePredictions.byFixture')[@get('model')]?.filterProperty('team', @get('homeTeam')) || []
-  ).property('controllers.allPredictions.@each.team')
+  ).property('controllers.gamePredictions.@each.team')
 
   awayTeamPredictions: (->
     return [] if @get('round.startTime') > new Date()
     @get('controllers.gamePredictions.byFixture')[@get('model')]?.filterProperty('team', @get('awayTeam')) || []
-  ).property('controllers.allPredictions.@each.team')
+  ).property('controllers.gamePredictions.@each.team')
 
   resultClass: (->
     return unless @get('winningTeam')
     if @get('winningTeam') == @get('homeTeam')
       "home-win away-lose"
-    else  
+    else
       "home-lose away-win"
   ).property('selectedTeam', 'winningTeam')
 
 
-  _gameFixtureKey: ->
-    game = @get('controllers.game.model')
-    "#{game.get('id')}-#{@get('id')}"
-  
