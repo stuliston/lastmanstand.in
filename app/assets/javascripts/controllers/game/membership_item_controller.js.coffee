@@ -11,6 +11,10 @@ LMS.GameMembershipItemController = Ember.ObjectController.extend
     @get('game.numberOfLives') - @get('incorrectPredictions').get('length')
   ).property('incorrectPredictions')
 
+  lostLives: (->
+    @get('incorrectPredictions').get('length')
+  ).property('incorrectPredictions')
+
   isOutOfLives: (->
     @get('remainingLives') <= 0
   ).property('remainingLives')
@@ -20,3 +24,4 @@ LMS.GameMembershipItemController = Ember.ObjectController.extend
     lastRoundNumber = Math.max(@get('incorrectPredictions').mapProperty('fixture.round.number')...)
     @get('incorrectPredictions').findProperty('fixture.round.number', lastRoundNumber).get('fixture')
   ).property('isOutOfLives')
+

@@ -6,7 +6,14 @@
       <div class="knockout-message">Knocked out in round {{knockoutFixture.round.number}}</div>
       <div class="knockout-result"><strong>{{knockoutFixture.winningTeam.name}}</strong> def {{knockoutFixture.losingTeam.name}}</div>
     {{else}}
-      <div class="lives">{{remainingLives}}/{{game.numberOfLives}} Lives Remaining</div>
+      <ul class="lives unstyled horizontal">
+      {{#repeater remainingLives}}
+        <li><i class="icon-heart"></i></li>
+      {{/repeater}}
+      {{#repeater lostLives}}
+        <li><i class="icon-heart-empty"></i></li>
+      {{/repeater}}
+      </ul>
     {{/if}}
   </div>
 </li>
