@@ -17,7 +17,7 @@ button.alert
   background: lighten($alert-color, 10)
 
 button[disabled]
-  background: lighten($secondary-color, 10)  
+  background: lighten($secondary-color, 10)
   color: $secondary-color
 
 input, select
@@ -26,6 +26,9 @@ input, select
   border: 1px solid $secondary-color
   color: $base-text-color
 
+input[type='checkbox']
+  width: auto
+
 .form
   .row
     padding: 10px 0
@@ -33,4 +36,3 @@ input, select
 @include phone
   input, select
     width: 100%
- 
