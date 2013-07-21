@@ -10,6 +10,16 @@ LMS.RoundListItemController = Ember.ObjectController.extend
     )
   ).property('predictions.@each.team')
 
+  winningTeam: (->
+    @get('prediction.fixture.winningTeam')
+  ).property('prediction.fixture.winningTeam')
+
+  losingTeam: (->
+    winningTeam = @get('winningTeam')
+    return unless winningTeam
+    [@get('prediction.fixture.homeTeam'), @get('prediction.fixture.awayTeam')].without(winningTeam)[0]
+  ).property('winningTeam')
+
   selectedTeam: (->
     @get('prediction.team')
   ).property('prediction')
@@ -20,7 +30,7 @@ LMS.RoundListItemController = Ember.ObjectController.extend
   ).property('prediction')
 
   isSelectionCorrect: (->
-    @get('prediction.team') == @get('prediction.fixture.winningTeam')
+    @get('prediction.team') == @get('winningTeam')
   ).property('prediction')
 
   selectionClass: (->

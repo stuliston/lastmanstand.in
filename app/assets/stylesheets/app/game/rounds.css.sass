@@ -4,6 +4,20 @@
     li
       background: $secondary-bg-color
       border-bottom: 1px solid #ddd
+      position: relative
+      .round-number
+        width: 30px
+        height: 30px
+        position: absolute
+        top: 50%
+        left: 15px
+        margin-top: -15px
+        @include border-radius(15px)
+        color: #fff
+        background: lighten($secondary-color, 5)
+        text-align: center
+        padding: 5px
+
       &.correct .selection
         color: lighten($success-color, 10)
       &.incorrect .selection
@@ -14,6 +28,9 @@
         line-height: 1.2em
         &:active
           background: #fff
+
+      .date, .selection
+        margin-left: 50px    
 
       .selection
         font-size: 0.8em

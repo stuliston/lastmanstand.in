@@ -1,7 +1,7 @@
 {{#view tagName="li" classNameBindings="selectionClass"}}
   {{#linkTo 'game.round' this}}
-    <div>Round {{number}}: {{date startTime format="ddd dd/MM/yyyy"}}</div>
-
+    <div class="round-number">{{number}}</div>
+    <div class="date">{{date startTime format="ddd dd/MM/yyyy"}}</div>
     {{#if selectedTeam}}
       <div class="selection">
       {{#if isSelectionCorrect}}
@@ -9,7 +9,7 @@
       {{else}}
         <i class="icon-remove-sign"></i>
       {{/if}}
-      <span>{{selectedTeam.name}} to defeat {{nonSelectedTeam.name}}</span>
+      <span>{{winningTeam.name}} defeated {{losingTeam.name}}</span>
       </div>
     {{/if}}
   {{/linkTo}}
