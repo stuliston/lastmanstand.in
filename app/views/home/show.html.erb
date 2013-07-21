@@ -3,7 +3,7 @@
   <script>
     var currentProfileId = <%= current_user.profile.id %>;
     window.ENV = { EXPERIMENTAL_CONTROL_HELPER: true};
-    var profileData = <%= ProfileSerializer.new(Profile.first).to_json.html_safe %>;
+    var profileData = <%= ProfileSerializer.new(current_user.profile).to_json.html_safe %>;
   </script> <!--do this properly once we do logins-->
 
   <%= javascript_include_tag "vendor" %>
