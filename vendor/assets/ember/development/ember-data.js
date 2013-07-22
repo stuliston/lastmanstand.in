@@ -48,7 +48,7 @@ var define, requireModule;
 */
 
 /**
-  All Ember Data methods and functions are defined inside of this namespace. 
+  All Ember Data methods and functions are defined inside of this namespace.
 
   @class DS
   @static
@@ -4260,8 +4260,8 @@ DS.RelationshipChange.determineRelationshipType = function(recordType, knownSide
     else{
       return knownKind === "belongsTo" ? "oneToMany" : "manyToMany";
     }
-  } 
- 
+  }
+
 };
 
 DS.RelationshipChange.createChange = function(firstRecordReference, secondRecordReference, store, options){
@@ -7390,7 +7390,7 @@ DS.loaderFor = loaderFor;
 
   For an example implementation, see {{#crossLink "DS.RestAdapter"}} the
   included REST adapter.{{/crossLink}}.
-  
+
   @class Adapter
   @namespace DS
   @extends Ember.Object
@@ -8610,10 +8610,43 @@ DS.RESTAdapter = DS.Adapter.extend({
   },
 
   createRecords: function(store, type, records) {
-    var adapter = this;
+    var adapter = this, serializer = this.serializer;
 
     if (get(this, 'bulkCommit') === false) {
-      return this._super(store, type, records);
+
+      var initialRecordsToCreate = []
+
+      records.forEach(function(record) {
+
+        var deferSave = false
+
+        record.eachRelationship(function(name, relationship) {
+          var key = serializer._keyForBelongsTo(record.constructor, name),
+              child, createDependent;
+
+          if (relationship.kind === 'belongsTo') {
+            if (!serializer.embeddedType(type, name)) {
+              child = get(record, relationship.key);
+
+              createDependentRecords = function() {
+                adapter.createRecords(store, type, [record]);
+                child.removeObserver('id', createDependentRecords);
+              };
+
+              if(child && !get(child, 'id')) {
+                child.addObserver('id', adapter,  createDependentRecords);
+                deferSave = true;
+              }
+            }
+          }
+        }, this);
+
+        if(!deferSave) {
+          initialRecordsToCreate.push(record);
+        }
+
+      });
+      return this._super(store, type, initialRecordsToCreate);
     }
 
     var root = this.rootForType(type),

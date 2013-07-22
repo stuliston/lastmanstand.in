@@ -1,10 +1,7 @@
 LMS.GamesNewRoute = Ember.Route.extend
 
   model: ->
-    game = LMS.Game.createRecord()
-    currentProfile = @controllerFor('currentProfile').get('model')
-    game.get('gameMemberships').pushObject(LMS.GameMembership.createRecord(game: game, profile: currentProfile))
-    game
+    LMS.Game.createRecord()
 
   setupController: (controller, game) ->
     controller.set('model', game)
