@@ -1,16 +1,18 @@
-{{#view tagName="li" classNameBindings="selectionClass"}}
-  {{#linkTo 'game.round' this}}
-    <div class="round-number">{{number}}</div>
-    <div class="date">{{date startTime format="ddd dd/MM/yyyy"}}</div>
-    {{#if selectedTeam}}
-      <div class="selection">
-      {{#if isSelectionCorrect}}
-        <i class="icon-ok-sign"></i>
-      {{else}}
-        <i class="icon-remove-sign"></i>
+{{#group}}
+  {{#view tagName="li" classNameBindings="selectionClass"}}
+    {{#linkTo 'game.round' this}}
+      <div class="round-number">{{number}}</div>
+      <div class="date">{{date startTime format="ddd dd/MM/yyyy"}}</div>
+      {{#if selectedTeam}}
+        <div class="selection">
+        {{#if isSelectionCorrect}}
+          <i class="icon-ok-sign"></i>
+        {{else}}
+          <i class="icon-remove-sign"></i>
+        {{/if}}
+        <span>{{winningTeam.name}} defeated {{losingTeam.name}}</span>
+        </div>
       {{/if}}
-      <span>{{winningTeam.name}} defeated {{losingTeam.name}}</span>
-      </div>
-    {{/if}}
-  {{/linkTo}}
-{{/view}}
+    {{/linkTo}}
+  {{/view}}
+{{/group}}
