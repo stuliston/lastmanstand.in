@@ -11,9 +11,16 @@
 
   <%= form_for(:user, url: user_registration_path) do |f| %>
 
+    <%= f.fields_for :profile_attributes do |profile_f| %>
+      <div class="input-prepend row">
+        <span class="add-on"><i class="icon-user"></i></span>
+        <%= profile_f.text_field :name, autofocus: true, placeholder: "Your Name" %>
+      </div>
+    <% end %>
+
     <div class="input-prepend row">
       <span class="add-on"><i class="icon-envelope"></i></span>
-      <%= f.email_field :email, autofocus: true, placeholder: "Login Email" %>
+      <%= f.email_field :email, placeholder: "Login Email" %>
     </div>
 
     <div class="input-prepend row">

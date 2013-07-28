@@ -7,4 +7,7 @@ class User < ActiveRecord::Base
 
   validates :email,     presence: true, uniqueness: true
   validates :password,  presence: true
+  validates :profile,   presence: true
+
+  accepts_nested_attributes_for :profile
 end
