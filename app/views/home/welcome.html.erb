@@ -1,51 +1,10 @@
 <section class="welcome">
-  <h1>LAST</h1>
-  <h1>MAN <i class="icon-male"></i></h1>
-  <h1>STANDING</h1>
+  <h1>LAST MAN</h1>
+  <h1>STAND.<i class="icon-male"></i>N</h1>
 </section>
 
-<section class='register-options form'>
-  <p>Create your free account:</p>
-
-  <% # TODO: Custom controller for registration. We need to create a profile too %>
-
-  <%= form_for(:user, url: user_registration_path) do |f| %>
-
-    <%= f.fields_for :profile_attributes do |profile_f| %>
-      <div class="input-prepend row">
-        <span class="add-on"><i class="icon-user"></i></span>
-        <%= profile_f.text_field :name, autofocus: true, placeholder: "Your Name" %>
-      </div>
-    <% end %>
-
-    <div class="input-prepend row">
-      <span class="add-on"><i class="icon-envelope"></i></span>
-      <%= f.email_field :email, placeholder: "Login Email" %>
-    </div>
-
-    <div class="input-prepend row">
-      <span class="add-on"><i class="icon-key"></i></span>
-      <%= f.password_field :password, placeholder: "Password" %>
-    </div>
-
-    <div class="input-prepend row">
-      <span class="add-on"><i class="icon-key"></i></span>
-      <%= f.password_field :password_confirmation, placeholder: "Confirm Password" %>
-    </div>
-
-    <div class="row">
-      <%= f.check_box :remember_me, checked: true %>
-      <%= f.label :remember_me %>
-    </div>
-
-    <div class="row">
-      <%= f.submit "Create my account", class: "submit primary" %>
-    </div>
-  <% end %>
-
-  <p>
-    Already have an account?
-    <%= link_to "Log in", new_user_session_path %>
-  </p>
-
+<section class='sign-up-or-in'>
+  <%= link_to "New to Lastmanstand.in? Sign up", new_user_registration_path %>
+  <hr/>
+  <%= link_to "Already have an account? Log in", new_user_session_path %>
 </section>
