@@ -37,6 +37,7 @@ western_bulldogs  = Team.create!(name: 'Western Bulldogs', league: afl)
 Season.destroy_all
 
 afl_season_2013 = Season.create!(name: "2013 AFL Premiership Season", start_date: Date.new(2013, 6, 22), end_date: Date.new(2013, 11, 30), league: afl)
+epl_season_2013 = Season.create!(name: "2013 English Premiership League", start_date: Date.new(2013, 6, 22), end_date: Date.new(2013, 11, 30), league: epl)
 
 Game.destroy_all
 Game.create!(name: 'Rob v Stu', profiles: [rob, stu].collect(&:profile), season: afl_season_2013)

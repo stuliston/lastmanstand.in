@@ -1,5 +1,4 @@
-// Version: v0.13-59-ge999edb
-// Last commit: e999edb (2013-07-06 06:03:59 -0700)
+// Last commit: 064dd22 (2013-07-23 23:50:06 +1000)
 
 
 (function() {
@@ -783,10 +782,15 @@ DS.Transaction = Ember.Object.extend({
     var commitDetails = get(this, 'commitDetails'),
         relationships = get(this, 'relationships');
 
+    recordsBeingCommitted = [];
+
     forEach(commitDetails, function(adapter, commitDetails) {
       Ember.assert("You tried to commit records but you have no adapter", adapter);
       Ember.assert("You tried to commit records but your adapter does not implement `commit`", adapter.commit);
 
+      recordsBeingCommitted.addObjects(commitDetails.created);
+      recordsBeingCommitted.addObjects(commitDetails.updated);
+      recordsBeingCommitted.addObjects(commitDetails.deleted);
       adapter.commit(store, commitDetails);
     });
 
@@ -796,6 +800,15 @@ DS.Transaction = Ember.Object.extend({
     relationships.forEach(function(relationship) {
       relationship.destroy();
     });
+
+    return new Ember.RSVP.Promise(function(resolve, reject){
+      recordsBeingCommitted.addObserver('@each.isSaving', function() {
+        if(recordsBeingCommitted.every(function(record) { return !record.get('isSaving') })) {
+          resolve(store);
+        }
+      });
+    });
+
   },
 
   /**
@@ -2026,12 +2039,12 @@ DS.Store = Ember.Object.extend(DS._Mappable, {
     a transaction.
   */
   save: function() {
-    once(this, 'commitDefaultTransaction');
+    return this.commitDefaultTransaction();
   },
   commit: Ember.aliasMethod('save'),
 
   commitDefaultTransaction: function() {
-    get(this, 'defaultTransaction').commit();
+    return get(this, 'defaultTransaction').commit();
   },
 
   scheduleSave: function(record) {
@@ -8194,8 +8207,7 @@ DS.FixtureSerializer = DS.Serializer.extend({
 */
 
 var get = Ember.get, fmt = Ember.String.fmt,
-    indexOf = Ember.EnumerableUtils.indexOf,
-    dump = Ember.get(window, 'JSON.stringify') || function(object) { return object.toString(); };
+    indexOf = Ember.EnumerableUtils.indexOf;
 
 /**
   `DS.FixtureAdapter` is an adapter that loads records from memory.
@@ -8228,7 +8240,7 @@ DS.FixtureAdapter = DS.Adapter.extend({
       return fixtures.map(function(fixture){
         var fixtureIdType = typeof fixture.id;
         if(fixtureIdType !== "number" && fixtureIdType !== "string"){
-          throw new Error(fmt('the id property must be defined as a number or string for fixture %@', [dump(fixture)]));
+          throw new Error(fmt('the id property must be defined as a number or string for fixture %@', [fixture]));
         }
         fixture.id = fixture.id + '';
         return fixture;
@@ -8610,59 +8622,82 @@ DS.RESTAdapter = DS.Adapter.extend({
   },
 
   createRecords: function(store, type, records) {
-    var adapter = this, serializer = this.serializer;
-
+    var recordsToCreate;
     if (get(this, 'bulkCommit') === false) {
-
-      var initialRecordsToCreate = []
-
-      records.forEach(function(record) {
-
-        var deferSave = false
-
-        record.eachRelationship(function(name, relationship) {
-          var key = serializer._keyForBelongsTo(record.constructor, name),
-              child, createDependent;
-
-          if (relationship.kind === 'belongsTo') {
-            if (!serializer.embeddedType(type, name)) {
-              child = get(record, relationship.key);
-
-              createDependentRecords = function() {
-                adapter.createRecords(store, type, [record]);
-                child.removeObserver('id', createDependentRecords);
-              };
-
-              if(child && !get(child, 'id')) {
-                child.addObserver('id', adapter,  createDependentRecords);
-                deferSave = true;
-              }
-            }
-          }
-        }, this);
-
-        if(!deferSave) {
-          initialRecordsToCreate.push(record);
-        }
-
-      });
-      return this._super(store, type, initialRecordsToCreate);
+      recordsToCreate = this._extractRecordsToCreateAndBindDependents(store, type, records);
+      return this._super(store, type, recordsToCreate);
+    } else {
+      return this._createBulkRecords(store, type, records);
     }
 
-    var root = this.rootForType(type),
-        plural = this.pluralize(root);
+  },
 
-    var data = {};
+  /**
+  * Use bulk api where possible. If any records depend on other records being saved first
+  * they will be extracted from the bulk save process and saved once their dependents have
+  * been populated with an id.
+  */
+  _createBulkRecords: function(store, type, records) {
+    var adapter = this,
+        root = this.rootForType(type),
+        plural = this.pluralize(root),
+        data = {},
+        recordsToCreate;
+
     data[plural] = [];
-    records.forEach(function(record) {
+
+    recordsToCreate = this._extractRecordsToCreateAndBindDependents(store, type, records);
+
+    recordsToCreate.forEach(function(record) {
       data[plural].push(this.serialize(record, { includeId: true }));
     }, this);
 
-    return this.ajax(this.buildURL(root), "POST", {
-      data: data
-    }).then(function(json) {
-      adapter.didCreateRecords(store, type, records, json);
-    }).then(null, DS.rejectionHandler);
+    if(data[plural].length) {
+      return this.ajax(this.buildURL(root), "POST", {
+        data: data
+      }).then(function(json) {
+        adapter.didCreateRecords(store, type, records, json);
+      }).then(null, DS.rejectionHandler);
+    }
+  },
+
+  _extractRecordsToCreateAndBindDependents: function(store, type, records) {
+    var adapter = this,
+        serializer = this.serializer,
+        initialRecordsToCreate = Ember.OrderedSet.create();
+
+    records.forEach(function(record) {
+      var deferSave = false;
+
+      record.eachRelationship(function(name, relationship) {
+        var key = serializer._keyForBelongsTo(record.constructor, name),
+            child,
+            createDependentRecords;
+
+        if (relationship.kind === 'belongsTo') {
+          if (!serializer.embeddedType(type, name)) {
+            child = get(record, relationship.key);
+
+            createDependentRecords = function() {
+              var recordsToCreate = Ember.OrderedSet.create();
+              recordsToCreate.add(record);
+              adapter.createRecords(store, type, recordsToCreate);
+              child.removeObserver('id', createDependentRecords);
+            };
+
+            if(child && !get(child, 'id')) {
+              child.addObserver('id', adapter,  createDependentRecords);
+              deferSave = true;
+            }
+          }
+        }
+      }, this);
+
+      if(!deferSave) {
+        initialRecordsToCreate.add(record);
+      }
+    });
+    return initialRecordsToCreate;
   },
 
   updateRecord: function(store, type, record) {
@@ -8675,7 +8710,7 @@ DS.RESTAdapter = DS.Adapter.extend({
     data = {};
     data[root] = this.serialize(record);
 
-    return this.ajax(this.buildURL(root, id), "PUT",{
+    return this.ajax(this.buildURL(root, id, record), "PUT",{
       data: data
     }).then(function(json){
       adapter.didUpdateRecord(store, type, record, json);
@@ -8718,7 +8753,7 @@ DS.RESTAdapter = DS.Adapter.extend({
     root = this.rootForType(type);
     adapter = this;
 
-    return this.ajax(this.buildURL(root, id), "DELETE").then(function(json){
+    return this.ajax(this.buildURL(root, id, record), "DELETE").then(function(json){
       adapter.didDeleteRecord(store, type, record, json);
     }, function(xhr){
       adapter.didError(store, type, record, xhr);
@@ -8864,18 +8899,18 @@ DS.RESTAdapter = DS.Adapter.extend({
     return serializer.pluralize(string);
   },
 
-  buildURL: function(record, suffix) {
+  buildURL: function(root, suffix, record) {
     var url = [this.url];
 
     Ember.assert("Namespace URL (" + this.namespace + ") must not start with slash", !this.namespace || this.namespace.toString().charAt(0) !== "/");
-    Ember.assert("Record URL (" + record + ") must not start with slash", !record || record.toString().charAt(0) !== "/");
+    Ember.assert("Root URL (" + root + ") must not start with slash", !root || root.toString().charAt(0) !== "/");
     Ember.assert("URL suffix (" + suffix + ") must not start with slash", !suffix || suffix.toString().charAt(0) !== "/");
 
     if (!Ember.isNone(this.namespace)) {
       url.push(this.namespace);
     }
 
-    url.push(this.pluralize(record));
+    url.push(this.pluralize(root));
     if (suffix !== undefined) {
       url.push(suffix);
     }

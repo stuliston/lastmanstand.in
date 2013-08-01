@@ -6,3 +6,4 @@ window.LMS = Ember.Application.create
 
 #Ember.LOG_BINDINGS = true
 #Ember.LOG_STACKTRACE_ON_DEPRECATION = true
+#Ember.STRUCTURED_PROFILE = true

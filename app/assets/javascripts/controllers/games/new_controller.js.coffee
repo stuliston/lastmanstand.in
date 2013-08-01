@@ -16,7 +16,6 @@ LMS.GamesNewController = Ember.ObjectController.extend
   ).property('totalPlayersRemaining')
 
   leagueDidChange: (->
-    console.log 'setting season', @get('league.currentSeason')
     @set('season', @get('league.currentSeason'))
   ).observes('league')
 
@@ -24,9 +23,21 @@ LMS.GamesNewController = Ember.ObjectController.extend
     currentProfile = @get('controllers.currentProfile.model')
     game = @get('model')
     game.get('gameMemberships').pushObject(LMS.GameMembership.createRecord(game: game, profile: currentProfile))
-    debugger
+
     @get('store').commit()
-    # @transitionToRoute(@get('indexRoute'))
+    @scheduleRouteWhenAllSaved(game)
+
+
+  # When all models have returned with ids, perform route.
+  # Once some extra work is done in ember data and commit returns a promise we won't need this.
+  scheduleRouteWhenAllSaved: (game) ->
+    models = [game]
+    models.addObjects(game.get('gameMemberships'))
+    models.addObjects(game.get('gameInvitations'))
+
+    models.addObserver '@each.isNew', =>
+      @transitionToRoute('game.current_round', game) unless models.some((model) -> !model.get('id'))
+
 
   cancel: ->
     @transitionToRoute(@get('indexRoute'))
