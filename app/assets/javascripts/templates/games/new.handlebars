@@ -3,13 +3,13 @@
 <div class="game-new form">
   <div class="row">
     {{view Ember.Select
-        name="league"
+        name="competition"
         viewName="select"
-        contentBinding="leagues"
+        contentBinding="competitions"
         optionLabelPath="content.name"
         optionValuePath="content.id"
-        prompt="Select a League"
-        selectionBinding="league"}}
+        prompt="Select a competition"
+        selectionBinding="competition"}}
 
   </div>
   <div class="row">

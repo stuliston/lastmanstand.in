@@ -19,27 +19,27 @@ module Api
         {game_memberships: [
           {game: [
             {season: [
-              :league, 
+              :competition,
               {
                 rounds: {
                   fixtures: [:home_team, :away_team, :winning_team]
                 }
               }
             ]}
-          ]}, 
+          ]},
           :profile
-        ]}, 
+        ]},
         {game_invitations: [
           {game: [
             {season: [
-              :league,
+              :competition,
               {
                 rounds: {
                   fixtures: [:home_team, :away_team, :winning_team]
                 }
               }
             ]}
-          ]}, 
+          ]},
           :profile
         ]},
         :predictions

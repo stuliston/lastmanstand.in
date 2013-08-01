@@ -1,6 +1,6 @@
 class Season < ActiveRecord::Base
 
-  belongs_to :league
+  belongs_to :competition
   has_many :rounds, :dependent => :delete_all
 
   validates :name, presence: true

@@ -1,4 +1,4 @@
-class LeagueSerializer < ActiveModel::Serializer
+class ShallowCompetitionSerializer < ActiveModel::Serializer
 
   attributes :id, :name
 

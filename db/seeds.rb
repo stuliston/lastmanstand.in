@@ -9,35 +9,35 @@ dan = User.create!(email: 'locusdelicti@gmail.com', password: 'password', passwo
 
 all_users = [ stu, rob, ash, phil, dan ]
 
-League.destroy_all
-afl = League.create!(name: 'Australian Football League')
-epl = League.create!(name: 'English Premier League')
+Competition.destroy_all
+afl = Competition.create!(name: 'Australian Football League')
+epl = Competition.create!(name: 'English Premier League')
 
 Team.destroy_all
-adelaide          = Team.create!(name: 'Adelaide', league: afl)
-brisbane          = Team.create!(name: 'Brisbane', league: afl)
-carlton           = Team.create!(name: 'Carlton', league: afl)
-collingwood       = Team.create!(name: 'Collingwood', league: afl)
-essendon          = Team.create!(name: 'Essendon', league: afl)
-fremantle         = Team.create!(name: 'Fremantle', league: afl)
-geelong           = Team.create!(name: 'Geelong', league: afl)
-gold_coast        = Team.create!(name: 'Gold Coast', league: afl)
-gws               = Team.create!(name: 'Greater Western Sydney', league: afl)
-hawthorn          = Team.create!(name: 'Hawthorn', league: afl)
-melbourne         = Team.create!(name: 'Melbourne', league: afl)
-north_melbourne   = Team.create!(name: 'North Melbourne', league: afl)
-port_adelaide     = Team.create!(name: 'Port Adelaide', league: afl)
-richmond          = Team.create!(name: 'Richmond', league: afl)
-st_kilda          = Team.create!(name: 'St Kilda', league: afl)
-sydney_swans      = Team.create!(name: 'Sydney Swans', league: afl)
-west_coast_eagles = Team.create!(name: 'West Coast Eagles', league: afl)
-western_bulldogs  = Team.create!(name: 'Western Bulldogs', league: afl)
+adelaide          = Team.create!(name: 'Adelaide', competition: afl)
+brisbane          = Team.create!(name: 'Brisbane', competition: afl)
+carlton           = Team.create!(name: 'Carlton', competition: afl)
+collingwood       = Team.create!(name: 'Collingwood', competition: afl)
+essendon          = Team.create!(name: 'Essendon', competition: afl)
+fremantle         = Team.create!(name: 'Fremantle', competition: afl)
+geelong           = Team.create!(name: 'Geelong', competition: afl)
+gold_coast        = Team.create!(name: 'Gold Coast', competition: afl)
+gws               = Team.create!(name: 'Greater Western Sydney', competition: afl)
+hawthorn          = Team.create!(name: 'Hawthorn', competition: afl)
+melbourne         = Team.create!(name: 'Melbourne', competition: afl)
+north_melbourne   = Team.create!(name: 'North Melbourne', competition: afl)
+port_adelaide     = Team.create!(name: 'Port Adelaide', competition: afl)
+richmond          = Team.create!(name: 'Richmond', competition: afl)
+st_kilda          = Team.create!(name: 'St Kilda', competition: afl)
+sydney_swans      = Team.create!(name: 'Sydney Swans', competition: afl)
+west_coast_eagles = Team.create!(name: 'West Coast Eagles', competition: afl)
+western_bulldogs  = Team.create!(name: 'Western Bulldogs', competition: afl)
 
 #Create a fixture for a single afl season
 Season.destroy_all
 
-afl_season_2013 = Season.create!(name: "2013 AFL Premiership Season", start_date: Date.new(2013, 6, 22), end_date: Date.new(2013, 11, 30), league: afl)
-epl_season_2013 = Season.create!(name: "2013 English Premiership League", start_date: Date.new(2013, 6, 22), end_date: Date.new(2013, 11, 30), league: epl)
+afl_season_2013 = Season.create!(name: "2013 AFL Premiership Season", start_date: Date.new(2013, 6, 22), end_date: Date.new(2013, 11, 30), competition: afl)
+epl_season_2013 = Season.create!(name: "2013 English Premiership League", start_date: Date.new(2013, 6, 22), end_date: Date.new(2013, 11, 30), competition: epl)
 
 Game.destroy_all
 Game.create!(name: 'Rob v Stu', profiles: [rob, stu].collect(&:profile), season: afl_season_2013)
@@ -56,7 +56,7 @@ Fixture.destroy_all
 round_date = afl_season_2013.start_date
 paired_teams = []
 round_number = 1
-all_afl_teams = Team.where(league: afl)
+all_afl_teams = Team.where(competition: afl)
 
 
 #This is pretty messy but it kinda works (I think)

@@ -1,7 +1,7 @@
 LMS.GamesNewController = Ember.ObjectController.extend
 
   needs: ['currentProfile']
-  league: null
+  competition: null
 
   totalPlayers: (->
     @get('gameInvitations.length') + @get('gameMemberships.length')
@@ -15,9 +15,9 @@ LMS.GamesNewController = Ember.ObjectController.extend
     @get('totalPlayersRemaining') > 0
   ).property('totalPlayersRemaining')
 
-  leagueDidChange: (->
-    @set('season', @get('league.currentSeason'))
-  ).observes('league')
+  competitionDidChange: (->
+    @set('season', @get('competition.currentSeason'))
+  ).observes('competition')
 
   saveGame: ->
     currentProfile = @get('controllers.currentProfile.model')

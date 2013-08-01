@@ -1,4 +1,4 @@
 LMS.Season = DS.Model.extend
   name: DS.attr('string')
-  league: DS.belongsTo('LMS.League')
+  competition: DS.belongsTo('LMS.Competition')
   rounds: DS.hasMany('LMS.Round')

@@ -1,9 +1,9 @@
 class Team < ActiveRecord::Base
-  belongs_to :league
+  belongs_to :competition
   has_many :home_fixtures, class_name: 'Fixture', foreign_key: :home_team_id
   has_many :away_fixtures, class_name: 'Fixture', foreign_key: :away_team_id
 
   validates :name, presence: true
-  validates :league, presence: true
+  validates :competition, presence: true
 
 end

@@ -1,4 +1,4 @@
-class League < ActiveRecord::Base
+class Competition < ActiveRecord::Base
   has_many :seasons
   has_many :teams
   validates :name, presence: true, uniqueness: true

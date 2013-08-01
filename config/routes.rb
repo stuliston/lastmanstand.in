@@ -7,7 +7,7 @@ LastManStanding::Application.routes.draw do
 
   namespace :api do
     resources :profiles
-    resources :leagues
+    resources :competitions
     resources :games
     resources :predictions
     resources :game_memberships, only: [ :create ]
