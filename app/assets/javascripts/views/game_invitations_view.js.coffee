@@ -10,6 +10,5 @@ LMS.GameInvitationsView = Ember.View.extend
 
   addEmail: ->
     game = @get('controller.model')
-    invitation = LMS.GameInvitation.createRecord(game: game, email: @get('newEmail'))
-    game.get('gameInvitations').pushObject(invitation)
+    game.get('gameInvitations').createRecord(email: @get('newEmail'))
     @set('newEmail', null)

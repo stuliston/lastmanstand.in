@@ -1,0 +1,10 @@
+{{#if controller.length}}
+  <div class="pending-invitations">
+    <h5>Pending invitations</h5>
+      <ul class="unstyled">
+        {{#each controller}}
+          <li>{{displayName}}</li>
+        {{/each}}
+      </ul>
+  </div>
+{{/if}}

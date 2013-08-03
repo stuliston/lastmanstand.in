@@ -1,6 +1,6 @@
 LMS.GamesNewController = Ember.ObjectController.extend
 
-  needs: ['currentProfile']
+  needs: ['currentProfile', 'featureToggles']
   competition: null
 
   totalPlayers: (->
@@ -15,9 +15,9 @@ LMS.GamesNewController = Ember.ObjectController.extend
     @get('totalPlayersRemaining') > 0
   ).property('totalPlayersRemaining')
 
-  competitionDidChange: (->
-    @set('season', @get('competition.currentSeason'))
-  ).observes('competition')
+  isInvalid: (->
+    !(@get('season') && @get('name'))
+  ).property('season', 'name')
 
   saveGame: ->
     currentProfile = @get('controllers.currentProfile.model')
@@ -26,7 +26,7 @@ LMS.GamesNewController = Ember.ObjectController.extend
 
     @get('store').commit()
     @scheduleRouteWhenAllSaved(game)
-
+    @set('isSavingGame', true)
 
   # When all models have returned with ids, perform route.
   # Once some extra work is done in ember data and commit returns a promise we won't need this.
@@ -36,8 +36,8 @@ LMS.GamesNewController = Ember.ObjectController.extend
     models.addObjects(game.get('gameInvitations'))
 
     models.addObserver '@each.isNew', =>
+      @set('isSavingGame', false)
       @transitionToRoute('game.current_round', game) unless models.some((model) -> !model.get('id'))
-
 
   cancel: ->
     @transitionToRoute(@get('indexRoute'))

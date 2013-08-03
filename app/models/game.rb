@@ -10,7 +10,7 @@ class Game < ActiveRecord::Base
 
 
   def max_allowed_players
-    3 #will be governed by payments later on
+    50 #Go big - will be governed by payments later on
   end
 
   private

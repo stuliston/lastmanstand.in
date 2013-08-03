@@ -1,26 +1,31 @@
-<h1>Start a New Game</h1>
+<div class="game-new">
+  <h1>Start a New Game</h1>
 
-<div class="game-new form">
-  <div class="row">
-    {{view Ember.Select
-        name="competition"
-        viewName="select"
-        contentBinding="competitions"
-        optionLabelPath="content.name"
-        optionValuePath="content.id"
-        prompt="Select a competition"
-        selectionBinding="competition"}}
+  {{#if isSavingGame}}
+    <p class="saving-message">Hold tight, while we set up your game...</p>
+  {{else}}
+    <div class="form">
+      <div class="row">
+        {{view Ember.Select
+            name="season"
+            viewName="select"
+            contentBinding="seasons"
+            optionLabelPath="content.competition.name"
+            optionValuePath="content.id"
+            prompt="Select a competition"
+            selectionBinding="season"}}
 
-  </div>
-  <div class="row">
-    {{input value=name name="name" placeholder="Name your Game"}}
-  </div>
+      </div>
+      <div class="row">
+        {{input value=name name="name" placeholder="Name your Game" classNameBindings="name::error"}}
+      </div>
 
-  {{view LMS.GameInvitationsView}}
+      {{view LMS.GameInvitationsView}}
 
-  <div class="row">
-    <button {{action cancel}} class="cancel secondary">Cancel</button>
-    <button {{action saveGame}} class="submit primary">Create</button>
-  </div>
-
+      <div class="row">
+        <button {{action cancel}} class="cancel secondary">Cancel</button>
+        <button {{action saveGame}} class="submit primary" {{bindAttr disabled="isInvalid"}}>Create</button>
+      </div>
+    </div>
+  {{/if}}
 </div>

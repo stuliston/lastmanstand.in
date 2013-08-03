@@ -14,7 +14,7 @@ module Api
       end
 
       if @game_invitation.save!
-        render json: @game_invitation
+        render json: @game_invitation, serializer: ShallowGameInvitationSerializer, root: 'game_invitation'
       end
     end
 
