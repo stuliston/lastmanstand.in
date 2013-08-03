@@ -1,9 +1,14 @@
 {{#if controller.length}}
   <div class="pending-invitations">
     <h5>Pending invitations</h5>
-      <ul class="unstyled">
+      <ul class="members unstyled">
         {{#each controller}}
-          <li>{{displayName}}</li>
+          <li>
+            <img {{bindAttr src="avatarImageUrlMedium"}} class="avatar" />
+            <div class="details">
+              {{displayName}}
+            </div>
+          </li>
         {{/each}}
       </ul>
   </div>
