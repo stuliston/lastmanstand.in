@@ -9,4 +9,5 @@ LMS.Router.map ->
       @route('round', {path: '/rounds/:round_number'}) #weird !
     )
   )
+  @resource('game_invitations')
 

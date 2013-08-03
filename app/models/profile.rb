@@ -10,4 +10,11 @@ class Profile < ActiveRecord::Base
 
   validates :name, presence: true
 
+  after_create do |profile|
+    invitations = GameInvitation.where(email: profile.user.email)
+    invitations.each do |invitation|
+      invitation.update_attributes(profile: profile)
+    end
+  end
+
 end

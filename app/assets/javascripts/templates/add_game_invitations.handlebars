@@ -1,0 +1,32 @@
+{{#if controllers.featureToggles.payments}}
+  <p>
+    Your game currently allows for {{maxAllowedPlayers}} players including you.
+  </p>
+{{else}}
+  <strong>Invite players to your game.</strong>
+{{/if}}
+<ul>
+  {{#each gameInvitation in gameInvitations}}
+    <li>{{gameInvitation.email}}</li>
+  {{/each}}
+</ul>
+
+{{#if controllers.featureToggles.payments}}
+  {{#if morePlayersAllowed}}
+    <p class="player-count" {{bindAttr class="morePlayersAllowed::full"}}>
+      You have {{totalPlayersRemaining}} players remaining.
+    </p>
+    <div class="add-email-container">
+      {{input value=view.newEmail name="email" type="email" placeholder="Enter email"}}
+      <button class="add-email primary" {{action addEmail target="view"}} {{bindAttr disabled="view.isEmailInvalid"}}>Add</button>
+    </div>
+  {{else}}
+    <button class="upgrade-account alert">Upgrade account to add more players</button>
+    <p class="or">- OR -</p>
+  {{/if}}
+{{else}}
+  <div class="add-email-container">
+    {{input value=view.newEmail name="email" type="email" placeholder="Enter email"}}
+    <button class="add-email primary" {{action addEmail target="view"}} {{bindAttr disabled="view.isEmailInvalid"}}>Add</button>
+  </div>
+{{/if}}

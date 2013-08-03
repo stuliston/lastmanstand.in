@@ -1,0 +1,21 @@
+.game-invitations
+
+  .info
+    padding: 1em
+    background: $dark-grey
+    color: #fff
+
+  .invitations
+    > li
+      padding: 1em
+      border-bottom: 1px solid darken($secondary-bg-color, 10)
+      background: $secondary-bg-color
+      position: relative
+
+      &.is-actioned
+        display: none
+
+    .actions
+      margin-top: 1em
+    button
+      font-size: 0.8em
