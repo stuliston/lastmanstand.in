@@ -5,5 +5,4 @@ LMS.GamesNewRoute = Ember.Route.extend
 
   setupController: (controller, game) ->
     controller.set('model', game)
-    LMS.Competition.find().then (competitions) =>
-      controller.set('seasons', competitions.mapProperty('currentSeason'))
+    controller.set('competitions', LMS.Competition.find())

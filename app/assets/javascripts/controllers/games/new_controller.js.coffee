@@ -1,7 +1,7 @@
 LMS.GamesNewController = Ember.ObjectController.extend
 
   needs: ['currentProfile', 'featureToggles']
-  competition: null
+  competitions: null
 
   totalPlayers: (->
     @get('gameInvitations.length') + @get('gameMemberships.length')
@@ -18,6 +18,10 @@ LMS.GamesNewController = Ember.ObjectController.extend
   isInvalid: (->
     !(@get('season') && @get('name'))
   ).property('season', 'name')
+
+  seasons: (->
+    @get('competitions').mapProperty('currentSeason')
+  ).property('competitions.@each')
 
   saveGame: ->
     currentProfile = @get('controllers.currentProfile.model')
