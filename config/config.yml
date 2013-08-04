@@ -1,0 +1,20 @@
+defaults: &defaults
+
+  playup_api:
+    competitions:
+      afl:
+        id: 53
+      epl:
+        id: 26
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults
