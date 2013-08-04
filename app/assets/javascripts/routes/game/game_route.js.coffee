@@ -7,8 +7,8 @@ LMS.GameRoute = Ember.Route.extend
 
   afterModel: (game) ->
     if game.get('isLoaded') && !@get('gameRefreshed')
-      game.reload()
       @set('gameRefreshed', true)
+      game.reload()
 
   events:
     willTransition: (transition) ->

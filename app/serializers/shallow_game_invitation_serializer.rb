@@ -1,11 +1,11 @@
 class ShallowGameInvitationSerializer < ActiveModel::Serializer
 
-  embed :ids, include: false
+  embed :ids
 
   attributes :id, :email
 
-  has_one :game
-  has_one :profile
-  has_one :invited_by
+  has_one :profile, include: true, serializer: ShallowProfileSerializer, root: :profiles
+  has_one :game, include: true, serializer: VeryShallowGameSerializer
+  has_one :invited_by, include: true, serializer: ShallowProfileSerializer, root: :profiles
 
 end

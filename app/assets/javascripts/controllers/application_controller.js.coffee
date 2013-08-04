@@ -10,6 +10,7 @@ LMS.ApplicationController = Ember.Controller.extend
     @_manageWindowWidth()
     @_trackCurrentTimeToSecond()
 
+
   toggleNavigation: ->
     @set('navigationVisible', !@get('navigationVisible'))
 
