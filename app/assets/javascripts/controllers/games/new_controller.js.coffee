@@ -32,10 +32,14 @@ LMS.GamesNewController = Ember.ObjectController.extend
     @scheduleRouteWhenAllSaved(game)
     @set('isSavingGame', true)
 
+  unsavedGameInvitations: (->
+    @get('gameInvitations').filter (invitation) -> !invitation.get('id')
+  ).property('gameInvitations.@each.id')
+
   # When all models have returned with ids, perform route.
   # Once some extra work is done in ember data and commit returns a promise we won't need this.
   scheduleRouteWhenAllSaved: (game) ->
-    models = [game]
+    models = Ember.A([game])
     models.addObjects(game.get('gameMemberships'))
     models.addObjects(game.get('gameInvitations'))
 

@@ -1,15 +1,19 @@
-{{#if controller.length}}
-  <div class="pending-invitations">
-    <h5>Pending invitations</h5>
-      <ul class="members unstyled">
-        {{#each controller}}
-          <li>
-            <img {{bindAttr src="avatarImageUrlMedium"}} class="avatar" />
-            <div class="details">
-              {{displayName}}
-            </div>
-          </li>
-        {{/each}}
-      </ul>
-  </div>
-{{/if}}
+<div class="pending-invitations">
+  <h5>
+    <span>Pending invitations</span>
+    {{#linkTo 'game.edit' controllers.game.model}}<i class="icon-plus-sign-alt"></i>{{/linkTo}}
+  </h5>
+
+  {{#if controller.length}}
+    <ul class="members unstyled">
+      {{#each controller}}
+        <li>
+          <img {{bindAttr src="avatarImageUrlMedium"}} class="avatar" />
+          <div class="details">
+            {{displayName}}
+          </div>
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
+</div>

@@ -6,7 +6,7 @@
   <strong>Invite players to your game.</strong>
 {{/if}}
 <ul>
-  {{#each gameInvitation in gameInvitations}}
+  {{#each gameInvitation in unsavedGameInvitations}}
     <li>{{gameInvitation.email}}</li>
   {{/each}}
 </ul>
