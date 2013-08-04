@@ -18,10 +18,18 @@ module Api
       end
     end
 
+    def destroy
+      if @game_invitation.destroy
+        head :no_content
+      else
+        head :bad_request
+      end
+    end
+
     private
 
      def game_invitation_params
-      params.require(:game_invitation).permit([:game_id, :email])
+      params.require(:game_invitation).permit([:game_id, :email, :invited_by_id])
     end
 
   end

@@ -6,5 +6,6 @@ class ShallowGameInvitationSerializer < ActiveModel::Serializer
 
   has_one :game
   has_one :profile
+  has_one :invited_by
 
 end

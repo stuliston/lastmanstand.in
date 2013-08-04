@@ -6,12 +6,12 @@ LastManStanding::Application.routes.draw do
   root to: 'home#show'
 
   namespace :api do
-    resources :profiles
-    resources :competitions
-    resources :games
-    resources :predictions
+    # resources :profiles
+    resources :competitions, only: [ :index ]
+    resources :games, only: [ :create, :show ]
+    resources :predictions, only: [ :create, :destroy ]
     resources :game_memberships, only: [ :create ]
-    resources :game_invitations, only: [ :create ]
+    resources :game_invitations, only: [ :create, :destroy ]
   end
 
 end

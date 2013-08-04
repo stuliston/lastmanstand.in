@@ -14,8 +14,25 @@
 
       &.is-actioned
         display: none
+      &.is-confirming-dismiss
+        .dismiss-confirm-container
+          display: block
+          background: $primary-bg-color
+          @include border-radius($border-radius)
+          padding: 1em
+        .dismiss, .accept
+          display: none
+
+      .dismiss-message
+        font-size: 0.8em
+        margin-bottom: 1em
+      .dismiss-confirm-container
+        display: none
 
     .actions
       margin-top: 1em
     button
       font-size: 0.8em
+
+
+

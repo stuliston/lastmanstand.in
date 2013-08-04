@@ -1,15 +1,24 @@
 <h1>Your Invitations</h1>
 <div class="game-invitations">
   <div class="info">
-    You've been invited to a game or two. Accept your invitations to get started.
+    {{#if isSingleInvitation}}
+      You've been invited to a game. Accept your invitation to get started.
+    {{else}}
+      You've been invited to the following games. Accept your invitations to get started.
+    {{/if}}
   </div>
   <ul class="invitations unstyled">
   {{#each invitation in controller}}
-    <li {{bindAttr class="invitation.isActioned"}}>
-      <div class="name">{{invitation.game.name}}</div>
+    <li {{bindAttr class="invitation.isActioned invitation.isConfirmingDismiss"}}>
+      <div class="name"><strong>{{invitation.game.name}}</strong> by {{invitation.invitedBy.name}}</div>
       <div class="actions">
-        <button {{action 'accept' invitation}} class="primary">Join Game</button>
-        <button {{action 'dismiss' invitation}}>Dismiss</button>
+        <button {{action 'accept' invitation}} class="accept primary">Join Game</button>
+        <button {{action 'dismissConfirm' invitation}} class="dismiss">Don't join</button>
+        <div class='dismiss-confirm-container'>
+          <div class="dismiss-message">Are you sure you don't want to join this game?</div>
+          <button {{action 'dismiss' invitation}} class="dismiss-confirm alert">Yes, Dismiss Invitation</button>
+          <button {{action 'dismissCancel' invitation}} class="dismiss-cancel">No, Cancel</button>
+        </div>
       </div>
     </li>
   {{/each}}
