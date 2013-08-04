@@ -14,6 +14,8 @@ gem 'ember-source', '1.0.0.rc6.2'
 # gem 'handlebars-source', '1.0.0.rc4'
 gem 'active_model_serializers'
 gem 'devise', '3.0.0'
+gem 'httparty'
+gem 'hashie'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -35,4 +37,9 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'factory_girl_rails'
   gem 'capybara'
+end
+
+group :test do
+  gem 'vcr'
+  gem 'webmock'
 end
