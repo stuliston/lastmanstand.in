@@ -1,10 +1,10 @@
 <div class="pending-invitations">
-  <h5>
-    <span>Pending invitations</span>
-    {{#linkTo 'game.edit' controllers.game.model}}<i class="icon-plus-sign-alt"></i>{{/linkTo}}
-  </h5>
-
   {{#if controller.length}}
+    <h5>
+      <span>Pending invitations</span>
+      {{#linkTo 'game.edit' controllers.game.model}}<i class="icon-plus-sign-alt"></i>{{/linkTo}}
+    </h5>
+
     <ul class="members unstyled">
       {{#each controller}}
         <li>
@@ -15,5 +15,9 @@
         </li>
       {{/each}}
     </ul>
+  {{else}}
+    <div class="actions">
+      {{#linkTo 'game.edit' controllers.game.model}}<i class="icon-plus-sign-alt"></i>Invite players{{/linkTo}}
+    </div>
   {{/if}}
 </div>

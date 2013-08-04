@@ -5,7 +5,7 @@ class ShallowGameInvitationSerializer < ActiveModel::Serializer
   attributes :id, :email, :avatar_image_url
 
   has_one :profile, include: true, serializer: ShallowProfileSerializer, root: :profiles
-  has_one :game, include: true, serializer: VeryShallowGameSerializer
+  has_one :game, include: true, serializer: ShallowGameSerializer
   has_one :invited_by, include: true, serializer: ShallowProfileSerializer, root: :profiles
 
   def avatar_image_url
