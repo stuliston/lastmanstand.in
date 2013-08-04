@@ -3,7 +3,7 @@ require 'spec_helper'
 module Api
   describe Playup do
 
-    let(:epl)           { 26 }
+    let(:epl)           { LastManStanding.config.playup_api.competitions.epl.id }
     let(:epl_round_one) { 407356 }
 
     describe '#competition' do
