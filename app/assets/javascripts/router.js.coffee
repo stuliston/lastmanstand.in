@@ -6,6 +6,7 @@ LMS.Router.map ->
       @route('current_round')
       @route('members')
       @route('rounds')
+      @route('edit')
       @route('round', {path: '/rounds/:round_number'}) #weird !
     )
   )

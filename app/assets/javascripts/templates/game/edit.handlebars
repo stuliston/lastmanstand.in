@@ -1,1 +1,7 @@
-<h1>Edit Game: {{name}}</h1>
+<div class="game-edit">
+  {{view LMS.AddGameInvitationsView currentProfileBinding="controllers.currentProfile.model"}}
+  <div class="row actions">
+    <button {{action cancel}} class="cancel secondary">Cancel</button>
+    <button {{action sendInvitations}} class="submit primary" {{bindAttr disabled="isInvalid"}}>Send Invitations</button>
+  </div>
+</div>
