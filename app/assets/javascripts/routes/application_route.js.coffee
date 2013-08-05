@@ -1,8 +1,6 @@
 LMS.ApplicationRoute = Ember.Route.extend
 
-  beforeModel: ->
-    store = @get('store')
-    store.adapterForType(LMS.Profile).didFindRecord(store, LMS.Profile, profileData)
+  # beforeModel: ->
 
   model: ->
     Ember.Object.create(currentProfile: LMS.Profile.find(currentProfileId))
