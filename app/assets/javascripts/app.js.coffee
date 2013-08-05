@@ -1,6 +1,6 @@
 window.LMS = Ember.Application.create
   rootElement: "#viewporter"
-  LOG_TRANSITIONS: true
+  # LOG_TRANSITIONS: true
   # LOG_VIEW_LOOKUPS: true
   # LOG_ACTIVE_GENERATION: true
 
