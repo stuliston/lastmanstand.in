@@ -2,10 +2,12 @@ defaults: &defaults
 
   playup_api:
     competitions:
-      afl:
-        id: 53
-      epl:
-        id: 26
+      -
+        playup_id: 53
+        name:      AFL
+      -
+        playup_id: 26
+        name:      Premier League
 
 development:
   <<: *defaults
