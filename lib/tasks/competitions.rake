@@ -1,16 +1,14 @@
-namespace :competitions do
+namespace :update do
 
-  namespace :update do
-
-    desc "Competitions. Updates the teams in the competition"
-    task :competitions do
-      CompetitionUpdateService.new.update_all!
-    end
-
-    desc "Teams. Updates the teams in the competition"
-    task :teams do
-      #TeamUpdateService.new.update!
-    end
-
+  desc "Competitions. Updates the teams in the competition"
+  task competitions: :environment do
+    CompetitionService.new.update_all!
   end
+
+  desc "Teams. Updates the teams in the competition"
+  task :teams do
+    puts "Some shit"
+    #TeamUpdateService.new.update!
+  end
+
 end
