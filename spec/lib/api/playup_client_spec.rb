@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Api
-  describe Playup do
+  describe PlayupClient do
 
     let(:epl)           { 26 }
     let(:epl_round_one) { 407356 }
@@ -9,7 +9,7 @@ module Api
     describe '#competition' do
 
       it 'gets the correct competition', :vcr do
-        competition = Playup.new.competition(epl)
+        competition = PlayupClient.new.competition(epl)
         expect(competition.name).to eq 'Premier League'
       end
 
@@ -18,7 +18,7 @@ module Api
     describe '#rounds' do
 
       it 'gets the rounds for a competition', :vcr do
-        rounds = Playup.new.rounds(epl).items
+        rounds = PlayupClient.new.rounds(epl).items
 
         expect(rounds.count).to            eq 34
         expect(rounds.first[':uid']).to    eq 'round-407356'
@@ -33,7 +33,7 @@ module Api
     describe '#contests' do
 
       it 'gets the contests for a given round', :vcr do
-        contests = Playup.new.contests(epl_round_one).items
+        contests = PlayupClient.new.contests(epl_round_one).items
 
         expect(contests.count).to                   eq 10
         expect(contests.first.competition_name).to  eq 'Premier League'

@@ -1,5 +1,5 @@
 module Api
-  class Playup
+  class PlayupClient
     include HTTParty
     base_uri 'http://sports.playup.com'
 
