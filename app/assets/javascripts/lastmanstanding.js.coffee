@@ -8,6 +8,7 @@
 #= require_tree ./validation
 #= require ./router
 #= require_tree ./routes
+#= require_tree ./initializers
 #= require_self
 
 $(document).ready ->
