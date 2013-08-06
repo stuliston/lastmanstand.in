@@ -3,6 +3,9 @@ LastManStanding::Application.routes.draw do
   devise_for :users
 
   get '/welcome', to: 'home#welcome', as: :welcome
+  get '/games/*anything', to: 'home#show'
+  get '/game_invitations', to: 'home#show'
+
   root to: 'home#show'
 
   namespace :api do

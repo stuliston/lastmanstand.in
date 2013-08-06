@@ -12,3 +12,5 @@ LMS.Router.map ->
   )
   @resource('game_invitations')
 
+LMS.Router.reopen
+  location: 'history'
