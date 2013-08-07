@@ -6,7 +6,11 @@ LMS.AddGameInvitationsView = Ember.View.extend
 
   isEmailInvalid: ( ->
     email = @get('newEmail')
-    !LMS.EmailValidator.isValid(email || "") || !!@get('controller.model.gameInvitations').findProperty('email', email)
+    !LMS.EmailValidator.isValid(email || "") || @get('controller.model.gameInvitations').someProperty('email', email) || @get('isCurrentProfileEmail')
+  ).property('newEmail')
+
+  isCurrentProfileEmail: (->
+    @get('currentProfile.email') == @get('newEmail')
   ).property('newEmail')
 
   addEmail: ->

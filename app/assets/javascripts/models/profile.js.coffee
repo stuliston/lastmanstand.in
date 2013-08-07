@@ -1,5 +1,6 @@
 LMS.Profile = DS.Model.extend
   name: DS.attr('string')
+  email: DS.attr('string')
   avatarImageUrl: DS.attr('string')
   gameMemberships: DS.hasMany('LMS.GameMembership')
   gameInvitations: DS.hasMany('LMS.GameInvitation', inverse: 'profile')
