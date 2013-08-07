@@ -9,3 +9,12 @@ LMS.ApplicationRoute = Ember.Route.extend
     controller.set('model', model)
     @controllerFor('currentProfile').set('model', model.get('currentProfile')) #profile id hacked into bootstrap html. fix later
 
+  # events:
+  #   error: (reason, transition) ->
+  #     console.log reason
+  #     @controller.set('errorMessage', reason.message)
+
+  #     if reason.status == 401
+  #       window.location.href = "/users/sign_in"
+  #     else
+  #       true # bubble the error

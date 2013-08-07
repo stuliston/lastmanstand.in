@@ -6,13 +6,15 @@ LMS.GameRoute = Ember.Route.extend
     @controllerFor('application').hideNavigation()
 
   afterModel: (game) ->
-    if game.get('isLoaded') && !@get('gameRefreshed')
+
+    if game.get('isLoaded') && (!@get('gameRefreshed') || @get('lastGame') != game)
       @set('gameRefreshed', true)
-      game.reload()
+      @set('lastGame', game)
+      game.reload() #last to return promise for router loading behaviour
 
   events:
     willTransition: (transition) ->
-      unless transition.targetName.match(/^game\./)
+      if !transition.targetName.match(/^game\./)
         @set('gameRefreshed', false)
 
   model: (params) ->
