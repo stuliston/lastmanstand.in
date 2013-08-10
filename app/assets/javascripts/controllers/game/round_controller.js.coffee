@@ -30,23 +30,28 @@ LMS.GameRoundController = Ember.ObjectController.extend
     store = @get('store')
 
     if @_isTeamSelectableForGame(team, game)
-      if prediction = @_predictionForTeamInCurrentRound(team)
-        store.deleteRecord(prediction)
+      if predictionToDelete = @_predictionForTeamInCurrentRound(team)
+        store.deleteRecord(predictionToDelete)
+        @_rollbackOnError(predictionToDelete)
         store.commitDefaultTransaction()
         return
-      else if prediction = @_predictionForTeamInFutureRound(team)
-        store.deleteRecord(prediction)
+      else if predictionToDelete = @_predictionForTeamInFutureRound(team)
+        store.deleteRecord(predictionToDelete)
+        @_rollbackOnError(predictionToDelete)
 
       if currentPrediction = @_predictionForGameAndRound()
         currentPrediction.setProperties(fixture: fixture, team: team)
+        @_rollbackOnError(currentPrediction)
       else
-        LMS.Prediction.createRecord
+        newPrediction = LMS.Prediction.createRecord
           fixture: fixture,
           team: team,
           profile: @get('currentProfile'),
           game: game
+        @_rollbackOnError(newPrediction)
 
       store.commitDefaultTransaction()
+
 
   _isTeamSelectableForGame: (team, game) ->
     !(@get('isRoundClosed') || @get('predictions').some((prediction) ->
@@ -78,3 +83,16 @@ LMS.GameRoundController = Ember.ObjectController.extend
       (prediction.get('fixture.round') != currentRound || prediction.get('fixture.round.startTime') > new Date()) &&
       prediction.get('team') == team
     )
+
+  _rollbackOnError: (prediction) ->
+    store = @get('store')
+    currentState = prediction.get('stateManager.currentPath').replace('rootState.', '')
+    revertState = if currentState.match('delete')
+      'loaded.saved'
+    else
+      currentState
+
+    prediction.one 'becameError', ->
+      if @get('isError')
+        @get('stateManager').transitionTo(revertState)
+        @rollback()
