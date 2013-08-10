@@ -3437,6 +3437,11 @@ var states = {
           manager.transitionTo('saved');
 
           manager.send('invokeLifecycleCallbacks');
+        },
+
+        becameError: function(manager) {
+          manager.transitionTo('error');
+          manager.send('invokeLifecycleCallbacks');
         }
       }),
 

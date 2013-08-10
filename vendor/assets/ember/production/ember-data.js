@@ -44,7 +44,7 @@ var define, requireModule;
 */
 
 /**
-  All Ember Data methods and functions are defined inside of this namespace. 
+  All Ember Data methods and functions are defined inside of this namespace.
 
   @class DS
   @static
@@ -3425,6 +3425,11 @@ var states = {
           manager.transitionTo('saved');
 
           manager.send('invokeLifecycleCallbacks');
+        },
+
+        becameError: function(manager) {
+          manager.transitionTo('error');
+          manager.send('invokeLifecycleCallbacks');
         }
       }),
 
@@ -4261,8 +4266,8 @@ DS.RelationshipChange.determineRelationshipType = function(recordType, knownSide
     else{
       return knownKind === "belongsTo" ? "oneToMany" : "manyToMany";
     }
-  } 
- 
+  }
+
 };
 
 DS.RelationshipChange.createChange = function(firstRecordReference, secondRecordReference, store, options){
@@ -7386,7 +7391,7 @@ DS.loaderFor = loaderFor;
 
   For an example implementation, see {{#crossLink "DS.RestAdapter"}} the
   included REST adapter.{{/crossLink}}.
-  
+
   @class Adapter
   @namespace DS
   @extends Ember.Object
