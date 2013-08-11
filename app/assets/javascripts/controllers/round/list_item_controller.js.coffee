@@ -14,6 +14,10 @@ LMS.RoundListItemController = Ember.ObjectController.extend
     @get('prediction.fixture.winningTeam')
   ).property('prediction.fixture.winningTeam')
 
+  hasResult: (->
+    !!@get('winningTeam')
+  ).property('winningTeam')
+
   losingTeam: (->
     winningTeam = @get('winningTeam')
     return unless winningTeam

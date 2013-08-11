@@ -12,3 +12,7 @@ LMS.Fixture = DS.Model.extend
     return unless winningTeam
     [@get('homeTeam'), @get('awayTeam')].without(winningTeam)[0]
   ).property('winningTeam')
+
+  hasResult: (->
+    !!@get('winningTeam')
+  ).property('winningTeam')

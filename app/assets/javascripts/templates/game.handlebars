@@ -1,6 +1,19 @@
 <div class="game-container">
   <h1>{{name}}</h1>
   {{render 'game_invitations_notification'}}
+  {{#if currentProfileIsOutOfLives}}
+    <div class="knockout-message">
+      You were knocked out in round {{currentProfileKnockoutFixture.round.number}} when
+      <strong>{{currentProfileKnockoutFixture.winningTeam.name}}</strong> defeated <strong>{{currentProfileKnockoutFixture.losingTeam.name}}</strong>.
+      {{#linkTo 'games.new'}}Start a new game{{/linkTo}}
+    </div>
+  {{/if}}
+  {{#if currentProfileIsWinner}}
+    <div class="game-win-message">
+      Congrats! You're the last man standing!
+      {{#linkTo 'games.new'}}Start a new game{{/linkTo}}
+    </div>
+  {{/if}}
   <ul class="nav unstyled">
     <li>{{#linkTo 'game.current_round' model}}This Round{{/linkTo}}</li>
     <li>{{#linkTo 'game.rounds' model}}All Rounds{{/linkTo}}</li>

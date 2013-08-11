@@ -3,7 +3,7 @@ LMS.GameMembershipItemController = Ember.ObjectController.extend
   incorrectPredictions: (->
     profile = @get('profile')
     @get('game.predictions').filter((prediction) ->
-      prediction.get('profile') == profile && !prediction.get('isCorrect')
+      prediction.get('profile') == profile && prediction.get('fixture.hasResult') && !prediction.get('isCorrect')
     )
   ).property('game.predictions.@each.team')
 

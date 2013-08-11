@@ -33,3 +33,25 @@
           height: 0
           border: 7px solid transparent
           border-bottom-color: $secondary-bg-color
+
+  >.knockout-message, >.game-win-message
+    color: #fff
+    padding: 1em
+    a, a:visited
+      display: block
+      margin: 1em 1em 0 1em
+      padding: 0.5em
+      text-align: center
+      @include border-radius($border-radius)
+
+  >.knockout-message
+    background: $alert-color
+    a, a:visited
+      background: lighten($alert-color, 20)
+      color: darken($alert-color, 10)
+
+  >.game-win-message
+    background: $success-color
+    a, a:visited
+      background: lighten($success-color, 20)
+      color: darken($success-color, 10)
