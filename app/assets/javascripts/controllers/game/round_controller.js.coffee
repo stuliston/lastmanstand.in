@@ -86,12 +86,7 @@ LMS.GameRoundController = Ember.ObjectController.extend
 
   _rollbackOnError: (prediction) ->
     store = @get('store')
-    currentState = prediction.get('stateManager.currentPath').replace('rootState.', '')
-    revertState = if currentState.match('delete')
-      'loaded.saved'
-    else
-      currentState
-
+    revertState = prediction.get('stateManager.currentPath').replace('rootState.', '')
     prediction.one 'becameError', ->
       if @get('isError')
         @get('stateManager').transitionTo(revertState)

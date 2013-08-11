@@ -11,11 +11,3 @@ LMS.Profile = DS.Model.extend
     @get('avatarImageUrl') + "?s=20"
   ).property('avatarImageUrl')
 
-  # currentGames: (->
-  #   @get('gameMemberships').getEach('game')
-  # ).property('@each.gameMemberships')#.cacheable()
-
-
-  # invitedGames: (->
-  #   @get('gameInvitations').getEach('game')
-  # ).property('@each.gameInvitations')#.cacheable()
