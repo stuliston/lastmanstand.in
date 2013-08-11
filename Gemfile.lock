@@ -1,4 +1,15 @@
 GIT
+  remote: git://github.com/clouseauu/monet.git
+  revision: 7589dc4e14939603a95150b45e1fcc47f3690590
+  specs:
+    monet (0.0.1)
+      awesome_print
+      pry
+      railties
+      sass (>= 3.1.10)
+      sprockets-rails (~> 2.0.0)
+
+GIT
   remote: git://github.com/milgner/compass-rails.git
   revision: 1749c06f15dc4b058427e7969810457213647fb8
   ref: 1749c06f15dc4b058427e7969810457213647fb8
@@ -236,6 +247,7 @@ DEPENDENCIES
   hashie
   httparty
   jquery-rails
+  monet!
   neat
   pg
   pry
