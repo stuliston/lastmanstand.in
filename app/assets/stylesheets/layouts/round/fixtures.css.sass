@@ -1,77 +1,85 @@
-.fixtures
-  li
-    clear: both
-    >a, >div
-      display: block
-      padding: 10px
-      margin-bottom: 10px
-      float: left
-    a:active
-      background: #888
-      color: #fff
-    .home, .away
-      position: relative
-      cursor: pointer
-      width: 42%
-    .home
-      text-align: right
-      @include border-radius(0px 3px 3px 0px)
-    .away
-      @include border-radius(3px 0px 0px 3px)
-    .time
-      text-align: center
-      width: 16%
-      font-size: 0.8em
-    .name
-      overflow: hidden
-      text-overflow: ellipsis
-      white-space: nowrap
-    .score, .predictions
-      display: none
+.round-container
 
-  .disable-home-team .home, .disable-away-team .away
-    background: $secondary-bg-color
-    color: #aaa
-    cursor: default
-
-  .home-selected .home, .away-selected .away, .home-selected.selecting, .away-selected.selecting
-    background: #666
+  h5
+    margin: 0
+    padding: 0.3em 1em
+    background: $dark-grey
     color: #fff
-    cursor: default
 
-.is-round-closed
   .fixtures
-    // .disable-home-team .home, .disable-away-team .away
-    //   background: $secondary-bg-color
-    //   color: #aaa
-    a, a:active
-      color: #888
-      background: #eee
-      cursor: default
-    .correct.home-selected .home, .correct.away-selected .away
-      background: $success-color
-      color: #fff
-    .incorrect.home-selected .home, .incorrect.away-selected .away
-      background: $alert-color
-      color: #fff
-    .home-win .home, .away-win .away
-      font-weight: bold
-      color: $base-text-color
-    .name
-      margin-bottom: 30px
-    .score
-      display: inline
-    .predictions
-      display: block
-      height: 20px
-      margin-top: 5px
-      // font-size: 0.9em
-      // font-weight: normal
-      // position: absolute
-      // bottom: 10px
+    li
+      @include clearfix
+      >a, >div
+        display: block
+        padding: 10px
+        margin-bottom: 10px
+        float: left
+      a:active
+        background: #888
+        color: #fff
+      .home, .away
+        position: relative
+        cursor: pointer
+        width: 42%
+      .home
+        text-align: right
+        @include border-radius(0px 3px 3px 0px)
+      .away
+        @include border-radius(3px 0px 0px 3px)
+      .time
+        text-align: center
+        width: 16%
+        font-size: 0.8em
+      .name
+        overflow: hidden
+        text-overflow: ellipsis
+        white-space: nowrap
+      .score, .predictions
+        display: none
 
-    .home .predictions, .away .score
-      left: 10px
-    .away .predictions, .home .score
-      right: 10px
+    .disable-home-team .home, .disable-away-team .away
+      background: $secondary-bg-color
+      color: #aaa
+      cursor: default
+
+    .home-selected .home, .away-selected .away, .home-selected.selecting, .away-selected.selecting
+      background: #666
+      color: #fff
+      cursor: default
+
+  &.is-round-closed
+    .fixtures
+      // .disable-home-team .home, .disable-away-team .away
+      //   background: $secondary-bg-color
+      //   color: #aaa
+      a, a:active
+        color: #888
+        background: #eee
+        cursor: default
+      .correct.home-selected .home, .correct.away-selected .away
+        background: $success-color
+        color: #fff
+      .incorrect.home-selected .home, .incorrect.away-selected .away
+        background: $alert-color
+        color: #fff
+      .home-win .home, .away-win .away
+        font-weight: bold
+        color: $base-text-color
+      .name
+        margin-bottom: 30px
+      .score
+        display: inline
+      .predictions
+        display: block
+        height: 20px
+        margin-top: 5px
+        // font-size: 0.9em
+        // font-weight: normal
+        // position: absolute
+        // bottom: 10px
+
+      .home .predictions, .away .score
+        left: 10px
+      .away .predictions, .home .score
+        right: 10px
 

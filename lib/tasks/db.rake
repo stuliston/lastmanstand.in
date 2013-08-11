@@ -88,7 +88,7 @@ namespace :db do
               home_score: team_a_score,
               away_team: team_b,
               away_score: team_b_score,
-              start_time: round_date,
+              start_time: round_date + rand(0..2).days + rand(0..8).hours,
               winning_team: winning_team)
             paired_teams << pair
             played_this_round << team_a
