@@ -27,6 +27,7 @@ group :assets do
   gem 'bourbon'
   gem 'neat'
   gem "teaspoon"
+  gem "monet", github: 'clouseauu/monet'
 end
 
 group :development, :test do
