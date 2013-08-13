@@ -15,18 +15,18 @@ LMS.GameController = Ember.ObjectController.extend
     @get('numberOfLives') - @get('currentProfileIncorrectPredictions.length')
   ).property('numberOfLives', 'currentProfileIncorrectPredictions.length')
 
-  currentProfileIsOutOfLives: Ember.computed.lte('currentProfileRemainingLives', 0)
+  isCurrentProfileOutOfLives: Ember.computed.lte('currentProfileRemainingLives', 0)
 
   #This is somewhat duplicated in game/membership_item_controller. Review later
   currentProfileKnockoutFixture: (->
-    return if !@get('currentProfileIsOutOfLives')
+    return if !@get('isCurrentProfileOutOfLives')
     lastRoundNumber = Math.max(@get('currentProfileIncorrectPredictions').mapProperty('fixture.round.number')...)
     @get('currentProfileIncorrectPredictions').findProperty('fixture.round.number', lastRoundNumber).get('fixture')
-  ).property('currentProfileIsOutOfLives')
+  ).property('isCurrentProfileOutOfLives')
 
   #This could be cleaned up a bit
   currentProfileIsWinner: (->
-    return false if @get('currentProfileIsOutOfLives')
+    return false if @get('isCurrentProfileOutOfLives')
 
     livesByProfileId = {}
 

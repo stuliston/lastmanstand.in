@@ -3,10 +3,10 @@ LMS.GameRoundController = Ember.ObjectController.extend
   needs: ['application', 'game', 'gameRounds', 'predictions', 'currentProfile']
   predictions: null
   currentProfile: null
-  currentProfileIsOutOfLives: null
+  isCurrentProfileOutOfLives: null
   predictionsBinding: 'controllers.predictions'
   currentProfileBinding: 'controllers.currentProfile.model'
-  currentProfileIsOutOfLivesBinding: 'controllers.game.currentProfileIsOutOfLives'
+  isCurrentProfileOutOfLivesBinding: 'controllers.game.isCurrentProfileOutOfLives'
 
   currentTime: (->
     @get('controllers.application.currentTime')
@@ -28,7 +28,7 @@ LMS.GameRoundController = Ember.ObjectController.extend
 
   #This and accompanying methods need some work.
   selectWinner: (fixture, team) ->
-    return if @get('currentProfileIsOutOfLives')
+    return if @get('isCurrentProfileOutOfLives')
 
     game = @get('controllers.game.model')
     store = @get('store')

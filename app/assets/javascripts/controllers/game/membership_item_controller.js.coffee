@@ -8,16 +8,14 @@ LMS.GameMembershipItemController = Ember.ObjectController.extend
   ).property('game.predictions.@each.team')
 
   lostLives: (->
-    @get('incorrectPredictions').get('length')
-  ).property('incorrectPredictions')
+    @get('incorrectPredictions.length')
+  ).property('incorrectPredictions.length')
 
   remainingLives: (->
     @get('game.numberOfLives') - @get('lostLives')
   ).property('lostLives')
 
-  isOutOfLives: (->
-    @get('remainingLives') <= 0
-  ).property('remainingLives')
+  isOutOfLives: Ember.computed.lte('remainingLives', 0)
 
   knockoutFixture: (->
     return if !@get('isOutOfLives')
