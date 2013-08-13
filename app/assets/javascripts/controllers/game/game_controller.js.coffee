@@ -4,7 +4,6 @@ LMS.GameController = Ember.ObjectController.extend
   currentProfile: null
   currentProfileBinding: 'controllers.currentProfile.model'
 
-  #This is somewhat duplicated in game/membership_item_controller. Review later
   currentProfileIncorrectPredictions: (->
     profile = @get('currentProfile')
     @get('predictions').filter((prediction) ->
@@ -12,20 +11,11 @@ LMS.GameController = Ember.ObjectController.extend
     )
   ).property('predictions.@each.team')
 
-  #This is somewhat duplicated in game/membership_item_controller. Review later
-  currentProfileLostLives: (->
-    @get('currentProfileIncorrectPredictions').get('length')
-  ).property('currentProfileIncorrectPredictions')
-
-  #This is somewhat duplicated in game/membership_item_controller. Review later
   currentProfileRemainingLives: (->
-    @get('numberOfLives') - @get('currentProfileLostLives')
-  ).property('lostLives')
+    @get('numberOfLives') - @get('currentProfileIncorrectPredictions.length')
+  ).property('numberOfLives', 'currentProfileIncorrectPredictions.length')
 
-  #This is somewhat duplicated in game/membership_item_controller. Review later
-  currentProfileIsOutOfLives: (->
-    @get('currentProfileRemainingLives') <= 0
-  ).property('currentProfileRemainingLives')
+  currentProfileIsOutOfLives: Ember.computed.lte('currentProfileRemainingLives', 0)
 
   #This is somewhat duplicated in game/membership_item_controller. Review later
   currentProfileKnockoutFixture: (->
@@ -38,25 +28,25 @@ LMS.GameController = Ember.ObjectController.extend
   currentProfileIsWinner: (->
     return false if @get('currentProfileIsOutOfLives')
 
-    lostLives = {}
-    availableLives = @get('numberOfLives')
+    livesByProfileId = {}
 
     @get('predictions').forEach((prediction) ->
       if prediction.get('fixture.hasResult') && !prediction.get('isCorrect')
         id = prediction.get('profile.id')
-        lostLives[id] = lostLives[id] + 1
+        livesByProfileId[id] = livesByProfileId[id] + 1
     )
 
     isWinner = true
+    availableLives = @get('numberOfLives')
 
-    for k, v of lostLives
-      if v < availableLives
+    for profileId, lostLives of livesByProfileId
+      if lostLives < availableLives
         isWinner = false
         break
 
     isWinner
 
-  ).property('currentProfileIsOutOfLives', 'predictions.@each.team')
+  ).property('predictions.@each.team')
 
   modelDidChange: (->
     game = @get('model')
