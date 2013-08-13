@@ -6,7 +6,7 @@ LMS.GameCurrentRoundRoute = Ember.Route.extend
     #What should the rules be for this ?? Tues - Mon?
     rounds.find((round) ->
       start = new XDate(round.get('startTime'))
-      diffDays = now.diffDays(start)
+      diffDays = Math.round(now.diffDays(start))
       diffDays > -3 && diffDays <= 4
     )
 

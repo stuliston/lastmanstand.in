@@ -1,7 +1,9 @@
 Ember.Handlebars.registerBoundHelper 'timeToNow', (date, currentTime, options) ->
 
+  return unless date && currentTime
   currentTime = new XDate(currentTime)
   date = new XDate(date)
+
 
   diffDays = currentTime.diffDays(date)
 
