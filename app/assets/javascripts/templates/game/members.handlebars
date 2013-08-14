@@ -3,11 +3,18 @@
   <li>
     <img {{bindAttr src="profile.avatarImageUrl"}} class="avatar" />
     <div class="details">
-      <strong>{{profile.name}}</strong>
+      <h3>{{profile.name}}</h3>
       {{playerLives remainingLives lostLives}}
       {{#if isOutOfLives}}
-        <div class="knockout-message">Knocked out in round {{knockoutFixture.round.number}}</div>
-        <div class="knockout-result"><strong>{{knockoutFixture.winningTeam.name}}</strong> def {{knockoutFixture.losingTeam.name}}</div>
+        <p class="knockout-message elaboration">
+          <span>Knocked out in round {{knockoutFixture.round.number}} after</span>
+          <span><strong>{{knockoutFixture.winningTeam.name}}</strong> defeated {{knockoutFixture.losingTeam.name}}</span>
+        </p>
+      {{else}}
+        <p class="correct-guesses elaboration">
+          <!-- TODO: de-hardcode this number -->
+          <strong>4</strong> correct guesses so far
+        </p>
       {{/if}}
     </div>
   </li>

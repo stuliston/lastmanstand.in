@@ -4,15 +4,22 @@ Ember.Handlebars.registerHelper 'playerLives', (remainingPath, lostPath) ->
   lost = @get(lostPath)
   total = remaining + lost
 
-  out = '<ul class="lives unstyled horizontal">'
+  out = "<ul class='lives unstyled horizontal'><li class='summary'>"
+
+  switch remaining
+    when 0 then out += "No lives"
+    when 1 then out += "1 life"
+    else out += "#{remaining} lives"
+
+  out += "</li>"
 
   for num in [0...total]
 
     out += '<li>'
     if num >= remaining
-      out += '<i class="icon-heart-empty"></i>'
+      out += '<i class="spritemaps-life-used"></i>'
     else
-      out += '<i class="icon-heart"></i>'
+      out += '<i class="spritemaps-life-remaining"></i>'
 
     out += '</li>'
 

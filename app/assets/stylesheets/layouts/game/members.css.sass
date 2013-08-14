@@ -1,29 +1,63 @@
+@include all-spritemaps-sprites
+
 .game-container
   .members
     > li
-      border-bottom: 1px solid darken($secondary-bg-color, 10)
-      background: $secondary-bg-color
+      border-bottom: 1px solid darken($secondary-bg-color, 2)
+      background: $members-bg-color-even
+      padding: 1em
       position: relative
 
+      &:nth-child(2n)
+        background: $members-bg-color-odd
+
     .avatar
+      border-radius: 100%
       height: 80px
       display: block
       width: 80px
 
     .details
-      bottom: 10px
-      left: 100px
+      bottom: 1em
+      left: 110px
       position: absolute
       right: 10px
-      top: 7px
+      top: 1em
 
+    .elaboration
+      color: lighten($base-text-color, 25)
+      font-size: .8em
+      margin: 0
+      position: absolute
+      bottom: .3em
+      span
+        display: block
 
+    h3
+      margin: .3em 0 0
+      font-size: 1.2em
 
-    .knockout-message, .knockout-result
-      font-size: 0.8em
 
     .lives
+      position: absolute
+      right: 0
+      top: .6em
+
       li
         margin-right: 3px
+        display: inline-block
+        height: 16px
+        vertical-align: text-top
+
+      .summary
+        color: lighten($base-text-color, 25)
+        font-size: .8em
+        margin-right: 10px
+        line-height: 16px
+
+      i
+        display: block
+        height: 16px
+        width: 16px
 
 

@@ -25,5 +25,7 @@ module LastManStanding
     # config.i18n.default_locale = :de
 
     config.autoload_paths += %W( #{config.root}/lib #{config.root}/lib/**/** )
+
+    config.compass.images_dir = '/app/assets/images'
   end
 end
