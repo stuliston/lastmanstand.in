@@ -8,10 +8,10 @@
   li ul
     display: none
 
-  h2, a
+  h4, a
     display: inline-block
     padding: 15px 10px 15px 10px
-  h2
+  h4
     margin: 0
     color: #666
     @include type-setter(1, 1, bold)
@@ -34,33 +34,56 @@
     display: block
     height: auto
     bottom: 0
-    background: #222
+    background: $nav-bg-color-phone
+    padding-top: 1em
 
-    ul
-      padding: 15px
+    .games
+      overflow: scroll
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: $nav-actions-height-phone
 
     li
       display: block
-      border-bottom: 1px solid #333
+      border-bottom: 1px solid lighten($nav-bg-color-phone, 10)
       ul
         display: block
         padding: 0 15px
       li
         border: none
 
-    h2
+    h4
       color: #fff
-      font-size: 1.1em
-    a, h2
-      padding: 10px 20px
+      font-size: 1em
+    a, h4
+      padding: 8px 20px
 
 
     a, a:visited, a:active
-    color: #bbb
-    text-decoration: none
+      color: $secondary-color
+      text-decoration: none
+      display: block
 
     a:hover
-      color: lighten(#bbb, 10)
+      color: lighten($secondary-color, 10)
 
     a.active
-      color: lighten(#bbb, 30)
+      color: lighten($secondary-color, 30)
+
+    .actions
+      +inline-block-list
+      position: absolute
+      bottom: 0
+      left: 0
+      right: 0
+      height: $nav-actions-height-phone
+      background: lighten($nav-bg-color-phone, 10)
+      li
+        padding: 0.5em
+      a
+        background: lighten($nav-bg-color-phone, 15)
+        @include border-radius($border-radius)
+        // line-height: $nav-actions-height-phone / 2
+

@@ -14,8 +14,8 @@ LMS.ApplicationController = Ember.Controller.extend
   toggleNavigation: ->
     @set('navigationVisible', !@get('navigationVisible'))
 
-  hideNavigation: (->
-    @set('navigationVisible', false)
+  currentPathDidChange: (->
+    @hideNavigation()
   ).observes('currentPath')
 
   hideNavigation: ->
