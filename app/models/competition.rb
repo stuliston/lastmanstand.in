@@ -6,4 +6,5 @@ class Competition < ActiveRecord::Base
   def current_season
     seasons.order(:start_date).last
   end
+
 end

@@ -41,12 +41,6 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.treat_symbols_as_metadata_keys_with_true_values = true
+  config.filter_run_excluding skip: true
 
-end
-
-VCR.configure do |config|
-  config.configure_rspec_metadata!
-  config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
-  config.hook_into :webmock
-  config.ignore_localhost = true
 end

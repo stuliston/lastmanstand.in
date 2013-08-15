@@ -1,10 +1,14 @@
-module Api
-  class PlayupClient
+module ApiClients
+  class Playup
     include HTTParty
     base_uri 'http://sports.playup.com'
 
     def competition(id)
       parse_response "/competitions/#{id}"
+    end
+
+    def round(round_id)
+      parse_response "http://sports.playup.com/rounds/#{round_id}"
     end
 
     def rounds(competition_id)

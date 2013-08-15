@@ -1,15 +1,15 @@
 require 'spec_helper'
 
-module Api
-  describe PlayupClient do
+module ApiClients
+  describe Playup, :skip do
 
     let(:epl)           { 26 }
     let(:epl_round_one) { 407356 }
 
     describe '#competition' do
 
-      it 'gets the correct competition', :vcr do
-        competition = PlayupClient.new.competition(epl)
+      it 'gets the correct competition' do
+        competition = Playup.new.competition(epl)
         expect(competition.name).to eq 'Premier League'
       end
 
@@ -17,8 +17,8 @@ module Api
 
     describe '#rounds' do
 
-      it 'gets the rounds for a competition', :vcr do
-        rounds = PlayupClient.new.rounds(epl).items
+      it 'gets the rounds for a competition' do
+        rounds = Playup.new.rounds(epl).items
 
         expect(rounds.count).to            eq 34
         expect(rounds.first[':uid']).to    eq 'round-407356'
@@ -32,8 +32,8 @@ module Api
 
     describe '#contests' do
 
-      it 'gets the contests for a given round', :vcr do
-        contests = PlayupClient.new.contests(epl_round_one).items
+      it 'gets the contests for a given round' do
+        contests = Playup.new.contests(epl_round_one).items
 
         expect(contests.count).to                   eq 10
         expect(contests.first.competition_name).to  eq 'Premier League'
