@@ -2,5 +2,6 @@
 
 FactoryGirl.define do
   factory :game do
+    name 'Hooroo Invitational'
   end
 end
