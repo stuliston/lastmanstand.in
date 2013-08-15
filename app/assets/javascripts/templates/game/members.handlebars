@@ -21,8 +21,13 @@
       <h3>{{user.name}}</h3>
       {{playerLives remainingLives lostLives}}
       <p class="knockout-message elaboration">
-        <span>Knocked out in round {{knockoutFixture.round.number}} after</span>
-        <span><strong>{{knockoutFixture.winningTeam.name}}</strong> defeated {{knockoutFixture.losingTeam.name}}</span>
+        {{#if knockoutFixture.draw}}
+          <span>Knocked out in round {{knockoutFixture.round.number}} after
+          <strong>{{knockoutFixture.homeTeam.name}}</strong> tied with <strong>{{knockoutFixture.awayTeam.name}}</strong></span>
+        {{else}}
+          <span>Knocked out in round {{knockoutFixture.round.number}} after
+          <strong>{{knockoutFixture.winningTeam.name}}</strong> defeated <strong>{{knockoutFixture.losingTeam.name}}</strong></span>
+        {{/if}}
       </p>
     </div>
   </li>

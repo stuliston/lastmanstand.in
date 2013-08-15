@@ -76,7 +76,6 @@ namespace :db do
 
       round = afl_season_2013.rounds.create(number: round_number)
       played_this_round = []
-      # puts paired_teams
 
       all_afl_teams.each do |team_a|
         next if played_this_round.include?(team_a)
@@ -133,7 +132,7 @@ namespace :db do
           game.created_at = rounds[3].start_time.midnight #Fudge the date to just before the first game that get's predictions
           game.save!
           rounds.each do |round|
-            if round.number > 3
+            if round.number > 5
               fixture_index = rand(0..round.fixtures.size - 1)
               fixture = round.fixtures[fixture_index]
               selected_team = [fixture.home_team, fixture.away_team][rand(0..1)]
@@ -149,6 +148,6 @@ namespace :db do
       end
     end
 
+    Fixture.all.each {|fixture| fixture.update_lives!}
   end
-
 end

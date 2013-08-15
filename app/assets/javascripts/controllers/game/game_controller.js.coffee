@@ -12,8 +12,8 @@ LMS.GameController = Ember.ObjectController.extend
   ).property('predictions.@each.team')
 
   currentUserRemainingLives: (->
-    @get('numberOfLives') - @get('currentUserIncorrectPredictions.length')
-  ).property('numberOfLives', 'currentUserIncorrectPredictions.length')
+    @get('numberOfLives') - @get('gameMemberships').findProperty('user', @get('currentUser')).get('lostLives')
+  ).property('numberOfLives', 'gameMemberships.@each.lostLives')
 
   isCurrentUserOutOfLives: Ember.computed.lte('currentUserRemainingLives', 0)
 
