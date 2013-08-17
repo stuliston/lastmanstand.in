@@ -3,8 +3,9 @@ module DataSources
     class RoundBuilder
 
       def build_from!(playup_round, round)
-        round.number = playup_round.name.to_i
-        round
+        round.tap do |r|
+          r.number = playup_round.name.to_i
+        end
       end
 
     end
