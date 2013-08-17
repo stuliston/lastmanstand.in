@@ -1,10 +1,35 @@
 module ApiClients
+
+  # Sport (Football)
+  # /sports/[sport_id]
+  #
+  # Competition (EPL)
+  # /competitions/[comp_id]
+  #
+  # Teams (returns 23 teams - includes relagated ones from last season)
+  # /competitions/[comp_id]/teams
+  #
+  # Current Round
+  # /rounds/[:round_id]
+  #
+  # Rounds
+  # /competitions/[comp_id]/rounds
+  #
+  # Contests (aka Fixtures)
+  # /rounds/[:round_id]/contests
+
+
   class Playup
     include HTTParty
     base_uri 'http://sports.playup.com'
 
     def competition(id)
       parse_response "/competitions/#{id}"
+    end
+
+    # Beware, this returns too many teams
+    def all_teams(competition_id)
+      parse_response "/competitions/#{competition_id}/teams"
     end
 
     def round(round_id)
