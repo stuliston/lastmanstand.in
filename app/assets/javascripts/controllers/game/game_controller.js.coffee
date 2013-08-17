@@ -27,6 +27,7 @@ LMS.GameController = Ember.ObjectController.extend
 
   #This could be cleaned up a bit
   currentProfileIsWinner: (->
+
     return false if @get('isCurrentProfileOutOfLives') || @get('gameMemberships.length') == 1
 
     livesByProfileId = {}
@@ -34,7 +35,7 @@ LMS.GameController = Ember.ObjectController.extend
     @get('predictions').forEach((prediction) ->
       if prediction.get('fixture.hasResult') && !prediction.get('isCorrect')
         id = prediction.get('profile.id')
-        livesByProfileId[id] = livesByProfileId[id] + 1
+        livesByProfileId[id] = (livesByProfileId[id] || 0) + 1
     )
 
     isWinner = true
