@@ -570,13 +570,13 @@ module DataSources
       let(:playup_team) { Hashie::Mash.new(JSON.parse(team_data)) }
 
       it 'assigns the name' do
-        team = ::Team.new
+        team = Team.new
         team_builder.build_from!(playup_team, team)
         expect(team.name).to eq 'Liverpool'
       end
 
       it 'assigns the abbreviated_name' do
-        team = ::Team.new
+        team = Team.new
         team_builder.build_from!(playup_team, team)
         expect(team.abbreviated_name).to eq 'LIV'
       end
