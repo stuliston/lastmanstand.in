@@ -39,8 +39,8 @@ namespace :db do
     # Create a fixture for a single afl season
     Season.destroy_all
 
-    afl_season_2013 = Season.create!(name: "2013 AFL Premiership Season", start_date: Date.new(2013, 6, 22), end_date: Date.new(2013, 11, 30), competition: afl)
-    epl_season_2013 = Season.create!(name: "2013 English Premiership League", start_date: Date.new(2013, 6, 22), end_date: Date.new(2013, 11, 30), competition: epl)
+    afl_season_2013 = Season.create!(name: "2013 AFL Premiership Season", start_date: Date.new(2013, 6, 21), end_date: Date.new(2013, 12, 1), competition: afl)
+    epl_season_2013 = Season.create!(name: "2013 English Premiership League", start_date: Date.new(2013, 6, 21), end_date: Date.new(2013, 12, 1), competition: epl)
 
     Game.destroy_all
     Game.create!(name: 'Rob v Stu', profiles: [rob, stu].collect(&:profile), season: afl_season_2013)
@@ -109,14 +109,16 @@ namespace :db do
         if game.profiles.include? profile
           lost_games = 0
           game.season.rounds.each do |round|
-            fixture_index = rand(0..round.fixtures.size - 1)
-            fixture = round.fixtures[fixture_index]
-            selected_team = [fixture.home_team, fixture.away_team][rand(0..1)]
-            if selected_team != fixture.winning_team
-              lost_games = lost_games + 1
-            end
-            if fixture.start_time < Time.now && lost_games <= game.number_of_lives
-              Prediction.create!(profile: profile, team: selected_team, game: game, fixture: fixture)
+            if round.start_time > (game.season.start_date + 1.month) #Start a game part way into season
+              fixture_index = rand(0..round.fixtures.size - 1)
+              fixture = round.fixtures[fixture_index]
+              selected_team = [fixture.home_team, fixture.away_team][rand(0..1)]
+              if selected_team != fixture.winning_team
+                lost_games = lost_games + 1
+              end
+              if fixture.start_time < Time.now && lost_games <= game.number_of_lives
+                Prediction.create!(profile: profile, team: selected_team, game: game, fixture: fixture)
+              end
             end
           end
         end
