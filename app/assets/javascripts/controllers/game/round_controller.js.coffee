@@ -4,33 +4,35 @@ LMS.GameRoundController = Ember.ObjectController.extend
   predictions: null
   currentProfile: null
   isCurrentProfileOutOfLives: null
+  currentTime: null
+  gameRounds: null
+  game: null
   predictionsBinding: 'controllers.predictions'
   currentProfileBinding: 'controllers.currentProfile.model'
   isCurrentProfileOutOfLivesBinding: 'controllers.game.isCurrentProfileOutOfLives'
-
-  currentTime: (->
-    @get('controllers.application.currentTime')
-  ).property 'controllers.application.currentTime'
+  currentTimeBinding: 'controllers.application.currentTime'
+  gameRoundsBinding: 'controllers.gameRounds'
+  gameBinding: 'controllers.game.model'
 
   isRoundClosed: (->
-    @get('controllers.application.currentTime') > @get('startTime')
+    @get('currentTime') > @get('startTime')
   ).property('startTime', 'currentTime')
 
   previousRound: (->
     previousRoundNumber = @get('number') - 1
-    @get('controllers.gameRounds').findProperty('number', previousRoundNumber)
-  ).property('controllers.gameRounds', 'model')
+    @get('gameRounds').findProperty('number', previousRoundNumber)
+  ).property('gameRounds', 'model')
 
   nextRound: (->
     nextRoundNumber = @get('number') + 1
-    @get('controllers.gameRounds').findProperty('number', nextRoundNumber)
-  ).property('controllers.gameRounds', 'model')
+    @get('gameRounds').findProperty('number', nextRoundNumber)
+  ).property('gameRounds', 'model')
 
   #This and accompanying methods need some work.
   selectWinner: (fixture, team) ->
     return if @get('isCurrentProfileOutOfLives')
 
-    game = @get('controllers.game.model')
+    game = @get('game')
     store = @get('store')
 
     if @_isTeamSelectableForGame(team, game)
@@ -70,7 +72,7 @@ LMS.GameRoundController = Ember.ObjectController.extend
   #at a later date.
   _predictionForGameAndRound: ->
     round = @get('model')
-    game = @get('controllers.game.model')
+    game = @get('game')
     @get('predictions').find((prediction) -> prediction.get('fixture.round') == round && prediction.get('game') == game)
 
 

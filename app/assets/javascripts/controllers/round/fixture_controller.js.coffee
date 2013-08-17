@@ -1,19 +1,25 @@
 LMS.RoundFixtureController = Ember.ObjectController.extend
 
   needs: ['predictions', 'gamePredictions', 'game']
+  game: null
+  predictions: null
+  gamePredictions: null
   isCurrentProfileOutOfLives: null
+  gameBinding: 'controllers.game.model'
+  predictionsBinding: 'controllers.predictions'
+  gamePredictionsBinding: 'controllers.gamePredictions'
   isCurrentProfileOutOfLivesBinding: 'controllers.game.isCurrentProfileOutOfLives'
 
   #This method has had some performance tuning done on it as it's called A LOT.
   #Be sure to profile any changes before and after.
   selectedTeam: (->
-    game = @get('controllers.game.model')
+    game = @get('game')
     fixture = @get('model')
-    prediction = @get('controllers.predictions.byGame')[game]?.find((prediction) =>
+    prediction = @get('predictions.byGame')[game]?.find((prediction) =>
       prediction.get('fixture') == fixture
     )
     prediction?.get('team')
-  ).property('controllers.predictions.@each.team', 'controllers.game.model')
+  ).property('predictions.@each.team', 'game')
 
   selectedTeamClass: (->
     if @get('selectedTeam') == @get('homeTeam')
@@ -26,25 +32,25 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
 
   disableHomeTeam: (->
     return true if @get('isCurrentProfileOutOfLives')
-    return if @get('round.startTime') < new Date()
-    game = @get('controllers.game.model')
+    return false if @get('round.startTime') < new Date()
+    game = @get('game')
     homeTeam = @get('homeTeam')
-    @get('controllers.predictions.byGame')[game]?.some((prediction) =>
+    @get('predictions.byGame')[game]?.some((prediction) =>
       prediction.get('fixture.round.startTime') < new Date() &&
       prediction.get('team') == homeTeam
     )
-  ).property('controllers.predictions.@each.team', 'controllers.game.model', 'isCurrentProfileOutOfLives')
+  ).property('predictions.@each.team', 'game', 'isCurrentProfileOutOfLives')
 
   disableAwayTeam: (->
     return true if @get('isCurrentProfileOutOfLives')
-    return if @get('round.startTime') < new Date()
-    game = @get('controllers.game.model')
+    return false if @get('round.startTime') < new Date()
+    game = @get('game')
     awayTeam = @get('awayTeam')
-    @get('controllers.predictions.byGame')[game]?.some((prediction) =>
+    @get('predictions.byGame')[game]?.some((prediction) =>
       prediction.get('fixture.round.startTime') < new Date() &&
       prediction.get('team') == awayTeam
     )
-  ).property('controllers.predictions.@each.team', 'controllers.game.model', 'isCurrentProfileOutOfLives')
+  ).property('predictions.@each.team', 'game', 'isCurrentProfileOutOfLives')
 
   selectionClass: (->
     return unless @get('selectedTeam') && @get('winningTeam')
@@ -56,13 +62,13 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
 
   homeTeamPredictions: (->
     return [] if @get('round.startTime') > new Date()
-    @get('controllers.gamePredictions.byFixture')[@get('model')]?.filterProperty('team', @get('homeTeam')) || []
-  ).property('controllers.gamePredictions.@each.team')
+    @get('gamePredictions.byFixture')[@get('model')]?.filterProperty('team', @get('homeTeam')) || []
+  ).property('gamePredictions.@each.team')
 
   awayTeamPredictions: (->
     return [] if @get('round.startTime') > new Date()
-    @get('controllers.gamePredictions.byFixture')[@get('model')]?.filterProperty('team', @get('awayTeam')) || []
-  ).property('controllers.gamePredictions.@each.team')
+    @get('gamePredictions.byFixture')[@get('model')]?.filterProperty('team', @get('awayTeam')) || []
+  ).property('gamePredictions.@each.team')
 
   resultClass: (->
     return unless @get('winningTeam')

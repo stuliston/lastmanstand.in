@@ -1,4 +1,4 @@
-{{#if controllers.featureToggles.payments}}
+{{#if featureToggles.payments}}
   <p>
     Your game currently allows for {{maxAllowedPlayers}} players including you.
   </p>
@@ -11,7 +11,7 @@
   {{/each}}
 </ul>
 
-{{#if controllers.featureToggles.payments}}
+{{#if featureToggles.payments}}
   {{#if morePlayersAllowed}}
     <p class="player-count" {{bindAttr class="morePlayersAllowed::full"}}>
       You have {{totalPlayersRemaining}} players remaining.

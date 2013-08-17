@@ -12,6 +12,12 @@
         {{/if}}
         <span>{{winningTeam.name}} defeated {{losingTeam.name}}</span>
         </div>
+      {{else}}
+        {{#if selectedTeam}}
+          <div class="selection">
+            {{selectedTeam.name}} to def {{nonSelectedTeam.name}}
+          </div>
+        {{/if}}
       {{/if}}
     {{/linkTo}}
   {{/view}}

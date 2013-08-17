@@ -8,11 +8,11 @@ LMS.Fixture = DS.Model.extend
   round: DS.belongsTo('LMS.Round')
 
   losingTeam: (->
+    return unless @get('hasResult')
     winningTeam = @get('winningTeam')
-    return unless winningTeam
     [@get('homeTeam'), @get('awayTeam')].without(winningTeam)[0]
-  ).property('winningTeam')
+  ).property('winningTeam', 'hasResult')
 
   hasResult: (->
-    !!@get('winningTeam')
+    !!@get('winningTeam') #Add draw in later
   ).property('winningTeam')
