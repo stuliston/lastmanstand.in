@@ -108,15 +108,16 @@ namespace :db do
       Game.all.each do |game|
         if game.profiles.include? profile
           lost_games = 0
-          game.season.rounds.each do |round|
-            if round.start_time > (game.season.start_date + 2.weeks) #Start a game part way into season
+          rounds = game.season.rounds.sort_by {|round| round.number}
+          rounds.each do |round|
+            if round.number > 3
               fixture_index = rand(0..round.fixtures.size - 1)
               fixture = round.fixtures[fixture_index]
               selected_team = [fixture.home_team, fixture.away_team][rand(0..1)]
               if selected_team != fixture.winning_team
                 lost_games = lost_games + 1
               end
-              if fixture.start_time < Time.now && lost_games <= game.number_of_lives
+              if fixture.start_time < Time.now + 3.days && lost_games <= game.number_of_lives
                 Prediction.create!(profile: profile, team: selected_team, game: game, fixture: fixture)
               end
             end
