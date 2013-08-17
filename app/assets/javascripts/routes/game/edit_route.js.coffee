@@ -5,3 +5,4 @@ LMS.GameEditRoute = Ember.Route.extend
 
   setupController: (controller, game) ->
     controller.set('model', game)
+    @controllerFor('application').set('pageTitle', "Invite Your Friends")

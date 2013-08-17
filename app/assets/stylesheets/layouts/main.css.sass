@@ -59,8 +59,7 @@ ul.horizontal
     left: 0
     width: 100% //set as fixed on mobiles on load
     overflow-y: auto
-    // Removed for now as it prevented nav from being clicked on phone
-    // -webkit-overflow-scrolling: touch
+    -webkit-overflow-scrolling: touch
     background: $primary-bg-color
     @include transition(all, 0.2s)
     &.navigation-visible
@@ -68,8 +67,17 @@ ul.horizontal
 
   #header
     height: $header-height-phone
+    -webkit-transform: translate3d(0,0,0)
+    h1
+      text-align: center
+      color: $light-grey
+      margin: 0 20px
+      line-height: $header-height-phone
+      font-size: 1em
+
 
   #navigation
+    -webkit-transform: translate3d(0,0,0)
     width: $nav-width-phone
     top: 0
     left: 0
@@ -79,13 +87,8 @@ ul.horizontal
     bottom: auto
 
   #main
+    -webkit-transform: translate3d(0,0,0)
     left: 0
     top: $header-height-phone
+    z-index: 2
 
-  h1
-    text-align: center
-    color: $light-grey
-    margin: 0
-    margin-top: -$header-height-phone
-    line-height: $header-height-phone
-    font-size: 1em
