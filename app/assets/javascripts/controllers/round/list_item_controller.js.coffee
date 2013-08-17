@@ -40,6 +40,10 @@ LMS.RoundListItemController = Ember.ObjectController.extend
     @get('prediction.team') == @get('winningTeam')
   ).property('prediction.team')
 
+  isBeforeGameStarted: (->
+    @get('game.createdAt') > @get('startTime')
+  ).property('game.createdAt', 'startTime')
+
   selectionClass: (->
     if @get('prediction.team')
       if @get('isSelectionCorrect')

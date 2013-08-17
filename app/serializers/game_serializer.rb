@@ -1,6 +1,6 @@
 class GameSerializer < ActiveModel::Serializer
   embed :ids, include: true
-  attributes :id, :name, :max_allowed_players, :number_of_lives
+  attributes :id, :name, :max_allowed_players, :number_of_lives, :created_at
 
   has_one :season
   has_many :predictions

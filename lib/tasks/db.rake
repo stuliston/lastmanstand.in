@@ -109,6 +109,8 @@ namespace :db do
         if game.profiles.include? profile
           lost_games = 0
           rounds = game.season.rounds.sort_by {|round| round.number}
+          game.created_at = rounds[3].start_time.midnight #Fudge the date to just before the first game that get's predictions
+          game.save!
           rounds.each do |round|
             if round.number > 3
               fixture_index = rand(0..round.fixtures.size - 1)
