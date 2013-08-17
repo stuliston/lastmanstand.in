@@ -109,7 +109,7 @@ namespace :db do
         if game.profiles.include? profile
           lost_games = 0
           game.season.rounds.each do |round|
-            if round.start_time > (game.season.start_date + 1.month) #Start a game part way into season
+            if round.start_time > (game.season.start_date + 2.weeks) #Start a game part way into season
               fixture_index = rand(0..round.fixtures.size - 1)
               fixture = round.fixtures[fixture_index]
               selected_team = [fixture.home_team, fixture.away_team][rand(0..1)]
