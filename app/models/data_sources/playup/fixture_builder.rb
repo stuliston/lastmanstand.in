@@ -8,9 +8,10 @@ module DataSources
 
       def build_from!(playup_contest, fixture)
         fixture.tap do |f|
-          f.start_time = playup_contest.scheduled_start_time
-          f.home_team  = home_team(playup_contest)
-          f.away_team  = away_team(playup_contest)
+          f.start_time    = playup_contest.scheduled_start_time
+          f.home_team     = home_team(playup_contest)
+          f.away_team     = away_team(playup_contest)
+          f.winning_team  = winning_team(playup_contest)
         end
       end
 
@@ -28,6 +29,20 @@ module DataSources
         all_competition_teams.find do |t|
           t.name == playup_contest.scores.last.team.name
         end
+      end
+
+      def winning_team(playup_contest)
+        scores = playup_contest.scores.collect(&:total)
+
+        if scores.first > scores.last
+          home_team(playup_contest)
+        elsif scores.last > scores.first
+          away_team(playup_contest)
+        end
+      end
+
+      def away_data(playup_contest)
+        playup_contest.scores.first
       end
 
       def team_builder

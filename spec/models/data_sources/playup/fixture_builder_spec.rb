@@ -61,7 +61,7 @@ module DataSources
             },
             "scores": [
               {
-                "total": 0,
+                "total": 2,
                 "summary": "0",
                 "team": {
                   ":self": "http://sports.playup.com/teams/175",
@@ -118,7 +118,7 @@ module DataSources
                 }
               },
               {
-                "total": 0,
+                "total": 1,
                 "summary": "0",
                 "team": {
                   ":self": "http://sports.playup.com/teams/193",
@@ -202,7 +202,7 @@ module DataSources
           fixture_builder.build_from!(playup_contest, @fixture)
         end
 
-        it 'assigns the start_time' do
+        it 'assigns the start time' do
           expect(@fixture.start_time).to eq DateTime.parse("2013-08-17T11:45:00Z")
         end
 
@@ -212,6 +212,10 @@ module DataSources
 
         it 'assigns the away team' do
           expect(@fixture.away_team).to eq stoke_city
+        end
+
+        it 'assigns the winning team' do
+          expect(@fixture.winning_team).to eq liverpool
         end
 
       end
