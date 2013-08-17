@@ -1,6 +1,6 @@
 Ember.Handlebars.registerBoundHelper 'predictionAvatars', (predictions) ->
 
-  maxToDisplay = 1
+  maxToDisplay = 4
   numberOfPredictions = predictions.get('length')
   displayAll = numberOfPredictions <= maxToDisplay
   extraNames = []
