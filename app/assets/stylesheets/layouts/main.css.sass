@@ -59,7 +59,8 @@ ul.horizontal
     left: 0
     width: 100% //set as fixed on mobiles on load
     overflow-y: auto
-    -webkit-overflow-scrolling: touch
+    // Removed for now as it prevented nav from being clicked on phone
+    // -webkit-overflow-scrolling: touch
     background: $primary-bg-color
     @include transition(all, 0.2s)
     &.navigation-visible
