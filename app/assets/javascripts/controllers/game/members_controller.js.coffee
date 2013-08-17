@@ -3,14 +3,14 @@ LMS.GameMembersController = Ember.ArrayController.extend
   needs: ['game']
   modelBinding: 'controllers.game.gameMemberships'
   itemController: 'game_membership_item'
-  # Sorting based on a computed property of the itemController is not currently supported
-  # See - https://github.com/emberjs/ember.js/issues/2717
-  # Putting this logic in the model is not a good idea as they live in a global space
-  # And could do a lot of work even when they're not visible
-  sortProperties: ['lostLives']
-  sortAscending: true
 
+  membersWithLives: (->
+    @_sortedMemberships(@filter((membership) -> !membership.get('isOutOfLives')))
+  ).property('@each.lostLives')
 
-  # sortFunction: (a, b) ->
-  #   console.log a, b
-  #   0
+  membersWithoutLives: (->
+    @_sortedMemberships(@filter((membership) -> membership.get('isOutOfLives')))
+  ).property('@each.lostLives')
+
+  _sortedMemberships: (memberships) ->
+    Ember.ArrayController.createWithMixins(content: memberships, sortProperties: ['lostLives'])

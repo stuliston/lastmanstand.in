@@ -23,6 +23,6 @@ Ember.Handlebars.registerHelper 'playerLives', (remainingPath, lostPath) ->
 
     out += '</li>'
 
-  out += '</ul'
+  out += '</ul>'
 
   new Handlebars.SafeString(out)

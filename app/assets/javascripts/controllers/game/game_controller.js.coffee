@@ -40,9 +40,10 @@ LMS.GameController = Ember.ObjectController.extend
 
     isWinner = true
     availableLives = @get('numberOfLives')
+    currentProfileId = @get('currentProfile.id')
 
     for profileId, lostLives of livesByProfileId
-      if lostLives < availableLives
+      if (lostLives < availableLives) && profileId != currentProfileId
         isWinner = false
         break
 
