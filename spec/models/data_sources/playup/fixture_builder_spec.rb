@@ -4,16 +4,7 @@ module DataSources
   module Playup
     describe FixtureBuilder do
 
-      # t.integer  "home_team_id"
-      # t.integer  "away_team_id"
-      # t.integer  "winning_team_id"
-      # t.datetime "start_time"
-      # t.datetime "created_at"
-      # t.datetime "updated_at"
       # t.integer  "round_id"
-      # t.integer  "home_score"
-      # t.integer  "away_score"
-
 
       let(:contest_data) {
         <<-JSON
@@ -192,11 +183,16 @@ module DataSources
       let(:stoke_city)  { Team.new(name: 'Stoke City') }
       let(:sunderland)  { Team.new(name: 'Sunderland') }
 
+      let(:round_1) { Round.new(number: 1) }
+      let(:round_2) { Round.new(number: 2) }
+      let(:round_3) { Round.new(number: 3) }
+
       describe '.build_from!' do
 
         before do
-          all_competition_teams = [ sunderland, stoke_city, liverpool ]
-          fixture_builder = FixtureBuilder.new(all_competition_teams)
+          all_rounds  = [ round_1, round_2, round_3 ]
+          all_teams   = [ sunderland, stoke_city, liverpool ]
+          fixture_builder = FixtureBuilder.new(all_teams, all_rounds)
 
           @fixture = Fixture.new
           fixture_builder.build_from!(playup_contest, @fixture)
@@ -216,6 +212,18 @@ module DataSources
 
         it 'assigns the winning team' do
           expect(@fixture.winning_team).to eq liverpool
+        end
+
+        it 'assigns the home score' do
+          expect(@fixture.home_score).to be 2
+        end
+
+        it 'assigns the away score' do
+          expect(@fixture.away_score).to be 1
+        end
+
+        it 'assigns the round' do
+          expect(@fixture.round).to eq round_1
         end
 
       end
