@@ -2,7 +2,7 @@ class ShallowGameMembershipSerializer < ActiveModel::Serializer
 
   embed :ids, include: false
 
-  attributes :id, :lost_lives
+  attributes :id
 
   has_one :game
   has_one :profile

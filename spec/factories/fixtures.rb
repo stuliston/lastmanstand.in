@@ -2,6 +2,5 @@
 
 FactoryGirl.define do
   factory :fixture do
-
   end
 end

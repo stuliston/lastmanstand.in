@@ -7,17 +7,4 @@ class Fixture < ActiveRecord::Base
 
   has_many :predictions
 
-  after_save do |fixture|
-    update_lives!
-  end
-
-  def update_lives!
-    game_memberships.each {|game_membership| game_membership.update_lives! }
-  end
-
-  def game_memberships
-    game_ids = predictions.map(&:game_id)
-    GameMembership.where(game_id: game_ids)
-  end
-
 end

@@ -7,8 +7,4 @@ class Prediction < ActiveRecord::Base
   belongs_to :team
   belongs_to :game
 
-  def correct?
-    team == fixture.winning_team
-  end
-
 end

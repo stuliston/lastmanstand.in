@@ -123,6 +123,6 @@ namespace :db do
       end
     end
 
-    Fixture.all.each {|fixture| fixture.update_lives!}
   end
+
 end
