@@ -4,12 +4,12 @@ LMS.GameInvitation = DS.Model.extend
   avatarImageUrl: DS.attr('string')
 
   game: DS.belongsTo('LMS.Game')
-  profile: DS.belongsTo('LMS.Profile', inverse: 'gameInvitations')
-  invitedBy: DS.belongsTo('LMS.Profile', inverse: 'gameInvitationsAsInviter')
+  user: DS.belongsTo('LMS.User', inverse: 'gameInvitations')
+  invitedBy: DS.belongsTo('LMS.User', inverse: 'gameInvitationsAsInviter')
 
   displayName: (->
-    @get('profile.name') || @get('email')
-  ).property('profile.name', 'email')
+    @get('user.name') || @get('email')
+  ).property('user.name', 'email')
 
   avatarImageUrlMedium: (->
     @get('avatarImageUrl') + "?s=40"

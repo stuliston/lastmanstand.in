@@ -53,7 +53,7 @@ pavlov.specify "game/round_controller", ->
         game = LMS.Game.createRecord(season: season)
         prediction = LMS.Prediction.createRecord(game: game, fixture: fixture1, team: team1)
 
-        controllerFor('currentProfile').get('predictions').pushObject(prediction)
+        controllerFor('currentUser').get('predictions').pushObject(prediction)
         controllerFor('application').set('currentTime', timeInPast)
 
         gameController = controllerFor('game', game)

@@ -8,8 +8,8 @@ describe GameMembership do
   let!(:game) { FactoryGirl.create(:game) }
 
   it "creating a game membership deletes the invitation" do
-    game_membership = game.game_memberships.create!(profile: user.profile)
-    expect(GameInvitation.where(profile: user.profile)).to be_empty
+    game_membership = game.game_memberships.create!(user: user)
+    expect(GameInvitation.where(user: user)).to be_empty
   end
 
 

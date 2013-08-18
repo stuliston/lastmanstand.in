@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :user do
+    name 'First Last'
     email 'user@gmail.com'
     password 'password'
     password_confirmation 'password'
-    profile { FactoryGirl.build(:profile) }
   end
 end

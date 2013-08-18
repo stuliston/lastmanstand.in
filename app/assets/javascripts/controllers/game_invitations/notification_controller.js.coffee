@@ -1,7 +1,7 @@
 LMS.GameInvitationsNotificationController = Ember.ArrayController.extend
 
-  needs: ['currentProfile']
-  modelBinding: 'controllers.currentProfile.gameInvitations'
+  needs: ['currentUser']
+  modelBinding: 'controllers.currentUser.gameInvitations'
 
   hasInvitations: (->
     @get('length') > 0

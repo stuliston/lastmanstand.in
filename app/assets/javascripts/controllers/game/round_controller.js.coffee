@@ -1,15 +1,15 @@
 LMS.GameRoundController = Ember.ObjectController.extend
 
-  needs: ['application', 'game', 'gameRounds', 'predictions', 'currentProfile']
+  needs: ['application', 'game', 'gameRounds', 'predictions', 'currentUser']
   predictions: null
-  currentProfile: null
-  isCurrentProfileOutOfLives: null
+  currentUser: null
+  isCurrentUserOutOfLives: null
   currentTime: null
   gameRounds: null
   game: null
   predictionsBinding: 'controllers.predictions'
-  currentProfileBinding: 'controllers.currentProfile.model'
-  isCurrentProfileOutOfLivesBinding: 'controllers.game.isCurrentProfileOutOfLives'
+  currentUserBinding: 'controllers.currentUser.model'
+  isCurrentUserOutOfLivesBinding: 'controllers.game.isCurrentUserOutOfLives'
   currentTimeBinding: 'controllers.application.currentTime'
   gameRoundsBinding: 'controllers.gameRounds'
   gameBinding: 'controllers.game.model'
@@ -38,7 +38,7 @@ LMS.GameRoundController = Ember.ObjectController.extend
 
   #This and accompanying methods need some work.
   selectWinner: (fixture, team) ->
-    return if @get('isCurrentProfileOutOfLives')
+    return if @get('isCurrentUserOutOfLives')
 
     game = @get('game')
     store = @get('store')
@@ -60,7 +60,7 @@ LMS.GameRoundController = Ember.ObjectController.extend
         newPrediction = LMS.Prediction.createRecord
           fixture: fixture,
           team: team,
-          profile: @get('currentProfile'),
+          user: @get('currentUser'),
           game: game
         @_rollbackOnError(newPrediction)
 

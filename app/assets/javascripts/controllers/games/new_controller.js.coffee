@@ -1,10 +1,10 @@
 LMS.GamesNewController = Ember.ObjectController.extend
 
-  needs: ['currentProfile', 'featureToggles']
-  currentProfile: null
+  needs: ['currentUser', 'featureToggles']
+  currentUser: null
   featureToggles: null
   competitions: null
-  currentProfileBinding: 'controllers.currentProfile.model'
+  currentUserBinding: 'controllers.currentUser.model'
   featureTogglesBinding: 'controllers.featureToggles'
 
   totalPlayers: (->
@@ -28,9 +28,9 @@ LMS.GamesNewController = Ember.ObjectController.extend
   ).property('competitions.@each')
 
   saveGame: ->
-    currentProfile = @get('currentProfile')
+    currentUser = @get('currentUser')
     game = @get('model')
-    game.get('gameMemberships').pushObject(LMS.GameMembership.createRecord(game: game, profile: currentProfile))
+    game.get('gameMemberships').pushObject(LMS.GameMembership.createRecord(game: game, user: currentUser))
 
     @get('store').commit()
     @scheduleRouteWhenAllSaved(game)

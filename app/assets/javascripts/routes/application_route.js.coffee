@@ -1,11 +1,11 @@
 LMS.ApplicationRoute = Ember.Route.extend
 
   model: ->
-    Ember.Object.create(currentProfile: LMS.Profile.find(currentProfileId))
+    Ember.Object.create(currentUser: LMS.User.find(currentUserId))
 
   setupController: (controller, model) ->
     controller.set('model', model)
-    @controllerFor('currentProfile').set('model', model.get('currentProfile')) #profile id hacked into bootstrap html. fix later
+    @controllerFor('currentUser').set('model', model.get('currentUser')) #user id hacked into bootstrap html. fix later
 
   # events:
   #   error: (reason, transition) ->

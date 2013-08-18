@@ -1,13 +1,13 @@
 <div class="game-container">
   {{render 'game_invitations_notification'}}
-  {{#if isCurrentProfileOutOfLives}}
+  {{#if isCurrentUserOutOfLives}}
     <div class="knockout-message">
-      You were knocked out in round {{currentProfileKnockoutFixture.round.number}} when
-      <strong>{{currentProfileKnockoutFixture.winningTeam.name}}</strong> defeated <strong>{{currentProfileKnockoutFixture.losingTeam.name}}</strong>.
+      You were knocked out in round {{currentUserKnockoutFixture.round.number}} when
+      <strong>{{currentUserKnockoutFixture.winningTeam.name}}</strong> defeated <strong>{{currentUserKnockoutFixture.losingTeam.name}}</strong>.
       {{#linkTo 'games.new'}}Start a new game{{/linkTo}}
     </div>
   {{/if}}
-  {{#if currentProfileIsWinner}}
+  {{#if currentUserIsWinner}}
     <div class="game-win-message">
       Congrats! You're the last man standing!
       {{#linkTo 'games.new'}}Start a new game{{/linkTo}}

@@ -9,10 +9,10 @@ Ember.Handlebars.registerBoundHelper 'predictionAvatars', (predictions) ->
 
   predictions.forEach (prediction, index) ->
     if displayAll || index < maxToDisplay
-      url = prediction.get('profile.smallThumbAvatarImageUrl')
+      url = prediction.get('user.smallThumbAvatarImageUrl')
       out += "<li><img src='#{url}'/></li>"
     else
-      extraNames.push(prediction.get('profile.name'))
+      extraNames.push(prediction.get('user.name'))
 
   extras = numberOfPredictions - maxToDisplay
 

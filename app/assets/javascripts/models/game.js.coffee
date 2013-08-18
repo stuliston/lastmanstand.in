@@ -11,7 +11,7 @@ LMS.Game = DS.Model.extend
   gameInvitations: DS.hasMany('LMS.GameInvitation')
 
   members: (->
-    @get('gameMemberships').getEach('profile')
+    @get('gameMemberships').getEach('user')
   ).property('@each.gameMemberships')
 
   invitations: (->

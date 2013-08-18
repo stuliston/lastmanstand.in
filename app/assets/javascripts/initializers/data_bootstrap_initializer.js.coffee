@@ -4,7 +4,7 @@ Ember.Application.initializer
   after: "store"
   initialize: (container) ->
     store = container.lookup('store:main')
-    if window.profileData
-      store.adapterForType(LMS.Profile).didFindRecord(store, LMS.Profile, window.profileData)
+    if window.userData
+      store.adapterForType(LMS.User).didFindRecord(store, LMS.User, window.userData)
     else
       console.warn 'No bootstrap data was found. Initial app data will be loaded async.'

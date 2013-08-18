@@ -1,7 +1,7 @@
 LMS.NavGameMembershipsController = Ember.ArrayController.extend
 
-  needs: ['currentProfile']
-  modelBinding: 'controllers.currentProfile.gameMemberships'
+  needs: ['currentUser']
+  modelBinding: 'controllers.currentUser.gameMemberships'
   itemController: 'game_membership_item'
 
   currentGames: ( ->

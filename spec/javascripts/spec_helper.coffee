@@ -36,7 +36,7 @@ LMS.setupForTesting()
 
 LMS.injectTestHelpers()
 
-window.currentProfileId = 1
+window.currentUserId = 1
 LMS.Store = DS.Store.extend
   revision: 12
   adapter: DS.FixtureAdapter.create

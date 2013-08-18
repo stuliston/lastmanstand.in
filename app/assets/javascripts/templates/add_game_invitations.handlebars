@@ -30,7 +30,7 @@
     <button class="add-email primary" {{action addEmail target="view"}} {{bindAttr disabled="view.isEmailInvalid"}}>Add</button>
   </div>
 {{/if}}
-{{#if view.isCurrentProfileEmail}}
+{{#if view.isCurrentUserEmail}}
   <div class="alert">
     There's no need to invite yourself.
   </div>

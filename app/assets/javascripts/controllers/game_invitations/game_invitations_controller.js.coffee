@@ -1,7 +1,7 @@
 LMS.GameInvitationsController = Ember.ArrayController.extend
 
-  needs: ['currentProfile']
-  modelBinding: 'controllers.currentProfile.gameInvitations'
+  needs: ['currentUser']
+  modelBinding: 'controllers.currentUser.gameInvitations'
 
   areAnyInvitationsToAction: (->
     @some (invitation) -> invitation.get('isActioned') != true
@@ -13,7 +13,7 @@ LMS.GameInvitationsController = Ember.ArrayController.extend
 
   accept: (invitation) ->
     game = invitation.get('game')
-    gameMemberships = @get('controllers.currentProfile.gameMemberships')
+    gameMemberships = @get('controllers.currentUser.gameMemberships')
     gameMemberships.createRecord(game: game)
     invitation.set('isActioned', true)
     @get('store').commit()

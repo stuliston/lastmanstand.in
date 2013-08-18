@@ -1,57 +1,57 @@
 LMS.GameController = Ember.ObjectController.extend
 
-  needs: ['currentProfile']
-  currentProfile: null
-  currentProfileBinding: 'controllers.currentProfile.model'
+  needs: ['currentUser']
+  currentUser: null
+  currentUserBinding: 'controllers.currentUser.model'
 
-  currentProfileIncorrectPredictions: (->
-    profile = @get('currentProfile')
+  currentUserIncorrectPredictions: (->
+    user = @get('currentUser')
     @get('predictions').filter((prediction) ->
-      prediction.get('profile') == profile && prediction.get('fixture.hasResult') && !prediction.get('isCorrect')
+      prediction.get('user') == user && prediction.get('fixture.hasResult') && !prediction.get('isCorrect')
     )
   ).property('predictions.@each.team')
 
-  currentProfileRemainingLives: (->
-    @get('numberOfLives') - @get('currentProfileIncorrectPredictions.length')
-  ).property('numberOfLives', 'currentProfileIncorrectPredictions.length')
+  currentUserRemainingLives: (->
+    @get('numberOfLives') - @get('currentUserIncorrectPredictions.length')
+  ).property('numberOfLives', 'currentUserIncorrectPredictions.length')
 
-  isCurrentProfileOutOfLives: Ember.computed.lte('currentProfileRemainingLives', 0)
+  isCurrentUserOutOfLives: Ember.computed.lte('currentUserRemainingLives', 0)
 
   #This is somewhat duplicated in game/membership_item_controller. Review later
-  currentProfileKnockoutFixture: (->
-    return if !@get('isCurrentProfileOutOfLives')
-    lastRoundNumber = Math.max(@get('currentProfileIncorrectPredictions').mapProperty('fixture.round.number')...)
-    @get('currentProfileIncorrectPredictions').findProperty('fixture.round.number', lastRoundNumber).get('fixture')
-  ).property('isCurrentProfileOutOfLives')
+  currentUserKnockoutFixture: (->
+    return if !@get('isCurrentUserOutOfLives')
+    lastRoundNumber = Math.max(@get('currentUserIncorrectPredictions').mapProperty('fixture.round.number')...)
+    @get('currentUserIncorrectPredictions').findProperty('fixture.round.number', lastRoundNumber).get('fixture')
+  ).property('isCurrentUserOutOfLives')
 
   #This could be cleaned up a bit
   winner: (->
 
     return if @get('gameMemberships.length') == 1
 
-    livesByProfileId = {}
+    livesByUserId = {}
 
     @get('predictions').forEach((prediction) ->
       if prediction.get('fixture.hasResult') && !prediction.get('isCorrect')
-        id = prediction.get('profile.id')
-        livesByProfileId[id] = (livesByProfileId[id] || 0) + 1
+        id = prediction.get('user.id')
+        livesByUserId[id] = (livesByUserId[id] || 0) + 1
     )
 
     availableLives = @get('numberOfLives')
-    currentProfileId = @get('currentProfile.id')
-    profilesWithLives = []
+    currentUserId = @get('currentUser.id')
+    usersWithLives = []
 
-    for profileId, lostLives of livesByProfileId
+    for userId, lostLives of livesByUserId
       if (lostLives < availableLives)
-        profilesWithLives.push(LMS.Profile.find(profileId))
+        usersWithLives.push(LMS.User.find(userId))
 
-    if profilesWithLives.length == 1
-      profilesWithLives[0]
+    if usersWithLives.length == 1
+      usersWithLives[0]
 
   ).property('predictions.@each.team')
 
-  currentProfileIsWinner: (->
-    @get('winner') == @get('currentProfile')
+  currentUserIsWinner: (->
+    @get('winner') == @get('currentUser')
   ).property('winner')
 
   modelDidChange: (->
