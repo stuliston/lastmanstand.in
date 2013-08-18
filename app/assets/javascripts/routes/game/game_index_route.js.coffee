@@ -4,4 +4,4 @@ LMS.GameIndexRoute = Ember.Route.extend LMS.CurrentRoundForGame,
     @modelFor('game')
 
   afterModel: (game, transition) ->
-    @transitionTo('game.round',  @_currentRoundForGame(game))
+    @transitionTo('game.round', game.get('currentRound'))

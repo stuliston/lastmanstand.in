@@ -5,12 +5,12 @@ LMS.NavGameMembershipsController = Ember.ArrayController.extend
   itemController: 'game_membership_item'
 
   currentGames: ( ->
-    @_sortedGames(@filter((membership) -> !membership.get('isOutOfLives')))#.mapProperty('game'))
+    @_sortedGames(@filter((membership) -> !membership.get('isOutOfLives')).mapProperty('game'))
   ).property('@each.isOutOfLives')
 
   pastGames: ( ->
-    @_sortedGames(@filter((membership) -> membership.get('isOutOfLives')))#.mapProperty('game'))
+    @_sortedGames(@filter((membership) -> membership.get('isOutOfLives')).mapProperty('game'))
   ).property('@each.isOutOfLives')
 
   _sortedGames: (games) ->
-    Ember.ArrayController.createWithMixins(content: games, sortProperties: ['game.name'])
+    Ember.ArrayController.createWithMixins(content: games, sortProperties: ['name'])
