@@ -1,4 +1,4 @@
-LMS.GameInvitationsController = Ember.ArrayController.extend LMS.CurrentRoundForGame,
+LMS.GameInvitationsController = Ember.ArrayController.extend
 
   needs: ['currentProfile']
   modelBinding: 'controllers.currentProfile.gameInvitations'

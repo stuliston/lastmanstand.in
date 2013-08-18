@@ -1,4 +1,4 @@
-LMS.GamesNewController = Ember.ObjectController.extend  LMS.CurrentRoundForGame,
+LMS.GamesNewController = Ember.ObjectController.extend
 
   needs: ['currentProfile', 'featureToggles']
   currentProfile: null

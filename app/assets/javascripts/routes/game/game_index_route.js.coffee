@@ -1,4 +1,4 @@
-LMS.GameIndexRoute = Ember.Route.extend LMS.CurrentRoundForGame,
+LMS.GameIndexRoute = Ember.Route.extend
 
   model: ->
     @modelFor('game')

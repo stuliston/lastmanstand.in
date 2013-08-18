@@ -1,7 +1,9 @@
-LMS.IndexRoute = Ember.Route.extend LMS.CurrentRoundForGame,
+LMS.IndexRoute = Ember.Route.extend
 
   afterModel: ->
     currentProfile = @modelFor('application').get('currentProfile')
+
+    alert currentProfile.get('gameMemberships.firstObject.game')
 
     if currentProfile.get('gameInvitations.length')
       @transitionTo 'game_invitations'
