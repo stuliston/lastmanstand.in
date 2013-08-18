@@ -1,12 +1,11 @@
-LMS.GameCurrentRoundRoute = Ember.Route.extend
+LMS.CurrentRoundForGame = Ember.Mixin.create
 
-  model: ->
+  _currentRoundForGame: (game) ->
     now = new XDate()
-    rounds = @modelFor('game').get('season.rounds')
+    rounds = game.get('season.rounds')
     #What should the rules be for this ?? Tues - Mon?
     rounds.find((round) ->
       start = new XDate(round.get('startTime'))
       diffDays = Math.round(now.diffDays(start))
       diffDays > -3 && diffDays <= 4
     )
-

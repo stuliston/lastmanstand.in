@@ -1,8 +1,12 @@
-LMS.GameController = Ember.ObjectController.extend
+LMS.GameController = Ember.ObjectController.extend LMS.CurrentRoundForGame,
 
   needs: ['currentProfile']
   currentProfile: null
   currentProfileBinding: 'controllers.currentProfile.model'
+
+  currentRound: (->
+    @_currentRoundForGame(@get('model'))
+  ).property('')
 
   currentProfileIncorrectPredictions: (->
     profile = @get('currentProfile')

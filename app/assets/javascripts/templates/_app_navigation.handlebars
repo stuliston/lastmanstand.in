@@ -4,10 +4,10 @@
       <li class="current-games"><i></i>
         <h4>Current Games</h4>
         <ul class="unstyled">
-        {{#each game in currentGames}}
+        {{#each membership in currentGames}}
           <li>
-            {{#linkTo 'game.current_round' game}}
-              <div class="name">{{game.name}}</div>
+            {{#linkTo 'game.round' membership.game membership.currentRound}}
+              <div class="name">{{membership.game.name}}</div>
             {{/linkTo}}
           </li>
         {{/each}}
@@ -16,10 +16,10 @@
       <li class="completed-games"><i></i>
         <h4>Past Games</h4>
         <ul class="unstyled">
-        {{#each game in pastGames}}
+        {{#each membership in pastGames}}
           <li>
-            {{#linkTo 'game.current_round' game}}
-              <div class="name">{{game.name}}</div>
+            {{#linkTo 'game.round' membership.game membership.currentRound}}
+              <div class="name">{{membership.game.name}}</div>
             {{/linkTo}}
           </li>
         {{/each}}

@@ -83,7 +83,6 @@ LMS.GameRoundController = Ember.ObjectController.extend
     game = @get('game')
     @get('predictions').find((prediction) -> prediction.get('fixture.round') == round && prediction.get('game') == game)
 
-
   _predictionForTeamInCurrentRound: (team) ->
     currentRound = @get('model')
     prediction = @get('predictions').find((prediction) =>

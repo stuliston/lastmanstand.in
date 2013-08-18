@@ -14,7 +14,7 @@
     </div>
   {{/if}}
   <ul class="nav unstyled">
-    <li>{{#linkTo 'game.current_round' model}}This Round{{/linkTo}}</li>
+    <li>{{#linkTo 'game.round' model currentRound}}This Round{{/linkTo}}</li>
     <li>{{#linkTo 'game.rounds' model}}All Rounds{{/linkTo}}</li>
     <li>{{#linkTo 'game.members' model}}Members{{/linkTo}}</li>
   </ul>

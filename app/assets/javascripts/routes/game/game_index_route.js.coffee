@@ -1,7 +1,7 @@
-LMS.GameIndexRoute = Ember.Route.extend
+LMS.GameIndexRoute = Ember.Route.extend LMS.CurrentRoundForGame,
 
   model: ->
     @modelFor('game')
 
   afterModel: (game, transition) ->
-    @transitionTo('game.current_round', game)  
+    @transitionTo('game.round',  @_currentRoundForGame(game))

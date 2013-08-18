@@ -1,4 +1,4 @@
-LMS.GameInvitationsController = Ember.ArrayController.extend
+LMS.GameInvitationsController = Ember.ArrayController.extend LMS.CurrentRoundForGame,
 
   needs: ['currentProfile']
   modelBinding: 'controllers.currentProfile.gameInvitations'
@@ -18,7 +18,7 @@ LMS.GameInvitationsController = Ember.ArrayController.extend
     invitation.set('isActioned', true)
     @get('store').commit()
 
-    @transitionToRoute('game.current_round', game) unless @get('areAnyInvitationsToAction')
+    @transitionToRoute('game.round', @_currentRoundForGame(game)) unless @get('areAnyInvitationsToAction')
 
   dismissConfirm: (invitation) ->
     invitation.set('isConfirmingDismiss', true)

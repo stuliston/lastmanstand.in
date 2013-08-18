@@ -1,4 +1,4 @@
-LMS.GameMembershipItemController = Ember.ObjectController.extend
+LMS.GameMembershipItemController = Ember.ObjectController.extend LMS.CurrentRoundForGame,
 
   currentProfilePredictionsWithResult: (->
     profile = @get('profile')
@@ -34,4 +34,8 @@ LMS.GameMembershipItemController = Ember.ObjectController.extend
     lastRoundNumber = Math.max(@get('incorrectPredictions').mapProperty('fixture.round.number')...)
     @get('incorrectPredictions').findProperty('fixture.round.number', lastRoundNumber).get('fixture')
   ).property('isOutOfLives')
+
+  currentRound: (->
+    @_currentRoundForGame(@get('game'))
+  ).property('game')
 

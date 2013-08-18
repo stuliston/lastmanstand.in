@@ -1,1 +1,30 @@
-{{partial 'game/round'}}
+{{#view class="round-container" classNameBindings="isRoundClosed"}}
+  <ul class="header">
+    <li class="previous">
+      {{#if previousRound}}
+        {{#linkTo 'game.round' controllers.game.model previousRound}}<i class="icon-chevron-sign-left icon-2x"></i>{{/linkTo}}
+      {{else}}
+        &nbsp;
+      {{/if}}
+    </li>
+    <li class="title">
+      <h2>Round {{number}}</h2>
+      <strong>{{date startTime format="ddd dd MMM, yyyy"}}</strong>
+    </li>
+    <li class="next">
+      {{#if nextRound}}
+        {{#linkTo 'game.round' controllers.game.model nextRound}}<i class="icon-chevron-sign-right icon-2x"></i>{{/linkTo}}
+      {{else}}
+        &nbsp;
+      {{/if}}
+    </li>
+  </ul>
+  <div class="round-close-message">
+    {{#if isRoundClosed}}
+      Round is closed
+    {{else}}
+      Round closes in <strong>{{timeToNow startTime currentTime}}</strong>
+    {{/if}}
+  </div>
+  {{render "round/fixtures" fixtures}}
+{{/view}}

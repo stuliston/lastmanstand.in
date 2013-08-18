@@ -1,4 +1,4 @@
-LMS.GamesNewController = Ember.ObjectController.extend
+LMS.GamesNewController = Ember.ObjectController.extend  LMS.CurrentRoundForGame,
 
   needs: ['currentProfile', 'featureToggles']
   currentProfile: null
@@ -48,7 +48,7 @@ LMS.GamesNewController = Ember.ObjectController.extend
     models.addObjects(game.get('gameInvitations'))
 
     models.addObserver '@each.isNew', =>
-      @transitionToRoute('game.current_round', game) unless models.some((model) -> !model.get('id'))
+      @transitionToRoute('game.round', game, @_currentRoundForGame(game)) unless models.some((model) -> !model.get('id'))
 
   cancel: ->
     @transitionToRoute(@get('indexRoute'))
