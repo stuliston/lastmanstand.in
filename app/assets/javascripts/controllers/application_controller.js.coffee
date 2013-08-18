@@ -11,6 +11,10 @@ LMS.ApplicationController = Ember.Controller.extend
     @_trackCurrentTimeToSecond()
 
 
+  isIos: (->
+    'platform' of navigator && (/iphone|ipod|ipad/gi).test(navigator.platform)
+  ).property()
+
   toggleNavigation: ->
     @set('navigationVisible', !@get('navigationVisible'))
 
