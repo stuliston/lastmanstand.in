@@ -107,7 +107,7 @@ namespace :db do
     Profile.all.each do |profile|
       Game.all.each do |game|
         if game.profiles.include? profile
-          lost_games = 0
+          lost_lives = 0
           rounds = game.season.rounds.sort_by {|round| round.number}
           game.created_at = rounds[3].start_time.midnight #Fudge the date to just before the first game that get's predictions
           game.save!
@@ -117,9 +117,9 @@ namespace :db do
               fixture = round.fixtures[fixture_index]
               selected_team = [fixture.home_team, fixture.away_team][rand(0..1)]
               if selected_team != fixture.winning_team
-                lost_games = lost_games + 1
+                lost_lives = lost_lives + 1
               end
-              if fixture.start_time < Time.now + 3.days && lost_games <= game.number_of_lives
+              if fixture.start_time < Time.now + 3.days && lost_lives <= game.number_of_lives
                 Prediction.create!(profile: profile, team: selected_team, game: game, fixture: fixture)
               end
             end

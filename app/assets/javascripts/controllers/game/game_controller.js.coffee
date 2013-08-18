@@ -24,11 +24,10 @@ LMS.GameController = Ember.ObjectController.extend
     @get('currentProfileIncorrectPredictions').findProperty('fixture.round.number', lastRoundNumber).get('fixture')
   ).property('isCurrentProfileOutOfLives')
 
-
   #This could be cleaned up a bit
-  currentProfileIsWinner: (->
+  winner: (->
 
-    return false if @get('isCurrentProfileOutOfLives') || @get('gameMemberships.length') == 1
+    return if @get('gameMemberships.length') == 1
 
     livesByProfileId = {}
 
@@ -38,18 +37,22 @@ LMS.GameController = Ember.ObjectController.extend
         livesByProfileId[id] = (livesByProfileId[id] || 0) + 1
     )
 
-    isWinner = true
     availableLives = @get('numberOfLives')
     currentProfileId = @get('currentProfile.id')
+    profilesWithLives = []
 
     for profileId, lostLives of livesByProfileId
-      if (lostLives < availableLives) && profileId != currentProfileId
-        isWinner = false
-        break
+      if (lostLives < availableLives)
+        profilesWithLives.push(LMS.Profile.find(profileId))
 
-    isWinner
+    if profilesWithLives.length == 1
+      profilesWithLives[0]
 
   ).property('predictions.@each.team')
+
+  currentProfileIsWinner: (->
+    @get('winner') == @get('currentProfile')
+  ).property('winner')
 
   modelDidChange: (->
     game = @get('model')

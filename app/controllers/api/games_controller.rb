@@ -10,7 +10,7 @@ module Api
     end
 
     def show
-      respond_with @game
+      render json: @game
     end
 
     def create

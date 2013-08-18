@@ -14,6 +14,9 @@ LMS.GameRoundController = Ember.ObjectController.extend
   gameRoundsBinding: 'controllers.gameRounds'
   gameBinding: 'controllers.game.model'
 
+  init: ->
+    @_pollForRoundClose()
+
   isRoundClosed: (->
     @get('currentTime') > @get('startTime')
   ).property('startTime', 'currentTime')
@@ -27,6 +30,11 @@ LMS.GameRoundController = Ember.ObjectController.extend
     nextRoundNumber = @get('number') + 1
     @get('gameRounds').findProperty('number', nextRoundNumber)
   ).property('gameRounds', 'model')
+
+  roundPredictions: (->
+    round = @get('model')
+    @get('game.predictions').filter (prediction) -> prediction.get('fixture.round') == round
+  ).property('predictions.@each.fixture', 'model')
 
   #This and accompanying methods need some work.
   selectWinner: (fixture, team) ->
@@ -97,3 +105,13 @@ LMS.GameRoundController = Ember.ObjectController.extend
       if @get('isError')
         @get('stateManager').transitionTo(revertState)
         @rollback()
+
+  _pollForRoundClose: ->
+    @_roundClosePollId = setInterval(=>
+      Ember.run =>
+        if @get('startTime') < new Date() && @get('roundPredictions.length') == 1 && !@get('controllers.game.winner')
+          @get('game').reload() #Simplest to just get the whole game for now.
+    , 60000)
+
+  destroy: ->
+    clearInterval(@_roundClosePollId)
