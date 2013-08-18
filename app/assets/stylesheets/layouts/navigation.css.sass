@@ -26,7 +26,7 @@
   a.active
     color: darken(#888, 30)
 
-@include phone
+@include phone-and-tablet-portrait
 
   #navigation
     z-index: 0
@@ -45,7 +45,7 @@
       left: 0
       right: 0
       bottom: $nav-actions-height-phone
-      // padding-bottom: 1em
+      padding-top: 1em
 
     li
       -webkit-transform: translate3d(0,0,0)
