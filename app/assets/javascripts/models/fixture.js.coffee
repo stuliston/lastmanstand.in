@@ -1,4 +1,6 @@
 LMS.Fixture = DS.Model.extend
+
+  draw: DS.attr('boolean')
   startTime: DS.attr('date')
   homeScore: DS.attr('number')
   awayScore: DS.attr('number')
@@ -14,5 +16,5 @@ LMS.Fixture = DS.Model.extend
   ).property('winningTeam', 'hasResult')
 
   hasResult: (->
-    !!@get('winningTeam') #Add draw in later
+    !!@get('winningTeam') || @get('draw')
   ).property('winningTeam')

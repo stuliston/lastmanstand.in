@@ -10,7 +10,11 @@
         {{else}}
           <i class="icon-remove-sign"></i>
         {{/if}}
-        <span>{{winningTeam.name}} defeated {{losingTeam.name}}</span>
+        {{#if winningTeam}}
+          <strong>{{winningTeam.name}}</strong> defeated {{losingTeam.name}}
+        {{else}}
+          Draw: <strong>{{prediction.fixture.homeTeam.name}}</strong> and <strong>{{prediction.fixture.awayTeam.name}}</strong>
+        {{/if}}
         </div>
       {{else}}
         {{#if selectedTeam}}

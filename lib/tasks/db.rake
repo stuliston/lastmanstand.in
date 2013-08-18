@@ -80,8 +80,17 @@ namespace :db do
           else
             if round_date < Time.now
               team_a_score = rand(30..150)
-              team_b_score = rand(30..150)
-              winning_team = team_a_score < team_b_score ? team_b : team_a
+              if round_number == 6 #Make round 6 always a draw
+                team_b_score = team_a_score
+              else
+                team_b_score = rand(30..150)
+              end
+
+              if team_a_score != team_b_score
+                winning_team = team_a_score < team_b_score ? team_b : team_a
+              else
+                drawn_game = true
+              end
             end
             round.fixtures.create!(
               home_team: team_a,
@@ -89,7 +98,9 @@ namespace :db do
               away_team: team_b,
               away_score: team_b_score,
               start_time: round_date + rand(0..2).days + rand(0..8).hours,
-              winning_team: winning_team)
+              winning_team: winning_team,
+              draw: drawn_game
+            )
             paired_teams << pair
             played_this_round << team_a
             played_this_round << team_b

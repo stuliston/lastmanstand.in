@@ -1,7 +1,7 @@
 class FixtureSerializer < ActiveModel::Serializer
 
   # embed :ids, include: true
-  attributes :id, :start_time, :home_score, :away_score
+  attributes :id, :start_time, :home_score, :away_score, :draw
 
   has_one :round, embed: :ids, include: true
   has_one :home_team, embed: :ids, include: true, root: :teams
