@@ -2,40 +2,26 @@ module DataSources
   module Playup
     class FixtureBuilder
 
-      def initialize(all_teams, all_rounds)
-        @all_teams  = all_teams
-        @all_rounds = all_rounds
-      end
-
-      def build_from!(contest, fixture)
+      def build_from!(contest, fixture, all_teams)
         fixture.tap do |f|
           f.start_time    = contest.scheduled_start_time
-          f.home_team     = home_team(contest)
-          f.away_team     = away_team(contest)
+          f.home_team     = home_team(contest, all_teams)
+          f.away_team     = away_team(contest, all_teams)
           f.home_score    = home_score(contest)
           f.away_score    = away_score(contest)
-          f.winning_team  = winning_team(contest)
-          f.round         = round(contest)
+          f.winning_team  = winning_team(contest, all_teams)
         end
       end
 
       private
 
-      attr_reader :all_teams, :all_rounds
-
-      def round(contest)
-        all_rounds.find do |r|
-          r.number == contest.round_name.to_i
-        end
-      end
-
-      def home_team(contest)
+      def home_team(contest, all_teams)
         all_teams.find do |t|
           t.name == contest.scores.first.team.name
         end
       end
 
-      def away_team(contest)
+      def away_team(contest, all_teams)
         all_teams.find do |t|
           t.name == contest.scores.last.team.name
         end
@@ -49,11 +35,11 @@ module DataSources
         contest.scores.last.total
       end
 
-      def winning_team(contest)
+      def winning_team(contest, all_teams)
         if home_score(contest) > away_score(contest)
-          home_team(contest)
+          home_team(contest, all_teams)
         elsif away_score(contest) > home_score(contest)
-          away_team(contest)
+          away_team(contest, all_teams)
         end
       end
 

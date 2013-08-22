@@ -27,6 +27,10 @@ module ApiClients
       parse_response "/competitions/#{id}"
     end
 
+    def current_season(competition_id)
+      parse_response "/competitions/#{competition_id}/current_season"
+    end
+
     # Beware, this returns too many teams
     def all_teams(competition_id)
       parse_response "/competitions/#{competition_id}/teams"

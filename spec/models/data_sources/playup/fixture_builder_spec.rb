@@ -181,16 +181,11 @@ module DataSources
       let(:stoke_city)  { Team.new(name: 'Stoke City') }
       let(:sunderland)  { Team.new(name: 'Sunderland') }
 
-      let(:round_1) { Round.new(number: 1) }
-      let(:round_2) { Round.new(number: 2) }
-      let(:round_3) { Round.new(number: 3) }
-
       describe '.build_from!' do
 
         before do
-          all_rounds  = [ round_1, round_2, round_3 ]
           all_teams   = [ sunderland, stoke_city, liverpool ]
-          fixture_builder = FixtureBuilder.new(all_teams, all_rounds)
+          fixture_builder = FixtureBuilder.new(all_teams)
 
           @fixture = Fixture.new
           fixture_builder.build_from!(playup_contest, @fixture)
@@ -218,10 +213,6 @@ module DataSources
 
         it 'assigns the away score' do
           expect(@fixture.away_score).to be 1
-        end
-
-        it 'assigns the round' do
-          expect(@fixture.round).to eq round_1
         end
 
       end

@@ -1,8 +1,10 @@
 namespace :import do
 
-  desc "Fixtures. Pulls in the fixtures for all competitions"
-  task :fixutres do
-    puts 'Importing shiz'
+  desc "Competitions. Pulls in the data for a competition"
+  task :competitions do
+    epl = Competition.find_or_create_by(name: 'Premier League')
+    importer = Playup::FixtureImportService.new
+    importer.import_fixtures_for(epl)
   end
 
 end
