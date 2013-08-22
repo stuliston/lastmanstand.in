@@ -1105,16 +1105,10 @@ module DataSources
 
       let(:playup_season) { Hashie::Mash.new(JSON.parse(season_data)) }
 
-      let(:liverpool)   { Team.new(name: 'Liverpool') }
-      let(:stoke_city)  { Team.new(name: 'Stoke City') }
-      let(:sunderland)  { Team.new(name: 'Sunderland') }
-
       describe '.build_from!' do
 
         before do
-          all_teams   = [ sunderland, stoke_city, liverpool ]
-          season_builder = SeasonBuilder.new(all_teams)
-
+          season_builder = SeasonBuilder.new
           @season = Season.new
           season_builder.build_from!(playup_season, @season)
         end
@@ -1123,16 +1117,12 @@ module DataSources
           expect(@season.name).to eq "Premier League 2013/14"
         end
 
-        it 'assigns the rounds' do
-          expect(@season.rounds.count).to be 34
-        end
-
         it 'assigns the start date' do
-          pending
+          expect(@season.start_date).to eq Date.parse("2013-08-17T11:45:00Z")
         end
 
         it 'assigns the end date' do
-          pending
+          expect(@season.end_date).to eq Date.parse("2014-05-11T14:00:00Z")
         end
 
       end
