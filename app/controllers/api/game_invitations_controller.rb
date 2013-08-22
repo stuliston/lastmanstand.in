@@ -12,10 +12,9 @@ module Api
     end
 
     def create
-
       invited_user = User.find_by_email(@game_invitation.email)
       if invited_user
-        @game_invitation.user_id = invited_user.user.id
+        @game_invitation.user_id = invited_user.id
       end
 
       if @game_invitation.save!
@@ -33,7 +32,7 @@ module Api
 
     private
 
-     def game_invitation_params
+    def game_invitation_params
       params.require(:game_invitation).permit([:game_id, :email, :invited_by_id])
     end
 

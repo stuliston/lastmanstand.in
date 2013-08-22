@@ -13,7 +13,6 @@ module Api
       respond_with @season
     end
 
-
   end
 
 end
