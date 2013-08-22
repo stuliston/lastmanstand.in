@@ -61,10 +61,6 @@ module DataSources
         contest.scores.first
       end
 
-      def team_builder
-        @team_builder ||= TeamBuilder.new
-      end
-
     end
   end
 end

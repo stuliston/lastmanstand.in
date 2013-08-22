@@ -4,8 +4,6 @@ module DataSources
   module Playup
     describe FixtureBuilder do
 
-      # t.integer  "round_id"
-
       let(:contest_data) {
         <<-JSON
           {
