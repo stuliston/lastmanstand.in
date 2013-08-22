@@ -7,4 +7,6 @@ class Fixture < ActiveRecord::Base
 
   has_many :predictions
 
+  default_scope -> { order('start_time') }
+
 end
