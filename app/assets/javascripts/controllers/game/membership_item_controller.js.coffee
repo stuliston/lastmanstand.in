@@ -1,23 +1,23 @@
 LMS.GameMembershipItemController = Ember.ObjectController.extend
 
-  currentProfilePredictionsWithResult: (->
-    profile = @get('profile')
+  currentUserPredictionsWithResult: (->
+    user = @get('user')
     Ember.A(@get('game.predictions')).filter((prediction) ->
-      prediction.get('profile') == profile && prediction.get('fixture.hasResult')
+      prediction.get('user') == user && prediction.get('fixture.hasResult')
     )
   ).property('game.predictions.@each.team')
 
   correctPredictions: (->
-    @get('currentProfilePredictionsWithResult').filter((prediction) ->
+    @get('currentUserPredictionsWithResult').filter((prediction) ->
       prediction.get('isCorrect')
     )
-  ).property('currentProfilePredictionsWithResult')
+  ).property('currentUserPredictionsWithResult')
 
   incorrectPredictions: (->
-    @get('currentProfilePredictionsWithResult').filter((prediction) ->
+    @get('currentUserPredictionsWithResult').filter((prediction) ->
       !prediction.get('isCorrect')
     )
-  ).property('currentProfilePredictionsWithResult')
+  ).property('currentUserPredictionsWithResult')
 
   lostLives: (->
     @get('incorrectPredictions.length')
@@ -34,4 +34,3 @@ LMS.GameMembershipItemController = Ember.ObjectController.extend
     lastRoundNumber = Math.max(@get('incorrectPredictions').mapProperty('fixture.round.number')...)
     @get('incorrectPredictions').findProperty('fixture.round.number', lastRoundNumber).get('fixture')
   ).property('isOutOfLives')
-

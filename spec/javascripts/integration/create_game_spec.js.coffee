@@ -2,7 +2,7 @@
 
 pavlov.specify "Creating a new game", ->
 
-  currentProfile = null
+  currentUser = null
 
   describe "without invitations", ->
     before ->
@@ -19,7 +19,7 @@ pavlov.specify "Creating a new game", ->
 
       Ember.run =>
         LMS.advanceReadiness()
-        currentProfile = LMS.Profile.find(currentProfileId)
+        currentUser = LMS.Profile.find(currentUserId)
 
     it "creates a game and invites members", ->
 
@@ -44,9 +44,9 @@ pavlov.specify "Creating a new game", ->
           assert(game.get('competition')).equals(competition)
           assert(game.get('name')).equals(name)
 
-          members = game.get('gameMemberships').mapProperty('profile')
+          members = game.get('gameMemberships').mapProperty('user')
           assert(members.get('length')).equals(1)
-          assert(members.objectAt(0)).equals(currentProfile)
+          assert(members.objectAt(0)).equals(currentUser)
 
           invitedMemberEmails = game.get('gameInvitations').mapProperty('email')
           assert(invitedMemberEmails.get('length')).equals(2)

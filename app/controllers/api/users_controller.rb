@@ -1,21 +1,21 @@
 module Api
 
-  class ProfilesController < ApplicationController
+  class UsersController < ApplicationController
     respond_to :json
     authorize_resource
 
-    before_filter :load_profile
+    before_filter :load_user
 
     def index
-      respond_with @profiles
+      respond_with @users
     end
 
     def show
-      respond_with @profile
+      respond_with @user
     end
 
-    def load_profile
-      @profile = Profile.includes(#:game_memberships, :game_invitations, :predictions).find(params[:id])
+    def load_user
+      @user = User.includes(#:game_memberships, :game_invitations, :predictions).find(params[:id])
         {game_memberships: [
           {game: [
             {season: [
@@ -27,7 +27,7 @@ module Api
               }
             ]}
           ]},
-          :profile
+          :user
         ]},
         {game_invitations: [
           {game: [
@@ -40,7 +40,7 @@ module Api
               }
             ]}
           ]},
-          :profile
+          :user
         ]},
         :predictions
         ).find(params[:id])

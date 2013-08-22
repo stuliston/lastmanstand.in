@@ -1,6 +1,6 @@
 LMS.GameEditController = Ember.ObjectController.extend
 
-  needs: ['currentProfile', 'featureToggles']
+  needs: ['currentUser', 'featureToggles']
 
   sendInvitations: ->
     game = @get('model')

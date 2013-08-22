@@ -1,4 +1,4 @@
-class ShallowProfileSerializer < ActiveModel::Serializer
+class ShallowUserSerializer < ActiveModel::Serializer
 
   embed :ids#, include: true
 
@@ -9,6 +9,6 @@ class ShallowProfileSerializer < ActiveModel::Serializer
   has_many :predictions
 
   def avatar_image_url
-    "http://www.gravatar.com/avatar/" + Digest::MD5.hexdigest(object.user.email.to_s.strip.downcase)
+    "http://www.gravatar.com/avatar/" + Digest::MD5.hexdigest(object.email.to_s.strip.downcase)
   end
 end

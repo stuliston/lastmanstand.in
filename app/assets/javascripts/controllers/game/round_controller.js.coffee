@@ -1,18 +1,21 @@
 LMS.GameRoundController = Ember.ObjectController.extend
 
-  needs: ['application', 'game', 'gameRounds', 'predictions', 'currentProfile']
+  needs: ['application', 'game', 'gameRounds', 'predictions', 'currentUser']
   predictions: null
-  currentProfile: null
-  isCurrentProfileOutOfLives: null
+  currentUser: null
+  isCurrentUserOutOfLives: null
   currentTime: null
   gameRounds: null
   game: null
   predictionsBinding: 'controllers.predictions'
-  currentProfileBinding: 'controllers.currentProfile.model'
-  isCurrentProfileOutOfLivesBinding: 'controllers.game.isCurrentProfileOutOfLives'
+  currentUserBinding: 'controllers.currentUser.model'
+  isCurrentUserOutOfLivesBinding: 'controllers.game.isCurrentUserOutOfLives'
   currentTimeBinding: 'controllers.application.currentTime'
   gameRoundsBinding: 'controllers.gameRounds'
   gameBinding: 'controllers.game.model'
+
+  init: ->
+    @_pollForRoundClose()
 
   isRoundClosed: (->
     @get('currentTime') > @get('startTime')
@@ -28,9 +31,14 @@ LMS.GameRoundController = Ember.ObjectController.extend
     @get('gameRounds').findProperty('number', nextRoundNumber)
   ).property('gameRounds', 'model')
 
+  roundPredictions: (->
+    round = @get('model')
+    @get('game.predictions').filter (prediction) -> prediction.get('fixture.round') == round
+  ).property('predictions.@each.fixture', 'model')
+
   #This and accompanying methods need some work.
   selectWinner: (fixture, team) ->
-    return if @get('isCurrentProfileOutOfLives')
+    return if @get('isCurrentUserOutOfLives')
 
     game = @get('game')
     store = @get('store')
@@ -52,7 +60,7 @@ LMS.GameRoundController = Ember.ObjectController.extend
         newPrediction = LMS.Prediction.createRecord
           fixture: fixture,
           team: team,
-          profile: @get('currentProfile'),
+          user: @get('currentUser'),
           game: game
         @_rollbackOnError(newPrediction)
 
@@ -75,7 +83,6 @@ LMS.GameRoundController = Ember.ObjectController.extend
     game = @get('game')
     @get('predictions').find((prediction) -> prediction.get('fixture.round') == round && prediction.get('game') == game)
 
-
   _predictionForTeamInCurrentRound: (team) ->
     currentRound = @get('model')
     prediction = @get('predictions').find((prediction) =>
@@ -97,3 +104,13 @@ LMS.GameRoundController = Ember.ObjectController.extend
       if @get('isError')
         @get('stateManager').transitionTo(revertState)
         @rollback()
+
+  _pollForRoundClose: ->
+    @_roundClosePollId = setInterval(=>
+      Ember.run =>
+        if @get('startTime') < new Date() && @get('roundPredictions.length') == 1 && !@get('controllers.game.winner')
+          @get('game').reload() #Simplest to just get the whole game for now.
+    , 60000)
+
+  destroy: ->
+    clearInterval(@_roundClosePollId)

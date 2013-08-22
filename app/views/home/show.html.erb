@@ -1,10 +1,10 @@
 <%- content_for :head do %>
 
   <script>
-    var currentProfileId = <%= current_user.profile.id %>;
+    var currentUserId = <%= current_user.id %>;
     window.ENV = { EXPERIMENTAL_CONTROL_HELPER: true};
-    var profileData = <%= ProfileSerializer.new(current_user.profile).to_json.html_safe %>;
-  </script> <!--do this properly once we do logins-->
+    var userData = <%= UserSerializer.new(current_user, scope: current_user).to_json.html_safe %>;
+  </script>
 
   <%= javascript_include_tag "vendor" %>
   <%= javascript_include_tag "lastmanstanding" %>

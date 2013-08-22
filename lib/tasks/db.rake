@@ -43,13 +43,30 @@ namespace :db do
     epl_season_2013 = Season.create!(name: "2013 English Premiership League", start_date: Date.new(2013, 6, 21), end_date: Date.new(2013, 12, 1), competition: epl)
 
     Game.destroy_all
-    Game.create!(name: 'Rob v Stu', profiles: [rob, stu].collect(&:profile), season: afl_season_2013)
-    Game.create!(name: 'Rob v Phil', profiles: [rob, phil].collect(&:profile), season: afl_season_2013)
-    Game.create!(name: 'Stu v Phil', profiles: [stu, phil].collect(&:profile), season: afl_season_2013)
-    Game.create!(name: 'Phil v Ash', profiles: [phil, ash].collect(&:profile), season: afl_season_2013)
-    Game.create!(name: 'Ash v Dan', profiles: [ash, dan].collect(&:profile), season: afl_season_2013)
-    Game.create!(name: 'Stu Solo Style', profiles: [ stu.profile ], season: afl_season_2013)
-    Game.create!(name: 'Hooroo Invitational', profiles: all_users.collect(&:profile), season: afl_season_2013)
+
+    game = Game.create!(name: 'Rob v Stu', season: afl_season_2013)
+    game.game_memberships.create!(user: rob)
+    game.game_memberships.create!(user: stu)
+    game = Game.create!(name: 'Rob v Phil', season: afl_season_2013)
+    game.game_memberships.create!(user: rob)
+    game.game_memberships.create!(user: phil)
+    game = Game.create!(name: 'Stu v Phil', season: afl_season_2013)
+    game.game_memberships.create!(user: stu)
+    game.game_memberships.create!(user: phil)
+    game = Game.create!(name: 'Phil v Ash', season: afl_season_2013)
+    game.game_memberships.create!(user: phil)
+    game.game_memberships.create!(user: ash)
+    game = Game.create!(name: 'Ash v Dan', season: afl_season_2013)
+    game.game_memberships.create!(user: ash)
+    game.game_memberships.create!(user: dan)
+    game = Game.create!(name: 'Stu Solo Style', season: afl_season_2013)
+    game.game_memberships.create!(user: stu)
+    game = Game.create!(name: 'Hooroo Invitational', season: afl_season_2013)
+    game.game_memberships.create!(user: rob)
+    game.game_memberships.create!(user: stu)
+    game.game_memberships.create!(user: dan)
+    game.game_memberships.create!(user: phil)
+    game.game_memberships.create!(user: ash)
 
     Round.destroy_all
     Fixture.destroy_all
@@ -80,8 +97,17 @@ namespace :db do
           else
             if round_date < Time.now
               team_a_score = rand(30..150)
-              team_b_score = rand(30..150)
-              winning_team = team_a_score < team_b_score ? team_b : team_a
+              if round_number == 6 #Make round 6 always a draw
+                team_b_score = team_a_score
+              else
+                team_b_score = rand(30..150)
+              end
+
+              if team_a_score != team_b_score
+                winning_team = team_a_score < team_b_score ? team_b : team_a
+              else
+                drawn_game = true
+              end
             end
             round.fixtures.create!(
               home_team: team_a,
@@ -89,7 +115,9 @@ namespace :db do
               away_team: team_b,
               away_score: team_b_score,
               start_time: round_date + rand(0..2).days + rand(0..8).hours,
-              winning_team: winning_team)
+              winning_team: winning_team,
+              draw: drawn_game
+            )
             paired_teams << pair
             played_this_round << team_a
             played_this_round << team_b
@@ -104,10 +132,10 @@ namespace :db do
 
     Prediction.destroy_all
 
-    Profile.all.each do |profile|
+    User.all.each do |user|
       Game.all.each do |game|
-        if game.profiles.include? profile
-          lost_games = 0
+        if game.users.include? user
+          lost_lives = 0
           rounds = game.season.rounds.sort_by {|round| round.number}
           game.created_at = rounds[3].start_time.midnight #Fudge the date to just before the first game that get's predictions
           game.save!
@@ -117,10 +145,10 @@ namespace :db do
               fixture = round.fixtures[fixture_index]
               selected_team = [fixture.home_team, fixture.away_team][rand(0..1)]
               if selected_team != fixture.winning_team
-                lost_games = lost_games + 1
+                lost_lives = lost_lives + 1
               end
-              if fixture.start_time < Time.now + 3.days && lost_games <= game.number_of_lives
-                Prediction.create!(profile: profile, team: selected_team, game: game, fixture: fixture)
+              if fixture.start_time < Time.now + 3.days && lost_lives <= game.number_of_lives
+                Prediction.create!(user: user, team: selected_team, game: game, fixture: fixture)
               end
             end
           end

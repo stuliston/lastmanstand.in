@@ -4,8 +4,8 @@ LMS.Adapter = DS.RESTAdapter.extend()
 #   # availability: "availabilities"
 # })
 
-LMS.Adapter.configure('LMS.Profile', {
- sideloadAs: 'profiles'
+LMS.Adapter.configure('LMS.User', {
+ sideloadAs: 'users'
 })
 
 # LMS.Adapter.configure('LMS.Game', {

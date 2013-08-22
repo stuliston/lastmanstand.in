@@ -1,5 +1,5 @@
 <div class="game-edit">
-  {{view LMS.AddGameInvitationsView currentProfileBinding="controllers.currentProfile.model"}}
+  {{view LMS.AddGameInvitationsView currentUserBinding="controllers.currentUser.model"}}
   <div class="row actions">
     <button {{action cancel}} class="cancel secondary">Cancel</button>
     <button {{action sendInvitations}} class="submit primary" {{bindAttr disabled="isInvalid"}}>Send Invitations</button>

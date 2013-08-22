@@ -1,4 +1,4 @@
-LMS.CurrentProfileController = Ember.ObjectController.extend
+LMS.CurrentUserController = Ember.ObjectController.extend
 
   init: ->
     @_pollForInvitations()
@@ -6,7 +6,7 @@ LMS.CurrentProfileController = Ember.ObjectController.extend
   _pollForInvitations: ->
     @_invitationsPollId = setInterval(=>
       Ember.run =>
-        $.get("/api/profiles/#{@get('id')}/game_invitations").success (result) =>
+        $.getJSON("/api/users/#{@get('id')}/game_invitations").success (result) =>
           store = @get('store')
           store.adapterForType(LMS.GameInvitation).didFindMany(store, LMS.GameInvitation, result)
     , 60000)

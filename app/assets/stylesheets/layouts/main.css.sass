@@ -50,7 +50,7 @@ ul.horizontal
     display: inline-block
 
 
-@include phone
+@include phone-and-tablet-portrait
 
   #main-wrapper
     position: absolute
@@ -63,7 +63,7 @@ ul.horizontal
     background: $primary-bg-color
     @include transition(all, 0.2s)
     &.navigation-visible
-      left: 80%
+      left: 260px
 
   #header
     height: $header-height-phone

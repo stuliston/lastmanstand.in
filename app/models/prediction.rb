@@ -3,7 +3,7 @@
 class Prediction < ActiveRecord::Base
 
   belongs_to :fixture
-  belongs_to :profile
+  belongs_to :user
   belongs_to :team
   belongs_to :game
 

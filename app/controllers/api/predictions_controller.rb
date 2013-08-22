@@ -36,7 +36,7 @@ module Api
     private
 
     def prediction_params
-      params.require(:prediction).permit(:profile_id, :team_id, :fixture_id, :game_id)
+      params.require(:prediction).permit(:user_id, :team_id, :fixture_id, :game_id)
     end
 
   end

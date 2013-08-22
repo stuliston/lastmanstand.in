@@ -1,9 +1,9 @@
 <ul class="members with-lives unstyled">
 {{#each membersWithLives}}
   <li>
-    <img {{bindAttr src="profile.avatarImageUrl"}} class="avatar" />
+    <img {{bindAttr src="user.avatarImageUrl"}} class="avatar" />
     <div class="details">
-      <h3>{{profile.name}}</h3>
+      <h3>{{user.name}}</h3>
       {{playerLives remainingLives lostLives}}
       <p class="correct-guesses elaboration">
         <strong>{{correctPredictions.length}}</strong> correct guesses so far
@@ -16,9 +16,9 @@
 <ul class="members without-lives unstyled">
 {{#each membersWithoutLives}}
   <li>
-    <img {{bindAttr src="profile.avatarImageUrl"}} class="avatar" />
+    <img {{bindAttr src="user.avatarImageUrl"}} class="avatar" />
     <div class="details">
-      <h3>{{profile.name}}</h3>
+      <h3>{{user.name}}</h3>
       {{playerLives remainingLives lostLives}}
       <p class="knockout-message elaboration">
         <span>Knocked out in round {{knockoutFixture.round.number}} after</span>

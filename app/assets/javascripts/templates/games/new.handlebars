@@ -18,7 +18,7 @@
         {{input value=name name="name" placeholder="Name your Game" classNameBindings="name::error"}}
       </div>
 
-      {{view LMS.AddGameInvitationsView currentProfileBinding="controllers.currentProfile.model"}}
+      {{view LMS.AddGameInvitationsView currentUserBinding="controllers.currentUser.model"}}
 
       <div class="row">
         <button {{action cancel}} class="cancel secondary">Cancel</button>

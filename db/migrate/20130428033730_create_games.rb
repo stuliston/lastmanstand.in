@@ -6,9 +6,9 @@ class CreateGames < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :games_profiles do |t|
+    create_table :game_memberships do |t|
       t.integer :game_id
-      t.integer :profile_id
+      t.integer :user_id
       t.timestamps
     end
 

@@ -11,10 +11,21 @@ LMS.Game = DS.Model.extend
   gameInvitations: DS.hasMany('LMS.GameInvitation')
 
   members: (->
-    @get('gameMemberships').getEach('profile')
+    @get('gameMemberships').getEach('user')
   ).property('@each.gameMemberships')
 
   invitations: (->
     @get('gameInvitations').getEach('game')
   ).property('@each.gameInvitations')
+
+  currentRound: (->
+    now = new XDate()
+    rounds = @get('season.rounds')
+    #What should the rules be for this ?? Tues - Mon?
+    rounds.find((round) ->
+      start = new XDate(round.get('startTime'))
+      diffDays = Math.round(now.diffDays(start))
+      diffDays > -3 && diffDays <= 4
+    )
+  ).property('season.rounds.@each')
 
