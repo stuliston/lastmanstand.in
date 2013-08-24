@@ -67,6 +67,7 @@ LMS.GameRoundController = Ember.ObjectController.extend
       store.commitDefaultTransaction()
 
 
+
   _isTeamSelectableForGame: (team, game) ->
     !(@get('isRoundClosed') || @get('predictions').some((prediction) ->
       prediction.get('fixture.round.startTime') < new Date() &&
