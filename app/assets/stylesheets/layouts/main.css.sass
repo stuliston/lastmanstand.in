@@ -58,8 +58,7 @@ ul.horizontal
     bottom: 0
     left: 0
     width: 100% //set as fixed on mobiles on load
-    overflow-y: auto
-    -webkit-overflow-scrolling: touch
+
     background: $primary-bg-color
     @include transition(all, 0.3s)
     &.navigation-visible
@@ -76,7 +75,6 @@ ul.horizontal
       line-height: $header-height-phone
       font-size: 1em
 
-
   #navigation
     -webkit-transform: translate3d(0,0,0)
     width: $nav-width-phone
@@ -88,7 +86,8 @@ ul.horizontal
     bottom: auto
 
   #main
-    -webkit-transform: translate3d(0,0,0)
+    overflow-y: auto
+    -webkit-overflow-scrolling: touch
     left: 0
     top: $header-height-phone
     z-index: 2
