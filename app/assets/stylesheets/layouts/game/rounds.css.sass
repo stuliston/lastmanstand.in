@@ -1,35 +1,44 @@
 .game-container
 
   .rounds
+
+    .round-number
+      width: 30px
+      height: 30px
+      position: absolute
+      top: 50%
+      left: 15px
+      margin-top: -15px
+      @include border-radius(15px)
+      color: #fff
+      background: lighten($secondary-color, 5)
+      text-align: center
+      padding: 4px
+      border: 3px solid lighten($secondary-color, 10)
+      font-size: 0.8em
+
     li
       background: $secondary-bg-color
       border-bottom: 1px solid #ddd
       position: relative
+
       &.is-before-game-started
         background: darken($secondary-bg-color, 5)
-      &.correct .selection
-        color: lighten($success-color, 10)
-      &.incorrect .selection
-        color: lighten($alert-color, 10)
-      .round-number
-        width: 30px
-        height: 30px
-        position: absolute
-        top: 50%
-        left: 15px
-        margin-top: -15px
-        @include border-radius(15px)
-        color: #fff
-        background: lighten($secondary-color, 5)
-        text-align: center
-        padding: 5px
+        .round-number
+          color: #dfdfdf
+        a
+          color: lighten($base-text-color, 30)
+
+      &.correct .round-number
+        background: lighten($success-color, 10)
+        border-color: lighten($success-color, 15)
+      &.incorrect .round-number
+        background: lighten($alert-color, 10)
+        border-color: lighten($alert-color, 15)
 
       a
-        padding: 15px
+        padding: 12px
         display: block
-        line-height: 1.2em
-        &:active
-          background: #fff
 
       .date, .selection
         margin-left: 50px
