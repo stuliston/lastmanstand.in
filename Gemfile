@@ -16,18 +16,14 @@ gem 'devise', '3.0.0'
 gem 'httparty'
 gem 'hashie'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 4.0.0.beta1'
-  gem 'compass-rails', github: 'milgner/compass-rails', ref: '1749c06f15dc4b058427e7969810457213647fb8'
-  gem 'coffee-rails', '~> 4.0.0.beta1'
-  gem 'uglifier', '>= 1.0.3'
-  gem 'bourbon'
-  gem 'neat'
-  gem "teaspoon"
-  gem "monet", github: 'clouseauu/monet'
-end
+gem 'sass-rails',   '~> 4.0.0.beta1'
+gem 'compass-rails', github: 'milgner/compass-rails', ref: '1749c06f15dc4b058427e7969810457213647fb8'
+gem 'coffee-rails', '~> 4.0.0.beta1'
+gem 'uglifier', '>= 1.0.3'
+gem 'bourbon'
+gem 'neat'
+gem "teaspoon"
+gem "monet", github: 'clouseauu/monet'
 
 group :development, :test do
   gem 'rspec-rails'
