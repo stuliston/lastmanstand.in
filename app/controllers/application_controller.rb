@@ -10,18 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    obvious_message = <<-ASCII
-       $$$$$$\  $$\   $$\        $$$$$$\  $$\   $$\  $$$$$$\  $$$$$$$\  $$\
-      $$  __$$\ $$ |  $$ |      $$  __$$\ $$$\  $$ |$$  __$$\ $$  __$$\ $$ |
-      $$ /  $$ |$$ |  $$ |      $$ /  \__|$$$$\ $$ |$$ /  $$ |$$ |  $$ |$$ |
-      $$ |  $$ |$$$$$$$$ |      \$$$$$$\  $$ $$\$$ |$$$$$$$$ |$$$$$$$  |$$ |
-      $$ |  $$ |$$  __$$ |       \____$$\ $$ \$$$$ |$$  __$$ |$$  ____/ \__|
-      $$ |  $$ |$$ |  $$ |      $$\   $$ |$$ |\$$$ |$$ |  $$ |$$ |
-       $$$$$$  |$$ |  $$ |      \$$$$$$  |$$ | \$$ |$$ |  $$ |$$ |      $$\
-       \______/ \__|  \__|       \______/ \__|  \__|\__|  \__|\__|      \__|
-    ASCII
-    Rails.logger.warn obvious_message
-
     redirect_to root_path, alert: exception.message
   end
 
