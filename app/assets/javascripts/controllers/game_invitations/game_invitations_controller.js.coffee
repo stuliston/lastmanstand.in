@@ -14,11 +14,10 @@ LMS.GameInvitationsController = Ember.ArrayController.extend
   accept: (invitation) ->
     game = invitation.get('game')
     gameMemberships = @get('controllers.currentUser.gameMemberships')
-    gameMemberships.createRecord(game: game)
+    gameMembership = gameMemberships.createRecord(game: game)
     invitation.set('isActioned', true)
     @get('store').commit()
-
-    @transitionToRoute('game.round', game.get('currentRound')) unless @get('areAnyInvitationsToAction')
+    @scheduleRouteWhenAllSaved(gameMembership)
 
   dismissConfirm: (invitation) ->
     invitation.set('isConfirmingDismiss', true)
@@ -31,3 +30,10 @@ LMS.GameInvitationsController = Ember.ArrayController.extend
 
   dismissCancel: (invitation) ->
     invitation.set('isConfirmingDismiss', false)
+
+  # When all models have returned with ids, perform route.
+  # Once some extra work is done in ember data and commit returns a promise we won't need this.
+  scheduleRouteWhenAllSaved: (gameMembership) ->
+    gameMembership.addObserver 'isNew', =>
+      game = gameMembership.get('game')
+      @transitionToRoute('game.round', game, game.get('currentRound'))
