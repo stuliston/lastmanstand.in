@@ -16,7 +16,7 @@ namespace :db do
     afl = Competition.find_by(name: 'AFL')
     epl = Competition.find_by(name: 'Premier League')
 
-    Team.destroy_all
+    afl.teams.destroy_all
     adelaide          = Team.create!(name: 'Adelaide', competition: afl, abbreviated_name: 'ADE')
     brisbane          = Team.create!(name: 'Brisbane', competition: afl, abbreviated_name: 'BRI')
     carlton           = Team.create!(name: 'Carlton', competition: afl, abbreviated_name: 'CAR')
@@ -37,12 +37,10 @@ namespace :db do
     western_bulldogs  = Team.create!(name: 'Western Bulldogs', competition: afl, abbreviated_name: 'BUL')
 
     # Create a fixture for a single afl season
-    Season.destroy_all
+    afl.seasons.destroy_all
 
     afl_season_2013 = Season.create!(name: "2013 AFL Premiership Season", start_date: Date.new(2013, 6, 21), end_date: Date.new(2013, 12, 1), competition: afl)
     epl_season_2013 = Season.create!(name: "2013 English Premiership League", start_date: Date.new(2013, 6, 21), end_date: Date.new(2013, 12, 1), competition: epl)
-
-    Game.destroy_all
 
     game = Game.create!(name: 'Rob v Stu', season: afl_season_2013)
     game.game_memberships.create!(user: rob)
@@ -67,9 +65,6 @@ namespace :db do
     game.game_memberships.create!(user: dan)
     game.game_memberships.create!(user: phil)
     game.game_memberships.create!(user: ash)
-
-    Round.destroy_all
-    Fixture.destroy_all
 
     round_date = afl_season_2013.start_date
     paired_teams = []
@@ -129,8 +124,6 @@ namespace :db do
       round_date = round_date + 1.week
       round_number += 1
     end
-
-    Prediction.destroy_all
 
     User.all.each do |user|
       Game.all.each do |game|

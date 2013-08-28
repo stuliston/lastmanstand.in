@@ -1,6 +1,6 @@
 class Round < ActiveRecord::Base
   belongs_to :season
-  has_many :fixtures, dependent: :delete_all
+  has_many :fixtures, dependent: :destroy
 
   default_scope -> { order('number') }
 
