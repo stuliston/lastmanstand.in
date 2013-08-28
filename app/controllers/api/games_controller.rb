@@ -28,7 +28,7 @@ module Api
     private
 
     def game_params
-      params.require(:game).permit(:name, :season_id)
+      params.require(:game).permit(:name, :number_of_lives, :season_id)
     end
 
   end
