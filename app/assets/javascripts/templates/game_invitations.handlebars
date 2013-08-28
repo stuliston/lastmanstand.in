@@ -12,11 +12,11 @@
       <div class="name"><strong>{{invitation.game.name}}</strong> by {{invitation.invitedBy.name}}</div>
       <div class="actions">
         <button {{action 'accept' invitation}} class="accept primary">Join Game</button>
-        <button {{action 'dismissConfirm' invitation}} class="dismiss">Don't join</button>
+        <button {{action 'dismissConfirm' invitation}} class="dismiss alert">Don't join</button>
         <div class='dismiss-confirm-container'>
           <div class="dismiss-message">Are you sure you don't want to join this game?</div>
           <button {{action 'dismiss' invitation}} class="dismiss-confirm alert">Yes, Dismiss Invitation</button>
-          <button {{action 'dismissCancel' invitation}} class="dismiss-cancel">No, Cancel</button>
+          <button {{action 'dismissCancel' invitation}} class="dismiss-cancel secondary">No, Cancel</button>
         </div>
       </div>
     </li>
