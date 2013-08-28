@@ -15,6 +15,10 @@ LMS.GameController = Ember.ObjectController.extend
     @get('numberOfLives') - @get('gameMemberships').findProperty('user', @get('currentUser')).get('lostLives')
   ).property('numberOfLives', 'gameMemberships.@each.lostLives')
 
+  currentUserLostLives: (->
+    @get('numberOfLives') - @get('currentUserRemainingLives')
+  ).property('currentUserRemainingLives')
+
   isCurrentUserOutOfLives: Ember.computed.lte('currentUserRemainingLives', 0)
 
   #This is somewhat duplicated in game/membership_item_controller. Review later

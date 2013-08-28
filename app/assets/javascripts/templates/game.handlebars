@@ -6,6 +6,10 @@
       <strong>{{currentUserKnockoutFixture.winningTeam.name}}</strong> defeated <strong>{{currentUserKnockoutFixture.losingTeam.name}}</strong>.
       {{#linkTo 'games.new'}}Start a new game{{/linkTo}}
     </div>
+  {{else}}
+    <div class="remaining-lives">
+      {{playerLives currentUserRemainingLives currentUserLostLives}}
+    </div>
   {{/if}}
   {{#if currentUserIsWinner}}
     <div class="game-win-message">
