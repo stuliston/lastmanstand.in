@@ -29,6 +29,15 @@
         a
           color: lighten($base-text-color, 30)
 
+      &.is-current-round
+        background: darken($secondary-bg-color, 30)
+        .round-number
+          background: darken($secondary-bg-color, 5)
+          border-color: darken($secondary-bg-color, 10)
+          color: darken($secondary-bg-color, 40)
+        a
+          color: #fff
+
       &.correct .round-number
         background: lighten($success-color, 10)
         border-color: lighten($success-color, 15)

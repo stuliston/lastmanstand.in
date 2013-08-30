@@ -1,5 +1,5 @@
 {{#group}}
-  {{#view tagName="li" classNameBindings="selectionClass isBeforeGameStarted"}}
+  {{#view tagName="li" classNameBindings="selectionClass isBeforeGameStarted isCurrentRound"}}
     {{#linkTo 'game.round' this}}
       <div class="round-number">{{number}}</div>
       <div class="date">{{date startTime format="ddd dd/MM/yyyy"}}</div>
