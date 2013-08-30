@@ -14,13 +14,14 @@ LMS.ApplicationController = Ember.Controller.extend
     'platform' of navigator && (/iphone|ipod|ipad/gi).test(navigator.platform)
   ).property()
 
-  toggleNavigation: ->
-    @set('navigationVisible', !@get('navigationVisible'))
-
   currentPathDidChange: (->
     @hideNavigation()
     Ember.run.next(@, @scrollTop)
   ).observes('currentPath')
+
+  actions:
+    toggleNavigation: ->
+      @set('navigationVisible', !@get('navigationVisible'))
 
   hideNavigation: ->
     @set('navigationVisible', false)
@@ -28,14 +29,14 @@ LMS.ApplicationController = Ember.Controller.extend
   scrollTop: ->
     $('#main').scrollTop(0)
 
+  destroy: ->
+    clearInterval(@_timerId)
+
   #Not sure how often we want to trigger this? Maybe too often
   _trackCurrentTimeToSecond: ->
     @_timerId = setInterval(=>
       Ember.run => @set('currentTime', new Date())
     , 1000)
-
-  destroy: ->
-    clearInterval(@_timerId)
 
   _manageWindowWidth: ->
     calculateWindowWidth = =>

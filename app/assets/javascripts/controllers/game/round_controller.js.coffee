@@ -6,7 +6,6 @@ LMS.GameRoundController = Ember.ObjectController.extend
   currentUser: Ember.computed.alias('controllers.currentUser.model')
   isCurrentUserOutOfLives: Ember.computed.alias('controllers.game.isCurrentUserOutOfLives')
   currentTime: Ember.computed.alias('controllers.application.currentTime')
-
   game: Ember.computed.alias('controllers.game.model')
 
   init: ->
@@ -32,35 +31,37 @@ LMS.GameRoundController = Ember.ObjectController.extend
     @get('game.predictions').filter (prediction) -> prediction.get('fixture.round') == round
   ).property('predictions.@each.fixture', 'model')
 
-  #This and accompanying methods need some work.
-  selectWinner: (fixture, team) ->
-    return if @get('isCurrentUserOutOfLives')
 
-    game = @get('game')
-    store = @get('store')
+  actions:
+    #This and accompanying methods need some work.
+    selectWinner: (fixture, team) ->
+      return if @get('isCurrentUserOutOfLives')
 
-    if @_isTeamSelectableForGame(team, game)
-      if predictionToDelete = @_predictionForTeamInCurrentRound(team)
-        store.deleteRecord(predictionToDelete)
-        @_rollbackOnError(predictionToDelete)
+      game = @get('game')
+      store = @get('store')
+
+      if @_isTeamSelectableForGame(team, game)
+        if predictionToDelete = @_predictionForTeamInCurrentRound(team)
+          store.deleteRecord(predictionToDelete)
+          @_rollbackOnError(predictionToDelete)
+          store.commitDefaultTransaction()
+          return
+        else if predictionToDelete = @_predictionForTeamInFutureRound(team)
+          store.deleteRecord(predictionToDelete)
+          @_rollbackOnError(predictionToDelete)
+
+        if currentPrediction = @_predictionForGameAndRound()
+          currentPrediction.setProperties(fixture: fixture, team: team)
+          @_rollbackOnError(currentPrediction)
+        else
+          newPrediction = LMS.Prediction.createRecord
+            fixture: fixture,
+            team: team,
+            user: @get('currentUser'),
+            game: game
+          @_rollbackOnError(newPrediction)
+
         store.commitDefaultTransaction()
-        return
-      else if predictionToDelete = @_predictionForTeamInFutureRound(team)
-        store.deleteRecord(predictionToDelete)
-        @_rollbackOnError(predictionToDelete)
-
-      if currentPrediction = @_predictionForGameAndRound()
-        currentPrediction.setProperties(fixture: fixture, team: team)
-        @_rollbackOnError(currentPrediction)
-      else
-        newPrediction = LMS.Prediction.createRecord
-          fixture: fixture,
-          team: team,
-          user: @get('currentUser'),
-          game: game
-        @_rollbackOnError(newPrediction)
-
-      store.commitDefaultTransaction()
 
 
 

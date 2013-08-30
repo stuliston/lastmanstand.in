@@ -12,7 +12,7 @@ LMS.GameRoute = Ember.Route.extend
       @set('lastGame', game)
       game.reload() #last to return promise for router loading behaviour
 
-  events:
+  actions:
     willTransition: (transition) ->
       if !transition.targetName.match(/^game\./)
         @set('gameRefreshed', false)
