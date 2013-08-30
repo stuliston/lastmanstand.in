@@ -10,7 +10,6 @@ LMS.ApplicationController = Ember.Controller.extend
     @_manageWindowWidth()
     @_trackCurrentTimeToSecond()
 
-
   isIos: (->
     'platform' of navigator && (/iphone|ipod|ipad/gi).test(navigator.platform)
   ).property()
@@ -20,10 +19,14 @@ LMS.ApplicationController = Ember.Controller.extend
 
   currentPathDidChange: (->
     @hideNavigation()
+    Ember.run.next(@, @scrollTop)
   ).observes('currentPath')
 
   hideNavigation: ->
     @set('navigationVisible', false)
+
+  scrollTop: ->
+    $('#main').scrollTop(0)
 
   #Not sure how often we want to trigger this? Maybe too often
   _trackCurrentTimeToSecond: ->
