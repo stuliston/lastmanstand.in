@@ -22,4 +22,5 @@ LMS.GameRoute = Ember.Route.extend
 
   setupController: (controller, game) ->
     controller.set('model', game)
+    @controllerFor('gamePredictions').set('model', game.get('predictions'))
     @controllerFor('application').set('pageTitle', game.get('name'))

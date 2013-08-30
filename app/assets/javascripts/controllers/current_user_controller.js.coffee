@@ -1,6 +1,7 @@
 LMS.CurrentUserController = Ember.ObjectController.extend
 
   init: ->
+    @_super()
     @_pollForInvitations()
 
   _pollForInvitations: ->

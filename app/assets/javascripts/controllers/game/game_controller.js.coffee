@@ -1,8 +1,7 @@
 LMS.GameController = Ember.ObjectController.extend
 
   needs: ['currentUser']
-  currentUser: null
-  currentUserBinding: 'controllers.currentUser.model'
+  currentUser: Ember.computed.alias('controllers.currentUser.model')
 
   currentUserIncorrectPredictions: (->
     user = @get('currentUser')

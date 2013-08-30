@@ -7,3 +7,7 @@ window.LMS = Ember.Application.create
 #Ember.LOG_BINDINGS = true
 #Ember.LOG_STACKTRACE_ON_DEPRECATION = true
 #Ember.STRUCTURED_PROFILE = true
+
+Ember.RSVP.configure 'onerror', (e) ->
+  console.log(e.message)
+  console.log(e.stack)

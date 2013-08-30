@@ -1,9 +1,5 @@
 LMS.NavGameMembershipsController = Ember.ArrayController.extend
 
-  needs: ['currentUser']
-  modelBinding: 'controllers.currentUser.gameMemberships'
-  itemController: 'game_membership_item'
-
   currentGames: ( ->
     @_sortedGames(@filter((membership) -> !membership.get('isOutOfLives')).mapProperty('game'))
   ).property('@each.isOutOfLives')

@@ -1,11 +1,9 @@
 LMS.GamesNewController = Ember.ObjectController.extend
 
   needs: ['currentUser', 'featureToggles']
-  currentUser: null
-  featureToggles: null
   competitions: null
-  currentUserBinding: 'controllers.currentUser.model'
-  featureTogglesBinding: 'controllers.featureToggles'
+  currentUser: Ember.computed.alias('controllers.currentUser.model')
+  featureToggles: Ember.computed.alias('controllers.featureToggles')
 
   totalPlayers: (->
     @get('gameInvitations.length') + @get('gameMemberships.length')

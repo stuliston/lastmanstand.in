@@ -1,14 +1,10 @@
 LMS.RoundFixtureController = Ember.ObjectController.extend
 
   needs: ['predictions', 'gamePredictions', 'game']
-  game: null
-  predictions: null
-  gamePredictions: null
-  isCurrentUserOutOfLives: null
-  gameBinding: 'controllers.game.model'
-  predictionsBinding: 'controllers.predictions'
-  gamePredictionsBinding: 'controllers.gamePredictions'
-  isCurrentUserOutOfLivesBinding: 'controllers.game.isCurrentUserOutOfLives'
+  game: Ember.computed.alias('controllers.game.model')
+  predictions: Ember.computed.alias('controllers.predictions')
+  gamePredictions: Ember.computed.alias('controllers.gamePredictions')
+  isCurrentUserOutOfLives: Ember.computed.alias('controllers.game.isCurrentUserOutOfLives')
 
   #This method has had some performance tuning done on it as it's called A LOT.
   #Be sure to profile any changes before and after.

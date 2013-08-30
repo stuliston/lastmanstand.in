@@ -1,20 +1,16 @@
 LMS.GameRoundController = Ember.ObjectController.extend
 
-  needs: ['application', 'game', 'gameRounds', 'predictions', 'currentUser']
-  predictions: null
-  currentUser: null
-  isCurrentUserOutOfLives: null
-  currentTime: null
-  gameRounds: null
-  game: null
-  predictionsBinding: 'controllers.predictions'
-  currentUserBinding: 'controllers.currentUser.model'
-  isCurrentUserOutOfLivesBinding: 'controllers.game.isCurrentUserOutOfLives'
-  currentTimeBinding: 'controllers.application.currentTime'
-  gameRoundsBinding: 'controllers.gameRounds'
-  gameBinding: 'controllers.game.model'
+  needs: ['application', 'game', 'predictions', 'currentUser']
+  rounds: null
+  predictions: Ember.computed.alias('controllers.predictions')
+  currentUser: Ember.computed.alias('controllers.currentUser.model')
+  isCurrentUserOutOfLives: Ember.computed.alias('controllers.game.isCurrentUserOutOfLives')
+  currentTime: Ember.computed.alias('controllers.application.currentTime')
+
+  game: Ember.computed.alias('controllers.game.model')
 
   init: ->
+    @_super()
     @_pollForRoundClose()
 
   isRoundClosed: (->
@@ -23,13 +19,13 @@ LMS.GameRoundController = Ember.ObjectController.extend
 
   previousRound: (->
     previousRoundNumber = @get('number') - 1
-    @get('gameRounds').findProperty('number', previousRoundNumber)
-  ).property('gameRounds', 'model')
+    @get('rounds').findProperty('number', previousRoundNumber)
+  ).property('rounds', 'model')
 
   nextRound: (->
     nextRoundNumber = @get('number') + 1
-    @get('gameRounds').findProperty('number', nextRoundNumber)
-  ).property('gameRounds', 'model')
+    @get('rounds').findProperty('number', nextRoundNumber)
+  ).property('rounds', 'model')
 
   roundPredictions: (->
     round = @get('model')

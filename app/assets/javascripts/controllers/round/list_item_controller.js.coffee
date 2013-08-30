@@ -1,10 +1,8 @@
 LMS.RoundListItemController = Ember.ObjectController.extend
 
   needs: ['predictions', 'game']
-  game: null
-  predictions: null
-  gameBinding: 'controllers.game.model'
-  predictionsBinding: 'controllers.predictions'
+  game: Ember.computed.alias('controllers.game.model')
+  predictions: Ember.computed.alias('controllers.predictions')
 
   prediction: (->
     round = @get('model')

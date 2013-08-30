@@ -1,7 +1,7 @@
 LMS.GameInvitationsController = Ember.ArrayController.extend
 
   needs: ['currentUser']
-  modelBinding: 'controllers.currentUser.gameInvitations'
+  # model: Ember.computed.alias('controllers.currentUser.gameInvitations')
 
   areAnyInvitationsToAction: (->
     @some (invitation) -> invitation.get('isActioned') != true

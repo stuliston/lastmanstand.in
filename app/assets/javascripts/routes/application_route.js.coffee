@@ -5,7 +5,9 @@ LMS.ApplicationRoute = Ember.Route.extend
 
   setupController: (controller, model) ->
     controller.set('model', model)
-    @controllerFor('currentUser').set('model', model.get('currentUser')) #user id hacked into bootstrap html. fix later
+    @controllerFor('currentUser').set('model', model.get('currentUser'))
+    @controllerFor('navGameMemberships').set('model', model.get('currentUser.gameMemberships'))
+    @controllerFor('predictions').set('model', model.get('currentUser.predictions'))
 
   # events:
   #   error: (reason, transition) ->

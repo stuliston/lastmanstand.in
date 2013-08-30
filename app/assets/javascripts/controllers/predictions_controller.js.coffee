@@ -1,6 +1,4 @@
 LMS.PredictionsController = Ember.ArrayController.extend
-  needs: ['currentUser']
-  modelBinding: 'controllers.currentUser.predictions'
 
   byGame: (->
     grouped = {}
