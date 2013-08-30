@@ -1,17 +1,26 @@
-Ember.Handlebars.registerHelper 'playerLives', (remainingPath, lostPath) ->
+Ember.Handlebars.registerHelper 'playerLives', (options) ->
 
-  remaining = @get(remainingPath)
-  lost = @get(lostPath)
+  remaining = @get(options.hash.remainingPath)
+  lost = @get(options.hash.lostPath)
+
   total = remaining + lost
 
-  out = "<ul class='lives unstyled horizontal'><li class='summary'>"
+  out = "<ul class='lives unstyled horizontal #{options.hash.align}'>"
+
+  summaryItem = "<li class='summary'>"
 
   switch remaining
-    when 0 then out += "No lives"
-    when 1 then out += "1 life"
-    else out += "#{remaining} lives"
+    when 0 then summaryItem += "No lives"
+    when 1 then summaryItem += "1 life"
+    else summaryItem += "#{remaining} lives"
 
-  out += "</li>"
+  if options.hash.showLongDescription
+    summaryItem += " remaining"
+
+  summaryItem += "</li>"
+
+  if options.hash.align == 'right'
+    out += summaryItem
 
   for num in [0...total]
 
@@ -22,6 +31,9 @@ Ember.Handlebars.registerHelper 'playerLives', (remainingPath, lostPath) ->
       out += '<i class="spritemaps-life-remaining"></i>'
 
     out += '</li>'
+
+  if options.hash.align == 'left'
+    out += summaryItem
 
   out += '</ul>'
 

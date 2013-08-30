@@ -8,7 +8,7 @@
     </div>
   {{else}}
     <div class="remaining-lives">
-      {{playerLives currentUserRemainingLives currentUserLostLives}}
+      {{playerLives remainingPath=currentUserRemainingLives lostPath=currentUserLostLives align='left' showLongDescription=true}}
     </div>
   {{/if}}
   {{#if currentUserIsWinner}}

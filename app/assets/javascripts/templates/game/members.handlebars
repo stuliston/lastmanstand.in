@@ -4,7 +4,7 @@
     <img {{bindAttr src="user.avatarImageUrl"}} class="avatar" />
     <div class="details">
       <h3>{{user.name}}</h3>
-      {{playerLives remainingLives lostLives}}
+      {{playerLives remainingPath=remainingLives lostPath=lostLives align='right'}}
       <p class="correct-guesses elaboration">
         <strong>{{correctPredictions.length}}</strong> correct guesses so far
       </p>
@@ -19,7 +19,7 @@
     <img {{bindAttr src="user.avatarImageUrl"}} class="avatar" />
     <div class="details">
       <h3>{{user.name}}</h3>
-      {{playerLives remainingLives lostLives}}
+      {{playerLives remainingPath=remainingLives lostPath=lostLives align='right'}}
       <p class="knockout-message elaboration">
         {{#if knockoutFixture.draw}}
           <span>Knocked out in round {{knockoutFixture.round.number}} after
