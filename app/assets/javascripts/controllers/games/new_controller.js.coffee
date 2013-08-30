@@ -44,9 +44,8 @@ LMS.GamesNewController = Ember.ObjectController.extend
     models = Ember.A([game])
     models.addObjects(game.get('gameMemberships'))
     models.addObjects(game.get('gameInvitations'))
-
-    models.addObserver '@each.isNew', =>
-      @transitionToRoute('game.round', game, game.get('currentRound')) unless models.some((model) -> !model.get('id'))
+    models.addObserver '@each.id', =>
+      @transitionToRoute('game.rounds', game) unless models.some((model) -> !model.get('id'))
 
   cancel: ->
     @transitionToRoute(@get('indexRoute'))
