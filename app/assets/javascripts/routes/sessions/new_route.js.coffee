@@ -1,4 +1,4 @@
-LMS.SessionsNewRoute = Ember.Route.extend
+LMS.SessionsNewRoute = LMS.PublicRoute.extend
 
   model: ->
     LMS.Session.createRecord()
@@ -6,3 +6,7 @@ LMS.SessionsNewRoute = Ember.Route.extend
   setupController: (controller, session) ->
     controller.set('model', session)
     @controllerFor('application').set('pageTitle', "Sign In")
+
+  actions:
+    willTransition: ->
+      @get('currentModel')?.deleteRecord()

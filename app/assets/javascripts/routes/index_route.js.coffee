@@ -18,5 +18,3 @@ LMS.IndexRoute = Ember.Route.extend
       else
         @transitionTo 'games.new'
 
-
-

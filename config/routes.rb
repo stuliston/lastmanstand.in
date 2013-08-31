@@ -16,6 +16,7 @@ LastManStanding::Application.routes.draw do
     end
     resources :competitions, only: [ :index ]
     resources :games, only: [ :create, :show ]
+    resources :rounds, only: [ :index ]
     resources :predictions, only: [ :create, :update, :destroy ]
     resources :game_memberships, only: [ :create ]
     resources :game_invitations, only: [ :create, :destroy ]
