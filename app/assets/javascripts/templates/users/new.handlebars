@@ -1,0 +1,36 @@
+<div class="user-new">
+  <div class="form">
+    <div class="row">
+      {{view Ember.TextField valueBinding='name' name='name' placeholder='Name'}}
+    </div>
+    <div class="row">
+      {{view Ember.TextField valueBinding='email' name='email' placeholder='Email'}}
+    </div>
+    <div class="row">
+      {{view Ember.TextField type="password" valueBinding='password' placeholder='Password'}}
+      <div {{bindAttr class=':tip isPasswordLongEnough:valid:invalid'}}>Min 5 characters</div>
+    </div>
+    <div class="row">
+      {{view Ember.TextField type="password" valueBinding='passwordConfirmation' placeholder='Confirm Password'}}
+    </div>
+    {{#if errors.length}}
+      <div class="row">
+        <div class="alert">
+          <ul class="unstyled">
+            {{#each errors}}
+              <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+    <div class="row">
+      <button {{action cancel}} class="cancel secondary">Cancel</button>
+      <button {{action signIn}} class="submit primary" {{bindAttr disabled="isDisabled"}}>Sign In</button>
+    </div>
+    <div class="sign-in-message">
+      Already have an account? <br>
+      {{#linkTo 'sessions.new'}}Sign in.{{/linkTo}}
+    </div>
+  </div>
+</div>

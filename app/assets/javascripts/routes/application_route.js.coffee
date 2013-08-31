@@ -1,13 +1,12 @@
 LMS.ApplicationRoute = Ember.Route.extend
 
-  model: ->
-    Ember.Object.create(currentUser: LMS.User.find(currentUserId))
+  # model: ->
+  #   Ember.Object.create(currentUser: LMS.User.find(currentUserId))
 
   setupController: (controller, model) ->
-    controller.set('model', model)
-    @controllerFor('currentUser').set('model', model.get('currentUser'))
-    @controllerFor('navGameMemberships').set('model', model.get('currentUser.gameMemberships'))
-    @controllerFor('predictions').set('model', model.get('currentUser.predictions'))
+    currentUserController = @controllerFor('currentUser')
+    @controllerFor('navGameMemberships').set('model', currentUserController.get('gameMemberships'))
+    @controllerFor('predictions').set('model', currentUserController.get('predictions'))
 
   # events:
   #   error: (reason, transition) ->

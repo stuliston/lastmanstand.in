@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
   def show
-    redirect_to :welcome unless user_signed_in?
+    # redirect_to :welcome unless user_signed_in?
   end
 
   def welcome

@@ -20,4 +20,3 @@ LMS.Store = DS.Store.extend
   revision: 12
   adapter: LMS.Adapter.create
     namespace: 'api'
-

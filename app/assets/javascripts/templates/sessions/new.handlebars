@@ -1,0 +1,25 @@
+<div class="session-new">
+  <div class="form">
+    <div class="row">
+      {{view Ember.TextField valueBinding='email' name='email' placeholder='Email'}}
+    </div>
+    <div class="row">
+      {{view Ember.TextField type="password" valueBinding='password' placeholder='Password'}}
+    </div>
+    {{#if errorMessage}}
+      <div class="row">
+        <div class="alert">
+          {{errorMessage}}
+        </div>
+      </div>
+    {{/if}}
+    <div class="row">
+      <button {{action cancel}} class="cancel secondary">Cancel</button>
+      <button {{action signIn}} class="submit primary" {{bindAttr disabled="isDisabled"}}>Sign In</button>
+    </div>
+    <div class="sign-up-message">
+      Don't have an account yet? <br>
+      {{#linkTo 'users.new'}}Sign up for free.{{/linkTo}}
+    </div>
+  </div>
+</div>

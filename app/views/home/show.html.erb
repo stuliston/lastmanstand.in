@@ -1,9 +1,9 @@
 <%- content_for :head do %>
 
   <script>
-    var currentUserId = <%= current_user.id %>;
-    window.ENV = { EXPERIMENTAL_CONTROL_HELPER: true};
-    var userData = <%= UserSerializer.new(current_user, scope: current_user).to_json.html_safe %>;
+    <% if current_user.present? %>
+      var userData = <%= UserSerializer.new(current_user, scope: current_user).to_json.html_safe %>;
+    <% end %>
   </script>
 
   <%= javascript_include_tag "vendor" %>

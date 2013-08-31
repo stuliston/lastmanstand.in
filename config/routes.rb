@@ -5,6 +5,8 @@ LastManStanding::Application.routes.draw do
   get '/welcome', to: 'home#welcome', as: :welcome
   get '/games/*anything', to: 'home#show'
   get '/game_invitations', to: 'home#show'
+  get '/sessions/new', to: 'home#show'
+  get '/users/new', to: 'home#show'
 
   root to: 'home#show'
 
