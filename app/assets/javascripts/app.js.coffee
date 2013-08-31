@@ -11,3 +11,6 @@ window.LMS = Ember.Application.create
 Ember.RSVP.configure 'onerror', (e) ->
   console.log(e.message)
   console.log(e.stack)
+
+Ember.debugObj = (message) ->
+  Ember.Logger.debug("DEBUG: ", message)

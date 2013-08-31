@@ -34,4 +34,18 @@
   <div class="alert">
     There's no need to invite yourself.
   </div>
+{{else}}
+  {{#if view.isExistingMemberEmail}}
+    <div class="alert">
+      There's an existing member with this email.
+    </div>
+  {{/if}}
+  {{#if view.isExistingInvitationEmail}}
+    <div class="alert">
+      There's an existing invitation for this email
+    </div>
+  {{/if}}
+
 {{/if}}
+
+
