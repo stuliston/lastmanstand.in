@@ -27,5 +27,15 @@ LMS.GameEditController = Ember.ObjectController.extend
     invitations.addObjects(game.get('gameInvitations'))
     invitations.addObserver '@each.id', =>
       unless invitations.some((invitation) -> !invitation.get('id'))
-        @transitionToRoute('game.members', game)
+        Ember.run.next =>
+          @_resolveHasManyArray(game.get('gameInvitations'))
+          @transitionToRoute('game.members', game)
+
+  #This is to get around a bug in ember data that means hasMany arrays are not being
+  #marked as loaded so their promise is never resolved. When this happens, routes that
+  #load the hasMany relationship will never transition because they are waiting on the
+  #promise to resolve
+  _resolveHasManyArray: (invitations) ->
+    invitations.set('isLoaded', true)
+    invitations.resolve(invitations)
 

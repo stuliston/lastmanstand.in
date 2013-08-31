@@ -1,3 +1,4 @@
-# LMS.GamePendingInvitationsController = Ember.ArrayController.extend
+LMS.GamePendingInvitationsController = Ember.ArrayController.extend
 
-#   needs: ['game']
+  #we need this as we refer to game in template
+  needs: ['game']
