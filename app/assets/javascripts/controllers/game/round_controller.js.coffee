@@ -62,6 +62,7 @@ LMS.GameRoundController = Ember.ObjectController.extend
           @_rollbackOnError(newPrediction)
 
         store.commitDefaultTransaction()
+        @get('analytics').trackEvent(category: 'action', action: 'prediction')
 
 
 
