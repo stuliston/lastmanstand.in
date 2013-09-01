@@ -42,7 +42,6 @@ namespace :db do
     afl_season_2013 = Season.create!(name: "2013 AFL Premiership Season", start_date: Date.new(2013, 6, 21), end_date: Date.new(2013, 12, 1), competition: afl)
     epl_season_2013 = Season.create!(name: "2013 English Premiership League", start_date: Date.new(2013, 6, 21), end_date: Date.new(2013, 12, 1), competition: epl)
 
-    Game.where(season_id: nil).destroy_all
     game = Game.create!(name: 'Rob v Stu', season: afl_season_2013)
     game.game_memberships.create!(user: rob)
     game.game_memberships.create!(user: stu)
