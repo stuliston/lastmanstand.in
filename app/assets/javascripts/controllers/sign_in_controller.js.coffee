@@ -1,4 +1,4 @@
-LMS.SessionsNewController = Ember.ObjectController.extend
+LMS.SignInController = Ember.ObjectController.extend
 
   needs: ['currentUser']
 

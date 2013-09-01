@@ -1,12 +1,9 @@
 LMS.Router.map ->
 
-  this.resource('users', ->
-    this.route('new')
-  )
+  @route('sign_in')
 
-  this.resource('sessions', ->
-    this.route('new')
-    this.route('destroy')
+  @resource('users', ->
+    @route('new')
   )
 
   @resource('games', {path: '/games'}, ->

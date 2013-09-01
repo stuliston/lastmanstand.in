@@ -3,7 +3,7 @@ LMS.IndexRoute = Ember.Route.extend
   afterModel: ->
     currentUser = @controllerFor('currentUser').get('model')
     if !currentUser
-      @transitionTo 'sessions.new'
+      @transitionTo 'sign_in'
     else
       currentGames = currentUser.get('gameMemberships').mapProperty('game')
 
