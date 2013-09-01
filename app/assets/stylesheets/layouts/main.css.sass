@@ -69,6 +69,10 @@ ul.horizontal
   #header
     height: $header-height-phone
     -webkit-transform: translate3d(0,0,0)
+    -webkit-transform: translateZ(0)
+    -webkit-perspective: 1000
+    -webkit-backface-visiblility: hidden
+
     h1
       text-align: center
       color: $light-grey
@@ -78,6 +82,10 @@ ul.horizontal
 
   #navigation
     -webkit-transform: translate3d(0,0,0)
+    -webkit-transform: translateZ(0)
+    -webkit-perspective: 1000
+    -webkit-backface-visiblility: hidden
+
     width: $nav-width-phone
     top: 0
     left: 0
@@ -87,6 +95,10 @@ ul.horizontal
     bottom: auto
 
   #main
+    -webkit-transform: translateZ(0)
+    -webkit-perspective: 1000
+    -webkit-backface-visiblility: hidden
+
     overflow-y: auto
     -webkit-overflow-scrolling: touch
     left: 0
