@@ -1,5 +1,7 @@
 <%- content_for :head do %>
 
+  <meta name="app-version" content="<%= @git_sha %>">
+
   <script>
     <% if current_user.present? %>
       var userData = <%= UserSerializer.new(current_user, scope: current_user).to_json.html_safe %>;

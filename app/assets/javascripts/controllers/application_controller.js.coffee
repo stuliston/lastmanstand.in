@@ -5,6 +5,7 @@ LMS.ApplicationController = Ember.Controller.extend
   isPhone: false
   windowWidth: 0
   currentTime: new Date()
+  isNewVersionAvailable: false
 
   init: ->
     @_super()
@@ -23,12 +24,9 @@ LMS.ApplicationController = Ember.Controller.extend
   actions:
     toggleNavigation: ->
       @set('navigationVisible', !@get('navigationVisible'))
-    signOut: ->
-      @get('controllers.currentUser').set('content', undefined);
-      session = App.Session.all().get('firstObject')
-      session.deleteRecord();
-      controller.store.commit();
-      @transitionToRoute('index');
+    reload: ->
+      window.location.reload()
+
 
   hideNavigation: ->
     @set('navigationVisible', false)

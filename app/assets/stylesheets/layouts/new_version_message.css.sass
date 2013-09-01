@@ -1,0 +1,35 @@
+.new-version-mask
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  height: 0
+  background: #000
+  opacity: 0.8
+  &.is-new-version-available
+    height: auto
+    bottom: 0
+
+.new-version-message
+  -webkit-transform: translate3d(0,0,0)
+  -webkit-transform: translateZ(0)
+  -webkit-perspective: 1000
+  -webkit-backface-visiblility: hidden
+  @include transition(all, .8s)
+  background: $info-color
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  height: 0
+  overflow: hidden
+  text-align: center
+  color: #fff
+  &.is-new-version-available
+    height: 150px
+  .inner
+    position: absolute
+    left: 0
+    right: 0
+    bottom: 0
+    padding: 2em

@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+
+  GIT_SHA ||= `git rev-parse HEAD`.chomp
+
   protect_from_forgery with: :exception
   respond_to :html, :json
 
@@ -14,6 +17,11 @@ class ApplicationController < ActionController::Base
   end
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
+
+  before_filter do
+    headers['X-GitSHA'] = GIT_SHA
+    @git_sha = GIT_SHA
+  end
 
   protected
 

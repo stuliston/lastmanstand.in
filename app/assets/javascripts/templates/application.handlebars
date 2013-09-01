@@ -10,6 +10,15 @@
     <h1>{{pageTitle}}</h1>
   </div>
   <div id="main">
-      {{outlet}}
+    {{outlet}}
+    <div {{bindAttr class=":new-version-mask isNewVersionAvailable"}}></div>
+    <div {{bindAttr class=":new-version-message isNewVersionAvailable"}}>
+      <div class="inner">
+        <p>
+          A new version of the app is available.
+        </p>
+        <button class="primary" {{action 'reload'}}>Get the Latest</button>
+      </div>
+    </div>
   </div>
 </div>
