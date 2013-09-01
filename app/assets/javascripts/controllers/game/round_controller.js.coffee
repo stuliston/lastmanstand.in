@@ -62,7 +62,12 @@ LMS.GameRoundController = Ember.ObjectController.extend
           @_rollbackOnError(newPrediction)
 
         store.commitDefaultTransaction()
-        @get('analytics').trackEvent(category: 'action', action: 'prediction')
+
+        @get('analytics').trackEvent
+          category: 'action'
+          action: 'prediction'
+          label: "#{game.get('name')} - Round #{fixture.get('round.number')}"
+          value: team.get('name')
 
 
 

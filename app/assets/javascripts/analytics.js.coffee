@@ -15,4 +15,5 @@ LMS.Analytics = Ember.Object.extend
 
   trackEvent: (options) ->
     if options.category && options.action
+      console.log options
       ga('send', 'event', options.category, options.action, options.label, options.value)
