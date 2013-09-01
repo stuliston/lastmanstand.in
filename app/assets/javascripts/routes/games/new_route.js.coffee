@@ -1,4 +1,5 @@
-LMS.GamesNewRoute = Ember.Route.extend
+#= require ../authenticated_route
+LMS.GamesNewRoute = LMS.AuthenticatedRoute.extend
 
   model: ->
     LMS.Game.createRecord()

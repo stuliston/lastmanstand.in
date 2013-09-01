@@ -1,4 +1,5 @@
-LMS.GameIndexRoute = Ember.Route.extend
+#= require ../authenticated_route
+LMS.GameIndexRoute = LMS.AuthenticatedRoute.extend
 
   model: ->
     @modelFor('game')

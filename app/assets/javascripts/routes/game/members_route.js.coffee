@@ -1,4 +1,5 @@
-LMS.GameMembersRoute = Ember.Route.extend
+#= require ../authenticated_route
+LMS.GameMembersRoute = LMS.AuthenticatedRoute.extend
 
   model: ->
     @modelFor('game').get('gameMemberships')
@@ -6,3 +7,4 @@ LMS.GameMembersRoute = Ember.Route.extend
   setupController: (controller, memberships) ->
     controller.set('model', memberships)
     controller.set('gameInvitations', @modelFor('game').get('gameInvitations'))
+    @controllerFor('application').set('pageTitle', @modelFor('game').get('name'))

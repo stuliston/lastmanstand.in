@@ -4,6 +4,7 @@ LMS.SignInController = Ember.ObjectController.extend
 
   errorMessage: null
   isSubmitting: false
+  afterSignInTransition: null
 
   isEmailValid: (->
     LMS.EmailValidator.isValid(@get('email'))
@@ -33,7 +34,10 @@ LMS.SignInController = Ember.ObjectController.extend
         @get('store').adapterForType(LMS.User).didFindRecord(@get('store'), LMS.User, response)
         user = LMS.User.find(response.user.id)
         @get('controllers.currentUser').set('model', user)
-        @transitionToRoute('index')
+        if @get('afterSignInTransition')
+          @get('afterSignInTransition').retry()
+        else
+          @transitionToRoute('index')
       ).fail((response) =>
         @set('errorMessage', response.responseJSON.error)
       ).always( =>
