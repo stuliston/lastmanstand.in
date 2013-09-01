@@ -1,4 +1,4 @@
-<div class="user-new">
+<div {{bindAttr class=":sign-up isSaving"}}>
   <div class="form">
     <div class="row">
       {{view Ember.TextField valueBinding='name' name='name' placeholder='Name'}}
@@ -26,7 +26,7 @@
     {{/if}}
     <div class="row">
       <button {{action cancel}} class="cancel secondary">Cancel</button>
-      <button {{action signIn}} class="submit primary" {{bindAttr disabled="isDisabled"}}>Sign In</button>
+      <button {{action signIn}} class="submit primary" {{bindAttr disabled="isDisabled"}}><i class="icon-refresh icon-spin icon"></i><span>Sign Up</span></button>
     </div>
     <div class="sign-in-message">
       Already have an account? <br>

@@ -1,10 +1,7 @@
 LMS.Router.map ->
 
   @route('sign_in')
-
-  @resource('users', ->
-    @route('new')
-  )
+  @route('sign_up')
 
   @resource('games', {path: '/games'}, ->
     @route('new')

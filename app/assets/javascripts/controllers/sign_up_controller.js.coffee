@@ -1,9 +1,9 @@
-LMS.UsersNewController = Ember.ObjectController.extend
+LMS.SignUpController = Ember.ObjectController.extend
 
   needs: ['currentUser']
 
   errors: null
-  isSubmitting: false
+  isSaving: false
 
   isEmailValid: (->
     LMS.EmailValidator.isValid(@get('email'))
@@ -19,7 +19,7 @@ LMS.UsersNewController = Ember.ObjectController.extend
 
   isValid: Ember.computed.and('name', 'isEmailValid', 'isPasswordLongEnough', 'isPasswordConfirmed')
   isInvalid: Ember.computed.not('isValid')
-  isDisabled: Ember.computed.or('isInvalid', 'isSubmitting')
+  isDisabled: Ember.computed.or('isInvalid', 'isSaving')
 
   emailDidChange: (->
     @set('errors', null)
@@ -27,7 +27,7 @@ LMS.UsersNewController = Ember.ObjectController.extend
 
   actions:
     signIn: ->
-      @set('isSubmitting', true)
+      @set('isSaving', true)
       user = @get('model')
 
       $.ajax('/users', {
@@ -47,7 +47,7 @@ LMS.UsersNewController = Ember.ObjectController.extend
       ).fail((response) =>
         @set('errors', @_parseErrors(response.responseJSON.errors))
       ).always( =>
-        @set('isSubmitting', false)
+        @set('isSaving', false)
       )
 
     cancel: ->

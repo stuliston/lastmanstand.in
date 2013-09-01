@@ -3,7 +3,7 @@ LMS.SignInController = Ember.ObjectController.extend
   needs: ['currentUser']
 
   errorMessage: null
-  isSubmitting: false
+  isSaving: false
   afterSignInTransition: null
 
   isEmailValid: (->
@@ -12,11 +12,11 @@ LMS.SignInController = Ember.ObjectController.extend
 
   isValid: Ember.computed.and('isEmailValid', 'password')
   isInvalid: Ember.computed.not('isValid')
-  isDisabled: Ember.computed.or('isInvalid', 'isSubmitting')
+  isDisabled: Ember.computed.or('isInvalid', 'isSaving')
 
   actions:
     signIn: ->
-      @set('isSubmitting', true)
+      @set('isSaving', true)
       data =
         remote: true
         commit: "Sign in"
@@ -41,7 +41,7 @@ LMS.SignInController = Ember.ObjectController.extend
       ).fail((response) =>
         @set('errorMessage', response.responseJSON.error)
       ).always( =>
-        @set('isSubmitting', false)
+        @set('isSaving', false)
       )
 
     cancel: ->

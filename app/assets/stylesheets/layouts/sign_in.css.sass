@@ -1,13 +1,22 @@
-.sign-in
+.sign-in, .sign-up
 
-  button.submit
+  &.is-saving
+    .submit
+      span
+        display: none
+      i
+        display: block
+
+  .submit
     float: right
     width: 48%
+    i
+      display: none
 
-  button.cancel
+  .cancel
     width: 48%
 
-  .sign-up-message
+  .sign-in-message, .sign-up-message
     margin-top: 1.5em
     text-align: center
     a
