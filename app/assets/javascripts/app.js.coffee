@@ -9,8 +9,10 @@ window.LMS = Ember.Application.create
 #Ember.STRUCTURED_PROFILE = true
 
 Ember.RSVP.configure 'onerror', (e) ->
+  ga('send', 'event', 'rsvp error', e.message)
   console.log(e.message)
   console.log(e.stack)
 
 Ember.debugObj = (message) ->
   Ember.Logger.debug("DEBUG: ", message)
+
