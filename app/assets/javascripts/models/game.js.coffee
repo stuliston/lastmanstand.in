@@ -22,7 +22,7 @@ LMS.Game = DS.Model.extend
     now = new XDate()
     rounds = @get('season.rounds')
     #What should the rules be for this ?? Tues - Mon?
-    rounds.find((round) ->
+    rounds?.find((round) ->
       if round.get('startTime')
         start = new XDate(round.get('startTime'))
         diffDays = Math.round(now.diffDays(start))

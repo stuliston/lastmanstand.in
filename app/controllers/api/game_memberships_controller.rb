@@ -8,7 +8,7 @@ module Api
 
     def create
       if @game_membership.save!
-        render json: @game_membership, serializer: ShallowGameMembershipSerializer, root: 'game_membership'
+        render json: @game_membership, serializer: GameMembershipSerializer, root: 'game_membership'
       end
     end
 
