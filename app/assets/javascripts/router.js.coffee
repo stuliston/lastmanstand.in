@@ -2,6 +2,8 @@ LMS.Router.map ->
 
   @route('sign_in')
   @route('sign_up')
+  @route('reset_password')
+  @route('change_password', {path: '/change_password/:reset_password_token'})
 
   @resource('games', {path: '/games'}, ->
     @route('new')

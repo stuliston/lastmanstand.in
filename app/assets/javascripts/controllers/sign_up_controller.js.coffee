@@ -51,7 +51,6 @@ LMS.SignUpController = Ember.ObjectController.extend
       )
 
     cancel: ->
-      @get('model').deleteRecord()
       @transitionToRoute('index')
 
   _parseErrors: (errorsObj) ->

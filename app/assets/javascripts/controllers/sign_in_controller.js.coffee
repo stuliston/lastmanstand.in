@@ -45,5 +45,4 @@ LMS.SignInController = Ember.ObjectController.extend
       )
 
     cancel: ->
-      @get('model').deleteRecord()
       @transitionToRoute('index')

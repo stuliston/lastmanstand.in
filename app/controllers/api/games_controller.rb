@@ -1,6 +1,6 @@
 module Api
-
   class GamesController < ApplicationController
+
     respond_to :json
 
     load_and_authorize_resource

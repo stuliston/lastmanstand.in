@@ -1,7 +1,7 @@
 <div {{bindAttr class=":sign-in isSaving"}}>
   <div class="form">
     <div class="row">
-      {{view Ember.TextField valueBinding='email' name='email' placeholder='Email'}}
+      {{view Ember.TextField type="email" valueBinding='email' name='email' placeholder='Email'}}
     </div>
     <div class="row">
       {{view Ember.TextField type="password" valueBinding='password' placeholder='Password'}}
@@ -20,6 +20,10 @@
     <div class="sign-up-message">
       Don't have an account yet? <br>
       {{#linkTo 'sign_up'}}Sign up for free.{{/linkTo}}
+    </div>
+    <div class="reset-password-message">
+      Forgotten your password? <br>
+      {{#linkTo 'reset_password'}}Reset it here.{{/linkTo}}
     </div>
   </div>
 </div>
