@@ -18,3 +18,5 @@ LMS.IndexRoute = Ember.Route.extend
       else
         @transitionTo 'games.new'
 
+  setupController: (controller, model) ->
+    @controllerFor('application').set('pageTitle', "Install")
