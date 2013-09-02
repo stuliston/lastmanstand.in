@@ -3,7 +3,11 @@ LMS.GameRoundRoute = LMS.AuthenticatedRoute.extend
 
   model: (params) ->
     game = @modelFor('game')
-    game.get('season.rounds').findProperty('number', Number(params.round_number))
+    game.get('season.rounds').then (rounds) ->
+      if round = rounds.findProperty('number', Number(params.round_number))
+        round
+      else
+        Ember.RSVP.reject(status: 404)
 
   setupController: (controller, round) ->
     controller.set('model', round)

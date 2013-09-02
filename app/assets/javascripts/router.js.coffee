@@ -16,5 +16,7 @@ LMS.Router.map ->
   )
   @resource('game_invitations')
 
+  @route('not_found')
+
 LMS.Router.reopen
   location: 'history'

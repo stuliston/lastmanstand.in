@@ -1,10 +1,15 @@
 LMS.AuthenticatedRoute = Ember.Route.extend
 
   beforeModel: ->
-    throw "Not Authenticated" unless @controllerFor('currentUser').get('model')
+    Ember.RSVP.reject(status: 401) unless @controllerFor('currentUser').get('model')
 
   actions:
     error: (reason, transition) ->
-      signInController = @controllerFor('signIn')
-      signInController.set('afterSignInTransition', transition)
-      @transitionTo('sign_in')
+      if reason.status == 401
+        signInController = @controllerFor('signIn')
+        signInController.set('afterSignInTransition', transition)
+        @transitionTo('sign_in')
+      else if reason.status == 404
+        @transitionTo('not_found')
+
+NOT_AUTHENTICATED = 401

@@ -23,12 +23,18 @@ class ApplicationController < ActionController::Base
     @git_sha = GIT_SHA
   end
 
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+
   protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) do |u|
       u.permit(:email, :remember_me, :password, :password_confirmation, :name )
     end
+  end
+
+  def record_not_found
+    render :nothing => true, :status => 404
   end
 
 end

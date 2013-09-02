@@ -8,7 +8,9 @@ LMS.GameRoute = LMS.AuthenticatedRoute.extend
     @controllerFor('application').hideNavigation()
 
   model: (params) ->
-    LMS.Game.find(params.game_id)
+    success = (game) -> game
+    error = (error) -> Ember.RSVP.reject(status: 404)
+    LMS.Game.find(params.game_id).then(success, error)
 
   afterModel: (game) ->
     if game.get('isLoaded') && (!@get('gameRefreshed') || @get('lastGame') != game)
