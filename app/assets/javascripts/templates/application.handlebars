@@ -2,11 +2,13 @@
 
 <div id="main-wrapper" {{bindAttr class="navigationVisible isPhone"}}>
   <div id="header">
-    <button class="nav-toggle" {{action "toggleNavigation"}}>
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
+    {{#if controllers.currentUser.isSignedIn}}
+      <button class="nav-toggle" {{action "toggleNavigation"}}>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    {{/if}}
     <h1>{{pageTitle}}</h1>
   </div>
   <div id="main">
