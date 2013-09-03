@@ -26,7 +26,7 @@ LMS.Game = DS.Model.extend
       if round.get('startTime')
         start = new XDate(round.get('startTime'))
         diffDays = Math.round(now.diffDays(start))
-        diffDays > -3 && diffDays <= 4
+        diffDays >= -3 && diffDays <= 4
     )
   ).property('season.rounds.@each')
 
