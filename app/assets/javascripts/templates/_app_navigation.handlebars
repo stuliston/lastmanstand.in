@@ -6,7 +6,7 @@
         <ul class="unstyled">
         {{#each game in currentGames}}
           <li>
-            {{#linkTo 'game.round' game game.currentRound}}
+            {{#linkTo 'game' game}}
               <div class="name">{{game.name}}</div>
             {{/linkTo}}
           </li>
@@ -18,7 +18,7 @@
         <ul class="unstyled">
         {{#each game in pastGames}}
           <li>
-            {{#linkTo 'game.round' game game.currentRound}}
+            {{#linkTo 'game' game}}
               <div class="name">{{game.name}}</div>
             {{/linkTo}}
           </li>
