@@ -148,6 +148,6 @@ namespace :db do
       end
     end
 
-    Fixture.all.each {|fixture| fixture.update_lives!}
+    GameMembership.all.each {|game_membership| game_membership.update_lives!}
   end
 end
