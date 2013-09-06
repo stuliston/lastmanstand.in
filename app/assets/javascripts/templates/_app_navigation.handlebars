@@ -1,34 +1,50 @@
 <div id="navigation">
-  <ul class="games unstyled">
-    {{#render 'nav_game_memberships'}}
-      <li class="current-games"><i></i>
-        <h4>Current Games</h4>
-        <ul class="unstyled">
-        {{#each game in currentGames}}
-          <li>
-            {{#linkTo 'game' game}}
-              <div class="name">{{game.name}}</div>
-            {{/linkTo}}
+  {{#if controllers.currentUser.isSignedIn}}
+    <ul class="games unstyled">
+      {{#render 'nav_game_memberships'}}
+        {{#if currentGames.length}}
+          <li class="current-games">
+            <h4>Current Games</h4>
+            <ul class="unstyled">
+            {{#each game in currentGames}}
+              <li>
+                {{#linkTo 'game' game}}
+                  {{game.name}}
+                {{/linkTo}}
+              </li>
+            {{/each}}
+            </ul>
           </li>
-        {{/each}}
-        </ul>
-      </li>
-      <li class="completed-games"><i></i>
-        <h4>Past Games</h4>
-        <ul class="unstyled">
-        {{#each game in pastGames}}
-          <li>
-            {{#linkTo 'game' game}}
-              <div class="name">{{game.name}}</div>
-            {{/linkTo}}
+        {{/if}}
+        {{#if pastGames.length}}
+          <li class="past-games"><i></i>
+            <h4>Past Games</h4>
+            <ul class="unstyled">
+            {{#each game in pastGames}}
+              <li>
+                {{#linkTo 'game' game}}
+                  {{game.name}}
+                {{/linkTo}}
+              </li>
+            {{/each}}
+            </ul>
           </li>
-        {{/each}}
-        </ul>
-      </li>
-    {{/render}}
-  </ul>
-  <ul class="actions unstyled horizontal">
-    <li>{{#linkTo "games.new"}}<i></i>New Game{{/linkTo}}</li>
-    <li><a href="/users/sign_out" class="btn">Log out</a></li>
-  </ul>
+        {{/if}}
+      {{/render}}
+    </ul>
+    <ul class="actions unstyled horizontal">
+      <li class="sign-out"><a href="/users/sign_out" title="Sign out"><i class="icon-signout"></i></a></li>
+      <li class="create-game">{{#linkTo "games.new" title="Create game"}}<i class="icon-plus-sign"></i>{{/linkTo}}</li>
+    </ul>
+  {{else}}
+    <div class="signed-out-message">
+      <p>
+        Sign in or create an account to play a game or two of Last Man Standing with your mates.
+      </p>
+      <p>
+        We're just getting started so let us know what you think, or more importantly
+        what you'd like to see in the game. We'd love to hear from you.
+      </p>
+    </div>
+  {{/if}}
 </div>

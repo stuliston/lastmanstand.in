@@ -1,39 +1,68 @@
+body
+  background: #ccc
 
 #main
   background: $primary-bg-color
+  position: absolute
+  top: $header-height-phone
+  left: 0
+  right: 0
+  bottom: 0
+  z-index: 2
+  overflow-y: auto
+  -webkit-transform: translateZ(0)
+  -webkit-perspective: 1000
+  -webkit-backface-visiblility: hidden
+  -webkit-overflow-scrolling: touch
 
-.fill-layout
+#main-wrapper
+  width: 100%
   position: absolute
   top: 0
   bottom: 0
   left: 0
-  right: 0
-  overflow: hidden
-
-#main-wrapper
-  width: 100%
+  background: $primary-bg-color
+  @include transition(all, 0.3s)
+  &.navigation-visible
+    left: 260px
+    opacity: 0.5
 
 #header
   position: absolute
   top: 0
   left: 0
   right: 0
-  height: $header-height
-  line-height: $header-height
+  height: $header-height-phone
+  -webkit-transform: translate3d(0,0,0)
+  -webkit-transform: translateZ(0)
+  -webkit-perspective: 1000
+  -webkit-backface-visiblility: hidden
+
+  h1
+    text-align: center
+    color: $light-grey
+    margin: 0 20px
+    line-height: $header-height-phone
+    font-size: 1em
 
 #navigation
   position: absolute
-  top: $header-height
+  top: 0
   left: 0
   right: 0
-  height: $nav-height
+  overflow: hidden
+  -webkit-transform: translate3d(0,0,0)
+  -webkit-transform: translateZ(0)
+  -webkit-perspective: 1000
+  -webkit-backface-visiblility: hidden
 
-#main
+.application
   position: absolute
-  top: $header-height + $nav-height
+  top: 0
+  bottom: 0
   left: 0
   right: 0
-  bottom: 0
+  overflow: hidden
 
 .content, .form
   padding: 20px
@@ -50,58 +79,38 @@ ul.horizontal
   li
     display: inline-block
 
-
-@include phone-and-tablet-portrait
-
-  #main-wrapper
-    position: absolute
-    top: 0
-    bottom: 0
-    left: 0
-    width: 100% //set as fixed on mobiles on load
-
-    background: $primary-bg-color
-    @include transition(all, 0.3s)
-    &.navigation-visible
-      left: 260px
-      opacity: 0.5
-
-  #header
-    height: $header-height-phone
-    -webkit-transform: translate3d(0,0,0)
-    -webkit-transform: translateZ(0)
-    -webkit-perspective: 1000
-    -webkit-backface-visiblility: hidden
-
-    h1
-      text-align: center
-      color: $light-grey
-      margin: 0 20px
-      line-height: $header-height-phone
-      font-size: 1em
+@include tablet
+  .application
+    position: relative
+    overflow: visible
+    &:after
+      content: ""
+      display: table
+      clear: both
+  #viewporter
+    position: relative
+    width: 768px
+    margin: 20px auto
+    background: $nav-bg-color-desktop
+    border-top: 4px solid lighten($primary-color, 10)
+    border-bottom: none
 
   #navigation
-    -webkit-transform: translate3d(0,0,0)
-    -webkit-transform: translateZ(0)
-    -webkit-perspective: 1000
-    -webkit-backface-visiblility: hidden
+    width: 230px
+    float: right
+    position: relative
+    overflow: visible
 
-    width: $nav-width-phone
-    top: 0
-    left: 0
-    right: 0
-    width: auto
-    overflow: hidden
-    bottom: auto
+  #main-wrapper
+    position: relative
+    width: 538px
+    float: left
+    overflow: visible
+    #header, #main
+      position: relative
+      top: 0
 
   #main
-    -webkit-transform: translateZ(0)
-    -webkit-perspective: 1000
-    -webkit-backface-visiblility: hidden
-
     overflow-y: auto
-    -webkit-overflow-scrolling: touch
-    left: 0
-    top: $header-height-phone
-    z-index: 2
+    height: 700px
 

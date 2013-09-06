@@ -1,90 +1,102 @@
 #navigation
-  background: $secondary-bg-color
+  z-index: 0
+  // height: $header-height-phone
+  display: block
+  height: auto
+  bottom: 0
+  background: $nav-bg-color-phone
+  padding-top: 1em
 
-  li
-    display: inline-block
-
-  li ul
-    display: none
-
-  h4, a
-    display: inline-block
-    padding: 15px 10px 15px 10px
-  h4
-    margin: 0
-    color: #666
-    @include type-setter(1, 1, bold)
-
-  a, a:visited, a:active
-    color: #888
-    text-decoration: none
-
-  a:hover
-    color: darken(#888, 10)
-
-  a.active
-    color: darken(#888, 30)
-
-@include phone-and-tablet-portrait
-
-  #navigation
-    z-index: 0
-    height: $header-height-phone
-    display: block
-    height: auto
-    bottom: 0
-    background: $nav-bg-color-phone
+  .games
+    overflow-y: auto
+    -webkit-overflow-scrolling: touch
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: $nav-actions-height-phone
     padding-top: 1em
 
+  li
+    -webkit-transform: translate3d(0,0,0)
+    display: block
+    ul
+      display: block
+      padding: 10px 15px
+    li
+      border: none
+
+  h4
+    color: #e1e1e1
+    font-size: 1em
+    margin: 0
+  a, h4
+    padding: 8px 20px
+
+
+  a, a:visited, a:active
+    color: $secondary-color
+    text-decoration: none
+    display: block
+
+  a:hover
+    color: lighten($secondary-color, 10)
+
+  a.active
+    color: lighten($secondary-color, 30)
+
+  .actions
+    +inline-block-list
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    height: $nav-actions-height-phone
+    background: lighten($nav-bg-color-phone, 10)
+    li
+      padding: 0.5em
+    a
+      background: lighten($nav-bg-color-phone, 15)
+      @include border-radius(20px)
+      padding: 7px 9px
+      @include transition(all, 0.2s)
+      &:active
+        background: lighten($primary-color, 15)
+      &.active
+        background: $primary-color
+
+    .sign-out a
+      padding-right: 8px
+
+    .create-game
+      float: right
+      margin-right: 70px
+
+  .signed-out-message
+    padding: 0 2em
+    p
+      font-size: 0.9em
+      color: #ddd
+
+@include tablet
+  #navigation
+    background: transparent
     .games
-      overflow-y: auto
-      -webkit-overflow-scrolling: touch
+      position: relative
+      margin-top: 34px
+      padding-top: 0
+      font-size: 0.8em
+      h4
+        padding: 8px 15px
+        background: lighten($nav-bg-color-phone, 5)
+      a
+        padding: 0.5em 0
+    .actions
       position: absolute
       top: 0
-      left: 0
-      right: 0
-      bottom: $nav-actions-height-phone
-      padding-top: 1em
-
-    li
-      -webkit-transform: translate3d(0,0,0)
-      display: block
-      ul
-        display: block
-        padding: 0 15px
-      li
-        border: none
-
-    h4
-      color: #fff
-      font-size: 1em
-    a, h4
-      padding: 8px 20px
-
-
-    a, a:visited, a:active
-      color: $secondary-color
-      text-decoration: none
-      display: block
-
-    a:hover
-      color: lighten($secondary-color, 10)
-
-    a.active
-      color: lighten($secondary-color, 30)
-
-    .actions
-      +inline-block-list
-      position: absolute
-      bottom: 0
-      left: 0
-      right: 0
-      height: $nav-actions-height-phone
-      background: lighten($nav-bg-color-phone, 10)
-      li
-        padding: 0.5em
-      a
-        background: lighten($nav-bg-color-phone, 15)
-        @include border-radius($border-radius)
-        // line-height: $nav-actions-height-phone / 2
+      height: $nav-actions-height-desktop
+      .sign-out
+        float: right
+      .create-game
+        float: left
 

@@ -4,8 +4,8 @@ LMS.GameRoute = LMS.AuthenticatedRoute.extend
   gameRefreshed: false
 
   beforeModel: ->
-    @_super()
     @controllerFor('application').hideNavigation()
+    @_super()
 
   model: (params) ->
     success = (game) -> game

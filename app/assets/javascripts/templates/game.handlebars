@@ -3,7 +3,7 @@
   {{#if isCurrentUserOutOfLives}}
     <div class="knockout-message">
       You were knocked out in round {{currentUserKnockoutFixture.round.number}} when
-      <strong>{{currentUserKnockoutFixture.winningTeam.name}}</strong> defeated <strong>{{currentUserKnockoutFixture.losingTeam.name}}</strong>.
+      <strong>{{currentUserKnockoutFixture.winningTeam.name}}</strong> defeated <strong>{{currentUserKnockoutFixture.losingTeam.name}}</strong>.<br>
       {{#linkTo 'games.new'}}Start a new game{{/linkTo}}
     </div>
   {{else}}
@@ -13,7 +13,7 @@
   {{/if}}
   {{#if currentUserIsWinner}}
     <div class="game-win-message">
-      Congrats! You're the last man standing!
+      Congrats! You're the last man standing!<br>
       {{#linkTo 'games.new'}}Start a new game{{/linkTo}}
     </div>
   {{/if}}
