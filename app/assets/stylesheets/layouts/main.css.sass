@@ -1,5 +1,6 @@
 body
   background: #ccc
+  height: 100%
 
 #main
   background: $primary-bg-color
@@ -90,7 +91,6 @@ ul.horizontal
   #viewporter
     position: relative
     width: 768px
-    margin: 20px auto
     background: $nav-bg-color-desktop
     border-top: 4px solid lighten($primary-color, 10)
     border-bottom: none
@@ -106,11 +106,9 @@ ul.horizontal
     width: 538px
     float: left
     overflow: visible
-    #header, #main
-      position: relative
-      top: 0
 
-  #main
-    overflow-y: auto
-    height: 700px
+@include desktop
+  #viewporter
+    margin: 20px auto
+
 

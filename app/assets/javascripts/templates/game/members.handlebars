@@ -1,39 +1,38 @@
-<div class="scroller">
-  <ul class="members with-lives unstyled">
-  {{#each membersWithLives}}
-    <li>
-      <img {{bindAttr src="user.avatarImageUrl"}} class="avatar" />
-      <div class="details">
-        <h3>{{user.name}}</h3>
-        {{playerLives remainingPath=remainingLives lostPath=lostLives align='right'}}
-        <p class="correct-guesses elaboration">
-          <strong>{{correctPredictions.length}}</strong> correct guesses so far
-        </p>
-      </div>
-    </li>
-  {{/each}}
-  </ul>
 
-  <ul class="members without-lives unstyled">
-  {{#each membersWithoutLives}}
-    <li>
-      <img {{bindAttr src="user.avatarImageUrl"}} class="avatar" />
-      <div class="details">
-        <h3>{{user.name}}</h3>
-        {{playerLives remainingPath=remainingLives lostPath=lostLives align='right'}}
-        <p class="knockout-message elaboration">
-          {{#if knockoutFixture.draw}}
-            <span>Knocked out in round {{knockoutFixture.round.number}} after
-            <strong>{{knockoutFixture.homeTeam.name}}</strong> tied with <strong>{{knockoutFixture.awayTeam.name}}</strong></span>
-          {{else}}
-            <span>Knocked out in round {{knockoutFixture.round.number}} after
-            <strong>{{knockoutFixture.winningTeam.name}}</strong> defeated <strong>{{knockoutFixture.losingTeam.name}}</strong></span>
-          {{/if}}
-        </p>
-      </div>
-    </li>
-  {{/each}}
-  </ul>
+<ul class="members with-lives unstyled">
+{{#each membersWithLives}}
+  <li>
+    <img {{bindAttr src="user.avatarImageUrl"}} class="avatar" />
+    <div class="details">
+      <h3>{{user.name}}</h3>
+      {{playerLives remainingPath=remainingLives lostPath=lostLives align='right'}}
+      <p class="correct-guesses elaboration">
+        <strong>{{correctPredictions.length}}</strong> correct guesses so far
+      </p>
+    </div>
+  </li>
+{{/each}}
+</ul>
 
-  {{render 'game/pending_invitations' gameInvitations}}
-</div>
+<ul class="members without-lives unstyled">
+{{#each membersWithoutLives}}
+  <li>
+    <img {{bindAttr src="user.avatarImageUrl"}} class="avatar" />
+    <div class="details">
+      <h3>{{user.name}}</h3>
+      {{playerLives remainingPath=remainingLives lostPath=lostLives align='right'}}
+      <p class="knockout-message elaboration">
+        {{#if knockoutFixture.draw}}
+          <span>Knocked out in round {{knockoutFixture.round.number}} after
+          <strong>{{knockoutFixture.homeTeam.name}}</strong> tied with <strong>{{knockoutFixture.awayTeam.name}}</strong></span>
+        {{else}}
+          <span>Knocked out in round {{knockoutFixture.round.number}} after
+          <strong>{{knockoutFixture.winningTeam.name}}</strong> defeated <strong>{{knockoutFixture.losingTeam.name}}</strong></span>
+        {{/if}}
+      </p>
+    </div>
+  </li>
+{{/each}}
+</ul>
+
+{{render 'game/pending_invitations' gameInvitations}}

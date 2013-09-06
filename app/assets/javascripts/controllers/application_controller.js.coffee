@@ -4,12 +4,13 @@ LMS.ApplicationController = Ember.Controller.extend
   navigationVisible: false
   isPhone: false
   windowWidth: 0
+  windowHeight: 0
   currentTime: new Date()
   isNewVersionAvailable: false
 
   init: ->
     @_super()
-    @_manageWindowWidth()
+    @_manageWindowDimensions()
     @_trackCurrentTimeToSecond()
 
   isIos: (->
@@ -43,13 +44,15 @@ LMS.ApplicationController = Ember.Controller.extend
       Ember.run => @set('currentTime', new Date())
     , 1000)
 
-  _manageWindowWidth: ->
-    calculateWindowWidth = =>
+  _manageWindowDimensions: ->
+    calculateWindowDimensions = =>
       width = $(window).width()
+      height = $(window).height()
       @set('windowWidth', width)
+      @set('windowHeight', height)
       @set('isPhone', width <= 480)
 
-    calculateWindowWidth()
+    calculateWindowDimensions()
 
     $(window).on 'resize', =>
-      calculateWindowWidth()
+      calculateWindowDimensions()

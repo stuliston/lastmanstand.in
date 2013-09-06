@@ -1,6 +1,7 @@
+
 {{partial 'app_navigation'}}
 
-<div id="main-wrapper" {{bindAttr class="navigationVisible isPhone"}}>
+<div id="main-wrapper" {{bindAttr class="navigationVisible isPhone"}} {{bindAttr style="view.heightStyle"}}>
   <div id="header">
     {{#if controllers.currentUser.isSignedIn}}
       <button class="nav-toggle" {{action "toggleNavigation"}}>

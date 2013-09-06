@@ -1,4 +1,4 @@
-<div id="navigation">
+<div id="navigation" {{bindAttr style="view.heightStyle"}}>
   {{#if controllers.currentUser.isSignedIn}}
     <ul class="games unstyled">
       {{#render 'nav_game_memberships'}}
