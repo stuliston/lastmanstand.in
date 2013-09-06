@@ -23,8 +23,10 @@ LMS.GameController = Ember.ObjectController.extend
   #This is somewhat duplicated in game/membership_item_controller. Review later
   currentUserKnockoutFixture: (->
     return if !@get('isCurrentUserOutOfLives')
-    lastRoundNumber = Math.max(@get('currentUserIncorrectPredictions').mapProperty('fixture.round.number')...)
-    @get('currentUserIncorrectPredictions').findProperty('fixture.round.number', lastRoundNumber).get('fixture')
+    predictionRoundNumbers = @get('currentUserIncorrectPredictions').mapProperty('fixture.round.number')
+    if predictionRoundNumbers.length
+      lastRoundNumber = Math.max(predictionRoundNumbers...)
+      @get('currentUserIncorrectPredictions').findProperty('fixture.round.number', lastRoundNumber).get('fixture')
   ).property('isCurrentUserOutOfLives')
 
   #This could be cleaned up a bit
