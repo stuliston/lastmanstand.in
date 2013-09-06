@@ -16,6 +16,7 @@ LMS.SignInController = Ember.ObjectController.extend
 
   actions:
     signIn: ->
+      return if @get('isInvalid')
       @set('isSaving', true)
       data =
         remote: true

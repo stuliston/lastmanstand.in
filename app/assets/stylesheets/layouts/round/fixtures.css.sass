@@ -2,27 +2,33 @@
 
   h5
     margin: 0
-    padding: 0.3em 1em
-    background: $dark-grey
-    color: #fff
+    padding: 1.2em 1em 0.3em 1em
+    background: #fff
+    color: $primary-color
+    font-weight: normal
+    background: lighten($primary-color, 60)
+    border-bottom: 1px solid darken($light-grey, 10)
 
   .fixtures
+    background: darken($light-grey, 5)
+    color: lighten($dark-grey, 10)
     li
       @include clearfix
       >a, >div
         display: block
         padding: 10px
         float: left
-
       .home, .away
+        background: #eee
         position: relative
         cursor: pointer
         width: 42%
+        border-bottom: 1px solid darken($light-grey, 5)
       .home
         text-align: right
-        @include border-radius(0px 3px 3px 0px)
+        // @include border-radius(0px 3px 3px 0px)
       .away
-        @include border-radius(3px 0px 0px 3px)
+        // @include border-radius(3px 0px 0px 3px)
       .time
         text-align: center
         width: 16%
@@ -36,11 +42,11 @@
 
     .disable-home-team .home, .disable-away-team .away
       background: $secondary-bg-color
-      color: #aaa
+      color: lighten($dark-grey, 20)
       cursor: default
 
     .home-selected .home, .away-selected .away, .home-selected.selecting, .away-selected.selecting
-      background: #666
+      background: lighten($dark-grey, 10)
       color: #fff
       cursor: default
 
@@ -48,7 +54,7 @@
     .fixtures
       a, a:active
         color: #888
-        background: #eee
+
         cursor: default
       .correct.home-selected .home, .correct.away-selected .away
         background: $success-color

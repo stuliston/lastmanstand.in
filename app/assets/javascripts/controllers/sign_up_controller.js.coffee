@@ -26,7 +26,8 @@ LMS.SignUpController = Ember.ObjectController.extend
   ).observes('email')
 
   actions:
-    signIn: ->
+    signUp: ->
+      return if @get('isInvalid')
       @set('isSaving', true)
       user = @get('model')
 

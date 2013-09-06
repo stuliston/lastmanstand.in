@@ -12,13 +12,13 @@
             {{predictionAvatars fixture.homeTeamPredictions}}
           </a>
           <div class="time">
-            @ {{date fixture.startTime format='HH:mm'}}
+            {{date fixture.startTime format='HH:mm'}}
           </div>
           <a class="away" {{action selectWinner fixture fixture.awayTeam}}>
-            <span class="name" {{bindAttr title="fixture.awayTeam.name"}}>{{fixture.awayTeam.abbreviatedName}}</span>
             {{#if fixture.homeScore}}
               <span class="score">({{fixture.awayScore}})</span>
             {{/if}}
+            <span class="name" {{bindAttr title="fixture.awayTeam.name"}}>{{fixture.awayTeam.abbreviatedName}}</span>
             {{predictionAvatars fixture.awayTeamPredictions}}
           </a>
         {{/view}}

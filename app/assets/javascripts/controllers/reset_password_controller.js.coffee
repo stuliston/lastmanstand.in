@@ -14,7 +14,8 @@ LMS.ResetPasswordController = Ember.ObjectController.extend
   isDisabled: Ember.computed.or('isInvalid', 'isSaving')
 
   actions:
-    signIn: ->
+    resetPassword: ->
+      return if @get('isInvalid')
       @set('isSaving', true)
       data =
         user:

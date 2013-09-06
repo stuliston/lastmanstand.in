@@ -1,10 +1,10 @@
 <div {{bindAttr class=":sign-in isSaving"}}>
   <div class="form">
     <div class="row">
-      {{view Ember.TextField type="email" valueBinding='email' name='email' placeholder='Email'}}
+      {{view Ember.TextField type="email" valueBinding='email' name='email' placeholder='Email' action='signIn'}}
     </div>
     <div class="row">
-      {{view Ember.TextField type="password" valueBinding='password' placeholder='Password'}}
+      {{view Ember.TextField type="password" valueBinding='password' placeholder='Password' action='signIn'}}
     </div>
     {{#if errorMessage}}
       <div class="row">
