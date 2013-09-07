@@ -2,5 +2,6 @@ LMS.ApplicationView = Ember.View.extend
   classNames: ['application']
 
   heightStyle: (->
-    "height: #{@get('controller.windowHeight')}px;"
+    if @get('controller.isTabletResolution') || @get('controller.isDesktopResolution')
+      "height: #{@get('controller.windowHeight')}px;"
   ).property('controller.windowHeight')

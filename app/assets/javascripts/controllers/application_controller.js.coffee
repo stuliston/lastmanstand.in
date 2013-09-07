@@ -2,7 +2,9 @@ LMS.ApplicationController = Ember.Controller.extend
 
   needs: ['currentUser']
   navigationVisible: false
-  isPhone: false
+  isPhoneResolution: false
+  isTabletResolution: false
+  isDesktopResolution: false
   windowWidth: 0
   windowHeight: 0
   currentTime: new Date()
@@ -50,7 +52,9 @@ LMS.ApplicationController = Ember.Controller.extend
       height = $(window).height()
       @set('windowWidth', width)
       @set('windowHeight', height)
-      @set('isPhone', width <= 480)
+      @set('isPhoneResolution', width <= 480)
+      @set('isTabletResolution', width >= 768 && width <= 1024)
+      @set('isDesktopResolution', width > 1024)
 
     calculateWindowDimensions()
 
