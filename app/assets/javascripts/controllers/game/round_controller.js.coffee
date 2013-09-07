@@ -69,8 +69,6 @@ LMS.GameRoundController = Ember.ObjectController.extend
           label: "#{game.get('name')} - Round #{fixture.get('round.number')}"
           value: team.get('name')
 
-
-
   _isTeamSelectableForGame: (team, game) ->
     !(@get('isRoundClosed') || @get('predictions').some((prediction) ->
       prediction.get('fixture.round.startTime') < new Date() &&

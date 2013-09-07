@@ -1,5 +1,8 @@
 class FixtureSerializer < ActiveModel::Serializer
 
+  cached
+  delegate :cache_key, to: :object
+
   # embed :ids, include: true
   attributes :id, :start_time, :home_score, :away_score, :draw
 
