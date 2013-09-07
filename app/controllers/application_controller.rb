@@ -19,8 +19,8 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   before_filter do
-    headers['X-GitSHA'] = GIT_SHA
-    @git_sha = GIT_SHA
+    headers['App-Version'] = GIT_SHA
+    @app_version = GIT_SHA
   end
 
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
