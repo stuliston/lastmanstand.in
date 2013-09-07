@@ -15,7 +15,7 @@ Ember.Handlebars.registerHelper 'playerLives', (options) ->
     else summaryItem += "#{remaining} lives"
 
   if options.hash.showLongDescription
-    summaryItem += " remaining"
+    summaryItem += " remaining in this game."
 
   summaryItem += "</li>"
 

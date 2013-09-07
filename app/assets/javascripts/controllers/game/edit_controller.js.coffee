@@ -1,6 +1,8 @@
-LMS.GameEditController = Ember.ObjectController.extend
+#=require ./game_edit_controller_mixin
+LMS.GameEditController = Ember.ObjectController.extend LMS.GameEditControllerMixin,
 
   needs: ['currentUser', 'featureToggles']
+  submitAction: 'sendInvitations'
 
   isInvalid: (->
     !@get('gameInvitations').someProperty('isNew')
@@ -12,6 +14,8 @@ LMS.GameEditController = Ember.ObjectController.extend
 
   actions:
     sendInvitations: ->
+      return if @get('isInvalid')
+      @send('addEmail') #Add any valid email in field not already added
       game = @get('model')
       @get('store').commit()
       @scheduleRouteWhenAllSaved(game)

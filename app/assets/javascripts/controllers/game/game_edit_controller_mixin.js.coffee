@@ -1,8 +1,9 @@
-LMS.AddGameInvitationsView = Ember.View.extend
-  templateName: 'add_game_invitations'
-  classNames: ['add-game-invitations']
+LMS.GameEditControllerMixin = Ember.Mixin.create
+  # templateName: 'add_game_invitations'
+  # classNames: ['add-game-invitations']
   newEmail: null
-  currentUser: null
+  needs: ['currentUser']
+  currentUser: Ember.computed.alias('controllers.currentUser')
 
   isCurrentUserEmail: (->
     @get('currentUser.email') == @get('newEmail')
@@ -10,23 +11,25 @@ LMS.AddGameInvitationsView = Ember.View.extend
 
   isExistingMemberEmail: (->
     email = @get('newEmail')
-    @get('controller.model.gameMemberships').someProperty('user.email', email)
+    @get('gameMemberships').someProperty('user.email', email)
   ).property('newEmail')
 
   isExistingInvitationEmail: (->
     email = @get('newEmail')
-    @get('controller.model.gameInvitations').someProperty('email', email)
+    @get('gameInvitations').someProperty('email', email)
   ).property('newEmail')
 
   isEmailTaken: Ember.computed.or('isExistingMemberEmail', 'isExistingInvitationEmail')
 
   isEmailInvalid: ( ->
-    email = @get('newEmail')
-    !LMS.EmailValidator.isValid(email || "") || @get('isEmailTaken')
+    !LMS.EmailValidator.isValid(@get('newEmail')) || @get('isEmailTaken')
   ).property('newEmail')
 
   actions:
+    onEnterKey: ->
+      @send('addEmail')
     addEmail: ->
-      game = @get('controller.model')
+      return if @get('isEmailInvalid')
+      game = @get('model')
       game.get('gameInvitations').createRecord(email: @get('newEmail'), invitedBy: @get('currentUser'))
       @set('newEmail', null)

@@ -1,6 +1,8 @@
-LMS.GamesNewController = Ember.ObjectController.extend
+#=require ../game/game_edit_controller_mixin
+LMS.GamesNewController = Ember.ObjectController.extend LMS.GameEditControllerMixin,
 
   needs: ['currentUser', 'featureToggles']
+  submitAction: 'saveGame'
   competitions: null
   currentUser: Ember.computed.alias('controllers.currentUser.model')
   featureToggles: Ember.computed.alias('controllers.featureToggles')
@@ -32,6 +34,8 @@ LMS.GamesNewController = Ember.ObjectController.extend
 
   actions:
     saveGame: ->
+      return if @get('isInvalid')
+      @send('addEmail') #Add any valid email in field not already added
       currentUser = @get('currentUser')
       game = @get('model')
       game.get('gameMemberships').pushObject(LMS.GameMembership.createRecord(game: game, user: currentUser))
