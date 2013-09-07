@@ -84,6 +84,8 @@ ul.horizontal
   .application
     position: relative
     overflow: visible
+    border-top: 10px solid lighten($primary-color, 10)
+    border-bottom: 10px solid darken($dark-grey, 10)
     &:after
       content: ""
       display: table
@@ -92,7 +94,6 @@ ul.horizontal
     position: relative
     width: 768px
     background: $nav-bg-color-desktop
-    border-top: 10px solid lighten($primary-color, 10)
     border-bottom: none
 
   #navigation
