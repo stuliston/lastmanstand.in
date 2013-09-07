@@ -1,9 +1,6 @@
 #= require ../authenticated_route
 LMS.GameRoute = LMS.AuthenticatedRoute.extend
 
-  gameRefreshed: false
-  isFirstLoad: true
-
   beforeModel: ->
     @controllerFor('application').hideNavigation()
     @_super()
@@ -14,19 +11,13 @@ LMS.GameRoute = LMS.AuthenticatedRoute.extend
     LMS.Game.find(params.game_id).then(success, error)
 
   afterModel: (game) ->
-    if game.get('isLoaded') && !@get('isFirstLoad') && (!@get('gameRefreshed') || @get('lastGame') != game)
-      @set('gameRefreshed', true)
-      @set('lastGame', game)
+    lastGame = @get('lastGame')
+    @set('lastGame', game)
+    if game.get('isLoaded') && lastGame && lastGame != game
       game.reload() #last to return promise for router loading behaviour
 
   setupController: (controller, game) ->
-    @set('isFirstLoad', false)
     controller.set('model', game)
     @controllerFor('gamePredictions').set('model', game.get('predictions'))
     @controllerFor('application').set('pageTitle', game.get('name'))
 
-
-  actions:
-    willTransition: (transition) ->
-      if !transition.targetName.match(/^game\./)
-        @set('gameRefreshed', false)
