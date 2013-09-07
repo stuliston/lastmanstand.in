@@ -54,7 +54,10 @@
     height: $nav-actions-height-phone
     background: lighten($nav-bg-color-phone, 10)
     li
-      padding: 0.5em
+      font-size: 0.8em
+      padding: 1em 0.7em
+      i
+        margin-right: .5em
     a
       background: lighten($nav-bg-color-phone, 15)
       @include border-radius(20px)
@@ -95,8 +98,11 @@
       position: absolute
       top: 0
       height: $nav-actions-height-desktop
+      li
+        font-size: 0.7em
       .sign-out
         float: right
       .create-game
         float: left
+        margin: 0
 
