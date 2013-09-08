@@ -28,6 +28,7 @@ LMS.ApplicationController = Ember.Controller.extend
     toggleNavigation: ->
       @set('navigationVisible', !@get('navigationVisible'))
     reload: ->
+      @set('isNewVersionAvailable', false)
       @get('analytics').trackEvent(category: 'action', action: 'app-version-reload')
       window.location.reload()
 
