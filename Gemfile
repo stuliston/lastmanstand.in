@@ -16,6 +16,7 @@ gem 'devise', '3.0.0'
 gem 'httparty'
 gem 'hashie'
 gem 'therubyracer'
+gem 'whenever' # cron
 
 gem 'sass-rails',   '~> 4.0.0.beta1'
 gem 'compass-rails', github: 'milgner/compass-rails', ref: '1749c06f15dc4b058427e7969810457213647fb8'
