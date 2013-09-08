@@ -1,8 +1,11 @@
 <%- content_for :head do %>
 
   <meta name="app-version" content="<%= @app_version %>">
-
   <script>
+    var Caliper = {
+      config: { apiKey: "c3a99950-5229-4f05-bba0-49cb555c4b96" }
+    };
+
     <% if current_user.present? %>
       var userData = <%= UserSerializer.new(current_user, scope: current_user).to_json.html_safe %>;
     <% end %>
