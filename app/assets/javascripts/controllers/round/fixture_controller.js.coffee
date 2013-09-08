@@ -26,27 +26,57 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
       null
   ).property('selectedTeam')
 
+  isFutureRound: (->
+    @get('round.startTime') > new Date()
+  ).property('round.startTime')
+
+  previousHomeTeamPrediction: (->
+    game = @get('game')
+    team = @get('homeTeam')
+    @get('predictions.byGame')[game]?.find((prediction) =>
+      prediction.get('fixture.round.startTime') < new Date() &&
+      prediction.get('team') == team
+    )
+  ).property('predictions.@each.team', 'game')
+
+  previousHomeTeamPredictionOtherTeam: (->
+    team = @get('homeTeam')
+    prediction = @get('previousHomeTeamPrediction')
+    if team == prediction.get('fixture.homeTeam')
+      prediction.get('fixture.awayTeam')
+    else
+      prediction.get('fixture.homeTeam')
+  ).property('previousHomeTeamPrediction')
+
+  previousAwayTeamPrediction: (->
+    game = @get('game')
+    team = @get('awayTeam')
+    @get('predictions.byGame')[game]?.find((prediction) =>
+      prediction.get('fixture.round.startTime') < new Date() &&
+      prediction.get('team') == team
+    )
+  ).property('predictions.@each.team', 'game')
+
+  previousAwayTeamPredictionOtherTeam: (->
+    team = @get('awayTeam')
+    prediction = @get('previousAwayTeamPrediction')
+    if team == prediction.get('fixture.awayTeam')
+      prediction.get('fixture.homeTeam')
+    else
+      prediction.get('fixture.awayTeam')
+  ).property('previousHomeTeamPrediction')
+
   disableHomeTeam: (->
     return true if @get('isCurrentUserOutOfLives')
     return false if @get('round.startTime') < new Date()
-    game = @get('game')
-    homeTeam = @get('homeTeam')
-    @get('predictions.byGame')[game]?.some((prediction) =>
-      prediction.get('fixture.round.startTime') < new Date() &&
-      prediction.get('team') == homeTeam
-    )
-  ).property('predictions.@each.team', 'game', 'isCurrentUserOutOfLives')
+    !!@get('previousHomeTeamPrediction')
+  ).property('previousHomeTeamPrediction', 'isCurrentUserOutOfLives')
 
   disableAwayTeam: (->
     return true if @get('isCurrentUserOutOfLives')
     return false if @get('round.startTime') < new Date()
-    game = @get('game')
-    awayTeam = @get('awayTeam')
-    @get('predictions.byGame')[game]?.some((prediction) =>
-      prediction.get('fixture.round.startTime') < new Date() &&
-      prediction.get('team') == awayTeam
-    )
-  ).property('predictions.@each.team', 'game', 'isCurrentUserOutOfLives')
+    !!@get('previousAwayTeamPrediction')
+  ).property('previousAwayTeamPrediction', 'isCurrentUserOutOfLives')
 
   selectionClass: (->
     return unless @get('selectedTeam') && @get('winningTeam')

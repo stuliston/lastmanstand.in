@@ -7,23 +7,23 @@
     color: $primary-color
     font-weight: normal
     background: #fff //lighten($primary-color, 60)
-    border-bottom: 1px solid darken($light-grey, 10)
+    border-bottom: 1px solid darken($light-grey, 5)
 
   .fixtures
     background: darken($light-grey, 5)
-    color: lighten($dark-grey, 10)
+    color: $dark-grey
     li
       @include clearfix
-      >a, >div
+      >div
         display: block
         padding: 10px
         float: left
       .home, .away
-        background: #eee
+        background: lighten($light-grey, 3)
         position: relative
         cursor: pointer
         width: 42%
-        border-bottom: 1px solid darken($light-grey, 5)
+        border-bottom: 1px solid darken($light-grey, 2)
       .home
         text-align: right
         // @include border-radius(0px 3px 3px 0px)
@@ -39,11 +39,15 @@
         white-space: nowrap
       .score, .predictions
         display: none
+      .round-pick
+        font-size: 0.8em
 
     .disable-home-team .home, .disable-away-team .away
-      background: $secondary-bg-color
-      color: lighten($dark-grey, 20)
+      background: darken($secondary-bg-color, 3)
+      color: lighten($dark-grey, 30)
       cursor: default
+      a
+        color: lighten($dark-grey, 20)
 
     .home-selected .home, .away-selected .away, .home-selected.selecting, .away-selected.selecting
       background: lighten($dark-grey, 10)
@@ -52,10 +56,9 @@
 
   &.is-round-closed, &.current-user-game-over
     .fixtures
-      a, a:active
-        color: #888
-
-        cursor: default
+      // a, a:active
+      //   color: #888
+      //   cursor: default
       .correct.home-selected .home, .correct.away-selected .away
         background: $success-color
         color: #fff

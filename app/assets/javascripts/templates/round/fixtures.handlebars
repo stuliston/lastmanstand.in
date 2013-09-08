@@ -4,23 +4,51 @@
     {{#each fixture in group.fixtures}}
       {{#group}}
         {{#view tagName="li" classNameBindings="fixture.selectedTeamClass fixture.disableHomeTeam fixture.disableAwayTeam fixture.selectionClass fixture.resultClass"}}
-          <a class="home" {{action selectWinner fixture fixture.homeTeam}}>
+          <div class="home" {{action selectWinner fixture fixture.homeTeam}}>
             <span class="name" {{bindAttr title="fixture.homeTeam.name"}}>{{fixture.homeTeam.abbreviatedName}}</span>
             {{#if fixture.homeScore}}
               <span class="score">({{fixture.homeScore}})</span>
             {{/if}}
             {{predictionAvatars fixture.homeTeamPredictions}}
-          </a>
+            {{#if isFutureRound}}
+              <div {{bindAttr class=":round-pick previousHomeTeamPrediction.isCorrect:correct:incorrect"}}>
+                {{#if previousHomeTeamPrediction}}
+                  {{#if previousHomeTeamPrediction.isCorrect}}
+                    <i class="icon-ok-sign"></i>
+                  {{else}}
+                    <i class="icon-remove-sign"></i>
+                  {{/if}}
+                  VS {{previousHomeTeamPredictionOtherTeam.abbreviatedName}}
+                {{else}}
+                  &nbsp;
+                {{/if}}
+              </div>
+            {{/if}}
+          </div>
           <div class="time">
             {{date fixture.startTime format='HH:mm'}}
           </div>
-          <a class="away" {{action selectWinner fixture fixture.awayTeam}}>
+          <div class="away" {{action selectWinner fixture fixture.awayTeam}}>
             {{#if fixture.homeScore}}
               <span class="score">({{fixture.awayScore}})</span>
             {{/if}}
             <span class="name" {{bindAttr title="fixture.awayTeam.name"}}>{{fixture.awayTeam.abbreviatedName}}</span>
             {{predictionAvatars fixture.awayTeamPredictions}}
-          </a>
+            {{#if isFutureRound}}
+              <div {{bindAttr class=":round-pick previousAwayTeamPrediction.isCorrect:correct:incorrect"}}>
+                {{#if previousAwayTeamPrediction}}
+                  {{#if previousAwayTeamPrediction.isCorrect}}
+                    <i class="icon-ok-sign"></i>
+                  {{else}}
+                    <i class="icon-remove-sign"></i>
+                  {{/if}}
+                  VS {{previousAwayTeamPredictionOtherTeam.abbreviatedName}}
+                {{else}}
+                  &nbsp;
+                {{/if}}
+              </div>
+            {{/if}}
+          </div>
         {{/view}}
       {{/group}}
     {{/each}}

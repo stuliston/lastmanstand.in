@@ -14,7 +14,6 @@ namespace :db do
     all_users = [ stu, rob, ash, phil, dan ]
 
     afl = Competition.find_by(name: 'AFL')
-    epl = Competition.find_by(name: 'Premier League')
 
     afl.teams.destroy_all
     adelaide          = Team.create!(name: 'Adelaide', competition: afl, abbreviated_name: 'ADE')
@@ -39,8 +38,7 @@ namespace :db do
     # Create a fixture for a single afl season
     afl.seasons.destroy_all
 
-    afl_season_2013 = Season.create!(name: "2013 AFL Premiership Season", start_date: Date.new(2013, 6, 21), end_date: Date.new(2013, 12, 1), competition: afl)
-    epl_season_2013 = Season.create!(name: "2013 English Premiership League", start_date: Date.new(2013, 6, 21), end_date: Date.new(2013, 12, 1), competition: epl)
+    afl_season_2013 = Season.create!(name: "2013 AFL Premiership Season", start_date: Date.today - 8.weeks, end_date: Date.new(2013, 12, 1), competition: afl)
 
     game = Game.create!(name: 'Rob v Stu', season: afl_season_2013)
     game.game_memberships.create!(user: rob)
