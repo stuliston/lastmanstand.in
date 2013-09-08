@@ -17,6 +17,14 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
     prediction?.get('team')
   ).property('predictions.@each.team', 'game')
 
+  isHomeSelected: (->
+    @get('selectedTeam') == @get('homeTeam')
+  ).property('selectedTeam')
+
+  isAwaySelected: (->
+    @get('selectedTeam') == @get('awayTeam')
+  ).property('selectedTeam')
+
   selectedTeamClass: (->
     if @get('selectedTeam') == @get('homeTeam')
       'home-selected'

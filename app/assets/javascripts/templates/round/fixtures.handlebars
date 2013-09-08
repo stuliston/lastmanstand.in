@@ -5,6 +5,9 @@
       {{#group}}
         {{#view tagName="li" classNameBindings="fixture.selectedTeamClass fixture.disableHomeTeam fixture.disableAwayTeam fixture.selectionClass fixture.resultClass"}}
           <div class="home" {{action selectWinner fixture fixture.homeTeam}}>
+            {{#if isHomeSelected}}
+              <i class="icon-star selected"></i>
+            {{/if}}
             <span class="name" {{bindAttr title="fixture.homeTeam.name"}}>{{fixture.homeTeam.abbreviatedName}}</span>
             {{#if fixture.homeScore}}
               <span class="score">({{fixture.homeScore}})</span>
@@ -29,6 +32,9 @@
             {{date fixture.startTime format='HH:mm'}}
           </div>
           <div class="away" {{action selectWinner fixture fixture.awayTeam}}>
+            {{#if isAwaySelected}}
+              <i class="icon-star selected"></i>
+            {{/if}}
             {{#if fixture.homeScore}}
               <span class="score">({{fixture.awayScore}})</span>
             {{/if}}

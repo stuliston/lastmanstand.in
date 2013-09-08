@@ -18,6 +18,15 @@
         display: block
         padding: 10px
         float: left
+
+      i.selected
+        position: absolute
+        top: 50%
+        margin-top: -10px
+        font-size: 20px
+        color: #000
+        opacity: 0.3
+
       .home, .away
         background: lighten($light-grey, 3)
         position: relative
@@ -26,9 +35,11 @@
         border-bottom: 1px solid darken($light-grey, 2)
       .home
         text-align: right
-        // @include border-radius(0px 3px 3px 0px)
+        i.selected
+          left: 10px
       .away
-        // @include border-radius(3px 0px 0px 3px)
+        i.selected
+          right: 10px
       .time
         text-align: center
         width: 16%
@@ -41,6 +52,8 @@
         display: none
       .round-pick
         font-size: 0.8em
+
+
 
     .disable-home-team .home, .disable-away-team .away
       background: darken($secondary-bg-color, 3)
