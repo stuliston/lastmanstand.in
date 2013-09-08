@@ -51,9 +51,15 @@ LMS.GameRoundController = Ember.ObjectController.extend
           @_rollbackOnError(predictionToDelete)
           store.commitDefaultTransaction()
 
-
         if currentPrediction = @_predictionForGameAndRound()
-          #Work around a bug in ember data preventing changes to belongsTo relationships
+          #Most of this is to work around a bug in ember data that doesn't dirty when belongsTo
+          #relationships change. The result is that a store commit won't save the record. Therefor
+          #rollback also doesn't work on the record because the record isn't considered dirty.
+          prevFixture = currentPrediction.get('fixture')
+          prevTeam = currentPrediction.get('team')
+          currentPrediction.set('fixture', fixture)
+          currentPrediction.set('team', team)
+
           $.ajax("/api/predictions/#{currentPrediction.get('id')}", {
             type: 'PUT'
             data:
@@ -66,7 +72,8 @@ LMS.GameRoundController = Ember.ObjectController.extend
           }).done((response) =>
             store.adapterForType(LMS.Prediction).didFindRecord(store, LMS.Prediction, response)
           ).fail((response) =>
-            #Nothing to do because unless we get a success we're not changing the local store
+            currentPrediction.set('fixture', prevFixture)
+            currentPrediction.set('team', prevTeam)
           )
         else
           newPrediction = LMS.Prediction.createRecord
