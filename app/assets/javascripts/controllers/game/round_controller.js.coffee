@@ -49,10 +49,25 @@ LMS.GameRoundController = Ember.ObjectController.extend
         else if predictionToDelete = @_predictionForTeamInFutureRound(team)
           store.deleteRecord(predictionToDelete)
           @_rollbackOnError(predictionToDelete)
+          store.commitDefaultTransaction()
+
 
         if currentPrediction = @_predictionForGameAndRound()
-          currentPrediction.setProperties(fixture: fixture, team: team)
-          @_rollbackOnError(currentPrediction)
+          #Work around a bug in ember data preventing changes to belongsTo relationships
+          $.ajax("/api/predictions/#{currentPrediction.get('id')}", {
+            type: 'PUT'
+            data:
+              prediction:
+                fixture_id: fixture.get('id')
+                team_id: team.get('id')
+                user_id: @get('currentUser').get('id')
+                game_id: game.get('id')
+            dataType: 'json'
+          }).done((response) =>
+            store.adapterForType(LMS.Prediction).didFindRecord(store, LMS.Prediction, response)
+          ).fail((response) =>
+            #Nothing to do because unless we get a success we're not changing the local store
+          )
         else
           newPrediction = LMS.Prediction.createRecord
             fixture: fixture,
@@ -60,8 +75,7 @@ LMS.GameRoundController = Ember.ObjectController.extend
             user: @get('currentUser'),
             game: game
           @_rollbackOnError(newPrediction)
-
-        store.commitDefaultTransaction()
+          store.commitDefaultTransaction()
 
         @get('analytics').trackEvent
           category: 'action'
