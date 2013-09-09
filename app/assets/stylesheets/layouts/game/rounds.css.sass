@@ -1,7 +1,5 @@
 .game-container
-
   .rounds
-
     .round-number
       width: 30px
       height: 30px
@@ -17,27 +15,26 @@
       border: 3px solid lighten($secondary-color, 10)
       font-size: 0.8em
 
-    li
+    a
       background: $secondary-bg-color
       border-bottom: 1px solid #ddd
       position: relative
+      padding: 10px
+      display: block
 
       &.is-before-game-started
         background: darken($secondary-bg-color, 5)
+        color: lighten($base-text-color, 30)
         .round-number
           color: #dfdfdf
-        a
-          color: lighten($base-text-color, 30)
 
       &.is-current-round
-        // background: darken($secondary-bg-color, 20)
         background: lighten($primary-color, 30)
+        color: #fff
         .round-number
           background: darken($secondary-bg-color, 5)
           border-color: darken($secondary-bg-color, 10)
           color: darken($secondary-bg-color, 40)
-        a
-          color: #fff
 
       &.correct .round-number
         background: lighten($success-color, 10)
@@ -47,10 +44,6 @@
         background: lighten($alert-color, 10)
         border-color: lighten($alert-color, 15)
         color: #fff
-
-      a
-        padding: 10px
-        display: block
 
       .date, .selection
         margin-left: 50px

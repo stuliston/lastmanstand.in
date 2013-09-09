@@ -1,19 +1,19 @@
-{{#view tagName="li" classNameBindings="selectionClass isBeforeGameStarted isCurrentRound"}}
-  {{#linkTo 'game.round' this}}
+<li>
+  {{#linkTo 'game.round' this classNameBindings="selectionClass isBeforeGameStarted isCurrentRound"}}
     <div class="round-number">{{number}}</div>
     <div class="date">{{date startTime format="ddd dd/MM/yyyy"}}</div>
     {{#if hasResult}}
       <div class="selection">
-      {{#if isSelectionCorrect}}
-        <i class="icon-ok-sign"></i>
-      {{else}}
-        <i class="icon-remove-sign"></i>
-      {{/if}}
-      {{#if winningTeam}}
-        <strong>{{winningTeam.name}}</strong> defeated {{losingTeam.name}}
-      {{else}}
-        Draw: <strong>{{prediction.fixture.homeTeam.name}}</strong> vs <strong>{{prediction.fixture.awayTeam.name}}</strong>
-      {{/if}}
+        {{#if isSelectionCorrect}}
+          <i class="icon-ok-sign"></i>
+        {{else}}
+          <i class="icon-remove-sign"></i>
+        {{/if}}
+        {{#if winningTeam}}
+          <strong>{{winningTeam.name}}</strong> defeated {{losingTeam.name}}
+        {{else}}
+          Draw: <strong>{{prediction.fixture.homeTeam.name}}</strong> vs <strong>{{prediction.fixture.awayTeam.name}}</strong>
+        {{/if}}
       </div>
     {{else}}
       {{#if selectedTeam}}
@@ -23,4 +23,4 @@
       {{/if}}
     {{/if}}
   {{/linkTo}}
-{{/view}}
+<li>
