@@ -13,8 +13,6 @@ module Playup
         # Should be idempotent
         2.times { importer.import_fixtures_for(epl) }
 
-        binding.pry
-
         expect(epl.teams.count).to eq 23
         expect(epl.seasons.count).to eq 1
         expect(epl.current_season.rounds.count).to eq 34

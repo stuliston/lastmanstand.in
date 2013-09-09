@@ -185,10 +185,10 @@ module DataSources
 
         before do
           all_teams   = [ sunderland, stoke_city, liverpool ]
-          fixture_builder = FixtureBuilder.new(all_teams)
+          fixture_builder = FixtureBuilder.new
 
           @fixture = Fixture.new
-          fixture_builder.build_from!(playup_contest, @fixture)
+          fixture_builder.build_from!(playup_contest, @fixture, all_teams)
         end
 
         it 'assigns the start time' do
