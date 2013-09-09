@@ -1,5 +1,33 @@
 namespace :db do
 
+  desc "Pull down the production database from Heroku"
+  task pull: :environment do
+    config = ActiveRecord::Base.configurations[Rails.env].symbolize_keys
+    username, password, host = config[:username], config[:password], config[:host]
+    database             = config[:database]  || config[:path].sub(/\//, "")
+    charset              = config[:charset]   || ENV['CHARSET']   || 'UTF-8'
+    collation            = config[:collation] || ENV['COLLATION'] || 'utf8_unicode_ci'
+
+    puts "=> Capturing a backup..."
+    require 'net/ssh'
+    Net::SSH.start('54.229.136.99', 'robmonie', keys: '~/.ssh/id_rsa') do |ssh|
+      ssh.exec "sudo su postgres -c 'pg_dump -Fc lms > /tmp/lms_backup.dump'"
+    end
+    puts "<= Done."
+
+    puts "=> Downloading backup..."
+    raise 'Unable to download backup' unless system("scp robmonie@54.229.136.99:/tmp/lms_backup.dump ./db/")
+    puts "<= Done."
+
+    puts "=> Restoring your dev DB from backup..."
+    system("pg_restore --verbose --clean --no-owner -h #{host} -d #{database} ./db/lms_backup.dump")
+    system("rm ./db/lms_backup.dump")
+    puts "<= Done."
+
+    puts "Stay Frosty!"
+  end
+
+
   desc "Random Seed. Clears DB and creates random seed data for local testing"
   task random_seed: :environment do
 
