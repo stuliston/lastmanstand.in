@@ -70,10 +70,12 @@ LMS.GameRoundController = Ember.ObjectController.extend
                 game_id: game.get('id')
             dataType: 'json'
           }).done((response) =>
-            store.adapterForType(LMS.Prediction).didFindRecord(store, LMS.Prediction, response)
+            Ember.run =>
+              store.adapterForType(LMS.Prediction).didFindRecord(store, LMS.Prediction, response)
           ).fail((response) =>
-            currentPrediction.set('fixture', prevFixture)
-            currentPrediction.set('team', prevTeam)
+            Ember.run =>
+              currentPrediction.set('fixture', prevFixture)
+              currentPrediction.set('team', prevTeam)
           )
         else
           newPrediction = LMS.Prediction.createRecord

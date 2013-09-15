@@ -41,14 +41,15 @@ LMS.SignUpController = Ember.ObjectController.extend
             password_confirmation: user.get('passwordConfirmation')
         dataType: 'json'
       }).done((response) =>
-        @get('store').adapterForType(LMS.User).didFindRecord(@get('store'), LMS.User, response)
-        user = LMS.User.find(response.user.id)
-        @get('controllers.currentUser').set('content', user)
-        @transitionToRoute('index')
+        Ember.run =>
+          @get('store').adapterForType(LMS.User).didFindRecord(@get('store'), LMS.User, response)
+          user = LMS.User.find(response.user.id)
+          @get('controllers.currentUser').set('content', user)
+          @transitionToRoute('index')
       ).fail((response) =>
-        @set('errors', @_parseErrors(response.responseJSON.errors))
+        Ember.run => @set('errors', @_parseErrors(response.responseJSON.errors))
       ).always( =>
-        @set('isSaving', false)
+        Ember.run => @set('isSaving', false)
       )
 
     cancel: ->

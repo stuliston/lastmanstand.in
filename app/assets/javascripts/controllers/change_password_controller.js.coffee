@@ -33,11 +33,11 @@ LMS.ChangePasswordController = Ember.ObjectController.extend
         data: data
         dataType: 'json'
       }).done((response) =>
-        @transitionToRoute('index')
+        Ember.run => @transitionToRoute('index')
       ).fail((response) =>
-        @set('errors', @_parseErrors(response.responseJSON.errors))
+        Ember.run => @set('errors', @_parseErrors(response.responseJSON.errors))
       ).always( =>
-        @set('isSaving', false)
+        Ember.run => @set('isSaving', false)
       )
 
     cancel: ->

@@ -6,6 +6,10 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
   gamePredictions: Ember.computed.alias('controllers.gamePredictions')
   isCurrentUserOutOfLives: Ember.computed.alias('controllers.game.isCurrentUserOutOfLives')
 
+  isFutureRound: (->
+    @get('round.startTime') > new Date()
+  ).property('round.startTime')
+
   #This method has had some performance tuning done on it as it's called A LOT.
   #Be sure to profile any changes before and after.
   selectedTeam: (->
@@ -24,19 +28,6 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
   isAwaySelected: (->
     @get('selectedTeam') == @get('awayTeam')
   ).property('selectedTeam')
-
-  selectedTeamClass: (->
-    if @get('selectedTeam') == @get('homeTeam')
-      'home-selected'
-    else if @get('selectedTeam') == @get('awayTeam')
-      'away-selected'
-    else
-      null
-  ).property('selectedTeam')
-
-  isFutureRound: (->
-    @get('round.startTime') > new Date()
-  ).property('round.startTime')
 
   previousHomeTeamPrediction: (->
     game = @get('game')
@@ -86,14 +77,6 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
     !!@get('previousAwayTeamPrediction')
   ).property('previousAwayTeamPrediction', 'isCurrentUserOutOfLives')
 
-  selectionClass: (->
-    return unless @get('selectedTeam') && @get('winningTeam')
-    if @get('selectedTeam') == @get('winningTeam')
-      "correct"
-    else
-      "incorrect"
-  ).property('selectedTeam', 'winningTeam')
-
   homeTeamPredictions: (->
     return [] if @get('round.startTime') > new Date()
     @get('gamePredictions.byFixture')[@get('model')]?.filterProperty('team', @get('homeTeam')) || []
@@ -104,6 +87,14 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
     @get('gamePredictions.byFixture')[@get('model')]?.filterProperty('team', @get('awayTeam')) || []
   ).property('gamePredictions.@each.team')
 
+  selectionClass: (->
+    return unless @get('selectedTeam') && @get('winningTeam')
+    if @get('selectedTeam') == @get('winningTeam')
+      "correct"
+    else
+      "incorrect"
+  ).property('selectedTeam', 'winningTeam')
+
   resultClass: (->
     return unless @get('winningTeam')
     if @get('winningTeam') == @get('homeTeam')
@@ -111,5 +102,14 @@ LMS.RoundFixtureController = Ember.ObjectController.extend
     else
       "home-lose away-win"
   ).property('selectedTeam', 'winningTeam')
+
+  selectedTeamClass: (->
+    if @get('selectedTeam') == @get('homeTeam')
+      'home-selected'
+    else if @get('selectedTeam') == @get('awayTeam')
+      'away-selected'
+    else
+      null
+  ).property('selectedTeam')
 
 

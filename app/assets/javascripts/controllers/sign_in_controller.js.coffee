@@ -32,17 +32,18 @@ LMS.SignInController = Ember.ObjectController.extend
         data: data
         dataType: 'json'
       }).done((response) =>
-        @get('store').adapterForType(LMS.User).didFindRecord(@get('store'), LMS.User, response)
-        user = LMS.User.find(response.user.id)
-        @get('controllers.currentUser').set('model', user)
-        if @get('afterSignInTransition')
-          @get('afterSignInTransition').retry()
-        else
-          @transitionToRoute('index')
+        Ember.run =>
+          @get('store').adapterForType(LMS.User).didFindRecord(@get('store'), LMS.User, response)
+          user = LMS.User.find(response.user.id)
+          @get('controllers.currentUser').set('model', user)
+          if @get('afterSignInTransition')
+            @get('afterSignInTransition').retry()
+          else
+            @transitionToRoute('index')
       ).fail((response) =>
-        @set('errorMessage', response.responseJSON.error)
+        Ember.run => @set('errorMessage', response.responseJSON.error)
       ).always( =>
-        @set('isSaving', false)
+        Ember.run => @set('isSaving', false)
       )
 
     cancel: ->

@@ -26,11 +26,11 @@ LMS.ResetPasswordController = Ember.ObjectController.extend
         data: data
         dataType: 'json'
       }).done((response) =>
-        @set('isSaved', true)
+        Ember.run => @set('isSaved', true)
       ).fail((response) =>
-        @set('errors', @_parseErrors(response.responseJSON.errors))
+        Ember.run => @set('errors', @_parseErrors(response.responseJSON.errors))
       ).always( =>
-        @set('isSaving', false)
+        Ember.run => @set('isSaving', false)
       )
 
     cancel: ->
